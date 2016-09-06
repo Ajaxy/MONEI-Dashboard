@@ -1,0 +1,59 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "__PROD__": false,
+    "__STAGE__": false,
+    "__DEV_STAGE__": false,
+    "__PROD_STAGE__": false,
+    "__DEBUG__": false,
+    "__COVERAGE__": false,
+    "__BASENAME__": false,
+    "__VERSION__": false,
+    "APP_CONFIG": false,
+    "Intercom": false,
+    "Stripe": false,
+    "Localize": false,
+    "ga": false,
+    "$": true
+  },
+  "plugins": [
+    "babel"
+  ],
+  "rules": {
+    "semi": [
+      2,
+      "always"
+    ],
+    "max-len": [
+      2,
+      120,
+      2
+    ],
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
+    "no-return-assign": 0,
+    "react/jsx-no-bind": 0,
+    "generator-star-spacing": 0,
+    "babel/generator-star-spacing": 1,
+    "babel/array-bracket-spacing": 1,
+    "babel/object-curly-spacing": 1,
+    "babel/object-shorthand": 1,
+    "babel/no-await-in-loop": 1,
+    "babel/flow-object-type": 1
+  }
+}
+
