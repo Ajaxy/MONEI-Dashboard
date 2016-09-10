@@ -10,3 +10,31 @@ For example:
 @import './variables/components';
 @import './themes/default';
 */
+@import "transitions";
+@import "semantic-ui-overrides";
+
+.clearing:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+a.disabled {
+  pointer-events: none;
+}
+
+.no.padding {
+  padding: 0 !important;
+}
+
+.field.error .ReactCodeMirror {
+  border-color: #e0b4b4;
+  color: #9f3a38;
+  box-shadow: none;
+  .CodeMirror {
+    background: #fff6f6;
+  }
+}
+

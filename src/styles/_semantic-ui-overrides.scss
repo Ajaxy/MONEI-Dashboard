@@ -1,0 +1,102 @@
+$text-colors: (
+  red: #B03060,
+  orange: #FE9A76,
+  yellow: #FFD700,
+  olive: #32CD32,
+  green: #016936,
+  teal: #008080,
+  blue: #0E6EB8,
+  violet: #EE82EE,
+  purple: #B413EC,
+  pink: #FF1493,
+  brown: #A52A2A,
+  grey: #A0A0A0,
+);
+
+@each $name, $color in $text-colors {
+  .text.#{$name} {
+    color: #{$color};
+  }
+}
+
+.ui.basic.segment {
+  min-height: 100px;
+}
+
+.ui.segment.padded-bottom {
+  padding-bottom: 5em;
+}
+
+.ui.segment.full.height {
+  height: calc(100% - 105px);
+}
+
+.ui.text.big p {
+  font-size: 1.33em;
+}
+
+.item.center.aligned, .ui.center.aligned {
+  text-align: center;
+}
+
+.ui.secondary.pointing.menu {
+  &.no-padding .item {
+    &:first-child {
+      padding-left: 5px;
+    }
+  }
+  .ui.dropdown .menu > .item {
+    border-bottom: none;
+  }
+}
+
+.ui.loader.inline.relaxed {
+  margin: 3em 0;
+}
+
+.ui.dimmer.modals {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui.modal {
+  position: initial;
+  margin: 0 !important;
+}
+
+@media only screen and (min-width: 992px) {
+  .ui.tiny.modal {
+    width: 450px;
+    margin: 0 0 0 -225px;
+  }
+}
+
+i.icon.loading {
+  padding: 0 !important;
+}
+
+.ui.list .list>.item>.icon-wrapper, .ui.list>.item>.icon-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.ui.list .list>.item>.icon-wrapper+.content, .ui.list>.item>.icon-wrapper+.content {
+  display: table-cell;
+  padding: 0 0 0 .5em;
+  vertical-align: top;
+}
+
+.ui.form .field>label {
+  white-space: nowrap;
+}
+
+.item .content.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  & *:first-child {
+    max-width: 300px;
+    flex: 1;
+  }
+}
