@@ -15,12 +15,9 @@ class Header extends Component {
   render() {
     const {profile, signOut, isFreeUser} = this.props;
     return (
-      <header className="ui fixed menu large">
+      <header className="ui menu large">
         <div className={cx('ui container', classNames.container)}>
-          <IndexLink to="/" className={cx('ui medium header item', classNames.logo)}>
-            MONEI
-          </IndexLink>
-          <DropDownMenu className="item right">
+          <DropDownMenu className="item right borderless">
             <img className="ui avatar image" src={profile.picture} />
             <span>{profile.name}</span>
             <i className="dropdown icon" />

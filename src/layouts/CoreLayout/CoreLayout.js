@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 import Header from 'components/Header';
+import Footer from 'components/Footer';
+import NavBar from 'components/NavBar';
 import MessagesStack from 'components/MessagesStack';
 import cx from 'classnames';
 import classNames from './CoreLayout.scss';
@@ -15,22 +17,18 @@ const CoreLayout = ({isAuthenticated, isWaiting, children, isPlain}) => {
     );
   }
   return (
-    <div className={classNames.container}>
-      <Header />
-      <section className={cx('ui main container', classNames.section)}>
-        {isWaiting && <div className="ui icon blue message">
-          <i className="info icon" />
-          <div className="content">
-            <div className="header">
-              Thank you for the upgrade, we have received your payment.
-            </div>
-            <p>Your request is in validation process. We will inform you once the account is ready for use.</p>
-          </div>
-        </div>}
+    <div className={cx("ui grid", classNames.container)}>
+      <div className={cx("four wide column", classNames.noPadding)}>
+        <NavBar/>
+      </div>
+      <div className={cx("twelve wide column", classNames.noPadding)}>
+        <Header/>
         {children}
-      </section>
-      <MessagesStack />
+        <MessagesStack />
+        <Footer/>
+      </div>
     </div>
+
   );
 };
 
