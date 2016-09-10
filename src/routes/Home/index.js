@@ -1,6 +1,7 @@
-import HomeView from './components/HomeView'
+import HomeView from './components/HomeView';
+import RequireAuth from 'containers/RequireAuth';
 
 // Sync route definition
 export default {
-  component : HomeView
-}
+  component: RequireAuth(HomeView)
+};
