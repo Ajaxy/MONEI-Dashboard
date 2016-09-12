@@ -1,10 +1,9 @@
 import React, {PropTypes, Component} from 'react';
-import SideBar from 'components/SideBar';
 import classNames from './NavBar.scss';
 import cx from 'classnames';
 
 const NavBar = ({isAdmin}) => (
-  <SideBar className={cx('inverted', classNames.container)}>
+  <div className={cx('ui vertical menu inverted', classNames.container)}>
     <div className="item">
       <div className="ui container">
         <h1>MONEI</h1>
@@ -13,7 +12,7 @@ const NavBar = ({isAdmin}) => (
     <div className="item"><i className={cx("home icon", classNames.icon)}/>Dashboard</div>
     <div className="item"><i className={cx("payment icon", classNames.icon)}/>Transactions</div>
     <div className="item"><i className={cx("users icon", classNames.icon)}/>Customers</div>
-  </SideBar>
+  </div>
 );
 
 export default NavBar;

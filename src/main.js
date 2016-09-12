@@ -7,6 +7,11 @@ import * as api from 'lib/api';
 import {syncParams} from 'react-router-redux-params';
 import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 // ========================================================
 // Author info

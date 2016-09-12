@@ -1,0 +1,32 @@
+.fullscreen {
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.sidebar {
+  position: static;
+  display: flex;
+  overflow-x: hidden;
+  flex-direction: column;
+  min-width: 260px;
+  max-width: 260px;
+  width: 260px;
+  height: 100%;
+  padding-right: 2px;
+  left: 0;
+  top: 0;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}

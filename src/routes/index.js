@@ -1,11 +1,11 @@
 // We only need to import the modules necessary for initial render
-import CoreLayout from 'layouts/CoreLayout';
+import MaterialLayout from 'layouts/MaterialLayout';
 import HomeRoute from './Home';
 import SignInRoute from './SignIn';
 
 export const createRoutes = (store) => ({
   path: '/',
-  component: CoreLayout,
+  component: MaterialLayout,
   indexRoute: HomeRoute,
   childRoutes: [
     SignInRoute,
