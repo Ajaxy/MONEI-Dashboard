@@ -1,5 +1,6 @@
 import aws4 from 'aws4';
 import AWS from 'aws-sdk';
+import {compact} from 'lib/utils';
 
 const transformData = (request) => {
   let data = request.data;
@@ -30,8 +31,7 @@ export const signRequest = (request, credentials) => {
   const data = transformData(request);
   const parser = parseUrl(request.url);
   const headers = request.headers;
-  //!TODO: Separate param keys from axios object
-  const params = /*request.params ? '?' + request.paramSerializer(request.params) :*/ '';
+  const params = request.params ? '?' + $.param(compact(request.params)) : '';
   if (!data) delete headers['Content-Type'];
 
   const options = aws4.sign({

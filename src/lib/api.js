@@ -23,9 +23,11 @@ export const addInterceptors = (store) => {
     config.headers.authToken = token;
     const profile = storage.get('profile');
     const meta = profile.app_metadata;
-    config.headers.smid = meta.smid;
-    config.headers.smpwd = meta.smpwd;
-    config.headers.smlogin = meta.smlogin;
+    if(config.sandbox) {
+      config.headers.smid = meta.smid;
+      config.headers.smpwd = meta.smpwd;
+      config.headers.smlogin = meta.smlogin;
+    }
     const credentials = storage.get('credentials');
     const signedConfig = signRequest(config, credentials)
     return signedConfig;
@@ -61,3 +63,8 @@ export const updateCard = ({token, email}) =>
 
 export const fetchTransactions = () =>
   apiClient.get('transactions');
+
+// Customers
+
+export const fetchCustomers = (params = {}) =>
+  apiClient.get('transactions/stored', {params:{from:1474128000000, to:1474214399999}});

@@ -21,7 +21,6 @@ const CoreLayout = ({isAuthenticated, isPlain, children}) => {
         {children}
         <MessagesStack />
       </div>
-      <Footer/>
     </div>
   );
 };

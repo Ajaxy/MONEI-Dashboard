@@ -2,6 +2,9 @@
 import CoreLayout from 'layouts/CoreLayout';
 import HomeRoute from './Home';
 import SignInRoute from './SignIn';
+import CustomersRoute from './Customers';
+import DashboardRoute from './Dashboard';
+import TransactionsRoute from './Transactions';
 
 export const createRoutes = (store) => ({
   path: '/',
@@ -9,6 +12,9 @@ export const createRoutes = (store) => ({
   indexRoute: HomeRoute,
   childRoutes: [
     SignInRoute,
+    CustomersRoute(store),
+    DashboardRoute(store),
+    TransactionsRoute(store),
   ]
 });
 
