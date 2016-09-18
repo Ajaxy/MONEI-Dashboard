@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import IndexLink from 'react-router/lib/IndexLink';
 import Link from 'react-router/lib/Link';
+import Logo from 'components/Logo';
 import DropDownMenu from 'components/DropDownMenu';
-import cx from 'classnames';
-import classNames from './Header.scss';
 
 class Header extends Component {
   static propTypes = {
@@ -15,8 +14,14 @@ class Header extends Component {
   render() {
     const {profile, signOut, isFreeUser} = this.props;
     return (
-      <header className="ui menu large">
-        <div className={cx('ui container', classNames.container)}>
+      <header className="ui inverted green fixed menu large">
+        <div className="ui container">
+          <IndexLink to="/" className="ui medium header item">
+            <Logo width={128} height={28} fill="#FFFFFF"/>
+          </IndexLink>
+          <Link to="/dashboard" className="item" activeClassName="active">Dashboard</Link>
+          <Link to="/transactions" className="item" activeClassName="active">Transactions</Link>
+          <Link to="/customers" className="item" activeClassName="active">Customers</Link>
           <DropDownMenu className="item right borderless">
             <img className="ui avatar image" src={profile.picture} />
             <span>{profile.name}</span>

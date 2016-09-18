@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import CoreLayoutView from './CoreLayout';
 import {getIsAuthenticated} from 'modules/auth/selectors';
-import {getProfile, getIsWaiting} from 'modules/profile/selectors';
+import {getProfile} from 'modules/profile/selectors';
 import * as actions from 'modules/auth/actions';
 import {connect as connectToNotifications} from 'modules/notifications/actions';
 import queryString from 'query-string';
@@ -40,7 +40,6 @@ class CoreLayout extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   profile: getProfile(state),
-  isWaiting: getIsWaiting(state),
   isAuthenticated: getIsAuthenticated(state),
   isPlain: ownProps.routes && ownProps.routes.some(r => r.isPlain)
 });

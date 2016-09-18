@@ -3,11 +3,7 @@
   position: relative;
 }
 
-.sidebar {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.noPadding {
-  padding: 0px !important;
+.content {
+  height: 100%;
+  padding-top: 64px;
 }

@@ -19,6 +19,16 @@ $text-colors: (
   }
 }
 
+$ui-colors: (
+  green: #00796B
+);
+
+@each $name, $color in $ui-colors {
+  .ui.menu.#{$name} {
+    background-color: #{$color} !important;
+  }
+}
+
 .ui.grid {
   margin: 0px;
 }
