@@ -121,12 +121,13 @@ export const getTokenInfo = (idToken) => {
 export const finalizeAuth = (profile, idToken) => {
   const token = idToken || storage.get('authToken');
   return dispatch => {
-    dispatch(fetchProfile());
+    // dispatch(fetchProfile());
     dispatch(autoSignOut(token));
     bootIntercom(profile);
     fetchAWSCredentials(token).then(
       // credentials => dispatch(notifications.connect(profile, credentials)),
-      // error => dispatch(addMessage({text: error}))
+      credentials => storage.set('credentials', credentials),
+      error => dispatch(addMessage({text: error}))
     );
   };
 };

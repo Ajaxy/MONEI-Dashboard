@@ -18,7 +18,10 @@ const webpackConfig = {
   devtool: config.compiler_devtool,
   resolve: {
     modules: [paths.client(), 'node_modules'],
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json'],
+    alias: {
+      querystring: 'querystring-browser'
+    }
   },
   browser: {
     fs: false
