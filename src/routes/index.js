@@ -2,6 +2,7 @@
 import CoreLayout from 'layouts/CoreLayout';
 import HomeRoute from './Home';
 import SignInRoute from './SignIn';
+import UserRoute from './User';
 import UsersRoute from './Users';
 import CustomersRoute from './Customers';
 import DashboardRoute from './Dashboard';
@@ -14,6 +15,7 @@ export const createRoutes = (store) => ({
   indexRoute: HomeRoute,
   childRoutes: [
     SignInRoute,
+    UserRoute(store),
     UsersRoute(store),
     CustomersRoute(store),
     DashboardRoute(store),

@@ -20,12 +20,23 @@ $text-colors: (
 }
 
 $ui-colors: (
-  green: #00796B
+  green: #00796B,
 );
 
 @each $name, $color in $ui-colors {
   .ui.menu.#{$name} {
     background-color: #{$color} !important;
+  }
+  .ui.button.#{name} {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+  .ui.button.#{$name}, .ui.button.#{$name}:active, .ui.button.#{$name}:focus {
+    background-color: #{$color};
+    opacity: 1;
+  }
+  .ui.button.#{$name}:hover {
+    background-color: #{$color};
+    opacity: 0.8;
   }
 }
 
