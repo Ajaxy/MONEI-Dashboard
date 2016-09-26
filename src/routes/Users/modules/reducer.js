@@ -53,18 +53,8 @@ const isFetching = (state = false, action) => {
 const page = (state = {}, action) => {
   switch (action.type) {
     case types.CLEAR_USERS:
-      return {
-        current: 0,
-        filter: null,
-        lastLoaded: 0,
-      };
     case types.FETCH_USERS_SUCCESS:
-      const {start, end, total, length, limit, page, filter} = action;
-      return {start, end, total, length, limit, filter,
-        current: page,
-        last: Math.ceil(total / (limit * 1.0)),
-        lastLoaded: Math.max(state.lastLoaded || 0, end)
-      };
+      return action.page;
     default:
       return state;
   }

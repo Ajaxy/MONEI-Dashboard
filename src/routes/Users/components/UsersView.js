@@ -20,7 +20,7 @@ const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, is
       numColumns={NUM_COLUMNS}
       onLoadMore={loadMore}
       total={page.total}
-      count={page.end}
+      count={page.lastItem}
       autoLoad={true}
       className="large striped single line"
       header={<UserRow isHeader={true}/>}

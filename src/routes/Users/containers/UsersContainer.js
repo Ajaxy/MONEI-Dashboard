@@ -24,7 +24,7 @@ class Users extends Component {
 
   loadMore = () => {
     const {page} = this.props;
-    this.props.fetchUsers(page.current + 1, page.filter);
+    this.props.fetchUsers(page.currentPage + 1, page.filter);
   };
 
   viewUser = (userId) => {
