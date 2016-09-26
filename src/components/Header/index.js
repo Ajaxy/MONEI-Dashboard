@@ -9,8 +9,7 @@ const mapActionCreators = {
 
 const mapStateToProps = (state) => ({
   profile: selectors.getProfile(state),
-  isFreeUser: selectors.getIsFreeUser(state)
+  isAdmin: selectors.getIsAdmin(state)
 });
 
 export default connect(mapStateToProps, mapActionCreators)(Header);
-

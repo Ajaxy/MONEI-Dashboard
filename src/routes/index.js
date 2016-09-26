@@ -5,6 +5,7 @@ import SignInRoute from './SignIn';
 import CustomersRoute from './Customers';
 import DashboardRoute from './Dashboard';
 import TransactionsRoute from './Transactions';
+import NotFoundRoute from './NotFound';
 
 export const createRoutes = (store) => ({
   path: '/',
@@ -15,6 +16,7 @@ export const createRoutes = (store) => ({
     CustomersRoute(store),
     DashboardRoute(store),
     TransactionsRoute(store),
+    NotFoundRoute,
   ]
 });
 

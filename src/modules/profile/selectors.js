@@ -2,6 +2,7 @@ import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 import {isEmpty} from 'lib/utils';
 import base64 from 'base64-url';
+import {USER_ROLES} from 'lib/enums';
 
 const profileSelector = state => state[stateKey];
 
@@ -15,27 +16,22 @@ export const getProfile = createSelector(
   profile => profile.data
 );
 
-export const getPaymentMethod = createSelector(
-  getProfile,
-  data => isEmpty(data.paymentMethod) ? undefined : data.paymentMethod
-);
-
-export const getIsFreeUser = createSelector(
-  getProfile,
-  data => data.plan === 'free'
-);
-
 export const getUserId = createSelector(
   getProfile,
   data => data.user_id
 );
 
+export const getAppMetadata =  createSelector(
+  getProfile,
+  profile => profile.app_metadata || {}
+);
+
+export const getIsAdmin = createSelector(
+  getAppMetadata,
+  appMetadata => appMetadata.role == USER_ROLES.Admin
+);
+
 export const getUserIdBase64 = createSelector(
   getUserId,
   id => base64.encode(id)
-);
-
-export const getIsWaiting = createSelector(
-  getProfile,
-  data => data.plan === 'paid' && !data.approved
 );

@@ -19,7 +19,6 @@ export const fetchCustomers = (page, forceRefresh = false) => {
         limit: PAGE_LIMIT,
         page,
       });
-      console.log(customers);
       const normalized = normalize(customers.items, schema.arrayOfCustomers);
       dispatch({
         type: types.FETCH_CUSTOMERS_SUCCESS,
@@ -29,7 +28,6 @@ export const fetchCustomers = (page, forceRefresh = false) => {
         prevPage: customers.prevPage
       });
     } catch (error) {
-      console.log(error);
       dispatch({
         type: types.FETCH_CUSTOMERS_FAIL
       });

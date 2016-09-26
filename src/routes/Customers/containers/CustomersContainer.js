@@ -10,7 +10,7 @@ class Customers extends Component {
   };
 
   componentWillMount() {
-    // this.props.fetchCustomers();
+    this.props.fetchCustomers();
   }
 
   getPage = (page) => {

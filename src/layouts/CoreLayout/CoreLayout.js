@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 import MessagesStack from 'components/MessagesStack';
 import classNames from './CoreLayout.scss';
+import cx from 'classnames';
 import 'styles/core.scss';
 
 const CoreLayout = ({isAuthenticated, isPlain, children}) => {
@@ -18,8 +18,10 @@ const CoreLayout = ({isAuthenticated, isPlain, children}) => {
     <div className={classNames.container}>
       <Header/>
       <div className={classNames.content}>
-        {children}
-        <MessagesStack />
+        <section className="ui main container">
+          {children}
+          <MessagesStack />
+        </section>
       </div>
     </div>
   );

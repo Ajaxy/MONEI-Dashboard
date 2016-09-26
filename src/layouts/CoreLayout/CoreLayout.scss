@@ -1,10 +1,11 @@
 .container {
   height: 100%;
   position: relative;
+  //overflow: hidden;
 }
 
 .content {
   height: 100%;
-  padding-top: 6em;
-  background-color: #edecec;
+  margin-top: 64px;
+  //overflow: scroll;
 }
