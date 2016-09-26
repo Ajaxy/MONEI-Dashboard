@@ -29,8 +29,7 @@ export const addInterceptors = (store) => {
       config.headers.smlogin = meta.smlogin;
     }
     const credentials = storage.get('credentials');
-    const signedConfig = signRequest(config, credentials)
-    return signedConfig;
+    return signRequest(config, credentials);
   }, error => {
     return Promise.reject(error.data);
   });
@@ -45,19 +44,22 @@ export const addInterceptors = (store) => {
   });
 };
 
-// Account
+// Users
 
-export const fetchAccount = () =>
-  apiClient.get('account');
+export const fetchUsers = ({limit = 50, page = 1, filter = null}) =>
+  apiClient.get('users', {params: {limit, page, filter}});
 
-export const fetchCharges = (params = {}) =>
-  apiClient.get('account/charges', {params});
+export const fetchUser = (userId) =>
+  apiClient.get(`users/${userId}`);
 
-export const updatePlan = ({plan, token, email}) =>
-  apiClient.post('account/subscription', {plan, token, email});
+export const updateUser = (userId, {app_metadata, user_metadata}) =>
+  apiClient.patch(`users/${userId}`, {app_metadata, user_metadata});
 
-export const updateCard = ({token, email}) =>
-  apiClient.post('account/card', {token, email});
+export const verifyUser = (userId) =>
+  apiClient.patch(`users/${userId}/verify`, {});
+
+export const impersonateUser = (userId, {redirect_uri}) =>
+  apiClient.post(`users/${userId}/impersonate`, {redirect_uri});
 
 // Transactions
 
@@ -67,4 +69,4 @@ export const fetchTransactions = () =>
 // Customers
 
 export const fetchCustomers = (params = {}) =>
-  apiClient.get('transactions/stored', {params:{from:1474128000000, to:1474214399999}});
+  apiClient.get('customers');
