@@ -12,7 +12,7 @@ const lock = new Auth0Lock(
   APP_CONFIG.auth0.clientDomain
 );
 
-const scope = 'openid email';
+const scope = 'openid role mid mlogin mpwd acquirer';
 
 export const unauth = () => ({
   type: types.UNAUTH
@@ -95,13 +95,31 @@ export const signInWithToken = (token) => {
   return async dispatch => {
     dispatch(signOut());
     storage.set('authToken', token);
-    const profile = await dispatch(getTokenInfo(token));
+    const newToken = await dispatch(resetToken(token));
+    storage.set('authToken', newToken);
+    const profile = await dispatch(getTokenInfo(newToken));
     dispatch({
       type: types.AUTH_SUCCESS
     });
-    dispatch(finalizeAuth(profile, token));
+    dispatch(finalizeAuth(profile, newToken));
     dispatch(replace('/'));
   };
+};
+
+export const resetToken = (token) => {
+  return async dispatch => {
+    return new Promise((resolve, reject) => {
+      const params = {
+        api: 'auth0',
+        id_token: token,
+        scope
+      };
+      lock.$auth0.getDelegationToken(params, (error, data) => {
+        if (error) return reject(error);
+        return resolve(data.id_token);
+      });
+    });
+  }
 };
 
 export const getTokenInfo = (idToken) => {
