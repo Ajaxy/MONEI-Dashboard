@@ -4,28 +4,30 @@ import * as schema from 'schema/customers';
 import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getIsUpToDate, getCampaignIds, getPages} from './selectors';
-import {push} from 'react-router-redux';
+import {getPage} from './selectors';
+import {getPageInfo, getPageDefaults} from 'lib/pagination';
 
-export const fetchCustomers = (page, forceRefresh = false) => {
+export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
   return async(dispatch, getState) => {
-    const isUpToDate = getIsUpToDate(getState());
-    if (isUpToDate && !forceRefresh) return;
-    dispatch({
-      type: types.FETCH_CUSTOMERS_REQUEST
-    });
+    const previous = getPage(getState());
+
+    // start from first page so clear all customers in the list
+    if(!page || filter !== previous.filter) {
+      dispatch({type: types.CLEAR_CUSTOMERS});
+    }
+
+    dispatch({type: types.FETCH_CUSTOMERS_REQUEST});
     try {
-      const customers = await api.fetchCustomers({
-        limit: PAGE_LIMIT,
-        page,
-      });
-      const normalized = normalize(customers.items, schema.arrayOfCustomers);
+      const result = await api.fetchCustomers({limit: PAGE_LIMIT, page, filter});
+      const normalized = normalize(result.items, schema.arrayOfCustomers);
+      // const currentPage = getPageInfo(result, previous);
       dispatch({
         type: types.FETCH_CUSTOMERS_SUCCESS,
         byId: normalized.entities.customers,
         ids: normalized.result,
-        nextPage: customers.nextPage,
-        prevPage: customers.prevPage
+        nextPage: result.nextPage,
+        length: normalized.result.length,
+        filter,
       });
     } catch (error) {
       dispatch({

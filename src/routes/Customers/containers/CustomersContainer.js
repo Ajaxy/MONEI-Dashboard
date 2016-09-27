@@ -13,15 +13,22 @@ class Customers extends Component {
     this.props.fetchCustomers();
   }
 
-  getPage = (page) => {
-    this.props.fetchCustomers(page, true);
+  filterUsers = (filter) => {
+    this.props.fetchCustomers(null, filter);
+  };
+
+  loadMore = () => {
+    const {page} = this.props;
+    this.props.fetchCustomers(page.nextPage, page.filter);
   };
 
   render() {
     return (
       <CustomersView
-        getPage={this.getPage}
-        {...this.props} />
+        loadMore={this.loadMore}
+        filterUsers={this.filterUsers}
+        {...this.props}
+      />
     );
   }
 }
@@ -29,9 +36,8 @@ class Customers extends Component {
 const mapStateToProps = (state) => ({
   customers: selectors.getCustomers(state),
   isFetching: selectors.getIsFetching(state),
-  isDeleting: selectors.getIsDeleting(state),
-  isUpToDate: selectors.getIsUpToDate(state),
-  pages: selectors.getPages(state)
+  isLastPage: selectors.getIsLastPage(state),
+  page: selectors.getPage(state)
 });
 
 export default connect(mapStateToProps, actions)(Customers);

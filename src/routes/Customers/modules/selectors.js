@@ -6,7 +6,7 @@ const customersSelector = state => state[stateKey];
 const activeCustomerIdSelector = state => state.router.params.customerId;
 export const getCustomers = createSelector(
   customersSelector,
-  customers => customers.ids.map(id => customers.byId[id]).slice(0, PAGE_LIMIT)
+  customers => customers.ids.map(id => customers.byId[id])
 );
 
 export const getCustomerIds = createSelector(
@@ -19,38 +19,12 @@ export const getIsFetching = createSelector(
   customers => customers.isFetching
 );
 
-export const getIsDeleting = createSelector(
+export const getPage = createSelector(
   customersSelector,
-  customers => customers.isDeleting
+  customers => customers.page
 );
 
-export const getIsCreating = createSelector(
-  customersSelector,
-  customers => customers.isCreating
-);
-
-export const getIsUpToDate = createSelector(
-  customersSelector,
-  customers => customers.isUpToDate
-);
-
-export const getPages = createSelector(
-  customersSelector,
-  customers => customers.pages
-);
-
-export const getActiveCustomer = createSelector(
-  customersSelector,
-  activeCustomerIdSelector,
-  (customers, customerId) => customers.byId[customerId] || {}
-);
-
-export const getDeletingCustomer = createSelector(
-  customersSelector,
-  customers => customers.byId[customers.customerToDelete] || {}
-);
-
-export const getIsDeleteModalOpen = createSelector(
-  customersSelector,
-  customers => customers.isDeleteModalOpen
+export const getIsLastPage = createSelector(
+  getPage,
+  page => !page.nextPage
 );

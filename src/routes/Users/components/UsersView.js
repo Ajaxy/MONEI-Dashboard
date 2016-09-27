@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import UserRow, {NUM_COLUMNS} from './UserRow';
 import Search from 'components/Search';
 import {InfiniteTable} from 'components/Table';
-import cx from 'classnames';
 import classNames from './UsersView.scss';
 
 const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, isLastPage}) => (

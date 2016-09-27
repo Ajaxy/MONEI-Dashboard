@@ -68,5 +68,5 @@ export const fetchTransactions = () =>
 
 // Customers
 
-export const fetchCustomers = (params = {}) =>
-  apiClient.get('customers');
+export const fetchCustomers = ({page, order, filter, limit}) =>
+  apiClient.get('customers', {params: {page, order, filter, limit}});

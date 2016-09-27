@@ -20,6 +20,9 @@ class InfiniteTable extends Component {
     setTimeout(() => {
       this.element.visibility({
         once: false,
+        //!TODO: Figure out how to recheck visibility
+        // on update without setting continuous to true.
+        continuous: true,
         observeChanges: true,
         includeMargin: true,
         onBottomVisible: () => {
@@ -50,9 +53,8 @@ class InfiniteTable extends Component {
           footer={
             <tr>
               <th colSpan={numColumns-1} >
-                {(count && total) ?
-                  `Showing ${count} of ${total}`
-                  : ''}
+                {count ? `Showing ${count} ` : ''}
+                {total ? `of ${total}` : `items`}
               </th>
               <th className="right aligned">
                 {(!isLastPage && !autoLoad) ?
