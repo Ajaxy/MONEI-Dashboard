@@ -4,32 +4,30 @@ import * as schema from 'schema/transactions';
 import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getIsUpToDate, getCampaignIds, getPages} from './selectors';
-import {push} from 'react-router-redux';
+import {getPage} from './selectors';
 
-export const fetchTransactions = (page, forceRefresh = false) => {
+export const fetchTransactions = (from, to, page, forceRefresh = false) => {
   return async(dispatch, getState) => {
-    const isUpToDate = getIsUpToDate(getState());
-    if (isUpToDate && !forceRefresh) return;
-    dispatch({
-      type: types.FETCH_TRANSACTIONS_REQUEST
-    });
+    const previous = getPage(getState());
+
+    // if we selected a new Date, let's clear the current list
+    if(!page || from !== previous.from || to !== previous.to || forceRefresh) {
+      dispatch({type: types.CLEAR_TRANSACTIONS});
+    }
+
+    dispatch({type: types.FETCH_TRANSACTIONS_REQUEST});
     try {
-      const transactions = await api.fetchTransactions({
-        limit: PAGE_LIMIT,
-        page,
-      });
-      console.log(transactions);
+      const transactions = await api.fetchTransactions({from, to, page});
       const normalized = normalize(transactions.items, schema.arrayOfTransactions);
       dispatch({
         type: types.FETCH_TRANSACTIONS_SUCCESS,
         byId: normalized.entities.transactions,
         ids: normalized.result,
         nextPage: transactions.nextPage,
-        prevPage: transactions.prevPage
+        from,
+        to,
       });
     } catch (error) {
-      console.log(error);
       dispatch({
         type: types.FETCH_TRANSACTIONS_FAIL
       });

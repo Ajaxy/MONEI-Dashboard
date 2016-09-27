@@ -14,43 +14,22 @@ export const getTransactionIds = createSelector(
   customers => customers.ids
 );
 
+export const getTotalAmount = createSelector(
+  customersSelector,
+  customers => customers.totalAmount
+);
+
 export const getIsFetching = createSelector(
   customersSelector,
   customers => customers.isFetching
 );
 
-export const getIsDeleting = createSelector(
+export const getPage = createSelector(
   customersSelector,
-  customers => customers.isDeleting
+  customers => customers.page
 );
 
-export const getIsCreating = createSelector(
-  customersSelector,
-  customers => customers.isCreating
-);
-
-export const getIsUpToDate = createSelector(
-  customersSelector,
-  customers => customers.isUpToDate
-);
-
-export const getPages = createSelector(
-  customersSelector,
-  customers => customers.pages
-);
-
-export const getActiveTransaction = createSelector(
-  customersSelector,
-  activeTransactionIdSelector,
-  (customers, customerId) => customers.byId[customerId] || {}
-);
-
-export const getDeletingTransaction = createSelector(
-  customersSelector,
-  customers => customers.byId[customers.customerToDelete] || {}
-);
-
-export const getIsDeleteModalOpen = createSelector(
-  customersSelector,
-  customers => customers.isDeleteModalOpen
+export const getIsLastPage = createSelector(
+  getPage,
+  page => !page.nextPage
 );

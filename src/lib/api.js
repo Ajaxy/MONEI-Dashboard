@@ -63,8 +63,8 @@ export const impersonateUser = (userId, {redirect_uri}) =>
 
 // Transactions
 
-export const fetchTransactions = () =>
-  apiClient.get('transactions');
+export const fetchTransactions = ({from, to, page}) =>
+  apiClient.get('transactions/stored', {params: {from, to, page}});
 
 // Customers
 

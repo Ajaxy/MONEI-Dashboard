@@ -12,7 +12,7 @@ export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
     const previous = getPage(getState());
 
     // start from first page so clear all customers in the list
-    if(!page || filter !== previous.filter) {
+    if(!page || filter !== previous.filter || forceRefresh) {
       dispatch({type: types.CLEAR_CUSTOMERS});
     }
 
@@ -20,7 +20,6 @@ export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
     try {
       const result = await api.fetchCustomers({limit: PAGE_LIMIT, page, filter});
       const normalized = normalize(result.items, schema.arrayOfCustomers);
-      // const currentPage = getPageInfo(result, previous);
       dispatch({
         type: types.FETCH_CUSTOMERS_SUCCESS,
         byId: normalized.entities.customers,

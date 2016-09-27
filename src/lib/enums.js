@@ -20,3 +20,15 @@ export const USER_ACQUIRERS = Object.freeze({
   Popular_Payments: 'PP',
   Technoactivity: 'TA'
 });
+
+export const PAYMENT_TYPES = Object.freeze({
+  DB: "Debit Card",
+  RF: "Refund",
+  PA: "Preauthorisation",
+  CP: "Capture",
+  CD: "Credit Card",
+  RV: "Reversal",
+  RB: "Rebill",
+  CB: "Chargeback",
+  RC: "Receipt",
+});
