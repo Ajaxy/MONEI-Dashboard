@@ -10,7 +10,7 @@ import {
 import cx from 'classnames';
 import classNames from './TransactionRow.scss';
 
-const TransactionRow = ({transaction, totalAmount = 0, isHeader = false, isFooter = false}) => {
+const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false, isFooter = false}) => {
   if (isHeader) {
     return (
       <tr>
@@ -32,7 +32,10 @@ const TransactionRow = ({transaction, totalAmount = 0, isHeader = false, isFoote
   } else {
     const {paymentType, currency, amount, result, customer, channelName, transactionTimestamp} = transaction;
     return (
-      <tr className={cx(classNames.row, {negative: (isFailed(result.code) || isRefund(paymentType))})}>
+      <tr
+        onClick={e => onClick(transaction.id)}
+        className={cx(classNames.row, {negative: isFailed(result.code), warning: isRefund(paymentType)})}
+      >
         <td>{getAmount(paymentType, currency, parseFloat(amount))}</td>
         <td>
           {

@@ -11,10 +11,10 @@ class Transactions extends Component {
   };
 
   componentWillMount() {
-    var date = new Date();
-    var from = moment(date).startOf('day').valueOf();
-    var to = moment(date).endOf('day').valueOf();
-    this.props.fetchTransactions(from, to);
+    const date = this.props.selectedDate;
+    var from = moment(date, selectors.DEFAULT_DATE_FORMAT).startOf('day').valueOf();
+    var to = moment(date, selectors.DEFAULT_DATE_FORMAT).endOf('day').valueOf();
+    this.props.fetchTransactions(from, to, null, true);
   }
 
   loadMore = () => {
@@ -28,11 +28,26 @@ class Transactions extends Component {
     this.props.fetchTransactions(from, to);
   };
 
+  viewDetails = (transactionId) => {
+    this.props.viewTransactionStart(transactionId);
+  };
+
+  closeDetails = () => {
+    this.props.viewTransactionCancel();
+  };
+
+  printPage = () => {
+    window.print();
+  };
+
   render() {
     return (
       <TransactionsView
         loadMore={this.loadMore}
         filterDate={this.filterDate}
+        viewDetails={this.viewDetails}
+        closeDetails={this.closeDetails}
+        printPage={this.printPage}
         {...this.props}
       />
     );
@@ -40,11 +55,14 @@ class Transactions extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  selectedDate: selectors.getSelectedDate(state),
   transactions: selectors.getTransactions(state),
   totalAmount: selectors.getTotalAmount(state),
   isFetching: selectors.getIsFetching(state),
   isLastPage: selectors.getIsLastPage(state),
-  page: selectors.getPage(state)
+  isDetailsModalOpen: selectors.getIsDetailsModalOpen(state),
+  transactionViewed: selectors.getViewedTransaction(state),
+  page: selectors.getPage(state),
 });
 
 export default connect(mapStateToProps, actions)(Transactions);

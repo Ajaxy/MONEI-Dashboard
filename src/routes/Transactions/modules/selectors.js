@@ -1,6 +1,7 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 import {PAGE_LIMIT} from 'lib/constants';
+import moment from 'moment';
 
 const customersSelector = state => state[stateKey];
 const activeTransactionIdSelector = state => state.router.params.customerId;
@@ -24,6 +25,11 @@ export const getIsFetching = createSelector(
   customers => customers.isFetching
 );
 
+export const getIsDetailsModalOpen = createSelector(
+  customersSelector,
+  customers => customers.isDetailsModalOpen
+);
+
 export const getPage = createSelector(
   customersSelector,
   customers => customers.page
@@ -32,4 +38,16 @@ export const getPage = createSelector(
 export const getIsLastPage = createSelector(
   getPage,
   page => !page.nextPage
+);
+
+export const getSelectedDate = createSelector(
+  getPage,
+  page => moment(page.from).format('MMMM DD, YYYY')
+);
+
+export const DEFAULT_DATE_FORMAT = 'MMMM DD, YYYY';
+
+export const getViewedTransaction = createSelector(
+  customersSelector,
+  customers => customers.byId[customers.transactionViewed] || {}
 );

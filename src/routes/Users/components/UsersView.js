@@ -33,7 +33,7 @@ const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, is
             appMetadata={user.app_metadata || {}}
             viewUser={viewUser}
           />)
-        : <tr><td colSpan="6">No users yet</td></tr>
+        : <tr><td colSpan={NUM_COLUMNS} className="center aligned">No users yet</td></tr>
       }
     </InfiniteTable>
   </section>

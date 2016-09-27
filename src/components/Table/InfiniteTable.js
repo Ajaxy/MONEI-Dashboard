@@ -25,6 +25,7 @@ class InfiniteTable extends Component {
         continuous: true,
         observeChanges: true,
         includeMargin: true,
+        initialCheck: false,
         onBottomVisible: () => {
           const {onLoadMore, isLastPage, isFetching} = this.props;
           if(!isLastPage && !isFetching) onLoadMore();
@@ -53,10 +54,10 @@ class InfiniteTable extends Component {
           footer={
             this.props.footer ? this.props.footer :
             <tr>
-              <th colSpan={numColumns-1} >
+              <th colSpan={numColumns-1} ><h3>
                 {count ? `Showing ${count} ` : ''}
                 {total ? `of ${total}` : count ? `items` : ''}
-              </th>
+              </h3></th>
               <th className="right aligned">
                 {(!isLastPage && !autoLoad) ?
                   <button

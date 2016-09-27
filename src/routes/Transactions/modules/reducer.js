@@ -59,12 +59,37 @@ const isFetching = (state = false, action) => {
 
 const page = (state = {}, action) => {
   switch (action.type) {
+    case types.CLEAR_TRANSACTIONS:
+      return {};
     case types.FETCH_TRANSACTIONS_SUCCESS:
       return {
+        page: action.page,
         nextPage: action.nextPage,
         from: action.from,
         to: action.to,
       };
+    default:
+      return state;
+  }
+};
+
+const isDetailsModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.VIEW_TRANSACTIONS_START:
+      return true;
+    case types.VIEW_TRANSACTIONS_CANCEL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const transactionViewed = (state = null, action) => {
+  switch (action.type) {
+    case types.VIEW_TRANSACTIONS_START:
+      return action.transactionId;
+    case types.VIEW_TRANSACTIONS_CANCEL:
+      return null;
     default:
       return state;
   }
@@ -75,6 +100,8 @@ export default combineReducers({
   byId,
   page,
   isFetching,
+  isDetailsModalOpen,
+  transactionViewed,
   totalAmount,
 });
 

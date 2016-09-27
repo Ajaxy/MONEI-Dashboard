@@ -36,9 +36,10 @@ export const getCurrencySymbol = (currency) => {
   return symbol;
 };
 
-export const getAmount = (paymentType, currency, amount) => {
+export const getAmount = (paymentType, currency, amount, showNegative=true) => {
   let formatted = getCurrencySymbol(currency) + ( isNaN(amount) ? 'N/A' : amount);
-  if(isRefund(paymentType)) formatted = '-' + formatted;
+  if(showNegative && isRefund(paymentType))
+    formatted = '-' + formatted;
   return formatted;
 };
 
@@ -46,6 +47,6 @@ export const getChannelName = (channel) => {
   return channel ? channel.match(/^[a-zA-Z0-9]+/g)[0] : '';
 };
 
-export const getTimeStamp = (timestamp) => {
-  return moment.unix(timestamp).format('HH:mm:ss');
+export const getTimeStamp = (timestamp, timeFormat) => {
+  return moment.unix(timestamp).format(timeFormat || 'HH:mm:ss');
 };

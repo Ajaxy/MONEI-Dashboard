@@ -1,22 +1,35 @@
 import React, {PropTypes} from 'react';
 import {InfiniteTable} from 'components/Table';
 import TransactionRow, {NUM_COLUMNS} from './TransactionRow';
+import TransactionDetails from './TransactionDetails';
 import DatePicker from 'components/DatePicker';
 import classNames from './TransactionsView.scss';
 
-const DEFAULT_VALUE = new Date();
-
-const TransactionsView = ({transactions, totalAmount, loadMore, filterDate, isFetching, isLastPage}) => (
+const TransactionsView = ({
+  transactions,
+  selectedDate,
+  totalAmount,
+  loadMore,
+  filterDate,
+  viewDetails,
+  closeDetails,
+  printPage,
+  isFetching,
+  isLastPage,
+  isDetailsModalOpen,
+  transactionViewed,
+}) => (
   <section className="ui basic segment padded-bottom">
     <h1 className="ui header">Transactions</h1>
     <DatePicker
       className={classNames.paddedBottom}
-      defaultValue={DEFAULT_VALUE}
+      placeholder="Date"
+      defaultValue={selectedDate}
       onChange={filterDate}
     />
     <InfiniteTable
       {...{isFetching, isLastPage}}
-      selectable={true}
+      selectable={!isFetching && transactions.length > 0}
       numColumns={NUM_COLUMNS}
       onLoadMore={loadMore}
       autoLoad={true}
@@ -29,10 +42,21 @@ const TransactionsView = ({transactions, totalAmount, loadMore, filterDate, isFe
           <TransactionRow
             key={index}
             transaction={tx}
+            onClick={viewDetails}
           />)
-        : <tr><td colSpan="2">No transactions</td></tr>
+        : <tr><td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td></tr>
       }
     </InfiniteTable>
+    {
+      isDetailsModalOpen && !!transactionViewed ?
+        <TransactionDetails
+          transaction={transactionViewed}
+          isOpen={isDetailsModalOpen}
+          onPrint={printPage}
+          onClose={closeDetails}
+        />
+      : null
+    }
   </section>
 );
 
@@ -41,8 +65,13 @@ TransactionsView.propTypes = {
   totalAmount: PropTypes.number.isRequired,
   loadMore: PropTypes.func.isRequired,
   filterDate: PropTypes.func.isRequired,
+  viewDetails: PropTypes.func.isRequired,
+  closeDetails: PropTypes.func.isRequired,
+  printPage: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
+  isDetailsModalOpen: PropTypes.bool.isRequired,
+  transactionViewed: PropTypes.object,
 };
 
 export default TransactionsView;

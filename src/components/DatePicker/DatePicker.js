@@ -3,19 +3,15 @@ import cx from 'classnames';
 
 class DatePicker extends Component {
   componentDidMount() {
-    const {defaultValue, onChange} = this.props;
+    const {onChange} = this.props;
     this.element.calendar({
       type: 'date',
       onChange,
     });
-
-    if(defaultValue instanceof Date) {
-      this.element.calendar('set date', defaultValue);
-    }
   }
 
   render() {
-    const {className} = this.props;
+    const {className, placeholder, defaultValue} = this.props;
     return (
       <div
         ref={el => { this.element = $(el); }}
@@ -23,7 +19,7 @@ class DatePicker extends Component {
       >
         <div className="ui input left icon">
           <i className="calendar icon"/>
-          <input type="text" placeholder="Date/Time"/>
+          <input type="text" {...{placeholder, defaultValue}}/>
         </div>
       </div>
     );
@@ -32,7 +28,8 @@ class DatePicker extends Component {
 
 DatePicker.propTypes = {
   className: PropTypes.string,
-  defaultValue: PropTypes.instanceOf(Date),
+  placeholder: PropTypes.string,
+  defaultValue: PropTypes.string,
   onChange: PropTypes.func,
 };
 

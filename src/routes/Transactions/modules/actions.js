@@ -10,12 +10,16 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
   return async(dispatch, getState) => {
     const previous = getPage(getState());
 
+    // prevent double requests
+    if(!forceRefresh && page === previous.page && from === previous.from && to === previous.to)
+      return;
+
     // if we selected a new Date, let's clear the current list
     if(!page || from !== previous.from || to !== previous.to || forceRefresh) {
       dispatch({type: types.CLEAR_TRANSACTIONS});
     }
 
-    dispatch({type: types.FETCH_TRANSACTIONS_REQUEST});
+    dispatch({type: types.FETCH_TRANSACTIONS_REQUEST, page});
     try {
       const transactions = await api.fetchTransactions({from, to, page});
       const normalized = normalize(transactions.items, schema.arrayOfTransactions);
@@ -24,6 +28,7 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
         byId: normalized.entities.transactions,
         ids: normalized.result,
         nextPage: transactions.nextPage,
+        page,
         from,
         to,
       });
@@ -34,9 +39,18 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchTransactions(page, true));
+          dispatch(fetchTransactions(from, to, page, true));
         }
       }));
     }
   };
 };
+
+export const viewTransactionStart = (transactionId) => ({
+  type: types.VIEW_TRANSACTIONS_START,
+  transactionId,
+});
+
+export const viewTransactionCancel = () => ({
+  type: types.VIEW_TRANSACTIONS_CANCEL,
+});
