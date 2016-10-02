@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import cx from 'classnames';
+import './calendar';
 
 class DatePicker extends Component {
   componentDidMount() {
