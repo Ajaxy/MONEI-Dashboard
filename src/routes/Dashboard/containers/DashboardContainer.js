@@ -7,88 +7,35 @@ import Chart from 'chart.js/src/chart';
 
 class Dashboard extends Component {
   static propTypes = {
-    // fetchDashboard: PropTypes.func.isRequired
+    fetchTransactionStats: PropTypes.func.isRequired
   };
 
   componentWillMount() {
-    // this.props.fetchDashboard();
+    this.refresh();
   }
 
-  componentDidMount() {
-    this.chart1 = new Chart($('#chart-gross-volume'), {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: 'Scatter Dataset',
-          data: [{
-            x: 0,
-            y: 0
-          }, {
-            x: 10,
-            y: 10
-          }, {
-            x: 20,
-            y: 5
-          }]
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'linear',
-            position: 'bottom'
-          }]
-        }
-      }
-    });
-
-    this.chart2 = new Chart($('#chart-successful-charges'), {
-      type: 'line',
-      data: {
-        datasets: [{
-          label: 'Scatter Dataset',
-          data: [{
-            x: 0,
-            y: 0
-          }, {
-            x: 10,
-            y: 10
-          }, {
-            x: 20,
-            y: 5
-          }]
-        }]
-      },
-      options: {
-        scales: {
-          xAxes: [{
-            type: 'linear',
-            position: 'bottom'
-          }]
-        }
-      }
-    })
-  }
-
-  getPage = (page) => {
-    // this.props.fetchDashboard(page, true);
+  refresh = () => {
+    this.props.fetchTransactionStats();
   };
 
   render() {
     return (
       <DashboardView
-        getPage={this.getPage}
+        refresh={this.refresh}
         {...this.props} />
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  // customers: selectors.getDashboard(state),
   isFetching: selectors.getIsFetching(state),
-  isDeleting: selectors.getIsDeleting(state),
-  isUpToDate: selectors.getIsUpToDate(state),
-  pages: selectors.getPages(state)
+  amountPerDay: selectors.getAmountPerDay(state),
+  countPerDay: selectors.getCountPerDay(state),
+  totalAmount: selectors.getTotalAmount(state),
+  totalCount: selectors.getTotalCount(state),
+  startDate: selectors.getStartDate(state),
+  endDate: selectors.getEndDate(state),
+  labels: selectors.getLabels(state),
 });
 
 export default connect(mapStateToProps, actions)(Dashboard);

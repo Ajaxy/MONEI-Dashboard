@@ -73,6 +73,9 @@ export const impersonateUser = (userId, {redirect_uri}) =>
 export const fetchTransactions = ({from, to, page}) =>
   apiClient.get('transactions/stored', {params: {from, to, page}});
 
+export const fetchTransactionStats = () =>
+  apiClient.get('transactions/stats');
+
 // Customers
 
 export const fetchCustomers = ({page, order, filter, limit}) =>
