@@ -19,13 +19,14 @@ class CoreLayout extends Component {
   componentWillMount() {
     const hash = queryString.parse(location.hash);
     if (hash.id_token) {
+      this.signedWithToken = true;
       this.props.signInWithToken(hash.id_token);
     }
   }
 
   componentDidMount() {
     const {profile, isAuthenticated, finalizeAuth, getTokenInfo} = this.props;
-    if (isAuthenticated) {
+    if (isAuthenticated && !this.signedWithToken) {
       getTokenInfo();
       finalizeAuth(profile);
     }

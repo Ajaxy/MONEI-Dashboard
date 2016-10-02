@@ -12,6 +12,14 @@ const apiClient = axios.create({
 export const addInterceptors = (store) => {
   apiClient.interceptors.request.use(config => {
     const token = storage.get('authToken');
+    const profile = storage.get('profile');
+    const credentials = storage.get('credentials');
+
+    // at this point, user is not yet finished authentication
+    if(!token || !profile || !credentials) {
+      return config;
+    }
+
     if (isTokenExpired(token)) {
       config.adapter = (resolve, reject) => reject({
         data: {
@@ -21,14 +29,13 @@ export const addInterceptors = (store) => {
       store.dispatch(signOut());
     }
     config.headers.authToken = token;
-    const profile = storage.get('profile');
-    const meta = profile.app_metadata;
+
+    const meta = profile ? profile.app_metadata : {};
     if(config.sandbox) {
       config.headers.smid = meta.smid;
       config.headers.smpwd = meta.smpwd;
       config.headers.smlogin = meta.smlogin;
     }
-    const credentials = storage.get('credentials');
     return signRequest(config, credentials);
   }, error => {
     return Promise.reject(error.data);

@@ -4,6 +4,7 @@ import * as schema from 'schema/users';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 import {getIsUpToDate} from './selectors';
+import {signOut} from 'modules/auth/actions';
 
 export const fetchUser = (userId, forceRefresh=false) => {
   return async(dispatch, getState) => {
@@ -67,6 +68,7 @@ export const loginAsUser = (userId) => {
     try {
       const redirect_uri = window.location.origin;
       const result = await api.impersonateUser(userId, {redirect_uri});
+      signOut();
       window.location.href = result;
     } catch (error) {
       dispatch(addMessage({

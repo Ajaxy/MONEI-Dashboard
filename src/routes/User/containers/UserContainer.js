@@ -12,7 +12,7 @@ class User extends Component {
     userId: PropTypes.string.isRequired,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const {userId} = this.props;
     this.props.fetchUser(userId, true);
   }

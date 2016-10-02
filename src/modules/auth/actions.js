@@ -75,12 +75,12 @@ export const showLock = () => {
     icon: `${APP_CONFIG.staticCdnURL}/logo.svg`
   };
   return dispatch => {
-    lock.hide(() => lock.show(lockOptions, (error, profile, token) => {
+    lock.hide(() => lock.show(lockOptions, async (error, profile, token) => {
       if (error) return;
       storage.set('profile', profile);
       storage.set('authToken', token);
       dispatch(updateProfile(profile));
-      dispatch(finalizeAuth(profile, token));
+      await dispatch(finalizeAuth(profile, token));
       setTimeout(() => {
         dispatch({
           type: types.AUTH_SUCCESS
@@ -94,14 +94,13 @@ export const showLock = () => {
 export const signInWithToken = (token) => {
   return async dispatch => {
     dispatch(signOut());
-    storage.set('authToken', token);
     const newToken = await dispatch(resetToken(token));
-    storage.set('authToken', newToken);
     const profile = await dispatch(getTokenInfo(newToken));
+    await dispatch(finalizeAuth(profile, newToken));
+    storage.set('authToken', newToken);
     dispatch({
       type: types.AUTH_SUCCESS
     });
-    dispatch(finalizeAuth(profile, newToken));
     dispatch(replace('/'));
   };
 };
@@ -124,7 +123,7 @@ export const resetToken = (token) => {
 
 export const getTokenInfo = (idToken) => {
   const token = idToken || storage.get('authToken');
-  return dispatch => {
+  return async dispatch => {
     return new Promise((resolve, reject) => {
       lock.getClient().getProfile(token, (error, profile) => {
         if (error) reject(error);
@@ -142,7 +141,7 @@ export const finalizeAuth = (profile, idToken) => {
     // dispatch(fetchProfile());
     dispatch(autoSignOut(token));
     bootIntercom(profile);
-    fetchAWSCredentials(token).then(
+    return fetchAWSCredentials(token).then(
       // credentials => dispatch(notifications.connect(profile, credentials)),
       credentials => storage.set('credentials', credentials),
       error => dispatch(addMessage({text: error}))

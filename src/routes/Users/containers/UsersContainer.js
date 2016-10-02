@@ -13,7 +13,7 @@ class Users extends Component {
     router: PropTypes.object
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const {page} = this.props;
     this.props.fetchUsers(1, page.filter);
   }

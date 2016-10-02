@@ -13,11 +13,11 @@ class Home extends Component {
     isAdmin: PropTypes.bool.isRequired
   };
 
-  componentWillMount() {
-    // if(this.props.isAdmin)
-    //   this.context.router.replace('/users');
-    // else
-    //   this.context.router.replace('/dashboard');
+  componentDidMount() {
+    if(this.props.isAdmin)
+      this.context.router.replace('/users');
+    else
+      this.context.router.replace('/dashboard');
   }
 
   render() {

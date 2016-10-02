@@ -134,7 +134,7 @@ config.globals = {
   APP_CONFIG: {
     auth0: {
       clientID: 'G4f0Hdd0KjxeMmxh978kb7UcLjjJpffn',
-      clientDomain: 'microapps.auth0.com'
+      clientDomain: 'monei.auth0.com'
     }
   }
 };

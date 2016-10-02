@@ -49,7 +49,7 @@ export const fetchUsers = (page = 1, filter = null, forceRefresh = false) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchUsers(page, true));
+          dispatch(fetchUsers(page, filter, forceRefresh));
         }
       }));
     }
