@@ -80,3 +80,11 @@ export const fetchTransactionStats = () =>
 
 export const fetchCustomers = ({page, order, filter, limit}) =>
   apiClient.get('customers', {params: {page, order, filter, limit}});
+
+// Phone verification
+
+export const verifyPhoneStart = (phoneNumber) => 
+  apiClient.post('phone-verification/start', {phoneNumber});
+
+export const verifyPhoneCheck = (phoneNumber, verificationCode) =>
+  apiClient.post('phone-verification/check', {phoneNumber, verificationCode});

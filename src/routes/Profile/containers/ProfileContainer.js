@@ -5,15 +5,6 @@ import * as selectors from '../modules/selectors';
 import * as profileSelectors from 'modules/profile/selectors';
 import ProfileView from '../components/ProfileView';
 
-class Profile extends Component {
-  static propTypes = {
-  };
-
-  render() {
-    return <ProfileView{...this.props} />;
-  }
-}
-
 const mapStateToProps = (state, props) => ({
   user: profileSelectors.getProfile(state),
   userId: profileSelectors.getUserId(state),
@@ -21,4 +12,4 @@ const mapStateToProps = (state, props) => ({
   appMetadata: profileSelectors.getAppMetadata(state),
 });
 
-export default connect(mapStateToProps, actions)(Profile);
+export default connect(mapStateToProps, actions)(ProfileView);

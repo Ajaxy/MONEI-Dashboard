@@ -61,7 +61,7 @@ const ChangePasswordView = ({
             type="submit" 
             value="Reset"
             disabled={pristine || !newPassword.dirty || !confirmPassword.dirty || isUpdating} 
-            className={cx("ui submit button fluid green", {loading: isUpdating})}
+            className={cx("ui submit large button fluid green", {loading: isUpdating})}
           />
         </div>
       </div>

@@ -3,6 +3,7 @@ import * as types from './types';
 import * as schemas from 'schema/users';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
+import {updateProfile} from 'modules/profile/actions';
 
 export const resetPassword = (email, password) => {
   return async dispatch => {
@@ -24,4 +25,53 @@ export const resetPassword = (email, password) => {
       }));
     }
   };
+};
+
+export const verifyPhoneNumber = (phoneNumber) => {
+  return async dispatch => {
+    dispatch({type: types.PHONE_VERIFICATION_REQUEST});
+    try {
+      const result = await api.verifyPhoneStart(phoneNumber);
+      dispatch({type: types.PHONE_VERIFICATION_SUCCESS});
+      dispatch(openCheckingModal(phoneNumber));
+    } catch(error) {
+      dispatch({type: types.PHONE_VERIFICATION_FAIL});
+      dispatch(addMessage({
+        type: error,
+        onRetry() {
+          dispatch(verifyPhoneStart(phoneNumber))
+        }
+      }));
+    }
+  };
+};
+
+export const checkPhoneNumber = (phoneNumber, verificationCode) => {
+  return async dispatch => {
+    dispatch({type: types.PHONE_VERIFICATION_CHECK_REQUEST});
+    try {
+      const result = await api.verifyPhoneCheck(phoneNumber, verificationCode);
+      const profile = storage.get('profile');
+      profile.app_metadata.phone_number = phoneNumber;
+      dispatch(updateProfile(profile));
+      dispatch({type: types.PHONE_VERIFICATION_CHECK_SUCCESS});
+      dispatch(closeCheckingModal());
+    } catch(error) {
+      dispatch({type: types.PHONE_VERIFICATION_CHECK_FAIL});
+      dispatch(addMessage({
+        type: error,
+        onRetry() {
+          dispatch(checkPhoneNumber(phoneNumber))
+        }
+      }));
+    }
+  };
+};
+
+export const openCheckingModal = (phoneNumber) => {
+  return {type: types.PHONE_VERIFICATION_CHECK_START, data: phoneNumber};
+};
+
+export const closeCheckingModal = () => {
+  return {type: types.PHONE_VERIFICATION_CHECK_STOP};
 };

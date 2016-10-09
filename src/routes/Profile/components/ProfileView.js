@@ -1,7 +1,8 @@
 import React from 'react';
 import UserHeader from 'routes/User/components/UserHeader';
 import PersonalDataView from 'routes/User/components/PersonalDataView';
-import ChangePhoneView from './ChangePhoneView';
+import ChangePhoneForm from '../containers/ChangePhoneForm';
+import ConfirmPhoneForm from '../containers/ConfirmPhoneForm';
 import ChangePasswordForm from '../containers/ChangePasswordForm';
 
 const ProfileView = ({user}) => (
@@ -12,9 +13,10 @@ const ProfileView = ({user}) => (
         <h4 className="ui dividing header">My personal data</h4>
         <PersonalDataView user={user} />
         <h4 className="ui dividing header">Change my phone</h4>
-        <ChangePhoneView user={user} />
+        <ChangePhoneForm user={user}/>
+        <ConfirmPhoneForm user={user}/>
         <h4 className="ui dividing header">Change my password</h4>
-        <ChangePasswordForm user={user} isUpdating={false} />        
+        <ChangePasswordForm user={user} />        
       </div>
     </div>
   </section>

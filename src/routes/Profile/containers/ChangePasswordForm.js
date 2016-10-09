@@ -3,7 +3,6 @@ import ChangePasswordView from '../components/ChangePasswordView';
 import {reduxForm} from 'redux-form';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
-import Modal from 'components/Modal';
 
 const MIN_PASSWORD_LENGTH = 8;
 
