@@ -37,9 +37,9 @@ const UserHeader = ({user, verifyUser, loginAsUser, isUpdating}) => (
 
 UserHeader.propTypes = {
   user: PropTypes.object.isRequired,
-  verifyUser: PropTypes.func.isRequired,
-  loginAsUser: PropTypes.func.isRequired,
-  isUpdating: PropTypes.bool.isRequired,
+  verifyUser: PropTypes.func,
+  loginAsUser: PropTypes.func,
+  isUpdating: PropTypes.bool,
 };
 
 export default UserHeader;

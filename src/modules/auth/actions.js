@@ -107,7 +107,7 @@ export const signInWithToken = (token) => {
 
 export const resetToken = (token) => {
   return async dispatch => {
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       const params = {
         api: 'auth0',
         id_token: token,
@@ -124,7 +124,7 @@ export const resetToken = (token) => {
 export const getTokenInfo = (idToken) => {
   const token = idToken || storage.get('authToken');
   return async dispatch => {
-    return new Promise((resolve, reject) => {
+    return await new Promise((resolve, reject) => {
       lock.getClient().getProfile(token, (error, profile) => {
         if (error) reject(error);
         storage.set('profile', profile);
@@ -147,4 +147,17 @@ export const finalizeAuth = (profile, idToken) => {
       error => dispatch(addMessage({text: error}))
     );
   };
+};
+
+export const changePassword = (email, password) => {
+  return new Promise((resolve, reject) => {
+    lock.$auth0.changePassword({
+      connection: 'Username-Password-Authentication',
+      email, 
+      password
+    }, (error, data) => {
+      if(error) return reject(error);
+      resolve(data);
+    });
+  });
 };
