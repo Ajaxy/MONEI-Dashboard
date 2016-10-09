@@ -15,7 +15,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
       size="small"
     >
       <div className="header">Transaction details</div>
-      <div className="content">
+      <div className={cx("content", classNames.modalContent)}>
         <h4 className="ui header">Payment Details</h4>
         <Table className="large definition">
           <tr>

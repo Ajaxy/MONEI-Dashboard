@@ -5,3 +5,8 @@
 .noMarginBottom {
   margin-bottom: 0px !important;
 }
+
+.modalContent {
+  max-height: 450px;
+  overflow-y: scroll;
+}
