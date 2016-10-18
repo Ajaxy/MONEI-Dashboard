@@ -45,15 +45,15 @@ export default {
 
     config.S3Plugin = {
       s3Options: {
-        accessKeyId: process.env.AWS_KEY,
-        secretAccessKey: process.env.AWS_SECRET,
+        accessKeyId: process.env.PROD_AWS_KEY,
+        secretAccessKey: process.env.PROD_AWS_SECRET,
         region
       },
       s3UploadOptions: {
-        Bucket: process.env.S3_BUCKET_NAME
+        Bucket: process.env.PROD_S3_BUCKET_NAME
       },
       cloudfrontInvalidateOptions: {
-        DistributionId: process.env.CF_DISTRIBUTION_ID,
+        DistributionId: process.env.PROD_CF_DISTRIBUTION_ID,
         Items: ['/index.html']
       }
     };
