@@ -9,6 +9,7 @@ debug('Create configuration.')
 const karmaConfig = {
   basePath : '../', // project root in relation to bin/karma.js
   files    : [
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.slim.min.js',
     {
       pattern  : `./${config.dir_test}/test-bundler.js`,
       watched  : false,
