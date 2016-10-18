@@ -36,7 +36,7 @@ export default {
     const region = 'eu-west-1';
     Object.assign(config.globals.APP_CONFIG, {
       apiBaseURL: 'https://api.monei.net/',
-      staticCdnURL: `${process.env.S3_BUCKET_NAME}.amazonaws.com`,
+      staticCdnURL: `http://${process.env.S3_BUCKET_NAME}.s3-website-${region}.amazonaws.com`,
       intercomID: 'za787poa',
       stripeKey: '',
       iotEndpoint: '',
