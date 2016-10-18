@@ -26,6 +26,11 @@ export const getAppMetadata =  createSelector(
   profile => profile.app_metadata || {}
 );
 
+export const getPhoneNumber = createSelector(
+  getAppMetadata,
+  appMetadata => appMetadata.phone_number || ''
+);
+
 export const getIsAdmin = createSelector(
   getAppMetadata,
   appMetadata => appMetadata.role == USER_ROLES.Admin

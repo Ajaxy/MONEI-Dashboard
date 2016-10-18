@@ -16,14 +16,19 @@ const isFetching = (state = false, action) => {
   }
 };
 
+const defaultUserMetadata = {profile_type: 'individual'};
 const profileState = storage.get('profile') || {};
 const data = (state = profileState, action) => {
   switch (action.type) {
     case types.FETCH_PROFILE_SUCCESS:
     case types.UPDATE_PROFILE:
       const newProfile = {...state, ...action.data};
+      newProfile.user_metadata = Object.assign({}, 
+        defaultUserMetadata, 
+        (action.data || {}).user_metadata
+      );
       storage.set('profile', newProfile);
-      return {...state, ...action.data};
+      return newProfile;
     default:
       return state;
   }
