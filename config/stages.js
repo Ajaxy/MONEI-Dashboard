@@ -8,10 +8,7 @@ export default {
   development: (config) => {
     const region = 'us-east-1';
     Object.assign(config.globals.APP_CONFIG, {
-      // apiBaseURL: 'https://oq60megra3.execute-api.us-east-1.amazonaws.com/production/',
-      // apiBaseURL: 'https://oq60megra3.execute-api.us-east-1.amazonaws.com/monei/',
       apiBaseURL: 'https://api.monei.net/',
-      csvImportBucket: '',
       staticCdnURL: 'http://monei-v2-dashboard-development.s3.amazonaws.com',
       intercomID: 'd84d8u48',
       stripeKey: '',
@@ -38,10 +35,9 @@ export default {
   production: (config) => {
     const region = 'eu-west-1';
     Object.assign(config.globals.APP_CONFIG, {
-      apiBaseURL: '',
-      csvImportBucket: '',
-      staticCdnURL: '',
-      intercomID: '',
+      apiBaseURL: 'https://api.monei.net/',
+      staticCdnURL: `${process.env.S3_BUCKET_NAME}.amazonaws.com`,
+      intercomID: 'za787poa',
       stripeKey: '',
       iotEndpoint: '',
       region
@@ -49,15 +45,15 @@ export default {
 
     config.S3Plugin = {
       s3Options: {
-        accessKeyId: process.env.PROD_ACCESS_KEY_ID,
-        secretAccessKey: process.env.PROD_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.AWS_KEY,
+        secretAccessKey: process.env.AWS_SECRET,
         region
       },
       s3UploadOptions: {
-        Bucket: ''
+        Bucket: process.env.S3_BUCKET_NAME
       },
       cloudfrontInvalidateOptions: {
-        DistributionId: '',
+        DistributionId: process.env.CF_DISTRIBUTION_ID,
         Items: ['/index.html']
       }
     };
