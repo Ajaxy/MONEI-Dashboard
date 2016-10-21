@@ -30,6 +30,32 @@ export const updateProfile = (data) => ({
   type: types.UPDATE_PROFILE,
   data
 });
+
+export const modifyProfile = (userId, {user_metadata}) => {
+  return async (dispatch, getState) => {
+    dispatch({type: types.MODIFY_PROFILE_REQUEST});
+    try {
+      const data = await api.updateProfile(userId, {user_metadata});
+      dispatch({
+        type: types.MODIFY_PROFILE_SUCCESS,
+        data
+      });
+      return true;
+    } catch (error) {
+      dispatch({
+        type: types.MODIFY_PROFILE_FAIL
+      });
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(modifyProfile(userId, {user_metadata}));
+        }
+      }));
+      return false
+    }
+  };
+};
+
 export const initSandbox = () => {
   return async (dispatch, getState) => {
     const state = getState();

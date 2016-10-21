@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {omitProps} from 'lib/utils';
+import {getInputProps} from 'components/Input';
 import cx from 'classnames';
 
 const ConfirmPhoneView = ({
@@ -8,20 +8,7 @@ const ConfirmPhoneView = ({
   onSubmit,
   isUpdating,
 }) => {
-  const verificationCodeProps = omitProps(verificationCode,
-    'initialValue',
-    'autofill',
-    'onUpdate',
-    'valid',
-    'dirty',
-    'pristine',
-    'active',
-    'visited',
-    'autofilled',
-    'invalid',
-    'touched',
-    'error',
-  );
+  const verificationCodeProps = getInputProps(verificationCode);
   return (
     <form className="ui large form" target="#" onSubmit={handleSubmit(onSubmit)}>
       <div className="fields">

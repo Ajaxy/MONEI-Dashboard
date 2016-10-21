@@ -16,11 +16,24 @@ const isFetching = (state = false, action) => {
   }
 };
 
+const isModifying = (state = false, action) => {
+  switch (action.type) {
+    case types.MODIFY_PROFILE_REQUEST:
+      return true;
+    case types.MODIFY_PROFILE_SUCCESS:
+    case types.MODIFY_PROFILE_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const defaultUserMetadata = {profile_type: 'individual'};
 const profileState = storage.get('profile') || {};
 const data = (state = profileState, action) => {
   switch (action.type) {
     case types.FETCH_PROFILE_SUCCESS:
+    case types.MODIFY_PROFILE_SUCCESS:
     case types.UPDATE_PROFILE:
       const newProfile = {...state, ...action.data};
       newProfile.user_metadata = Object.assign({}, 
@@ -67,6 +80,7 @@ const isInSandboxMode = (state = defaultSandboxMode, action) => {
 
 export default combineReducers({
   isFetching,
+  isModifying,
   isSandboxInitialized,
   isInSandboxMode,
   data
