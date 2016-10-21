@@ -4,9 +4,10 @@ import HomeRoute from './Home';
 import SignInRoute from './SignIn';
 import UserRoute from './User';
 import UsersRoute from './Users';
-import CustomersRoute from './Customers';
 import DashboardRoute from './Dashboard';
+import CustomersRoute from './Customers';
 import TransactionsRoute from './Transactions';
+import OnboardingRoute from './Onboarding';
 import ProfileRoute from './Profile';
 import NotFoundRoute from './NotFound';
 
@@ -21,6 +22,7 @@ export const createRoutes = (store) => ({
     CustomersRoute(store),
     DashboardRoute(store),
     TransactionsRoute(store),
+    OnboardingRoute(store),
     ProfileRoute(store),
     NotFoundRoute,
   ]

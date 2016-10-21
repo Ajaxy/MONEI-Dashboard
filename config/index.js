@@ -133,6 +133,7 @@ config.globals = {
   __VERSION__: pkg.version,
   APP_CONFIG: {
     auth0: {
+      baseURL: 'https://monei.auth0.com/api/v2/',
       clientID: 'G4f0Hdd0KjxeMmxh978kb7UcLjjJpffn',
       clientDomain: 'monei.auth0.com'
     }

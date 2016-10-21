@@ -1,0 +1,35 @@
+.container {
+  background: url('static/bg.jpg') center center no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+.header {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.section {
+  padding-top: 64px;
+}
+
+.content {
+  min-height: 360px;
+}
+
+.progress {
+  margin: 3.5em 0 0 0 !important;
+}
+
+.segment {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
+.steps {
+  border-radius: 0px !important;
+}
+
+.step {
+  border-radius: 0px !important; 
+}

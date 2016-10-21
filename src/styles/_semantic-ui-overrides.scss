@@ -1,6 +1,6 @@
 $text-colors: (
   red: #B03060,
-  orange: #FE9A76,
+  orange: #FF5623,
   yellow: #FFD700,
   olive: #32CD32,
   green: #016936,
@@ -15,12 +15,13 @@ $text-colors: (
 
 @each $name, $color in $text-colors {
   .text.#{$name} {
-    color: #{$color};
+    color: #{$color} !important;
   }
 }
 
 $ui-colors: (
   green: #00796B,
+  orange: #FF5623,
 );
 
 @each $name, $color in $ui-colors {
