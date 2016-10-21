@@ -3,10 +3,14 @@ import storage from 'store';
 import {omitInternalProps} from 'lib/utils';
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
-import {signRequest} from 'lib/aws';
+import {buildCreds, signRequest} from 'lib/aws';
 
 const apiClient = axios.create({
   baseURL: APP_CONFIG.apiBaseURL
+});
+
+const authApiClient = axios.create({
+  baseURL: APP_CONFIG.auth0.baseURL
 });
 
 export const addInterceptors = (store) => {
@@ -49,7 +53,56 @@ export const addInterceptors = (store) => {
       return Promise.reject(errorMessage);
     }
   });
+
+  authApiClient.interceptors.request.use(config => {
+    const token = storage.get('authToken');
+    if(!token) return config;
+
+    if(isTokenExpired(token)) {
+      config.adapter = (resolve, reject) => reject({
+        data: {
+          message: 'Your session is expired. Please sign in again'
+        }
+      });
+      store.dispatch(signOut());
+    }
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  }, error => {
+    return Promise.reject(error.data);
+  });
+
+  authApiClient.interceptors.response.use(response => {
+    return response.data;
+  }, error => {
+    if (error) {
+      const errorMessage = error.data && error.data.message;
+      return Promise.reject(errorMessage);
+    }
+  });
+
+  // update AWS creds
+  const credentials = storage.get('credentials');
+  if (credentials) buildCreds(credentials);
 };
+
+// Sandbox
+
+export const createSandbox = (name) =>
+  apiClient.post('sandbox', {name});
+
+// Transactions
+
+export const fetchTransactions = ({from, to, page}, sandbox) =>
+  apiClient.get('transactions/stored', {params: {from, to, page}, sandbox});
+
+export const fetchTransactionStats = (sandbox) =>
+  apiClient.get('transactions/stats', {sandbox});
+
+// Customers
+
+export const fetchCustomers = ({page, order, filter, limit}, sandbox) =>
+  apiClient.get('customers', {params: {page, order, filter, limit}, sandbox});
 
 // Users
 
@@ -68,18 +121,10 @@ export const verifyUser = (userId) =>
 export const impersonateUser = (userId, {redirect_uri}) =>
   apiClient.post(`users/${userId}/impersonate`, {redirect_uri});
 
-// Transactions
+// Profile
 
-export const fetchTransactions = ({from, to, page}) =>
-  apiClient.get('transactions/stored', {params: {from, to, page}});
-
-export const fetchTransactionStats = () =>
-  apiClient.get('transactions/stats');
-
-// Customers
-
-export const fetchCustomers = ({page, order, filter, limit}) =>
-  apiClient.get('customers', {params: {page, order, filter, limit}});
+export const updateProfile = (userId, {user_metadata}) => 
+  authApiClient.patch(`users/${userId}`, {user_metadata});
 
 // Phone verification
 

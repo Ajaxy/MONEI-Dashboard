@@ -10,6 +10,8 @@ export default {
     Object.assign(config.globals.APP_CONFIG, {
       apiBaseURL: 'https://api.monei.net/',
       staticCdnURL: 'http://monei-v2-dashboard-development.s3.amazonaws.com',
+      adminBucket: 'microapps-monei-verified-documents',
+      userBucket: 'microapps-monei-documents',
       intercomID: 'd84d8u48',
       stripeKey: '',
       iotEndpoint: '',
@@ -37,6 +39,8 @@ export default {
     Object.assign(config.globals.APP_CONFIG, {
       apiBaseURL: 'https://api.monei.net/',
       staticCdnURL: `http://${process.env.S3_BUCKET_NAME}.s3-website-${region}.amazonaws.com`,
+      adminBucket: 'microapps-monei-verified-documents',
+      userBucket: 'microapps-monei-documents',
       intercomID: 'za787poa',
       stripeKey: '',
       iotEndpoint: '',
