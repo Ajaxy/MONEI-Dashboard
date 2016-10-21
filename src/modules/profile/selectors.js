@@ -31,12 +31,42 @@ export const getPhoneNumber = createSelector(
   appMetadata => appMetadata.phone_number || ''
 );
 
+export const getIsUser = createSelector(
+  getAppMetadata,
+  appMetadata => appMetadata.role == USER_ROLES.User
+);
+
 export const getIsAdmin = createSelector(
   getAppMetadata,
   appMetadata => appMetadata.role == USER_ROLES.Admin
 );
 
+export const getIsMerchant = createSelector(
+  getAppMetadata,
+  appMetadata => !!appMetadata.mid
+);
+
+export const getIsCompany = createSelector(
+  getProfileType,
+  profileType => profileType == 'company'
+);
+
+export const getIsVerificationRequested = createSelector(
+  getUserMetadata,
+  userMetadata => userMetadata.verification_requested
+);
+
 export const getUserIdBase64 = createSelector(
   getUserId,
   id => base64.encode(id)
+);
+
+export const getIsSandboxInitialized = createSelector(
+  profileSelector,
+  profile => profile.isSandboxInitialized
+);
+
+export const getIsInSandboxMode = createSelector(
+  profileSelector,
+  profile => profile.isInSandboxMode
 );

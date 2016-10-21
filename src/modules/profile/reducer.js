@@ -34,7 +34,40 @@ const data = (state = profileState, action) => {
   }
 };
 
+const isSandboxInitialized = (state = false, action) => {
+  switch (action.type) {
+    case types.INIT_PROFILE_SANDBOX:
+      return true;
+    default:
+      return state;
+  }
+};
+
+const cachedSandbox = storage.get('sandbox');
+const defaultSandboxMode = cachedSandbox !== undefined ? cachedSandbox : true;
+const isInSandboxMode = (state = defaultSandboxMode, action) => {
+  let nextState = state;
+  switch (action.type) {
+    case types.FETCH_PROFILE_SUCCESS:
+    case types.UPDATE_PROFILE:
+      const appMetadata = (action.data || {}).app_metadata;
+      if (!appMetadata.mid) 
+        nextState = true;
+      storage.set('sandbox', nextState);
+      return nextState;
+    case types.SET_PROFILE_SANDBOX:
+      nextState = !!action.data;
+      storage.set('sandbox', nextState);
+      return nextState;
+    case types.INIT_PROFILE_SANDBOX:
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isFetching,
+  isSandboxInitialized,
+  isInSandboxMode,
   data
 });

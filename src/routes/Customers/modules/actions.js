@@ -5,6 +5,7 @@ import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 import {getPage} from './selectors';
+import {getIsInSandboxMode} from 'modules/profile/selectors';
 import {getPageInfo, getPageDefaults} from 'lib/pagination';
 
 export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
@@ -18,7 +19,8 @@ export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
 
     dispatch({type: types.FETCH_CUSTOMERS_REQUEST});
     try {
-      const result = await api.fetchCustomers({limit: PAGE_LIMIT, page, filter});
+      const sandbox = getIsInSandboxMode(getState());
+      const result = await api.fetchCustomers({limit: PAGE_LIMIT, page, filter}, sandbox);
       const normalized = normalize(result.items, schema.arrayOfCustomers);
       dispatch({
         type: types.FETCH_CUSTOMERS_SUCCESS,

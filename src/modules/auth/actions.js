@@ -4,7 +4,7 @@ import * as types from './types';
 import {replace} from 'react-router-redux';
 import storage from 'store';
 import {addMessage} from 'modules/messages/actions';
-import {fetchProfile, updateProfile} from 'modules/profile/actions';
+import {fetchProfile, updateProfile, initSandbox} from 'modules/profile/actions';
 import * as notifications from 'modules/notifications/actions';
 
 const lock = new Auth0Lock(
@@ -81,6 +81,7 @@ export const showLock = () => {
       storage.set('authToken', token);
       dispatch(updateProfile(profile));
       await dispatch(finalizeAuth(profile, token));
+      await dispatch(initSandbox());
       setTimeout(() => {
         dispatch({
           type: types.AUTH_SUCCESS
@@ -97,6 +98,7 @@ export const signInWithToken = (token) => {
     const newToken = await dispatch(resetToken(token));
     const profile = await dispatch(getTokenInfo(newToken));
     await dispatch(finalizeAuth(profile, newToken));
+    await dispatch(initSandbox());
     storage.set('authToken', newToken);
     dispatch({
       type: types.AUTH_SUCCESS

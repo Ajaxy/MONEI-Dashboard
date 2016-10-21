@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
+import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
 import moment from 'moment';
 
@@ -15,6 +16,11 @@ class Transactions extends Component {
     var from = moment(date, selectors.DEFAULT_DATE_FORMAT).startOf('day').valueOf();
     var to = moment(date, selectors.DEFAULT_DATE_FORMAT).endOf('day').valueOf();
     this.props.fetchTransactions(from, to, null, true);
+  }
+
+  componentWillUpdate(nextProps) {
+    if(nextProps.isInSandboxMode != this.props.isInSandboxMode)
+      this.componentWillMount();
   }
 
   loadMore = () => {
@@ -61,6 +67,7 @@ const mapStateToProps = (state) => ({
   isFetching: selectors.getIsFetching(state),
   isLastPage: selectors.getIsLastPage(state),
   isDetailsModalOpen: selectors.getIsDetailsModalOpen(state),
+  isInSandboxMode: profileSelectors.getIsInSandboxMode(state),
   transactionViewed: selectors.getViewedTransaction(state),
   page: selectors.getPage(state),
 });
