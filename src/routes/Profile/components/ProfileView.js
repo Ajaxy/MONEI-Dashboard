@@ -5,7 +5,7 @@ import ChangePhoneForm from '../containers/ChangePhoneForm';
 import ConfirmPhoneForm from '../containers/ConfirmPhoneForm';
 import ChangePasswordForm from '../containers/ChangePasswordForm';
 
-const ProfileView = ({user}) => (
+const ProfileView = ({user, isUsingAuth0UserPass}) => (
   <section className="ui basic segment padded-bottom">
     <div className="ui segments">
       <div className="ui segment padded-bottom">
@@ -15,8 +15,8 @@ const ProfileView = ({user}) => (
         <h4 className="ui dividing header">Change my phone</h4>
         <ChangePhoneForm user={user}/>
         <ConfirmPhoneForm user={user}/>
-        <h4 className="ui dividing header">Change my password</h4>
-        <ChangePasswordForm user={user} />        
+        {isUsingAuth0UserPass && <h4 className="ui dividing header">Change my password</h4>}
+        {isUsingAuth0UserPass && <ChangePasswordForm user={user} />}
       </div>
     </div>
   </section>

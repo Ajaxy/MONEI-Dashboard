@@ -126,6 +126,11 @@ export const getIsVerificationRequested = createSelector(
   userMetadata => userMetadata.verification_requested
 );
 
+export const getIsUsingAuth0UserPass = createSelector(
+  getUserId,
+  userId => userId.indexOf("auth0") === 0
+);
+
 export const getUserIdBase64 = createSelector(
   getUserId,
   id => base64.encode(id)
