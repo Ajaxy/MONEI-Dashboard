@@ -14,6 +14,10 @@ For example:
 @import "semantic-ui-overrides";
 @import "calendar";
 
+.ui {
+  font-family: RobotoDraft,Roboto,'Helvetica Neue',sans-serif !important;
+}
+
 .clearing:after {
   content: ".";
   display: block;
