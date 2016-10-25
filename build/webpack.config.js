@@ -1,3 +1,4 @@
+import {sep} from 'path';
 import webpack from 'webpack';
 import cssnano from 'cssnano';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -70,7 +71,8 @@ webpackConfig.plugins = [
       collapseWhitespace: true
     }
   }),
-  new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/)
+  // moment.js locales fix see https://github.com/moment/moment/issues/2979
+  new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/)
 ];
 
 if (__DEV__) {
@@ -149,7 +151,8 @@ if (!__TEST__) {
 webpackConfig.module.loaders = [
   {
     test: /\.(js|jsx)$/,
-    exclude: /node_modules\/(?!moment\/src)/,
+    // Platform independent version of /node_modules\/(?!moment\/src)/
+    exclude: new RegExp(`node_modules\\${sep}(?!moment\\${sep}src)`),
     loader: 'babel',
     query: {
       cacheDirectory: true,
@@ -173,6 +176,7 @@ webpackConfig.module.loaders = [
         },
         test: {
           plugins: [
+            '__coverage__',
             'rewire'
           ]
         }
