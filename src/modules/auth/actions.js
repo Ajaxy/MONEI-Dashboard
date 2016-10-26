@@ -5,6 +5,7 @@ import {replace} from 'react-router-redux';
 import storage from 'store';
 import {addMessage} from 'modules/messages/actions';
 import {fetchProfile, updateProfile, initSandbox} from 'modules/profile/actions';
+import logo from 'static/logo.svg';
 import * as notifications from 'modules/notifications/actions';
 
 const lock = new Auth0Lock(
@@ -72,20 +73,20 @@ export const showLock = () => {
     closable: false,
     container: 'lock-container',
     authParams: {scope},
-    icon: `${APP_CONFIG.staticCdnURL}/logo.svg`
+    icon: logo
   };
   return dispatch => {
     lock.hide(() => lock.show(lockOptions, async (error, profile, token) => {
       if (error) return;
       storage.set('profile', profile);
       storage.set('authToken', token);
+      dispatch({
+        type: types.AUTH_SUCCESS
+      });
       dispatch(updateProfile(profile));
       await dispatch(finalizeAuth(profile, token));
       await dispatch(initSandbox());
       setTimeout(() => {
-        dispatch({
-          type: types.AUTH_SUCCESS
-        });
         dispatch(replace('/'));
       });
     }));
@@ -155,7 +156,7 @@ export const changePassword = (email, password) => {
   return new Promise((resolve, reject) => {
     lock.$auth0.changePassword({
       connection: 'Username-Password-Authentication',
-      email, 
+      email,
       password
     }, (error, data) => {
       if(error) return reject(error);
