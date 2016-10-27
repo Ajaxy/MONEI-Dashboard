@@ -25,7 +25,7 @@ export const createRoutes = (store) => ({
     DashboardRoute(store),
     TransactionsRoute(store),
     OnboardingRoute(store),
-    ProfileRoute,
+    ProfileRoute(store),
     ChannelRoute(store),
     ChannelsRoute(store),
     NotFoundRoute,
