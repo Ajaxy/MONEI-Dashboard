@@ -72,7 +72,7 @@ let render = (routerKey = null) => {
       store={store}
       history={history}
       routes={routes}
-      routerKey={routerKey}
+      key={routerKey}
     />,
     MOUNT_NODE
   );
