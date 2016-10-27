@@ -7,5 +7,4 @@ pipelines:
             - npm --version
             - npm install
             - bin/create_pipelines_env.sh
-            - npm test
             - npm run deploy:prod

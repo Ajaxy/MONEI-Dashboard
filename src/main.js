@@ -13,6 +13,7 @@ import AppContainer from './containers/AppContainer';
 // ========================================================
 window.author = 'Ranier Montalbo, https://github.com/montzkie18';
 
+
 // ========================================================
 // Browser History Setup
 // ========================================================
@@ -71,7 +72,7 @@ let render = (routerKey = null) => {
       store={store}
       history={history}
       routes={routes}
-      routerKey={routerKey}
+      key={routerKey}
     />,
     MOUNT_NODE
   );

@@ -1,10 +1,15 @@
 import * as types from './types';
 import * as schema from 'schema/messages';
+import {getMessages} from './selectors';
 import {normalize} from 'normalizr';
 
 let nId = 0;
 export const addMessage = (props = {}) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const activeMessages = getMessages(getState());
+    if (activeMessages.some(msg => msg.text === props.text)) {
+      return;
+    }
     const message = {
       id: nId,
       delay: 3000,

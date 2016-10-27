@@ -2,11 +2,29 @@ import React, {PropTypes} from 'react';
 import humanize from 'humanize-string';
 import cx from 'classnames';
 
-const CheckBox = ({className, onChange, checked, name, value, fitted = false}) => {
+const CheckBox = ({
+  className,
+  onChange,
+  checked,
+  name = '',
+  value,
+  label,
+  fitted,
+  toggle,
+  slider,
+  inverted
+}) => {
+  const labelText = label || humanize(name);
+  const _value = value === '' ? false : value;
   return (
-    <div className={cx('ui checkbox', className, {fitted})}>
-      <input type="checkbox" checked={checked} onChange={onChange} value={value} />
-      <label>{name && humanize(name)}</label>
+    <div className={cx('ui checkbox', className, {fitted, toggle, slider, inverted})}>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        value={_value}
+        id={name} />
+      <label htmlFor={name}>{labelText}</label>
     </div>
   );
 };
@@ -17,7 +35,16 @@ CheckBox.propTypes = {
   checked: PropTypes.bool,
   name: PropTypes.string,
   value: PropTypes.bool,
-  fitted: PropTypes.bool
+  fitted: PropTypes.bool,
+  toggle: PropTypes.bool,
+  slider: PropTypes.bool,
+  inverted: PropTypes.bool,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
+    PropTypes.bool
+  ])
 };
 
 CheckBox.defaultProps = {
