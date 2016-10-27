@@ -2,8 +2,8 @@ import React, {PropTypes} from 'react';
 import humanize from 'humanize-string';
 import {Table} from 'components/Table';
 
-const addRow = (list, store, key, title, capitalize=false) => {
-  if(store[key]) {
+const addRow = (list, store, key, title, capitalize = false) => {
+  if (store[key]) {
     list.push(
       <tr key={list.length}>
         <td className="two wide">{title}</td>
@@ -23,15 +23,13 @@ const PersonalDataView = ({user}) => {
   addRow(rows, user.user_metadata, "document_name", "Document");
   addRow(rows, user.user_metadata, "store_url", "Store URL");
   addRow(rows, user.user_metadata, "store_goods", "Store Goods");
-  if(rows.length > 0) {
+  if (rows.length > 0) {
     return (
-      <div className="ui basic segment">
-        <Table className="large definition">
-          {rows}
-        </Table>
-      </div>
+      <Table className="large definition">
+        {rows}
+      </Table>
     );
-  }else{
+  } else {
     return (
       <div className="ui center aligned basic segment">
         No data available
