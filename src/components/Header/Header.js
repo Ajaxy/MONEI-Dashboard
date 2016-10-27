@@ -10,6 +10,7 @@ import cx from 'classnames';
 const Header = ({
   profile, 
   signOut, 
+  isUser,
   isAdmin, 
   isMerchant, 
   isInSandboxMode, 
@@ -56,6 +57,12 @@ const Header = ({
             <i className="user icon" />
             Profile
           </Link>
+          {isUser &&
+            <Link to="/channels" className="item" activeClassName="active">
+              <i className="payment icon" />
+              Channels
+            </Link>
+          }
           <a className="item" onClick={signOut}>
             <i className="sign out icon" />
             Sign Out

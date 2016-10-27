@@ -20,9 +20,9 @@ const UserView = ({
   return (
     <section className="ui basic segment padded-bottom">
       <h1 className={cx("ui header", classNames.breadcrumb)}>
-        <Link className={cx("section", classNames.link)} to="/users">Users</Link>
+        <Link className={cx("ui section", classNames.link)} to="/users">Users</Link>
         <span className="divider"> / </span>
-        <span className={cx("section", classNames.link)}>
+        <span className={cx("ui section", classNames.link)}>
           {userMetadata.name || user.email}
         </span>
       </h1>

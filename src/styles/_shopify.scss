@@ -1,0 +1,147 @@
+.shopify-screenshot {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.shopify-frame {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 18px;
+  font-size: 13px;
+  background-color: #f5f6f7;
+  border: 1px solid #ebeef0;
+  padding: 20px;
+  margin-top: 30px!important;
+}
+
+.shopify-form {
+  background-color: #ffffff;
+  border: 1px solid #d3dbe2;
+  padding: 15px;
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #31373d;
+    font-size: 13px;
+    font-weight: normal;
+  }
+  input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    vertical-align: top;
+    height: 28px;
+    font-size: 13px;
+    padding: 4px 30px 4px 4px;
+    margin: 0;
+    border: 1px solid #d3dbe2;
+    display: inline-block;
+    color: #222;
+    border-radius: 3px;
+    margin-bottom: 15px;
+  }
+}
+
+.shopify-form__sub{
+  margin-bottom: 15px;
+}
+
+.shopify-form__row {
+  position: relative;
+  input[type=text] {
+    cursor: pointer;
+  }
+}
+
+.shopify-form__copy {
+  border: none;
+  background: none;
+  outline: none;
+  position: absolute;
+  right: 2px;
+  bottom: 17px;
+  md-icon {
+    font-size: 1.3em;
+  }
+}
+
+.shopify-form_test-mode {
+  background-image: url(https://cdn.shopify.com/s/assets/admin/payments/test-mode-fa7738d96ca8120a13796f3942ac486d34b3ed46c3a82dbedeeaeea666ed12b6.png);
+  background-repeat: repeat-x;
+  background-position: 0 -1px;
+  margin-bottom: 14px;
+}
+
+.shopify-form__heading {
+  display: block;
+  border-bottom: 1px solid #e6e6e6;
+  color: #000000;
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  padding: 0 0 4px 0;
+  font-weight: bold;
+}
+
+.shopify-text{
+  padding: 0 15px 15px;
+  margin: 0;
+  color: #31373d;
+  font-size: 13px;
+}
+
+.shopify-ico {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: top;
+  text-indent: 999em;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 56px;
+  height: 36px;
+  background-repeat: no-repeat
+}
+
+.shopify-ico-visa {
+  background-image: url(https://cdn.shopify.com/s/assets/admin/payment-visa-5c98b989c33732e15fca01b38887280439366e7aa3cd1066f9c37d09fe88e6f7.svg)
+}
+
+.shopify-ico-mastercard {
+  background-image: url(https://cdn.shopify.com/s/assets/admin/payment-mastercard-d0bbff8b653774cc2a21eb1a6212ae369d35af8d14f7448ef21f7562dd204adb.svg)
+}
+
+.shopify-ico-american-express {
+  background-image: url(https://cdn.shopify.com/s/assets/admin/payment-american-express-27cb2e6f685b19562212fcbc396ac9aecb427dea2a95887f7cf1cd7c6b7292cc.svg)
+}
+
+.shopify-ico-maestro{
+  background-image: url(https://cdn.shopify.com/s/assets/admin/payment-maestro-06f3d0e470e45659e78f1eeb716a9ad06fccf46845878ddff837dcd5c0ff4b0a.svg)
+}
+
+.shopify-ico-jcb {
+  background-image: url(https://cdn.shopify.com/s/assets/admin/payment-jcb-1c1c779a715851480ebba2040221253c92afa221acb43fad25ba1638d9cd3415.svg)
+}
+
+.shopify-accepted-cards {
+  overflow: hidden;
+  list-style: none;
+  input[type=checkbox] {
+    margin: 12px 5px 0 5px;
+    float: left;
+  }
+  li {
+    background: #f6f6f6;
+    border-radius: 3px;
+    position: relative;
+    margin-right: 6px;
+    margin-bottom: 8px;
+    float: left;
+    &.inactive .shopify-ico {
+      opacity: 0.4;
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+  }
+}
+
+.margin-0 {
+  margin: 0!important;
+}

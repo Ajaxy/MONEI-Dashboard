@@ -26,6 +26,7 @@ const mapActionCreators = {
 
 const mapStateToProps = (state) => ({
   profile: selectors.getProfile(state),
+  isUser: selectors.getIsUser(state),
   isAdmin: selectors.getIsAdmin(state),
   isMerchant: selectors.getIsMerchant(state),
   isInSandboxMode: selectors.getIsInSandboxMode(state),
