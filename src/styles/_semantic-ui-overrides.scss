@@ -102,18 +102,18 @@ i.icon.loading {
   padding: 0 !important;
 }
 
-.ui.list .list>.item>.icon-wrapper, .ui.list>.item>.icon-wrapper {
+.ui.list .list > .item > .icon-wrapper, .ui.list > .item > .icon-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 
-.ui.list .list>.item>.icon-wrapper+.content, .ui.list>.item>.icon-wrapper+.content {
+.ui.list .list > .item > .icon-wrapper + .content, .ui.list > .item > .icon-wrapper + .content {
   display: table-cell;
   padding: 0 0 0 .5em;
   vertical-align: top;
 }
 
-.ui.form .field>label {
+.ui.form .field > label {
   white-space: nowrap;
 }
 
@@ -125,4 +125,12 @@ i.icon.loading {
     max-width: 300px;
     flex: 1;
   }
+}
+
+.ui.toggle.checkbox.inverted input:checked ~ label:before {
+  background-color: rgba(0,0,0,.5) !important;
+}
+
+.ui.toggle.checkbox.inverted input ~ label:before {
+  background-color: rgba(0,0,0,.5) !important;
 }

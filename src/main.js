@@ -13,6 +13,7 @@ import AppContainer from './containers/AppContainer';
 // ========================================================
 window.author = 'Ranier Montalbo, https://github.com/montzkie18';
 
+
 // ========================================================
 // Browser History Setup
 // ========================================================

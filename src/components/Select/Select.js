@@ -19,6 +19,8 @@ class Select extends Component {
     ]),
     label: PropTypes.oneOfType([
       PropTypes.string,
+      PropTypes.element,
+      PropTypes.func,
       PropTypes.bool
     ]),
     placeholder: PropTypes.oneOfType([
@@ -26,6 +28,7 @@ class Select extends Component {
       PropTypes.bool
     ]),
     fieldClass: PropTypes.string,
+    hint: PropTypes.string,
     error: PropTypes.any,
     search: PropTypes.bool,
     loading: PropTypes.bool,
@@ -70,17 +73,18 @@ class Select extends Component {
     });
     return (
       <div className={cx('field', props.fieldClass, {error: props.touched && props.invalid})}>
-        {props.label !== false && <label>{labelText}</label>}
+        {props.label !== false && <label htmlFor={props.name}>{labelText}</label>}
         <div
           className={dropDownClass}
-          ref={(s) => { this.element = $(s); }}>
-          <input name={props.name} type="hidden" />
+          ref={s => { this.element = $(s); }}>
+          <input name={props.name} id={props.name} type="hidden" />
           <i className="dropdown icon" />
           <div className="default text">{props.placeholder || ''}</div>
           <div className="menu">
             {props.children}
           </div>
         </div>
+        {props.hint && !(props.touched && props.invalid) && <div className="text grey">{props.hint}</div>}
         {props.touched && props.invalid && <div className="ui basic red pointing prompt label">
           {errorText}
         </div>}

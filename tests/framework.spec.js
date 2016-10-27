@@ -1,9 +1,9 @@
-import assert from 'assert'
-import React from 'react'
-import { mount, render, shallow } from 'enzyme'
+import assert from 'assert';
+import React, {Component} from 'react';
+import {mount, render, shallow} from 'enzyme';
 
-class Fixture extends React.Component {
-  render () {
+class Fixture extends Component {
+  render() {
     return (
       <div>
         <input id='checked' defaultChecked />
@@ -16,30 +16,30 @@ class Fixture extends React.Component {
 describe('(Framework) Karma Plugins', function () {
   it('Should expose "expect" globally.', function () {
     assert.ok(expect)
-  })
+  });
 
   it('Should expose "should" globally.', function () {
     assert.ok(should)
-  })
+  });
 
   it('Should have chai-as-promised helpers.', function () {
-    const pass = new Promise(resolve => resolve('test'))
-    const fail = new Promise((resolve, reject) => reject())
+    const pass = new Promise(res => res('test'));
+    const fail = new Promise((res, rej) => rej());
 
     return Promise.all([
       expect(pass).to.be.fulfilled,
       expect(fail).to.not.be.fulfilled
     ])
-  })
+  });
 
   it('should have chai-enzyme working', function () {
-    let wrapper = shallow(<Fixture />)
-    expect(wrapper.find('#checked')).to.be.checked()
+    let wrapper = shallow(<Fixture />);
+    expect(wrapper.find('#checked')).to.be.checked();
 
-    wrapper = mount(<Fixture />)
-    expect(wrapper.find('#checked')).to.be.checked()
+    wrapper = mount(<Fixture />);
+    expect(wrapper.find('#checked')).to.be.checked();
 
-    wrapper = render(<Fixture />)
+    wrapper = render(<Fixture />);
     expect(wrapper.find('#checked')).to.be.checked()
   })
-})
+});
