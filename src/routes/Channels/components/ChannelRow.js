@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import classNames from './ChannelRow.scss';
 
+export const NUM_COLUMNS = 4;
+
 const ChannelRow = ({channel, onClick, isHeader, isFooter}) => {
   if (isHeader) {
     return (
@@ -15,7 +17,7 @@ const ChannelRow = ({channel, onClick, isHeader, isFooter}) => {
   } else if (isFooter) {
     return (
       <tr>
-        <th colSpan="4"></th>
+        <th colSpan={NUM_COLUMNS}></th>
       </tr>
     );
   } else {

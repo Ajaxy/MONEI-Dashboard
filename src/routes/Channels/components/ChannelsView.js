@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {InfiniteTable} from 'components/Table';
-import ChannelRow from './ChannelRow';
+import ChannelRow, {NUM_COLUMNS} from './ChannelRow';
 
 const ChannelsView = ({channels, loadMore, viewChannel, isFetching}) => (
   <section className="ui basic segment padded-bottom">
@@ -9,7 +9,7 @@ const ChannelsView = ({channels, loadMore, viewChannel, isFetching}) => (
       isFetching={isFetching}
       isLastPage={true}
       selectable={!isFetching && channels.length > 0}
-      numColumns={4}
+      numColumns={NUM_COLUMNS}
       onLoadMore={loadMore}
       autoLoad={true}
       className="large striped single line"
@@ -23,7 +23,7 @@ const ChannelsView = ({channels, loadMore, viewChannel, isFetching}) => (
             channel={channel}
             onClick={viewChannel}
           />)
-        : <tr><td colSpan="2" className="center aligned">No channels yet</td></tr>
+        : <tr><td colSpan={NUM_COLUMNS} className="center aligned">No channels yet</td></tr>
       }
     </InfiniteTable>
   </section>
