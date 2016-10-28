@@ -1,29 +1,34 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 
-const profileSelector = state => state[stateKey];
+const settingsSelector = state => state[stateKey];
 
 export const getIsChangingPassword = createSelector(
-  profileSelector,
-  profile => profile.isChangingPassword
+  settingsSelector,
+  settings => settings.isChangingPassword
 );
 
-export const getIsRequestingPhoneVerification = createSelector(
-  profileSelector,
-  profile => profile.isRequestingPhoneVerification
+export const getIsPhoneVerificationStarted = createSelector(
+  settingsSelector,
+  settings => settings.isPhoneVerificationStarted
 );
 
-export const getIsCheckingPhoneVerification = createSelector(
-  profileSelector,
-  profile => profile.isCheckingPhoneVerification
+export const getIsVerifying = createSelector(
+  settingsSelector,
+  settings => settings.isVerifying
 );
 
-export const getIsCheckingModalVisible = createSelector(
-  profileSelector,
-  profile => profile.isCheckingModalVisible
+export const getIsCheckingCode = createSelector(
+  settingsSelector,
+  settings => settings.isCheckingCode
 );
 
-export const getPhoneNumberToCheck = createSelector(
-  profileSelector,
-  profile => profile.phoneNumberToCheck
+export const getIsEditingPhone = createSelector(
+  settingsSelector,
+  settings => settings.isEditingPhone
+);
+
+export const getPhoneNumber = createSelector(
+  settingsSelector,
+  settings => settings.phoneNumber
 );

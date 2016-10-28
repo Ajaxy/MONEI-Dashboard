@@ -1,5 +1,6 @@
 import * as types from './types';
 import {combineReducers} from 'redux';
+
 export const stateKey = 'profileSettings';
 
 const isChangingPassword = (state = false, action) => {
@@ -14,49 +15,59 @@ const isChangingPassword = (state = false, action) => {
   }
 };
 
-const isRequestingPhoneVerification = (state = false, action) => {
+const phoneNumber = (state = null, action) => {
   switch (action.type) {
-    case types.PHONE_VERIFICATION_REQUEST:
+    case types.PHONE_VERIFICATION_START_SUCCESS:
+      return action.phoneNumber;
+    default:
+      return state;
+  }
+};
+
+const isPhoneVerificationStarted = (state = false, action) => {
+  switch (action.type) {
+    case types.PHONE_VERIFICATION_START_SUCCESS:
       return true;
-    case types.PHONE_VERIFICATION_SUCCESS:
-    case types.PHONE_VERIFICATION_FAIL:
+    case types.PHONE_VERIFICATION_CHECK_CANCEL:
+    case types.PHONE_VERIFICATION_CHECK_SUCCESS:
       return false;
     default:
       return state;
   }
 };
 
-const isCheckingPhoneVerification = (state = false, action) => {
+const isEditingPhone = (state = false, action) => {
+  switch (action.type) {
+    case types.PHONE_EDIT_START:
+      return true;
+    case types.PHONE_EDIT_CANCEL:
+    case types.PHONE_VERIFICATION_CHECK_SUCCESS:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isVerifying = (state = false, action) => {
+  switch (action.type) {
+    case types.PHONE_VERIFICATION_START_REQUEST:
+      return true;
+    case types.PHONE_VERIFICATION_START_SUCCESS:
+    case types.PHONE_VERIFICATION_START_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isCheckingCode = (state = false, action) => {
   switch (action.type) {
     case types.PHONE_VERIFICATION_CHECK_REQUEST:
       return true;
     case types.PHONE_VERIFICATION_CHECK_SUCCESS:
     case types.PHONE_VERIFICATION_CHECK_FAIL:
+    case types.PHONE_VERIFICATION_CHECK_CANCEL:
       return false;
-    default:
-      return state;
-  }
-};
-
-const isCheckingModalVisible = (state = false, action) => {
-  switch (action.type) {
-    case types.PHONE_VERIFICATION_SUCCESS:
-    case types.PHONE_VERIFICATION_CHECK_START:
-      return true;
-    case types.PHONE_VERIFICATION_CHECK_SUCCESS:
-    case types.PHONE_VERIFICATION_CHECK_STOP:
-      return false;
-    default:
-      return state;
-  }
-};
-
-const phoneNumberToCheck = (state = '', action) => {
-  switch (action.type) {
-    case types.PHONE_VERIFICATION_CHECK_START:
-      return action.data;
-    case types.PHONE_VERIFICATION_CHECK_STOP:
-      return "";
     default:
       return state;
   }
@@ -64,9 +75,10 @@ const phoneNumberToCheck = (state = '', action) => {
 
 export default combineReducers({
   isChangingPassword,
-  isRequestingPhoneVerification,
-  isCheckingPhoneVerification,
-  isCheckingModalVisible,
-  phoneNumberToCheck,
+  isPhoneVerificationStarted,
+  isVerifying,
+  isCheckingCode,
+  isEditingPhone,
+  phoneNumber
 });
 
