@@ -19,8 +19,8 @@ const CoreLayout = ({isAuthenticated, isPlain, children}) => {
       <Header />
       <section className={cx('ui main container', classNames.section)}>
         {children}
-        <MessagesStack />
       </section>
+      <MessagesStack />
     </div>
   );
 };

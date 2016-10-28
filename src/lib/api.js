@@ -1,6 +1,5 @@
 import axios from 'axios';
 import storage from 'store';
-import {omitInternalProps} from 'lib/utils';
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
 import {buildCreds, signRequest} from 'lib/aws';
@@ -20,7 +19,7 @@ export const addInterceptors = (store) => {
     const credentials = storage.get('credentials');
 
     // at this point, user is not yet finished authentication
-    if(!token || !profile || !credentials) {
+    if (!token || !profile || !credentials) {
       return config;
     }
 
@@ -35,7 +34,7 @@ export const addInterceptors = (store) => {
     config.headers.authToken = token;
 
     const meta = profile ? profile.app_metadata : {};
-    if(config.sandbox) {
+    if (config.sandbox) {
       config.headers.smid = meta.smid;
       config.headers.smpwd = meta.smpwd;
       config.headers.smlogin = meta.smlogin;
@@ -56,9 +55,9 @@ export const addInterceptors = (store) => {
 
   authApiClient.interceptors.request.use(config => {
     const token = storage.get('authToken');
-    if(!token) return config;
+    if (!token) return config;
 
-    if(isTokenExpired(token)) {
+    if (isTokenExpired(token)) {
       config.adapter = (resolve, reject) => reject({
         data: {
           message: 'Your session is expired. Please sign in again'
@@ -123,35 +122,35 @@ export const impersonateUser = (userId, {redirect_uri}) =>
 
 // Profile
 
-export const updateProfile = (userId, {user_metadata}) => 
+export const updateProfile = (userId, {user_metadata}) =>
   authApiClient.patch(`users/${userId}`, {user_metadata});
 
 // Channels
 
-export const fetchChannels = (sandbox) => 
+export const fetchChannels = (sandbox) =>
   apiClient.get('channels', null, {sandbox});
 
 export const createZapierApiToken = (channelId) =>
-  apiClient.post('zapier/token/create', {channelId, slug: 'transaction', events: ['transaction.all']})
+  apiClient.post('zapier/token/create', {channelId, slug: 'transaction', events: ['transaction.all']});
 
 // Webhooks
 
 export const fetchWebhooks = (channelId) =>
-  apiClient.get('webhooks', {params: {channelId, slug: 'transaction'}})
+  apiClient.get('webhooks', {params: {channelId, slug: 'transaction'}});
 
 export const saveWebhook = (webhook) =>
-  apiClient.post('webhooks', {webhook})
+  apiClient.post('webhooks', {webhook});
 
 export const updateWebhook = (webhook) =>
-  apiClient.patch(`webhooks/${webhook.id}`, {webhook})
+  apiClient.patch(`webhooks/${webhook.id}`, {webhook});
 
 export const deleteWebhook = (webhookId) =>
-  apiClient.delete(`webhooks/${webhookId}`)
+  apiClient.delete(`webhooks/${webhookId}`);
 
 // Phone verification
 
-export const verifyPhoneStart = (phoneNumber) => 
+export const phoneVerificationStart = ({phoneNumber}) =>
   apiClient.post('phone-verification/start', {phoneNumber});
 
-export const verifyPhoneCheck = (phoneNumber, verificationCode) =>
+export const phoneVerificationCheck = ({phoneNumber, verificationCode}) =>
   apiClient.post('phone-verification/check', {phoneNumber, verificationCode});
