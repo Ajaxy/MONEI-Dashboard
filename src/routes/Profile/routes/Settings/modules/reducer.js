@@ -73,8 +73,21 @@ const isCheckingCode = (state = false, action) => {
   }
 };
 
+const isUpdatingMetaData = (state = false, action) => {
+  switch (action.type) {
+    case types.UPDATE_USER_METADATA_REQUEST:
+      return true;
+    case types.UPDATE_USER_METADATA_SUCCESS:
+    case types.UPDATE_USER_METADATA_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isChangingPassword,
+  isUpdatingMetaData,
   isPhoneVerificationStarted,
   isVerifying,
   isCheckingCode,
