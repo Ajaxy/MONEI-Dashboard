@@ -5,6 +5,33 @@ import {getPhoneNumber} from './selectors';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
 import {updateProfile} from 'modules/profile/actions';
+import {getUserId} from 'modules/profile/selectors';
+
+export const updateUserMetaData = (data) => {
+  console.log(data);
+  return async (dispatch, getState) => {
+    const userId = getUserId(getState());
+    dispatch({
+      type: types.UPDATE_USER_METADATA_REQUEST
+    });
+    try {
+      const user = await api.updateUserMetaData(userId, data);
+      dispatch(updateProfile(user));
+      dispatch({
+        type: types.UPDATE_USER_METADATA_SUCCESS
+      });
+      dispatch(addMessage({
+        style: 'success',
+        text: 'Your settings have been successfully updated'
+      }));
+    } catch (error) {
+      dispatch({
+        type: types.UPDATE_USER_METADATA_FAIL
+      });
+      dispatch(addMessage({text: error}));
+    }
+  };
+};
 
 export const resetPassword = (email, password) => {
   return async dispatch => {

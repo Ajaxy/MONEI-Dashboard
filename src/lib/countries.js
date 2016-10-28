@@ -1195,7 +1195,11 @@ export const findByPhone = (phoneNumber = '') => (
   countries.find(country => phoneNumber.startsWith(country.phoneCode))
 );
 
-export const findByCode = (code = '') => (
+export const findByName = (name) => (
+  countries.find(country => country.name === name)
+);
+
+export const findByCode = (code) => (
   countries.find(country => country.code === code)
 );
 

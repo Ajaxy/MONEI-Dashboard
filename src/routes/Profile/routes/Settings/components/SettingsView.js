@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import PhoneEdit from '../containers/PhoneEditContainer';
 import PhoneConfirm from '../containers/PhoneConfirmContainer';
 import PhoneView from './PhoneView';
+import UpdateMetaData from '../containers/UpdateMetaDataContainer';
 
 const SettingsView = ({
   isPhoneVerified,
@@ -24,6 +25,12 @@ const SettingsView = ({
           {!isVerificationStarted && <PhoneEdit />}
           {isVerificationStarted && <PhoneConfirm />}
         </div>}
+      </div>
+    </div>
+    <h3>Application settings</h3>
+    <div className="ui stackable grid">
+      <div className="nine wide column">
+        <UpdateMetaData />
       </div>
     </div>
   </section>

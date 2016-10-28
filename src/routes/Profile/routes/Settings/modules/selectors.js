@@ -32,3 +32,8 @@ export const getPhoneNumber = createSelector(
   settingsSelector,
   settings => settings.phoneNumber
 );
+
+export const getIsUpdatingMetaData = createSelector(
+  settingsSelector,
+  settings => settings.isUpdatingMetaData
+);

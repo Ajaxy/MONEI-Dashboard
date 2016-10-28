@@ -126,6 +126,9 @@ export const impersonateUser = (userId, {redirect_uri}) =>
 export const updateProfile = (userId, {user_metadata}) =>
   authApiClient.patch(`users/${userId}`, {user_metadata});
 
+export const updateUserMetaData = (userId, data) =>
+  authApiClient.patch(`users/${userId}`, {user_metadata: data});
+
 // Channels
 
 export const fetchChannels = (sandbox) => 
