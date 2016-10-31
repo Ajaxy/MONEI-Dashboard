@@ -6,6 +6,7 @@ import * as authActions from 'modules/auth/actions';
 import * as profileActions from 'modules/profile/actions';
 import * as profileSelectors from 'modules/profile/selectors';
 import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
+import {trackEvent} from 'lib/intercom';
 
 export const goToNextStep = () => ({
   type: types.ONBOARDING_NEXT_STEP
@@ -103,6 +104,7 @@ export const requestVerification = () => async (dispatch, getState) => {
   const userMetadata = profileSelectors.getUserMetadata(getState());
   const user_metadata = Object.assign({}, userMetadata, {verification_requested: true});
   const success = await dispatch(updateProfile(profile.user_id, {user_metadata}));
+  trackEvent('monei_requested_verification');
   if (success) {
     dispatch(addMessage({
       text: 'Verification is pending. We will check your data as soon as possible.',

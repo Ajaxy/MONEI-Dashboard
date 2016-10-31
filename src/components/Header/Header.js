@@ -17,7 +17,8 @@ const Header = ({
   isInSandboxMode,
   isVerificationRequested,
   setSandboxMode,
-  viewOnboarding
+  viewOnboarding,
+  viewChannels
 }) => (
   <header className="ui inverted green fixed menu large">
     <div className="ui container">
@@ -56,7 +57,7 @@ const Header = ({
             Profile
           </Link>
           {isUser &&
-            <Link to="/channels" className="item" activeClassName="active">
+            <Link to="/channels" className="item" activeClassName="active" onClick={viewChannels}>
               <i className="payment icon" />
               Channels
             </Link>

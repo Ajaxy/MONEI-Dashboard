@@ -4,6 +4,7 @@ import * as schemas from 'schema/users';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
 import {updateProfile} from 'modules/profile/actions';
+import {trackEvent} from 'lib/intercom';
 
 export const resetPassword = (email, password) => {
   return async dispatch => {
@@ -56,6 +57,9 @@ export const checkPhoneNumber = (phoneNumber, verificationCode) => {
       dispatch(updateProfile(profile));
       dispatch({type: types.PHONE_VERIFICATION_CHECK_SUCCESS});
       dispatch(closeCheckingModal());
+      trackEvent('monei_phone_verified', {
+        phone: phoneNumber
+      });
     } catch(error) {
       dispatch({type: types.PHONE_VERIFICATION_CHECK_FAIL});
       dispatch(addMessage({

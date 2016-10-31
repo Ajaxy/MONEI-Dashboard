@@ -4,6 +4,7 @@ import Header from './Header';
 import {signOut} from 'modules/auth/actions';
 import {setSandboxMode} from 'modules/profile/actions';
 import * as selectors from 'modules/profile/selectors';
+import {trackEvent} from 'lib/intercom';
 
 class HeaderContainer extends Component {
   static contextTypes = {
@@ -11,11 +12,22 @@ class HeaderContainer extends Component {
   };
 
   viewOnboarding = () => {
+    trackEvent('monei_verification_started');
     this.context.router.push('/onboarding');
   };
 
+  viewChannels = () => {
+    const {isInSandboxMode} = this.props;
+    trackEvent('monei_channels_clicked', {sandbox: isInSandboxMode});
+    this.context.router.push('/channels');
+  }
+
   render() {
-    return <Header viewOnboarding={this.viewOnboarding} {...this.props}/>
+    return <Header 
+      viewOnboarding={this.viewOnboarding} 
+      viewChannels={this.viewChannels}
+      {...this.props}
+    />
   }
 }
 

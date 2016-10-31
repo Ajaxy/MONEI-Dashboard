@@ -53,8 +53,8 @@ const bootIntercom = (profile) => {
   window.Intercom('boot', {
     app_id: APP_CONFIG.intercomID,
     ...profile,
-    user_id: `MONEIv2|${profile.user_id}`,
-    app: 'MONEI v2'
+    user_id: `MONEI|${profile.user_id}`,
+    app: 'MONEI'
   });
 };
 

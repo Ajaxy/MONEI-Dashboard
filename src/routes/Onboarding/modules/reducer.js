@@ -3,6 +3,7 @@ import * as profileTypes from 'modules/profile/types';
 import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
 export const stateKey = 'onboarding';
+import {trackEvent} from 'lib/intercom';
 
 const getOnboardingStepFromProfile = (profile) => {
   let nextStep = 0;
@@ -38,12 +39,18 @@ const getOnboardingPercentage = (profile) => {
   return percentage;
 };
 
+const notifiedSteps = [];
 const step = (state = 0, action) => {
   switch(action.type) {
     case types.ONBOARDING_UPDATE_STEP:
       return getOnboardingStepFromProfile(action.data);
     case types.ONBOARDING_NEXT_STEP:
-      return state + 1;
+      const nextState = state + 1;
+      if (notifiedSteps.indexOf(nextState) == -1) {
+        trackEvent(`monei_step_${nextState}_completed`)
+        notifiedSteps.push(nextState);
+      }
+      return nextState;
     case types.ONBOARDING_PREV_STEP:
       return state - 1;
     default:
