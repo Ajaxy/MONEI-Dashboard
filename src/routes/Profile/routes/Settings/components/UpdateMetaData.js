@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import Button from 'components/Button';
 import Input from 'components/Input';
+import {PROFILE_TYPES} from 'lib/constants'
 import Select, {SelectItem} from 'components/Select';
 import cx from 'classnames';
 
@@ -18,8 +19,13 @@ const UpdateMetaData = ({
       <Select
         {...profile_type}
         label="Profile Type">
-        <SelectItem value="company">Company</SelectItem>
-        <SelectItem value="individual">Individual</SelectItem>
+        {PROFILE_TYPES.map((type, i) => (
+          <SelectItem
+            key={i}
+            value={type.value}>
+            {type.name}
+          </SelectItem>
+        ))}
       </Select>
       <Select
         {...country}
