@@ -109,10 +109,12 @@ const isFileDeleting = (state = false, action) => {
   }
 };
 
-const fileUrl = (state = '', action) => {
+const fileUrl = (state = null, action) => {
   switch (action.type) {
     case types.FILE_URL_UPDATE:
       return action.data;
+    case types.FILE_DELETE_SUCCESS:
+      return null;
     default:
       return state;
   }

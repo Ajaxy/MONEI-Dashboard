@@ -31,11 +31,11 @@ export const updateProfileLocally = (data) => ({
   data
 });
 
-export const updateProfile = (userId, {user_metadata}) => {
+export const updateProfile = ({user_id, user_metadata}) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
-      const data = await api.updateProfile(userId, {user_metadata});
+      const data = await api.updateUserMetaData(user_id, user_metadata);
       dispatch({
         type: types.UPDATE_PROFILE_SUCCESS,
         data
@@ -48,7 +48,7 @@ export const updateProfile = (userId, {user_metadata}) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(updateProfile(userId, {user_metadata}));
+          dispatch(updateProfile({user_id, user_metadata}));
         }
       }));
       return false

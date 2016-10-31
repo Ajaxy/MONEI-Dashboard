@@ -121,17 +121,12 @@ export const verifyUser = (userId) =>
 export const impersonateUser = (userId, {redirect_uri}) =>
   apiClient.post(`users/${userId}/impersonate`, {redirect_uri});
 
-// Profile
-
-export const updateProfile = (userId, {user_metadata}) =>
-  authApiClient.patch(`users/${userId}`, {user_metadata});
-
 export const updateUserMetaData = (userId, data) =>
   authApiClient.patch(`users/${userId}`, {user_metadata: data});
 
 // Channels
 
-export const fetchChannels = (sandbox) => 
+export const fetchChannels = (sandbox) =>
   apiClient.get('channels', {sandbox});
 
 export const createZapierApiToken = (channelId) =>
@@ -143,13 +138,13 @@ export const fetchWebhooks = (channelId) =>
   apiClient.get('webhooks', {params: {channelId, slug: 'transaction'}});
 
 export const saveWebhook = (webhook) =>
-  apiClient.post('webhooks', {...webhook})
+  apiClient.post('webhooks', {...webhook});
 
 export const updateWebhook = (webhook) =>
-  apiClient.patch(`webhooks/${webhook.id}`, {...webhook})
+  apiClient.patch(`webhooks/${webhook.id}`, {...webhook});
 
 export const deleteWebhook = (webhookId) =>
-  apiClient.delete(`webhooks/${webhookId}`)
+  apiClient.delete(`webhooks/${webhookId}`);
 
 // Phone verification
 

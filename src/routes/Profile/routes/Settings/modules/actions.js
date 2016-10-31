@@ -9,13 +9,12 @@ import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 
 export const updateUserMetaData = (data) => {
   return async (dispatch, getState) => {
-    const userId = getUserId(getState());
+    const profile = getProfile(getState());
     dispatch({
       type: types.UPDATE_PROFILE_METADATA_REQUEST
     });
     try {
-      const user = await api.updateUserMetaData(userId, data);
-      dispatch(updateProfileLocally(user));
+      await updateProfile({...profile, user_metadata: data});
       dispatch({
         type: types.UPDATE_PROFILE_METADATA_SUCCESS
       });
@@ -133,7 +132,7 @@ export const uploadFile = (file) => {
     try {
       await fileUpload(profile.user_id, file);
       profile.user_metadata.document_name = file.name;
-      await dispatch(updateProfile(profile.user_id, profile));
+      await dispatch(updateProfile(profile));
       dispatch({type: types.FILE_UPLOAD_SUCCESS});
     } catch(error) {
       dispatch({type: types.FILE_UPLOAD_FAIL});
@@ -155,7 +154,7 @@ export const deleteFile = () => {
     try {
       await fileDelete(profile.user_id, profile.user_metadata.document_name);
       profile.user_metadata.document_name = null;
-      await dispatch(updateProfile(profile.user_id, profile));
+      await dispatch(updateProfile(profile));
       dispatch({type: types.FILE_DELETE_SUCCESS});
     } catch(error) {
       dispatch({type: types.FILE_DELETE_FAIL});
