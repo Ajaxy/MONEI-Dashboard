@@ -9,12 +9,13 @@ import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 
 export const updateUserMetaData = (data) => {
   return async (dispatch, getState) => {
-    const profile = getProfile(getState());
+    const userId = getUserId(getState());
     dispatch({
       type: types.UPDATE_PROFILE_METADATA_REQUEST
     });
     try {
-      await updateProfile({...profile, user_metadata: data});
+      const user = await api.updateUserMetaData(userId, data);
+      dispatch(updateProfileLocally(user));
       dispatch({
         type: types.UPDATE_PROFILE_METADATA_SUCCESS
       });

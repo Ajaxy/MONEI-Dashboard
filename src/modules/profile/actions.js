@@ -40,7 +40,7 @@ export const updateProfile = ({user_id, user_metadata}) => {
         type: types.UPDATE_PROFILE_SUCCESS,
         data
       });
-      return true;
+      return data;
     } catch (error) {
       dispatch({
         type: types.UPDATE_PROFILE_FAIL
@@ -51,7 +51,6 @@ export const updateProfile = ({user_id, user_metadata}) => {
           dispatch(updateProfile({user_id, user_metadata}));
         }
       }));
-      return false
     }
   };
 };
