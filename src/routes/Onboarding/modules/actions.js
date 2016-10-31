@@ -26,7 +26,7 @@ export const signOut = () => dispatch => {
 };
 
 export const updateProfile = (userId, {user_metadata}) => async (dispatch) => {
-  return await dispatch(profileActions.modifyProfile(userId, {user_metadata}));
+  return await dispatch(profileActions.updateProfile(userId, {user_metadata}));
 };
 
 export const openConfirmDeleteModal = () => ({

@@ -4,7 +4,7 @@ import * as types from './types';
 import {replace} from 'react-router-redux';
 import storage from 'store';
 import {addMessage} from 'modules/messages/actions';
-import {fetchProfile, updateProfile, initSandbox} from 'modules/profile/actions';
+import {fetchProfile, updateProfileLocally, initSandbox} from 'modules/profile/actions';
 import logo from 'static/logo.svg';
 import * as notifications from 'modules/notifications/actions';
 
@@ -83,7 +83,7 @@ export const showLock = () => {
       dispatch({
         type: types.AUTH_SUCCESS
       });
-      dispatch(updateProfile(profile));
+      dispatch(updateProfileLocally(profile));
       await dispatch(finalizeAuth(profile, token));
       await dispatch(initSandbox());
       setTimeout(() => {
@@ -131,7 +131,7 @@ export const getTokenInfo = (idToken) => {
       lock.getClient().getProfile(token, (error, profile) => {
         if (error) reject(error);
         storage.set('profile', profile);
-        dispatch(updateProfile(profile));
+        dispatch(updateProfileLocally(profile));
         resolve(profile);
       });
     });

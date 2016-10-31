@@ -18,28 +18,23 @@ const isFetching = (state = false, action) => {
 
 const isModifying = (state = false, action) => {
   switch (action.type) {
-    case types.MODIFY_PROFILE_REQUEST:
+    case types.UPDATE_PROFILE_REQUEST:
       return true;
-    case types.MODIFY_PROFILE_SUCCESS:
-    case types.MODIFY_PROFILE_FAIL:
+    case types.UPDATE_PROFILE_SUCCESS:
+    case types.UPDATE_PROFILE_FAIL:
       return false;
     default:
       return state;
   }
 };
 
-const defaultUserMetadata = {profile_type: 'individual'};
 const profileState = storage.get('profile') || {};
 const data = (state = profileState, action) => {
   switch (action.type) {
     case types.FETCH_PROFILE_SUCCESS:
-    case types.MODIFY_PROFILE_SUCCESS:
-    case types.UPDATE_PROFILE:
+    case types.UPDATE_PROFILE_SUCCESS:
+    case types.UPDATE_PROFILE_LOCALLY:
       const newProfile = {...state, ...action.data};
-      newProfile.user_metadata = Object.assign({}, 
-        defaultUserMetadata, 
-        (action.data || {}).user_metadata
-      );
       storage.set('profile', newProfile);
       return newProfile;
     default:
@@ -62,9 +57,9 @@ const isInSandboxMode = (state = defaultSandboxMode, action) => {
   let nextState = state;
   switch (action.type) {
     case types.FETCH_PROFILE_SUCCESS:
-    case types.UPDATE_PROFILE:
+    case types.UPDATE_PROFILE_LOCALLY:
       const appMetadata = (action.data || {}).app_metadata;
-      if (!appMetadata.mid) 
+      if (!appMetadata.mid)
         nextState = true;
       storage.set('sandbox', nextState);
       return nextState;

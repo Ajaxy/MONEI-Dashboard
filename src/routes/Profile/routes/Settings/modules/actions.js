@@ -1,24 +1,23 @@
 import * as api from 'lib/api';
 import * as types from './types';
-import storage from 'store';
 import {getPhoneNumber} from './selectors';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
-import {updateProfile} from 'modules/profile/actions';
-import {getUserId} from 'modules/profile/selectors';
+import {updateProfile, updateProfileLocally} from 'modules/profile/actions';
+import {getUserId, getProfile, getIsAdmin} from 'modules/profile/selectors';
+import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 
 export const updateUserMetaData = (data) => {
-  console.log(data);
   return async (dispatch, getState) => {
     const userId = getUserId(getState());
     dispatch({
-      type: types.UPDATE_USER_METADATA_REQUEST
+      type: types.UPDATE_PROFILE_METADATA_REQUEST
     });
     try {
       const user = await api.updateUserMetaData(userId, data);
-      dispatch(updateProfile(user));
+      dispatch(updateProfileLocally(user));
       dispatch({
-        type: types.UPDATE_USER_METADATA_SUCCESS
+        type: types.UPDATE_PROFILE_METADATA_SUCCESS
       });
       dispatch(addMessage({
         style: 'success',
@@ -26,7 +25,7 @@ export const updateUserMetaData = (data) => {
       }));
     } catch (error) {
       dispatch({
-        type: types.UPDATE_USER_METADATA_FAIL
+        type: types.UPDATE_PROFILE_METADATA_FAIL
       });
       dispatch(addMessage({text: error}));
     }
@@ -97,18 +96,19 @@ export const phoneVerificationCancel = () => ({
 
 export const phoneVerificationCheck = ({verificationCode}) => {
   return async (dispatch, getState) => {
-    const phoneNumber = getPhoneNumber(getState());
+    const state = getState();
+    const phoneNumber = getPhoneNumber(state);
+    const profile = getProfile(getState());
     dispatch({
       type: types.PHONE_VERIFICATION_CHECK_REQUEST
     });
     try {
-      const result = await api.phoneVerificationCheck({
+      await api.phoneVerificationCheck({
         phoneNumber,
         verificationCode
       });
-      const profile = storage.get('profile');
       profile.app_metadata.phone_number = phoneNumber;
-      dispatch(updateProfile(profile));
+      dispatch(updateProfileLocally(profile));
       dispatch({
         type: types.PHONE_VERIFICATION_CHECK_SUCCESS
       });
@@ -121,6 +121,69 @@ export const phoneVerificationCheck = ({verificationCode}) => {
         type: types.PHONE_VERIFICATION_CHECK_FAIL
       });
       dispatch(addMessage({text: error}));
+    }
+  };
+};
+
+export const uploadFile = (file) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const profile = getProfile(state);
+    dispatch({type: types.FILE_UPLOAD_REQUEST});
+    try {
+      await fileUpload(profile.user_id, file);
+      profile.user_metadata.document_name = file.name;
+      await dispatch(updateProfile(profile.user_id, profile));
+      dispatch({type: types.FILE_UPLOAD_SUCCESS});
+    } catch(error) {
+      dispatch({type: types.FILE_UPLOAD_FAIL});
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(uploadFile(file));
+        }
+      }));
+    }
+  };
+};
+
+export const deleteFile = () => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const profile = getProfile(state);
+    dispatch({type: types.FILE_DELETE_REQUEST});
+    try {
+      await fileDelete(profile.user_id, profile.user_metadata.document_name);
+      profile.user_metadata.document_name = null;
+      await dispatch(updateProfile(profile.user_id, profile));
+      dispatch({type: types.FILE_DELETE_SUCCESS});
+    } catch(error) {
+      dispatch({type: types.FILE_DELETE_FAIL});
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(deleteFile());
+        }
+      }));
+    }
+  };
+};
+
+export const getFileUrl = (name) => {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const profile = getProfile(state);
+    const isAdmin = getIsAdmin(state);
+    try {
+      const data = await fileGetUrl(profile.user_id, name, isAdmin);
+      dispatch({type: types.FILE_URL_UPDATE, data});
+    } catch(error) {
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(getFileUrl(name));
+        }
+      }));
     }
   };
 };

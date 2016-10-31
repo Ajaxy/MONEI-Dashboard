@@ -75,11 +75,44 @@ const isCheckingCode = (state = false, action) => {
 
 const isUpdatingMetaData = (state = false, action) => {
   switch (action.type) {
-    case types.UPDATE_USER_METADATA_REQUEST:
+    case types.UPDATE_PROFILE_METADATA_REQUEST:
       return true;
-    case types.UPDATE_USER_METADATA_SUCCESS:
-    case types.UPDATE_USER_METADATA_FAIL:
+    case types.UPDATE_PROFILE_METADATA_SUCCESS:
+    case types.UPDATE_PROFILE_METADATA_FAIL:
       return false;
+    default:
+      return state;
+  }
+};
+
+const isFileUploading = (state = false, action) => {
+  switch (action.type) {
+    case types.FILE_UPLOAD_REQUEST:
+      return true;
+    case types.FILE_UPLOAD_SUCCESS:
+    case types.FILE_UPLOAD_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isFileDeleting = (state = false, action) => {
+  switch (action.type) {
+    case types.FILE_DELETE_REQUEST:
+      return true;
+    case types.FILE_DELETE_SUCCESS:
+    case types.FILE_DELETE_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const fileUrl = (state = '', action) => {
+  switch (action.type) {
+    case types.FILE_URL_UPDATE:
+      return action.data;
     default:
       return state;
   }
@@ -92,6 +125,9 @@ export default combineReducers({
   isVerifying,
   isCheckingCode,
   isEditingPhone,
-  phoneNumber
+  phoneNumber,
+  isFileUploading,
+  isFileDeleting,
+  fileUrl
 });
 

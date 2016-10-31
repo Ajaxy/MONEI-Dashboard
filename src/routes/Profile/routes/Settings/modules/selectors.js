@@ -37,3 +37,19 @@ export const getIsUpdatingMetaData = createSelector(
   settingsSelector,
   settings => settings.isUpdatingMetaData
 );
+
+export const getIsFileUploading = createSelector(
+  settingsSelector,
+  settings => settings.isFileUploading
+);
+
+export const getIsFileDeleting = createSelector(
+  settingsSelector,
+  settings => settings.isFileDeleting
+);
+
+export const getFileUrl = createSelector(
+  settingsSelector,
+  settings => settings.fileUrl
+);
+

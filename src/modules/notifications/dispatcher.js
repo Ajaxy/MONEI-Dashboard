@@ -1,6 +1,6 @@
 import {signOut} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
-import {updateProfile} from '../profile/actions';
+import {updateProfileLocally} from '../profile/actions';
 import * as types from './types';
 
 export default dispatch => action => {
@@ -18,7 +18,7 @@ export default dispatch => action => {
       dispatch(addMessage(action.message));
       return;
     case types.UPDATE_PROFILE:
-      dispatch(updateProfile(action.data));
+      dispatch(updateProfileLocally(action.data));
       return;
   }
 };
