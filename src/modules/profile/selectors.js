@@ -123,7 +123,7 @@ export const getIsMerchant = createSelector(
 
 export const getIsCompany = createSelector(
   getProfileType,
-  profileType => profileType == 'company'
+  profileType => profileType === 'company'
 );
 
 export const getIsVerificationRequested = createSelector(

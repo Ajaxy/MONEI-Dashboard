@@ -19,12 +19,13 @@ const DocumentView = ({
       {documentUrl && <p>
         <a href={documentUrl} target="_blank">{documentName}</a>
       </p>}
-      {documentUrl && <Button
+      {documentUrl && <Button type="button"
         onClick={deleteFileStart}>
         <i className="icon trash"/>
         Delete
       </Button>}
       {!documentUrl && <FileButton
+        type="button"
         accept="image/*, application/pdf"
         loading={isUploading}
         onChange={onFileChange}>

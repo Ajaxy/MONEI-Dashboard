@@ -3,7 +3,6 @@ import PhoneEdit from '../containers/PhoneEditContainer';
 import PhoneConfirm from '../containers/PhoneConfirmContainer';
 import PhoneView from './PhoneView';
 import UpdateMetaData from '../containers/UpdateMetaDataContainer';
-import DocumentUpload from '../containers/DocumentContainer';
 
 const SettingsView = ({
   isPhoneVerified,
@@ -32,12 +31,6 @@ const SettingsView = ({
     <div className="ui stackable grid">
       <div className="nine wide column">
         <UpdateMetaData />
-      </div>
-    </div>
-    <h3>Upload your identity document</h3>
-    <div className="ui stackable grid">
-      <div className="nine wide column">
-        <DocumentUpload />
       </div>
     </div>
   </section>
