@@ -34,7 +34,7 @@ const SettingsView = ({
         <UpdateMetaData />
       </div>
     </div>
-    <h3>Upload your document</h3>
+    <h3>Upload your identity document</h3>
     <div className="ui stackable grid">
       <div className="nine wide column">
         <DocumentUpload />

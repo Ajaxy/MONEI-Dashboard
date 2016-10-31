@@ -11,10 +11,11 @@ const Confirm = ({
   onConfirm,
   confirmText,
   headerText,
-  confirmClass
+  confirmClass,
+  size
 }) => {
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} size={size}>
       <div className="header">{headerText || 'Are you sure?'}</div>
       <div className="content">
         {children}
@@ -44,7 +45,8 @@ Confirm.propTypes = {
   onConfirm: PropTypes.func.isRequired,
   confirmText: PropTypes.string.isRequired,
   confirmClass: PropTypes.string,
-  headerText: PropTypes.string
+  headerText: PropTypes.string,
+  size: PropTypes.oneOf([undefined, 'tiny', 'small', 'large', 'fullscreen'])
 };
 
 export default Confirm;

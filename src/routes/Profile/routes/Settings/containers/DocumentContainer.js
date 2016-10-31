@@ -27,8 +27,7 @@ class Document extends Component {
 const mapStateToProps = (state) => ({
   documentName: getDocumentName(state),
   documentUrl: selectors.getFileUrl(state),
-  isUploading: selectors.getIsFileUploading(state),
-  isDeleting: selectors.getIsFileDeleting(state)
+  isUploading: selectors.getIsFileUploading(state)
 });
 
 export default connect(mapStateToProps, actions)(Document);

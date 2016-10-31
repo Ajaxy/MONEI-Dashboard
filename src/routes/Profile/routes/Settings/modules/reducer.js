@@ -120,6 +120,19 @@ const fileUrl = (state = null, action) => {
   }
 };
 
+const isDeleteModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.FILE_DELETE_START:
+      return true;
+    case types.FILE_DELETE_SUCCESS:
+    case types.FILE_DELETE_FAIL:
+    case types.FILE_DELETE_CANCEL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isChangingPassword,
   isUpdatingMetaData,
@@ -130,6 +143,7 @@ export default combineReducers({
   phoneNumber,
   isFileUploading,
   isFileDeleting,
-  fileUrl
+  fileUrl,
+  isDeleteModalOpen
 });
 

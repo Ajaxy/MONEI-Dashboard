@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react';
 import Button from 'components/Button';
 import FileButton from 'components/FileButton';
+import ConfirmDelete from '../containers/ConfirmDeleteContainer';
 
 const DocumentView = ({
   documentName,
   documentUrl,
   isUploading,
-  isDeleting,
   uploadFile,
-  deleteFile
+  deleteFileStart,
 }) => {
   const onFileChange = (e) => {
     const {files} = e.target;
@@ -20,19 +20,19 @@ const DocumentView = ({
         <a href={documentUrl} target="_blank">{documentName}</a>
       </p>}
       {documentUrl && <Button
-        onClick={deleteFile}
-        negative
-        loading={isDeleting} >
+        onClick={deleteFileStart}>
+        <i className="icon trash"/>
         Delete
       </Button>}
       {!documentUrl && <FileButton
         accept="image/*, application/pdf"
         loading={isUploading}
         onChange={onFileChange}>
-        Upload your identity document
+        <i className="icon cloud upload"/>
+        Upload
       </FileButton>}
+      <ConfirmDelete />
     </div>
-
   );
 };
 

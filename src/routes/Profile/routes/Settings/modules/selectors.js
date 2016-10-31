@@ -53,3 +53,7 @@ export const getFileUrl = createSelector(
   settings => settings.fileUrl
 );
 
+export const getIsDeleteModalOpen = createSelector(
+  settingsSelector,
+  settings => settings.isDeleteModalOpen
+);

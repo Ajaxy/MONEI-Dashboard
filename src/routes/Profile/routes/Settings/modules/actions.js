@@ -147,6 +147,15 @@ export const uploadFile = (file) => {
   };
 };
 
+export const deleteFileStart = () => ({
+  type: types.FILE_DELETE_START
+});
+
+
+export const deleteFileCancel = () => ({
+  type: types.FILE_DELETE_CANCEL
+});
+
 export const deleteFile = () => {
   return async (dispatch, getState) => {
     const state = getState();
