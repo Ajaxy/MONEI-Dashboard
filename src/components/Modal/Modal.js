@@ -5,22 +5,26 @@ import cx from 'classnames';
 class Modal extends Component {
   static defaultProps = {
     style: 'standard',
-    size: 'tiny'
+    size: 'tiny',
   };
 
   static propTypes = {
     isOpen: PropTypes.bool,
     children: PropTypes.any,
     style: PropTypes.oneOf(['standard', 'basic']),
-    size: PropTypes.oneOf([undefined, 'tiny', 'small', 'large', 'fullscreen'])
+    size: PropTypes.oneOf([undefined, 'tiny', 'small', 'large', 'fullscreen']),
   };
 
   onOpen = () => {
+    if (this.opened) return;
+    this.opened = true;
     $(this.dimmer).transition('fade', '500ms');
     $(this.modal).transition('scale', '500ms');
   };
 
   beforeClose = (node, onComplete) => {
+    if (this.closed) return;
+    this.closed = true;
     $(this.dimmer).transition('fade', '500ms', onComplete);
     $(this.modal).transition('scale', '500ms');
   };

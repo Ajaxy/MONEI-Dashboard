@@ -4,6 +4,7 @@ import {reducer as form} from 'redux-form';
 import authReducer, {stateKey as authKey} from 'modules/auth/reducer';
 import userInfoReducer, {stateKey as userInfoKey} from '../modules/profile/reducer';
 import messagesReducer, {stateKey as messagesKey} from 'modules/messages/reducer';
+import modalsReducer, {stateKey as modalsKey} from 'modules/modals/reducer';
 import {UNAUTH} from 'modules/auth/types';
 
 export const makeRootReducer = (asyncReducers) => {
@@ -14,6 +15,7 @@ export const makeRootReducer = (asyncReducers) => {
     [authKey]: authReducer,
     [messagesKey]: messagesReducer,
     [userInfoKey]: userInfoReducer,
+    [modalsKey]: modalsReducer,
     ...asyncReducers
   });
 
