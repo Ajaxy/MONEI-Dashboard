@@ -129,7 +129,7 @@ export const updateProfile = (userId, {user_metadata}) =>
 // Channels
 
 export const fetchChannels = (sandbox) => 
-  apiClient.get('channels', null, {sandbox});
+  apiClient.get('channels', {sandbox});
 
 export const createZapierApiToken = (channelId) =>
   apiClient.post('zapier/token/create', {channelId, slug: 'transaction', events: ['transaction.all']})
@@ -140,10 +140,10 @@ export const fetchWebhooks = (channelId) =>
   apiClient.get('webhooks', {params: {channelId, slug: 'transaction'}})
 
 export const saveWebhook = (webhook) =>
-  apiClient.post('webhooks', {webhook})
+  apiClient.post('webhooks', {...webhook})
 
 export const updateWebhook = (webhook) =>
-  apiClient.patch(`webhooks/${webhook.id}`, {webhook})
+  apiClient.patch(`webhooks/${webhook.id}`, {...webhook})
 
 export const deleteWebhook = (webhookId) =>
   apiClient.delete(`webhooks/${webhookId}`)

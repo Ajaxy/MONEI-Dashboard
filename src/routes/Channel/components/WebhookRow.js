@@ -1,9 +1,17 @@
 import React, {PropTypes} from 'react';
 import humanize from 'humanize-string';
+import Button from 'components/Button';
 
 export const NUM_COLUMNS = 4;
 
-const WebhookRow = ({webhook, isHeader, isFooter}) => {
+const WebhookRow = ({
+  webhook, 
+  isHeader, 
+  isFooter, 
+  createWebhook, 
+  editWebhook, 
+  deleteWebhook
+}) => {
   if (isHeader) {
     return (
       <tr>
@@ -16,7 +24,11 @@ const WebhookRow = ({webhook, isHeader, isFooter}) => {
   } else if (isFooter) {
     return (
       <tr>
-        <th colSpan={NUM_COLUMNS}></th>
+        <th colSpan={NUM_COLUMNS} className="right aligned">
+          <Button primary={true} onClick={createWebhook} className="green">
+            Create Webhook
+          </Button>
+        </th>
       </tr>
     );
   } else {
@@ -25,7 +37,21 @@ const WebhookRow = ({webhook, isHeader, isFooter}) => {
         <td>{webhook.url}</td>
         <td>{humanize(webhook.webhookState)}</td>
         <td>{webhook.events.join(', ')}</td>
-        <td></td>
+        <td className="right aligned">
+          <Button 
+            icon={true} 
+            className="labeled"
+            onClick={() => editWebhook(webhook.channelId, webhook.id, webhook)}>
+            <i className="edit icon"/> Edit
+          </Button>
+          <Button 
+            icon={true} 
+            negative={true} 
+            className="labeled"
+            onClick={() => deleteWebhook(webhook.id)}>
+            <i className="trash icon"/> Delete
+          </Button>
+        </td>
       </tr>
     );
   }

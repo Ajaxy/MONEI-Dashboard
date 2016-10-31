@@ -15,9 +15,25 @@ class ChannelWebhooksContainer extends Component {
     this.props.fetchWebhooks(channelId);
   }
 
+  showCreateModal = () => {
+    const {channelId, showCreateWebhook} = this.props;
+    showCreateWebhook(channelId);
+  }
+
+  showEditModal = (channelId, webhookId, webhook) => {
+    this.props.showEditWebhook(channelId, webhookId, webhook);
+  }
+
+  showDeleteModal = (webhookId) => {
+    this.props.showDeleteWebhook(webhookId);
+  }
+
   render() {
     return <ChannelWebhooks 
       loadMore={this.loadMore} 
+      showCreateModal={this.showCreateModal}
+      showEditModal={this.showEditModal}
+      showDeleteModal={this.showDeleteModal}
       {...this.props}
     />;
   }

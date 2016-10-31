@@ -42,7 +42,15 @@ const webhookIds = (state = [], action) => {
     case types.FETCH_WEBHOOKS_REQUEST:
       return [];
     case types.FETCH_WEBHOOKS_SUCCESS:
+    case types.CREATE_WEBHOOKS_SUCCESS:
+    case types.UPDATE_WEBHOOKS_SUCCESS:
       return mergeArrays(state, action.ids);
+    case types.DELETE_WEBHOOKS_SUCCESS:
+      let index = state.indexOf(action.webhookId);
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
     default:
       return state;
   }
@@ -53,7 +61,13 @@ const webhookById = (state = {}, action) => {
     case types.FETCH_WEBHOOKS_REQUEST:
       return {};
     case types.FETCH_WEBHOOKS_SUCCESS:
+    case types.CREATE_WEBHOOKS_SUCCESS:
+    case types.UPDATE_WEBHOOKS_SUCCESS:
       return Object.assign({}, state, action.byId);
+    case types.DELETE_WEBHOOKS_SUCCESS:
+      const newState = {...state};
+      delete newState[action.webhookId];
+      return newState;
     default:
       return state;
   }
