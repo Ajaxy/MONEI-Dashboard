@@ -1,4 +1,5 @@
 import * as types from './types';
+import {UNAUTH} from 'modules/auth/types';
 import storage from 'store';
 import {combineReducers} from 'redux';
 
@@ -51,23 +52,22 @@ const isSandboxInitialized = (state = false, action) => {
   }
 };
 
-const cachedSandbox = storage.get('sandbox');
-const defaultSandboxMode = cachedSandbox !== undefined ? cachedSandbox : true;
+const defaultSandboxMode = storage.get('sandbox') || false;
 const isInSandboxMode = (state = defaultSandboxMode, action) => {
-  let nextState = state;
   switch (action.type) {
     case types.FETCH_PROFILE_SUCCESS:
     case types.UPDATE_PROFILE_LOCALLY:
       const appMetadata = (action.data || {}).app_metadata;
-      if (!appMetadata.mid)
-        nextState = true;
-      storage.set('sandbox', nextState);
-      return nextState;
+      if (!appMetadata.mid) {
+        return true;
+      }
+      return state;
     case types.SET_PROFILE_SANDBOX:
-      nextState = !!action.data;
+      const nextState = !!action.data;
       storage.set('sandbox', nextState);
       return nextState;
-    case types.INIT_PROFILE_SANDBOX:
+    case UNAUTH:
+      return false;
     default:
       return state;
   }

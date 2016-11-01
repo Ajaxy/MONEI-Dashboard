@@ -2,12 +2,13 @@ import React from 'react';
 import cx from 'classnames';
 import classNames from './UserRow.scss';
 import humanize from 'humanize-string';
+import userPic from 'static/user.png';
 
 const UserRow = ({user, userMetadata, appMetadata, viewUser = () => {}, isHeader = false}) => {
   if (isHeader) {
     return (
       <tr>
-        <th className="one wide"></th>
+        <th className="one wide" />
         <th>Name</th>
         <th>Store URL</th>
         <th>Acquirer</th>
@@ -19,7 +20,7 @@ const UserRow = ({user, userMetadata, appMetadata, viewUser = () => {}, isHeader
     return (
       <tr className={classNames.row} onClick={() => viewUser(user.user_id)}>
         <td>
-          <img className="ui avatar image" src={user.picture}/>
+          <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
         </td>
         <td>{userMetadata.name || user.email}</td>
         <td>

@@ -26,6 +26,7 @@ export const signOut = () => dispatch => {
   storage.remove('profile');
   storage.remove('authToken');
   storage.remove('credentials');
+  storage.remove('sandbox');
   window.Intercom('shutdown');
 };
 
