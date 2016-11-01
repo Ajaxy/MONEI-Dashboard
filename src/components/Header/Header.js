@@ -49,7 +49,9 @@ const Header = ({
         LIVE
       </div>}
       <DropDownMenu className="item right borderless">
-        {!isAdmin && isInSandboxMode && <div className="ui right pointing large red basic label">TEST MODE</div>}
+        {!isAdmin && isInSandboxMode &&
+        <div className={cx('ui right pointing large red basic label', classNames.label)}>TEST MODE</div>
+        }
         <img className="ui avatar image" src={profile.picture} onError={e => e.target.src = userPic} />
         <span>{profile.name}</span>
         <i className="dropdown icon" />
@@ -59,10 +61,10 @@ const Header = ({
             Profile
           </Link>
           {isUser &&
-            <Link to="/channels" className="item" activeClassName="active" onClick={viewChannels}>
-              <i className="payment icon" />
-              Channels
-            </Link>
+          <Link to="/channels" className="item" activeClassName="active" onClick={viewChannels}>
+            <i className="payment icon" />
+            Channels
+          </Link>
           }
           <a className="item" onClick={signOut}>
             <i className="sign out icon" />
