@@ -10,3 +10,5 @@ export const PROFILE_TYPES = [
     value: 'company'
   }
 ];
+
+export const DATE_FORMAT_SIMPLE = 'MMM DD, YYYY';

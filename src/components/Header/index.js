@@ -20,11 +20,11 @@ class HeaderContainer extends Component {
     const {isInSandboxMode} = this.props;
     trackEvent('monei_channels_clicked', {sandbox: isInSandboxMode});
     this.context.router.push('/channels');
-  }
+  };
 
   render() {
-    return <Header 
-      viewOnboarding={this.viewOnboarding} 
+    return <Header
+      viewOnboarding={this.viewOnboarding}
       viewChannels={this.viewChannels}
       {...this.props}
     />

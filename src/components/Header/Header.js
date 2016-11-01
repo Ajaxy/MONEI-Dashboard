@@ -49,7 +49,7 @@ const Header = ({
         LIVE
       </div>}
       <DropDownMenu className="item right borderless">
-        {isInSandboxMode && <div className="ui right pointing large red basic label">TEST MODE</div>}
+        {!isAdmin && isInSandboxMode && <div className="ui right pointing large red basic label">TEST MODE</div>}
         <img className="ui avatar image" src={profile.picture} onError={e => e.target.src = userPic} />
         <span>{profile.name}</span>
         <i className="dropdown icon" />

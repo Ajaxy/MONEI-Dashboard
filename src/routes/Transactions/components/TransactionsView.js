@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {InfiniteTable} from 'components/Table';
 import TransactionRow, {NUM_COLUMNS} from './TransactionRow';
 import TransactionDetails from './TransactionDetails';
-import DatePicker from 'components/DatePicker';
+import DateTimeInput from 'components/DateTimeInput';
 import classNames from './TransactionsView.scss';
 
 const TransactionsView = ({
@@ -21,12 +21,16 @@ const TransactionsView = ({
 }) => (
   <section className="ui basic segment padded-bottom">
     <h1 className="ui header">Transactions</h1>
-    <DatePicker
-      className={classNames.paddedBottom}
-      placeholder="Date"
-      defaultValue={selectedDate}
-      onChange={filterDate}
-    />
+    <div className={classNames.paddedBottom}>
+      <DateTimeInput
+        placeholder="Date"
+        name="date"
+        label={false}
+        timeFormat={false}
+        defaultValue={selectedDate}
+        onChange={filterDate}
+      />
+    </div>
     <InfiniteTable
       {...{isFetching, isLastPage}}
       selectable={!isFetching && transactions.length > 0}
@@ -34,8 +38,8 @@ const TransactionsView = ({
       onLoadMore={loadMore}
       autoLoad={true}
       className="large single line"
-      header={<TransactionRow isHeader={true}/>}
-      footer={<TransactionRow totalAmount={totalAmount} isFooter={true}/>}
+      header={<TransactionRow isHeader={true} />}
+      footer={<TransactionRow totalAmount={totalAmount} isFooter={true} />}
     >
       {
         (transactions.length > 0 || isFetching) ? transactions.map((tx, index) =>
@@ -44,7 +48,9 @@ const TransactionsView = ({
             transaction={tx}
             onClick={viewDetails}
           />)
-        : <tr><td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td></tr>
+          : <tr>
+          <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
+        </tr>
       }
     </InfiniteTable>
     {
@@ -55,7 +61,7 @@ const TransactionsView = ({
           onPrint={printPage}
           onClose={closeDetails}
         />
-      : null
+        : null
     }
   </section>
 );

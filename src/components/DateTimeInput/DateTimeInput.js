@@ -3,6 +3,7 @@ import cx from 'classnames';
 import humanize from 'humanize-string';
 import {omitProps} from 'lib/utils';
 import DateTime from 'react-datetime';
+import {DATE_FORMAT_SIMPLE} from 'lib/constants'
 import './DateTimeInput.scss';
 
 const Input = ({
@@ -10,7 +11,11 @@ const Input = ({
   error,
   touched,
   fieldClass,
+  inputClass,
+  fluid,
   label,
+  dateFormat = DATE_FORMAT_SIMPLE,
+  closeOnSelect = true,
   ...rest
 }) => {
   const labelText = label || humanize(rest.name);
@@ -24,15 +29,16 @@ const Input = ({
     'pristine',
     'active',
     'visited',
-    'autofilled'
+    'autofilled',
+    'fluid'
   );
   return (
     <div className={cx('field', fieldClass, {error: touched && invalid})}>
       {label !== false && <label>{labelText}</label>}
-      <div className="ui fluid icon input">
+      <div className={cx('ui icon input', inputClass, {fluid})}>
         <DateTime
-          timeFormat="HH:mm"
-          isValidDate={date => date.isAfter(DateTime.moment().subtract(1, 'day'))}
+          dateFormat={dateFormat}
+          closeOnSelect={closeOnSelect}
           {...inputProps} />
         <i className="calendar icon" />
       </div>

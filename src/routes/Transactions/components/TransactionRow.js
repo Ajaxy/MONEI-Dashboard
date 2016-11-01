@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {PAYMENT_TYPES} from 'lib/enums';
+import {formatDate} from 'lib/utils'
 import {
   getAmount,
   isFailed,
@@ -52,7 +53,7 @@ const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false
           </a>
         </td>
         <td>{getChannelName(channelName)}</td>
-        <td>{getTimeStamp(transactionTimestamp)}</td>
+        <td>{formatDate(transactionTimestamp)}</td>
       </tr>
     );
   }
