@@ -11,7 +11,7 @@ class DocumentsForm extends Component {
     const {documentName, getFileUrl} = this.props;
     if(documentName) getFileUrl(documentName);
   }
-  
+
   componentWillUpdate(nextProps) {
     if(nextProps.documentName && nextProps.documentName != this.props.documentName) {
       this.props.getFileUrl(nextProps.documentName);
@@ -21,9 +21,9 @@ class DocumentsForm extends Component {
   submitForm = ({companyName, vatNumber, idNumber}) => {
     const {verifyPhoneNumber} = this.props;
     return new Promise(async (resolve, reject) => {
-      const {user, updateProfile, goToNextStep} = this.props;
+      const {user, updateProfileLocally, goToNextStep} = this.props;
       const user_metadata = Object.assign({}, user.user_metadata, {companyName, vatNumber, idNumber});
-      const success = await updateProfile(user.user_id, {user_metadata});
+      const success = await updateProfileLocally(user.user_id, {user_metadata});
       if (success) goToNextStep();
     });
   };

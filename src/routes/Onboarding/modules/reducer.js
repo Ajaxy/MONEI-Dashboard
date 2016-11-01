@@ -12,7 +12,7 @@ const getOnboardingStepFromProfile = (profile) => {
   if(userMetadata.name && userMetadata.profile_type && userMetadata.country && appMetadata.phone_number)
     nextStep = 1;
   if(userMetadata.document_name && (
-    (userMetadata.profile_type == 'company' && userMetadata.company_name && userMetadata.vat_number) || 
+    (userMetadata.profile_type == 'company' && userMetadata.company_name && userMetadata.vat_number) ||
     (userMetadata.profile_type == 'individual' && userMetadata.id_number)))
     nextStep = 2;
   return nextStep;
@@ -25,7 +25,7 @@ const getOnboardingPercentage = (profile) => {
   if(userMetadata.name && userMetadata.profile_type && userMetadata.country && appMetadata.phone_number)
     percentage = 40;
   if(userMetadata.document_name && (
-    (userMetadata.profile_type == 'company' && userMetadata.company_name && userMetadata.vat_number) || 
+    (userMetadata.profile_type == 'company' && userMetadata.company_name && userMetadata.vat_number) ||
     (userMetadata.profile_type == 'individual' && userMetadata.id_number)))
     percentage = 70;
   if(userMetadata.store_url && userMetadata.store_goods)
@@ -111,16 +111,16 @@ const isDeleting = (state = false, action) => {
     default:
       return state;
   }
-}
+};
 
-const documentUrl = (state = "", action) => {
+const documentUrl = (state = '', action) => {
   switch (action.type) {
     case types.ONBOARDING_UPDATE_FILE_URL:
       return action.data;
     default:
       return state;
   }
-}
+};
 
 export default combineReducers({
   step,

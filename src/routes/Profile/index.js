@@ -1,12 +1,14 @@
 import {injectReducer} from 'store/reducers';
 import Profile from './containers/ProfileContainer';
+import OverviewRoute from './routes/Overview';
+import SettingsRoute from './routes/Settings';
 import RequireAuth from 'containers/RequireAuth';
-import reducer, {stateKey} from './modules/reducer';
 
-export default (store) => {
-  injectReducer(store, {key: stateKey, reducer});
-  return {
-    path: '/profile',
-    component: RequireAuth(Profile)
-  };
-};
+export default (store) => ({
+  path: '/profile',
+  indexRoute: OverviewRoute,
+  component: RequireAuth(Profile),
+  childRoutes: [
+    SettingsRoute(store)
+  ]
+});

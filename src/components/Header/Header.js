@@ -6,6 +6,7 @@ import Button from 'components/Button';
 import CheckBox from 'components/CheckBox';
 import DropDownMenu from 'components/DropDownMenu';
 import classNames from './Header.scss';
+import userPic from 'static/user.png';
 import cx from 'classnames';
 
 const Header = ({
@@ -28,11 +29,11 @@ const Header = ({
       {isAdmin ? <Link to="/users" className="item" activeClassName="active">Users</Link> : null }
       {!isAdmin ? <Link to="/transactions" className="item" activeClassName="active">Transactions</Link> : null }
       {!isAdmin ? <Link to="/customers" className="item" activeClassName="active">Customers</Link> : null }
-      {!isAdmin && !isMerchant && isVerificationRequested && <div className="item borderless text orange">
+      {!isAdmin && !isMerchant && isVerificationRequested && <div className="item borderless text yellow">
         Production access pending
       </div>}
       {!isAdmin && !isMerchant && !isVerificationRequested && <div className="item borderless">
-        <Button className="large orange" onClick={viewOnboarding}>Get production access</Button>
+        <Button className="inverted" onClick={viewOnboarding}>Get production access</Button>
       </div>}
       {!isAdmin && isMerchant && <div className="item borderless">
         TEST
@@ -48,7 +49,7 @@ const Header = ({
         LIVE
       </div>}
       <DropDownMenu className="item right borderless">
-        <img className="ui avatar image" src={profile.picture} />
+        <img className="ui avatar image" src={profile.picture} onError={e => e.target.src = userPic} />
         <span>{profile.name}</span>
         <i className="dropdown icon" />
         <div className="menu">

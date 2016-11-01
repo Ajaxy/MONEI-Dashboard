@@ -68,7 +68,7 @@ export const getDocumentName = createSelector(
 
 export const getIban = createSelector(
   getUserMetadata,
-  userMetadata => userMetadata.iban 
+  userMetadata => userMetadata.iban
 );
 
 export const getIdNumber = createSelector(
@@ -101,6 +101,11 @@ export const getPhoneNumber = createSelector(
   appMetadata => appMetadata.phone_number || ''
 );
 
+export const getIsPhoneVerified = createSelector(
+  getAppMetadata,
+  appMetadata => !!appMetadata.phone_number
+);
+
 export const getIsUser = createSelector(
   getAppMetadata,
   appMetadata => appMetadata.role == USER_ROLES.User
@@ -118,7 +123,7 @@ export const getIsMerchant = createSelector(
 
 export const getIsCompany = createSelector(
   getProfileType,
-  profileType => profileType == 'company'
+  profileType => profileType === 'company'
 );
 
 export const getIsVerificationRequested = createSelector(

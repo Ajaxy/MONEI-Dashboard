@@ -1,4 +1,5 @@
 import * as types from './types';
+import {UNAUTH} from 'modules/auth/types';
 import storage from 'store';
 import {combineReducers} from 'redux';
 
@@ -18,28 +19,23 @@ const isFetching = (state = false, action) => {
 
 const isModifying = (state = false, action) => {
   switch (action.type) {
-    case types.MODIFY_PROFILE_REQUEST:
+    case types.UPDATE_PROFILE_REQUEST:
       return true;
-    case types.MODIFY_PROFILE_SUCCESS:
-    case types.MODIFY_PROFILE_FAIL:
+    case types.UPDATE_PROFILE_SUCCESS:
+    case types.UPDATE_PROFILE_FAIL:
       return false;
     default:
       return state;
   }
 };
 
-const defaultUserMetadata = {profile_type: 'individual'};
 const profileState = storage.get('profile') || {};
 const data = (state = profileState, action) => {
   switch (action.type) {
     case types.FETCH_PROFILE_SUCCESS:
-    case types.MODIFY_PROFILE_SUCCESS:
-    case types.UPDATE_PROFILE:
+    case types.UPDATE_PROFILE_SUCCESS:
+    case types.UPDATE_PROFILE_LOCALLY:
       const newProfile = {...state, ...action.data};
-      newProfile.user_metadata = Object.assign({}, 
-        defaultUserMetadata, 
-        (action.data || {}).user_metadata
-      );
       storage.set('profile', newProfile);
       return newProfile;
     default:
@@ -56,23 +52,22 @@ const isSandboxInitialized = (state = false, action) => {
   }
 };
 
-const cachedSandbox = storage.get('sandbox');
-const defaultSandboxMode = cachedSandbox !== undefined ? cachedSandbox : true;
+const defaultSandboxMode = storage.get('sandbox') || false;
 const isInSandboxMode = (state = defaultSandboxMode, action) => {
-  let nextState = state;
   switch (action.type) {
     case types.FETCH_PROFILE_SUCCESS:
-    case types.UPDATE_PROFILE:
+    case types.UPDATE_PROFILE_LOCALLY:
       const appMetadata = (action.data || {}).app_metadata;
-      if (!appMetadata.mid) 
-        nextState = true;
-      storage.set('sandbox', nextState);
-      return nextState;
+      if (!appMetadata.mid) {
+        return true;
+      }
+      return state;
     case types.SET_PROFILE_SANDBOX:
-      nextState = !!action.data;
+      const nextState = !!action.data;
       storage.set('sandbox', nextState);
       return nextState;
-    case types.INIT_PROFILE_SANDBOX:
+    case UNAUTH:
+      return false;
     default:
       return state;
   }

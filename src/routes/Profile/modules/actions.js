@@ -3,7 +3,7 @@ import * as types from './types';
 import * as schemas from 'schema/users';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
-import {updateProfile} from 'modules/profile/actions';
+import {updateProfileLocally} from 'modules/profile/actions';
 import {trackEvent} from 'lib/intercom';
 
 export const resetPassword = (email, password) => {
@@ -54,7 +54,7 @@ export const checkPhoneNumber = (phoneNumber, verificationCode) => {
       const result = await api.verifyPhoneCheck(phoneNumber, verificationCode);
       const profile = storage.get('profile');
       profile.app_metadata.phone_number = phoneNumber;
-      dispatch(updateProfile(profile));
+      dispatch(updateProfileLocally(profile));
       dispatch({type: types.PHONE_VERIFICATION_CHECK_SUCCESS});
       dispatch(closeCheckingModal());
       trackEvent('monei_phone_verified', {

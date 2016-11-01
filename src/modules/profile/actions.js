@@ -26,32 +26,31 @@ export const fetchProfile = () => {
   };
 };
 
-export const updateProfile = (data) => ({
-  type: types.UPDATE_PROFILE,
+export const updateProfileLocally = (data) => ({
+  type: types.UPDATE_PROFILE_LOCALLY,
   data
 });
 
-export const modifyProfile = (userId, {user_metadata}) => {
-  return async (dispatch, getState) => {
-    dispatch({type: types.MODIFY_PROFILE_REQUEST});
+export const updateProfile = ({user_id, user_metadata}) => {
+  return async dispatch => {
+    dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
-      const data = await api.updateProfile(userId, {user_metadata});
+      const data = await api.updateUserMetaData(user_id, user_metadata);
       dispatch({
-        type: types.MODIFY_PROFILE_SUCCESS,
+        type: types.UPDATE_PROFILE_SUCCESS,
         data
       });
-      return true;
+      return data;
     } catch (error) {
       dispatch({
-        type: types.MODIFY_PROFILE_FAIL
+        type: types.UPDATE_PROFILE_FAIL
       });
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(modifyProfile(userId, {user_metadata}));
+          dispatch(updateProfile({user_id, user_metadata}));
         }
       }));
-      return false
     }
   };
 };
@@ -71,7 +70,7 @@ export const initSandbox = () => {
     try {
       const name = profile.email.toLowerCase().replace(/[@ .+]/g, '_');
       const data = await api.createSandbox(name);
-      dispatch(updateProfile(data));
+      dispatch(updateProfileLocally(data));
       dispatch({
         type: types.INIT_PROFILE_SANDBOX
       });
