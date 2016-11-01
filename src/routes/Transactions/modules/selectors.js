@@ -40,12 +40,15 @@ export const getIsLastPage = createSelector(
   page => !page.nextPage
 );
 
-export const getSelectedDate = createSelector(
+export const getFromDate = createSelector(
   getPage,
   page => moment(page.from).format('MMMM DD, YYYY')
 );
 
-export const DEFAULT_DATE_FORMAT = 'MMMM DD, YYYY';
+export const getToDate = createSelector(
+  getPage,
+  page => moment(page.to).format('MMMM DD, YYYY')
+);
 
 export const getViewedTransaction = createSelector(
   customersSelector,

@@ -4,6 +4,7 @@ import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
+import {DATE_FORMAT_LONG} from 'lib/constants'
 import moment from 'moment';
 
 class Transactions extends Component {
@@ -12,9 +13,8 @@ class Transactions extends Component {
   };
 
   componentWillMount() {
-    const date = this.props.selectedDate;
-    var from = moment(date, selectors.DEFAULT_DATE_FORMAT).startOf('day').valueOf();
-    var to = moment(date, selectors.DEFAULT_DATE_FORMAT).endOf('day').valueOf();
+    const from = moment().startOf('day').valueOf();
+    const to = moment().endOf('day').valueOf();
     this.props.fetchTransactions(from, to, null, true);
   }
 
@@ -28,9 +28,9 @@ class Transactions extends Component {
     this.props.fetchTransactions(page.from, page.to, page.nextPage);
   };
 
-  filterDate = (dateString) => {
-    var from = moment(dateString).startOf('day').valueOf();
-    var to = moment(dateString).endOf('day').valueOf();
+  filterByDate = (fromDate, toDate) => {
+    const from = moment(fromDate).startOf('day').valueOf();
+    const to = moment(toDate).endOf('day').valueOf();
     this.props.fetchTransactions(from, to);
   };
 
@@ -50,7 +50,7 @@ class Transactions extends Component {
     return (
       <TransactionsView
         loadMore={this.loadMore}
-        filterDate={this.filterDate}
+        filterByDate={this.filterByDate}
         viewDetails={this.viewDetails}
         closeDetails={this.closeDetails}
         printPage={this.printPage}
@@ -61,7 +61,8 @@ class Transactions extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  selectedDate: selectors.getSelectedDate(state),
+  fromDate: selectors.getFromDate(state),
+  toDate: selectors.getToDate(state),
   transactions: selectors.getTransactions(state),
   totalAmount: selectors.getTotalAmount(state),
   isFetching: selectors.getIsFetching(state),

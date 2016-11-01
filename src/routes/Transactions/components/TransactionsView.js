@@ -7,10 +7,11 @@ import classNames from './TransactionsView.scss';
 
 const TransactionsView = ({
   transactions,
-  selectedDate,
+  fromDate,
+  toDate,
   totalAmount,
   loadMore,
-  filterDate,
+  filterByDate,
   viewDetails,
   closeDetails,
   printPage,
@@ -21,15 +22,27 @@ const TransactionsView = ({
 }) => (
   <section className="ui basic segment padded-bottom">
     <h1 className="ui header">Transactions</h1>
-    <div className={classNames.paddedBottom}>
+    <div className={classNames.filters}>
       <DateTimeInput
-        placeholder="Date"
+        fieldClass={classNames.filter}
+        placeholder="From date"
         name="date"
         label={false}
         timeFormat={false}
         isValidDate={date => date.isBefore(new Date())}
-        defaultValue={selectedDate}
-        onChange={filterDate}
+        defaultValue={fromDate}
+        onChange={(date) => filterByDate(date, toDate)}
+      />
+      <b>&mdash;</b>
+      <DateTimeInput
+        fieldClass={classNames.filter}
+        placeholder="To date"
+        name="date"
+        label={false}
+        timeFormat={false}
+        isValidDate={date => date.isAfter(fromDate)}
+        defaultValue={fromDate}
+        onChange={(date) => filterByDate(fromDate, date)}
       />
     </div>
     <InfiniteTable
@@ -54,16 +67,11 @@ const TransactionsView = ({
         </tr>
       }
     </InfiniteTable>
-    {
-      isDetailsModalOpen && !!transactionViewed ?
-        <TransactionDetails
-          transaction={transactionViewed}
-          isOpen={isDetailsModalOpen}
-          onPrint={printPage}
-          onClose={closeDetails}
-        />
-        : null
-    }
+    <TransactionDetails
+      transaction={transactionViewed}
+      isOpen={isDetailsModalOpen}
+      onPrint={printPage}
+      onClose={closeDetails} />
   </section>
 );
 
@@ -71,7 +79,7 @@ TransactionsView.propTypes = {
   transactions: PropTypes.array.isRequired,
   totalAmount: PropTypes.number.isRequired,
   loadMore: PropTypes.func.isRequired,
-  filterDate: PropTypes.func.isRequired,
+  filterByDate: PropTypes.func.isRequired,
   viewDetails: PropTypes.func.isRequired,
   closeDetails: PropTypes.func.isRequired,
   printPage: PropTypes.func.isRequired,

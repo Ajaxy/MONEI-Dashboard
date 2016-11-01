@@ -1,13 +1,23 @@
 import React, {PropTypes} from 'react';
 import Modal from 'components/Modal';
+import Button from 'components/Button';
 import {Table} from 'components/Table';
 import {PAYMENT_TYPES} from 'lib/enums';
-import {getAmount, getTimeStamp, isFailed, isRefund} from 'routes/Transactions/modules/utils';
+import {formatDate} from 'lib/utils'
+import {getAmount, isFailed, isRefund} from 'routes/Transactions/modules/utils';
 import cx from 'classnames';
 import classNames from './TransactionDetails.scss';
 
 const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
-  const {customer, result, paymentType, currency, amount, card, billing} = transaction;
+  const {
+    customer = {},
+    result = {},
+    paymentType,
+    currency,
+    amount,
+    card = {},
+    billing = {}
+  } = transaction;
   return (
     <Modal
       isOpen={isOpen}
@@ -32,7 +42,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
           </tr> : null}
           <tr>
             <td>Date</td>
-            <td>{getTimeStamp(transaction.transactionTimestamp, "MMMM D, YYYY HH:mm:ss")}</td>
+            <td>{formatDate(transaction.transactionTimestamp, "MMMM D, YYYY HH:mm:ss")}</td>
           </tr>
           <tr>
             <td>Type</td>
@@ -111,10 +121,10 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
         </Table>
       </div>
       <div className="actions">
-        <div className="ui icon button" onClick={onPrint}>
-          <i className="print icon large"/>
-        </div>
-        <div className="ui button green" onClick={onClose}>OK</div>
+        <Button className="icon" onClick={onPrint}>
+          <i className="print icon"/>
+        </Button>
+        <Button onClick={onClose}>Close</Button>
       </div>
     </Modal>
   );

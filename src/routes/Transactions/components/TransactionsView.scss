@@ -1,3 +1,13 @@
-.paddedBottom {
+.filters {
+  display: flex;
   padding-bottom: 1em;
+  align-items: center;
+}
+
+.filter {
+  margin: 0 10px;
+}
+
+.filter:first-child {
+  margin-left: 0;
 }

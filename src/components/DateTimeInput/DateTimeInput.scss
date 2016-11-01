@@ -44,6 +44,9 @@
   .rdtPicker td {
     cursor: pointer;
   }
+  .rdtPicker td:hover {
+    background: #eeeeee;
+  }
   .rdtPicker td.rdtToday:hover,
   .rdtPicker td.rdtHour:hover,
   .rdtPicker td.rdtMinute:hover,

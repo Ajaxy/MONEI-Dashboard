@@ -46,7 +46,3 @@ export const getAmount = (paymentType, currency, amount, showNegative=true) => {
 export const getChannelName = (channel) => {
   return channel ? channel.match(/^[a-zA-Z0-9]+/g)[0] : '';
 };
-
-export const getTimeStamp = (timestamp, timeFormat) => {
-  return moment.unix(timestamp).format(timeFormat || 'HH:mm:ss');
-};
