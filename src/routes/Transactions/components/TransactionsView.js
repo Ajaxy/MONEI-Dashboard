@@ -27,6 +27,7 @@ const TransactionsView = ({
         name="date"
         label={false}
         timeFormat={false}
+        isValidDate={date => date.isBefore(new Date())}
         defaultValue={selectedDate}
         onChange={filterDate}
       />
