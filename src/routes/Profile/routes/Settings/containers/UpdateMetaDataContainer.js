@@ -45,6 +45,7 @@ export default reduxForm({
     'id_number',
     'store_url',
     'store_goods',
-    'iban'
+    'iban',
+    'isHintsDisabled'
   ]
 }, mapStateToProps, actions)(UpdateMetaData);

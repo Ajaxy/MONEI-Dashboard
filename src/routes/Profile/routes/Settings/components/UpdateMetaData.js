@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
+import CheckBox from 'components/CheckBox';
 import Button from 'components/Button';
+import DotHint from 'components/DotHint';
 import Input from 'components/Input';
 import {PROFILE_TYPES} from 'lib/constants'
 import Select, {SelectItem} from 'components/Select';
@@ -16,7 +18,8 @@ const UpdateMetaData = ({
     vat_number,
     store_url,
     store_goods,
-    iban
+    iban,
+    isHintsDisabled
   },
   values,
   countries,
@@ -25,9 +28,26 @@ const UpdateMetaData = ({
   isUpdatingMetaData,
   invalid
 }) => {
+  const disableHints = (e) => {
+    updateUserMetaData({isHintsDisabled: e.target.value !== 'true'});
+    isHintsDisabled.onChange(e);
+  };
   const isCompany = values.profile_type === 'company';
   return (
     <form className="ui form" onSubmit={handleSubmit(updateUserMetaData)}>
+      <h3>Application settings</h3>
+      <div className="field">
+        <CheckBox
+          {...isHintsDisabled}
+          onChange={disableHints}
+          toggle
+          label="Disable application hints"
+        />
+        <DotHint>
+          This is an example of the hint
+        </DotHint>
+      </div>
+      <h3>Personal data</h3>
       <Input {...name} label="Name and surname"/>
       <Select
         {...country}

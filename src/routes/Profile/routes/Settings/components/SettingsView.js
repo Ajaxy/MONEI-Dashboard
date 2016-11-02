@@ -27,7 +27,6 @@ const SettingsView = ({
         </div>}
       </div>
     </div>
-    <h3>Personal data</h3>
     <div className="ui stackable grid">
       <div className="nine wide column">
         <UpdateMetaData />

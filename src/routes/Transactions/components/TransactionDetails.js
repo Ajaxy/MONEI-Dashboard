@@ -3,8 +3,8 @@ import Modal from 'components/Modal';
 import Button from 'components/Button';
 import {Table} from 'components/Table';
 import {PAYMENT_TYPES} from 'lib/enums';
-import {formatDate} from 'lib/utils'
-import {getAmount, isFailed, isRefund} from 'routes/Transactions/modules/utils';
+import {formatDate} from 'lib/utils';
+import {getAmount, isFailed} from 'routes/Transactions/modules/utils';
 import cx from 'classnames';
 import classNames from './TransactionDetails.scss';
 
@@ -52,8 +52,8 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
             <td>Status</td>
             <td>
               {isFailed(result.code) ?
-                <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large"/></p> :
-                <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large"/></p>
+                <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p> :
+                <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
               }
               <h5 className={cx("ui header", classNames.noMarginTop)}>
                 <div className="sub header">{result.description}</div>
@@ -122,7 +122,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
       </div>
       <div className="actions">
         <Button className="icon" onClick={onPrint}>
-          <i className="print icon"/>
+          <i className="print icon" />
         </Button>
         <Button onClick={onClose}>Close</Button>
       </div>
