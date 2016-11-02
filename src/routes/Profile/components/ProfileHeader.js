@@ -10,6 +10,9 @@ const ProfileHeader = () => (
     <Link to="/profile/settings" className="item" activeClassName="active">
       Settings
     </Link>
+    <Link to="/profile/bank_accounts" className="item" activeClassName="active">
+      Bank accounts
+    </Link>
   </div>
 );
 
