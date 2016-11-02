@@ -84,7 +84,7 @@ class Select extends Component {
             {props.children}
           </div>
         </div>
-        {props.hint && !(props.touched && props.invalid) && <div className="text grey">{props.hint}</div>}
+        {props.hint && !(props.touched && props.invalid) && <div className="hint">{props.hint}</div>}
         {props.touched && props.invalid && <div className="ui basic red pointing prompt label">
           {errorText}
         </div>}

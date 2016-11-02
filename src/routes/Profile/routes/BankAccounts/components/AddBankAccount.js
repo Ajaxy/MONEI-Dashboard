@@ -37,7 +37,8 @@ const AddBankAccount = ({
         <Input
           {...number}
           onChange={cleanNumber}
-          label="Account number (IBAN)" />
+          label="Your bank account number"
+          hint="where you want your money to be settled" />
       </form>
     </Confirm>
   );

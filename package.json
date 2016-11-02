@@ -108,6 +108,7 @@
   "author": "Ranier Montalbo",
   "license": "MIT",
   "dependencies": {
+    "abavalidator": "^2.0.1",
     "aliasify": "^2.0.0",
     "auth0-lock": "^9.2.1",
     "aws-mqtt-client": "0.0.5",

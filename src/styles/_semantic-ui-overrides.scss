@@ -113,6 +113,12 @@ i.icon.loading {
   white-space: nowrap;
 }
 
+.ui.form .field > .hint {
+  margin: .28571429rem 0 0;
+  color: #A0A0A0;
+  font-size: .92857143em;
+}
+
 .item .content.flex {
   display: flex;
   justify-content: space-between;

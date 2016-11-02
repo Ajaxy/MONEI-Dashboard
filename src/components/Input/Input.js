@@ -11,6 +11,7 @@ const Input = ({
   fieldClass,
   component,
   label,
+  hint,
   ...rest
 }) => {
   const Component = rest.mask ? InputElement : component || 'input';
@@ -29,8 +30,9 @@ const Input = ({
   );
   return (
     <div className={cx('field', fieldClass, {error: touched && invalid})}>
-      {label !== false && <label>{labelText}</label>}
-      <Component {...inputProps} />
+      {label !== false && <label htmlFor={rest.name}>{labelText}</label>}
+      <Component {...inputProps} id={rest.name} />
+      {hint && !(touched && invalid) && <div className="hint">{hint}</div>}
       {touched && invalid && <div className="ui basic red pointing prompt label">{errorText}</div>}
     </div>
 
@@ -46,6 +48,8 @@ Input.propTypes = {
   ]),
   label: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.element,
+    PropTypes.func,
     PropTypes.bool
   ]),
   fieldClass: PropTypes.string,
@@ -55,7 +59,8 @@ Input.propTypes = {
   ]),
   touched: PropTypes.bool,
   invalid: PropTypes.bool,
-  mask: PropTypes.string
+  mask: PropTypes.string,
+  hint: PropTypes.string
 };
 
 export default Input;

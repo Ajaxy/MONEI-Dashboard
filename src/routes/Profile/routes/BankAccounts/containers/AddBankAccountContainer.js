@@ -10,7 +10,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const rules = {
-  number: 'required|iban'
+  number: 'required|bankAccount'
 };
 
 const validate = values => {
