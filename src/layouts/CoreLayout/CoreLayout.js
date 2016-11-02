@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import Header from 'components/Header';
 import MessagesStack from 'components/MessagesStack';
+import WindowStack from 'components/WindowStack';
 import classNames from './CoreLayout.scss';
 import cx from 'classnames';
 import 'styles/core.scss';
@@ -11,6 +12,7 @@ const CoreLayout = ({isAuthenticated, isPlain, children}) => {
       <div className={classNames.container}>
         {children}
         <MessagesStack />
+        <WindowStack />
       </div>
     );
   }
@@ -20,6 +22,7 @@ const CoreLayout = ({isAuthenticated, isPlain, children}) => {
       <section className={cx('ui main container', classNames.section)}>
         {children}
         <MessagesStack />
+        <WindowStack />
       </section>
     </div>
   );
