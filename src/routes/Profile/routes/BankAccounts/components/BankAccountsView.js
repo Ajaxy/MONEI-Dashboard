@@ -5,7 +5,7 @@ const BankAccountsView = ({
   addBankAccountStart
 }) => (
   <section className="ui vertical segment">
-    <h1 className="ui header">
+    <h2 className="ui header">
       Bank accounts
       <Button
         primary
@@ -13,7 +13,7 @@ const BankAccountsView = ({
         className="right floated">
         Add account
       </Button>
-    </h1>
+    </h2>
     <AddBankAccount />
   </section>
 );

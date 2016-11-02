@@ -83,9 +83,8 @@ const UpdateMetaData = ({
         <DocumentUpload />
       </div>
       <br />
-      <Input {...iban} label="IBAN number where you want your money to be settled."/>
-      <Input {...store_url} label="Your store website url"/>
-      <Input {...store_goods} label="What goods are you selling?"/>
+      {/*<Input {...store_url} label="Your store website url"/>*/}
+      {/*<Input {...store_goods} label="What goods are you selling?"/>*/}
       <Button
         primary
         type="submit"

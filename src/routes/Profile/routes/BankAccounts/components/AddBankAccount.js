@@ -19,6 +19,10 @@ const AddBankAccount = ({
     addBankAccountCancel();
     resetForm();
   };
+  const cleanNumber = (e) => {
+    const value = e.target.value.replace(/\s/g,'');
+    number.onChange(value);
+  };
   return (
     <Confirm
       isOpen={isOpen}
@@ -30,7 +34,10 @@ const AddBankAccount = ({
       confirmText="Add"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
-        <Input type="text" {...number} label="Account number" />
+        <Input
+          {...number}
+          onChange={cleanNumber}
+          label="Account number (IBAN)" />
       </form>
     </Confirm>
   );
