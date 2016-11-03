@@ -5,7 +5,7 @@ import reducer, {stateKey} from './modules/reducer';
 export default (store) => {
   injectReducer(store, {key: stateKey, reducer});
   return {
-    path: 'bank_accounts',
+    path: 'bank-accounts',
     component: BankAccounts
   };
 };

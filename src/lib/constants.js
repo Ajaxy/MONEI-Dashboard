@@ -11,5 +11,9 @@ export const PROFILE_TYPES = [
   }
 ];
 
+export const CURRENCIES = [
+  'USD', 'EUR'
+];
+
 export const DATE_FORMAT_SIMPLE = 'MMM DD, YYYY';
 export const DATE_FORMAT_LONG = 'MMMM DD, YYYY';
