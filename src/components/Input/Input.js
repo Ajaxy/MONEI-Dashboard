@@ -17,21 +17,22 @@ const Input = ({
   const Component = rest.mask ? InputElement : component || 'input';
   const labelText = label || humanize(rest.name);
   const errorText = Array.isArray(error) ? error[0] : error;
-  const inputProps = omitProps(rest,
-    'initialValue',
-    'autofill',
-    'onUpdate',
-    'valid',
-    'dirty',
-    'pristine',
-    'active',
-    'visited',
-    'autofilled'
-  );
+  const componentProps = Component === 'input' ?
+    omitProps(rest,
+      'initialValue',
+      'autofill',
+      'onUpdate',
+      'valid',
+      'dirty',
+      'pristine',
+      'active',
+      'visited',
+      'autofilled'
+    ) : rest;
   return (
     <div className={cx('field', fieldClass, {error: touched && invalid})}>
       {label !== false && <label htmlFor={rest.name}>{labelText}</label>}
-      <Component {...inputProps} id={rest.name} />
+      <Component {...componentProps} id={rest.name} />
       {hint && !(touched && invalid) && <div className="hint">{hint}</div>}
       {touched && invalid && <div className="ui basic red pointing prompt label">{errorText}</div>}
     </div>

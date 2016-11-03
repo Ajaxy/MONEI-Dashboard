@@ -2,6 +2,13 @@ import React, {PropTypes} from 'react';
 import Input from 'components/Input';
 import Confirm from 'components/Modal/Confirm';
 
+const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur}) => (
+  <div className="ui icon input">
+    <input type="text" value={value} name={name} onChange={onChange} onBlur={onBlur} />
+    {dirty && valid && <i className="check green icon" />}
+  </div>
+);
+
 const AddBankAccount = ({
   isOpen,
   isAdding,
@@ -20,7 +27,7 @@ const AddBankAccount = ({
     resetForm();
   };
   const cleanNumber = (e) => {
-    const value = e.target.value.replace(/\s/g,'');
+    const value = e.target.value.replace(/\s/g, '');
     number.onChange(value);
   };
   return (
@@ -36,6 +43,7 @@ const AddBankAccount = ({
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...number}
+          component={BankAccountInput}
           onChange={cleanNumber}
           label="Your bank account number"
           hint="where you want your money to be settled" />
