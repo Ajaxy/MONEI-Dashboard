@@ -35,9 +35,9 @@ const UserRow = ({user, userMetadata, appMetadata, viewUser = () => {}, isHeader
         <td>{humanize(appMetadata.status || '')}</td>
         <td className="right aligned">
           {appMetadata.verified ?
-            <i className={cx("big check circle icon", classNames.success)}/> :
+            <i className={cx('big check circle icon', classNames.success)} /> :
               userMetadata.verification_requested ?
-                <i className={cx("big warning circle icon", classNames.warning)}/> : ''}
+                <i className={cx('big warning circle icon', classNames.warning)} /> : ''}
         </td>
       </tr>
     );

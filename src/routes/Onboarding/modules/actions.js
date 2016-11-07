@@ -18,7 +18,7 @@ export const goToPrevStep = () => ({
 
 export const updateStep = (user) => ({
   type: types.ONBOARDING_UPDATE_STEP,
-  data: user,
+  data: user
 });
 
 export const signOut = () => dispatch => {
@@ -53,7 +53,7 @@ export const uploadFile = (file) => async (dispatch, getState) => {
     await fileUpload(profile.user_id, file);
     const user_metadata = Object.assign({}, userMetadata, {document_name: file.name});
     await dispatch(updateProfile(profile.user_id, {user_metadata}));
-  } catch(error) {
+  } catch (error) {
     dispatch(addMessage({
       text: error,
       onRetry() {
@@ -70,9 +70,9 @@ export const deleteFile = () => async (dispatch, getState) => {
   dispatch({type: types.ONBOARDING_DELETE_FILE_START});
   try {
     await fileDelete(profile.user_id, userMetadata.document_name);
-    const user_metadata = Object.assign({}, userMetadata, {document_name: ""});
+    const user_metadata = Object.assign({}, userMetadata, {document_name: ''});
     await dispatch(updateProfile(profile.user_id, {user_metadata}));
-  } catch(error) {
+  } catch (error) {
     dispatch(addMessage({
       text: error,
       onRetry() {
@@ -89,7 +89,7 @@ export const getFileUrl = (name) => async (dispatch, getState) => {
   try {
     const data = await fileGetUrl(profile.user_id, name, isAdmin);
     dispatch({type: types.ONBOARDING_UPDATE_FILE_URL, data});
-  } catch(error) {
+  } catch (error) {
     dispatch(addMessage({
       text: error,
       onRetry() {
@@ -108,7 +108,7 @@ export const requestVerification = () => async (dispatch, getState) => {
   if (success) {
     dispatch(addMessage({
       text: 'Verification is pending. We will check your data as soon as possible.',
-      style: 'success',
+      style: 'success'
     }));
   }
   return success;

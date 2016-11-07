@@ -7,12 +7,12 @@ import cx from 'classnames';
 const ConfirmRegisterView = ({
   isConfirmRegisterOpen,
   closeConfirmRegisterModal,
-  onRegister,
+  onRegister
 }) => (
   <Modal isOpen={isConfirmRegisterOpen} size="small">
     <div className="header">Are you sure?</div>
     <div className="content big">
-      <div className={cx("ui basic segment center aligned", classNames.text)}>
+      <div className={cx('ui basic segment center aligned', classNames.text)}>
         We will verify all your data and give you access to the application.
       </div>
     </div>

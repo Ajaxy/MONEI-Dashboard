@@ -42,7 +42,7 @@ export const resetPassword = (email, password) => {
       });
       dispatch(addMessage({
         text: 'Please follow the instructions we sent to your email.',
-        style: 'success',
+        style: 'success'
       }));
     } catch (e) {
       dispatch({
@@ -51,7 +51,7 @@ export const resetPassword = (email, password) => {
       dispatch(addMessage({
         text: e.message,
         onRetry() {
-          dispatch(resetPassword(email, password))
+          dispatch(resetPassword(email, password));
         }
       }));
     }
@@ -135,7 +135,7 @@ export const uploadFile = (file) => {
       profile.user_metadata.document_name = file.name;
       await dispatch(updateProfile(profile));
       dispatch({type: types.FILE_UPLOAD_SUCCESS});
-    } catch(error) {
+    } catch (error) {
       dispatch({type: types.FILE_UPLOAD_FAIL});
       dispatch(addMessage({
         text: error,
@@ -151,7 +151,6 @@ export const deleteFileStart = () => ({
   type: types.FILE_DELETE_START
 });
 
-
 export const deleteFileCancel = () => ({
   type: types.FILE_DELETE_CANCEL
 });
@@ -166,7 +165,7 @@ export const deleteFile = () => {
       profile.user_metadata.document_name = null;
       await dispatch(updateProfile(profile));
       dispatch({type: types.FILE_DELETE_SUCCESS});
-    } catch(error) {
+    } catch (error) {
       dispatch({type: types.FILE_DELETE_FAIL});
       dispatch(addMessage({
         text: error,
@@ -186,7 +185,7 @@ export const getFileUrl = (name) => {
     try {
       const data = await fileGetUrl(profile.user_id, name, isAdmin);
       dispatch({type: types.FILE_URL_UPDATE, data});
-    } catch(error) {
+    } catch (error) {
       dispatch(addMessage({
         text: error,
         onRetry() {

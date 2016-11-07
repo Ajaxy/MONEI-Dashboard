@@ -35,9 +35,9 @@ const totalAmount = (state = 0, action) => {
           action.byId[id]
         ).map(transaction => {
           const {result, paymentType} = transaction;
-          if(isFailed(result.code)) return 0;
+          if (isFailed(result.code)) return 0;
           const amount = parseFloat(transaction.amount);
-          if(isIncome(result.code, paymentType)) return amount;
+          if (isIncome(result.code, paymentType)) return amount;
           return -amount;
         }).reduce((a, b) => a + b, 0);
     default:
@@ -66,7 +66,7 @@ const page = (state = {}, action) => {
         page: action.page,
         nextPage: action.nextPage,
         from: action.from,
-        to: action.to,
+        to: action.to
       };
     default:
       return state;
@@ -102,6 +102,6 @@ export default combineReducers({
   isFetching,
   isDetailsModalOpen,
   transactionViewed,
-  totalAmount,
+  totalAmount
 });
 

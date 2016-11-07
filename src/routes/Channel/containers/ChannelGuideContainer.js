@@ -11,14 +11,14 @@ class ChannelGuideContainer extends Component {
   }
 
   render() {
-    return <ChannelGuide {...this.props}/>;
+    return <ChannelGuide {...this.props} />;
   }
 }
 
 const mapStateToProps = (state, props) => ({
   selectedPlatform: selectors.getSelectedPlatform(state),
   isInSandboxMode: profileSelectors.getIsInSandboxMode(state),
-  isMerchant: profileSelectors.getIsMerchant(state),
+  isMerchant: profileSelectors.getIsMerchant(state)
 });
 
 export default connect(mapStateToProps, actions)(ChannelGuideContainer);

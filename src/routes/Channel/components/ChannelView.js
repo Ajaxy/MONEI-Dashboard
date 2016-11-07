@@ -17,16 +17,16 @@ const ChannelView = ({channel, baseUrl, channelId, currentTab, zapierToken, copy
       <Link className="item" activeClassName="active" to={`${baseUrl}/zapier`}>Zapier</Link>
       <Link className="item" activeClassName="active" to={`${baseUrl}/webhooks`}>Webhooks</Link>
     </div>
-    { isFetching ? 
-        <Loader active={isFetching} inline={false}/> 
+    { isFetching ?
+      <Loader active={isFetching} inline={false} />
       : currentTab === 'guides' ?
-        <ChannelGuide channel={channel}/>
+        <ChannelGuide channel={channel} />
       : currentTab === 'settings' ?
-        <ChannelSettings channel={channel} copy={copy}/>
-      : currentTab === 'webhooks' ? 
-        <ChannelWebhooks channelId={channelId}/> 
-      : currentTab === 'zapier' ? 
-        <ChannelZapier channelId={channelId}/>
+        <ChannelSettings channel={channel} copy={copy} />
+      : currentTab === 'webhooks' ?
+        <ChannelWebhooks channelId={channelId} />
+      : currentTab === 'zapier' ?
+        <ChannelZapier channelId={channelId} />
       : null
     }
   </section>

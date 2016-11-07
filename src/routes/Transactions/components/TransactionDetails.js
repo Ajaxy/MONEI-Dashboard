@@ -25,7 +25,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
       size="small"
     >
       <div className="header">Transaction details</div>
-      <div className={cx("content", classNames.modalContent)}>
+      <div className={cx('content', classNames.modalContent)}>
         <h4 className="ui header">Payment Details</h4>
         <Table className="large definition">
           <tr>
@@ -42,7 +42,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
           </tr> : null}
           <tr>
             <td>Date</td>
-            <td>{formatDate(transaction.transactionTimestamp, "MMMM D, YYYY HH:mm:ss")}</td>
+            <td>{formatDate(transaction.transactionTimestamp, 'MMMM D, YYYY HH:mm:ss')}</td>
           </tr>
           <tr>
             <td>Type</td>
@@ -53,9 +53,9 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
             <td>
               {isFailed(result.code) ?
                 <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p> :
-                <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
+                  <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
               }
-              <h5 className={cx("ui header", classNames.noMarginTop)}>
+              <h5 className={cx('ui header', classNames.noMarginTop)}>
                 <div className="sub header">{result.description}</div>
               </h5>
             </td>
@@ -134,7 +134,7 @@ TransactionDetails.propTypes = {
   transaction: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onPrint: PropTypes.func.isRequired,
+  onPrint: PropTypes.func.isRequired
 };
 
 export default TransactionDetails;

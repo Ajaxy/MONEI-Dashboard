@@ -13,12 +13,12 @@ class AdminDataContainer extends Component {
   };
 
   render() {
-    return <AdminDataForm {...this.props} onSubmit={this.submitForm}/>
+    return <AdminDataForm {...this.props} onSubmit={this.submitForm} />;
   }
 }
 
 AdminDataContainer.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -30,7 +30,7 @@ const mapStateToProps = (state) => ({
     status: selectors.getAppMetadata(state).status,
     acquirer: selectors.getUserMetadata(state).acquirer,
     iban: selectors.getUserMetadata(state).iban,
-    comment: selectors.getAppMetadata(state).comment,
+    comment: selectors.getAppMetadata(state).comment
   }
 });
 

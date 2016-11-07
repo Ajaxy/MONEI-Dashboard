@@ -8,16 +8,16 @@ const DATASET_OPTIONS = {
   fill: true,
   lineTension: 0.02,
   pointRadius: 3.5,
-  borderColor: "#00796B",
+  borderColor: '#00796B',
   backgroundColor: 'rgba(153, 201, 195, 0.5)',
-  pointBorderColor: "#FFFFFF",
-  pointBackgroundColor: "#00796B",
+  pointBorderColor: '#FFFFFF',
+  pointBackgroundColor: '#00796B'
 };
 
 const COMMON_OPTIONS = {
   legend: {
     display: false
-  },
+  }
 };
 
 const AMOUNTS_OPTIONS = {
@@ -28,7 +28,7 @@ const AMOUNTS_OPTIONS = {
         return `${items[0].xLabel}: €${items[0].yLabel}`;
       },
       label: (item, data) => {
-        return "";
+        return '';
       }
     }
   }
@@ -42,12 +42,11 @@ const COUNT_OPTIONS = {
         return `${items[0].xLabel}: ${items[0].yLabel}`;
       },
       label: (item, data) => {
-        return "";
+        return '';
       }
     }
   }
 };
-
 
 const DashboardView = ({
   amountPerDay,
@@ -77,42 +76,42 @@ const DashboardView = ({
       </div>
     </div>
     <div className="column">
-      <div className={cx("ui segment", classNames.chart)}>
+      <div className={cx('ui segment', classNames.chart)}>
         <h3 className="ui header">Gross volume
           <div className="sub header">{`${startDate} - ${endDate}`}</div>
         </h3>
         {isFetching ?
-          <Loader active={true} inline={false}/> :
-          <div>
-            <LineChart
-              labels={labels}
-              datasets={[{
-                data: amountPerDay,
-                ...DATASET_OPTIONS
-              }]}
-              options={AMOUNTS_OPTIONS}
+          <Loader active inline={false} /> :
+            <div>
+              <LineChart
+                labels={labels}
+                datasets={[{
+                  data: amountPerDay,
+                  ...DATASET_OPTIONS
+                }]}
+                options={AMOUNTS_OPTIONS}
             />
-          </div>
+            </div>
         }
       </div>
     </div>
     <div className="column">
-      <div className={cx("ui segment", classNames.chart)}>
+      <div className={cx('ui segment', classNames.chart)}>
         <h3 className="ui header">Successful charges
           <div className="sub header">{`${startDate} - ${endDate}`}</div>
         </h3>
         {isFetching ?
-          <Loader active={true} inline={false}/> :
-          <div>
-            <LineChart
-              labels={labels}
-              datasets={[{
-                data: countPerDay,
-                ...DATASET_OPTIONS
-              }]}
-              options={COUNT_OPTIONS}
+          <Loader active inline={false} /> :
+            <div>
+              <LineChart
+                labels={labels}
+                datasets={[{
+                  data: countPerDay,
+                  ...DATASET_OPTIONS
+                }]}
+                options={COUNT_OPTIONS}
             />
-          </div>
+            </div>
         }
       </div>
     </div>

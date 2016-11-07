@@ -9,11 +9,11 @@ import * as profileSelectors from 'modules/profile/selectors';
 class DocumentsForm extends Component {
   componentWillMount() {
     const {documentName, getFileUrl} = this.props;
-    if(documentName) getFileUrl(documentName);
+    if (documentName) getFileUrl(documentName);
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.documentName && nextProps.documentName != this.props.documentName) {
+    if (nextProps.documentName && nextProps.documentName != this.props.documentName) {
       this.props.getFileUrl(nextProps.documentName);
     }
   }
@@ -36,14 +36,14 @@ class DocumentsForm extends Component {
 
   uploadFile = (e) => {
     const {files} = e.target;
-    if(files.length > 0)
-      this.props.uploadFile(files[0]);
+    if (files.length > 0)
+      { this.props.uploadFile(files[0]); }
   };
 
   render() {
     return <div>
-      <DocumentsView {...this.props} onSubmit={this.submitForm} onFileChange={this.uploadFile}/>
-      <ConfirmDeleteView {...this.props} onDelete={this.deleteFile}/>
+      <DocumentsView {...this.props} onSubmit={this.submitForm} onFileChange={this.uploadFile} />
+      <ConfirmDeleteView {...this.props} onDelete={this.deleteFile} />
     </div>;
   }
 }
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => ({
   initialValues: {
     companyName: profileSelectors.getCompanyName(state),
     vatNumber: profileSelectors.getVatNumber(state),
-    idNumber: profileSelectors.getIdNumber(state),
+    idNumber: profileSelectors.getIdNumber(state)
   },
   isCompany: profileSelectors.getIsCompany(state),
   isModifying: profileSelectors.getIsModifying(state),
@@ -60,10 +60,10 @@ const mapStateToProps = (state) => ({
   isDeleting: selectors.getIsDeleting(state),
   isConfirmDeleteOpen: selectors.getIsConfirmDeleteOpen(state),
   documentName: profileSelectors.getDocumentName(state),
-  documentUrl: selectors.getDocumentUrl(state),
+  documentUrl: selectors.getDocumentUrl(state)
 });
 
 export default reduxForm({
   form: 'onboarding-documents-form',
-  fields: ['companyName', 'vatNumber', 'idNumber'],
+  fields: ['companyName', 'vatNumber', 'idNumber']
 }, mapStateToProps, actions)(DocumentsForm);

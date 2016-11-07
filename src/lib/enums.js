@@ -22,13 +22,13 @@ export const USER_ACQUIRERS = Object.freeze({
 });
 
 export const PAYMENT_TYPES = Object.freeze({
-  DB: "Debit Card",
-  RF: "Refund",
-  PA: "Preauthorisation",
-  CP: "Capture",
-  CD: "Credit Card",
-  RV: "Reversal",
-  RB: "Rebill",
-  CB: "Chargeback",
-  RC: "Receipt",
+  DB: 'Debit Card',
+  RF: 'Refund',
+  PA: 'Preauthorisation',
+  CP: 'Capture',
+  CD: 'Credit Card',
+  RV: 'Reversal',
+  RB: 'Rebill',
+  CB: 'Chargeback',
+  RC: 'Receipt'
 });

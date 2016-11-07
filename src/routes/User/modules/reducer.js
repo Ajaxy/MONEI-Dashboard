@@ -41,6 +41,6 @@ const isUpToDate = (state = false, action) => {
 export default combineReducers({
   isFetching,
   isUpdating,
-  isUpToDate,
+  isUpToDate
 });
 

@@ -91,7 +91,7 @@ const AddBankAccount = ({
         {isUsFormat && <Input
           {...accountNumber}
           component={BankAccountInput}
-          label="Account number"/>}
+          label="Account number" />}
       </form>
     </Confirm>
   );

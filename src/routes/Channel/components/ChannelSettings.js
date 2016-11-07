@@ -3,20 +3,20 @@ import {Table} from 'components/Table';
 import classNames from './ChannelSettings.scss';
 
 const ChannelSettings = ({channel, copy}) => (
-  <Table className="large definition" selectable={true}>
-    <tr className={classNames.row} onClick={() => copy(channel.sender, "App ID")}>
+  <Table className="large definition" selectable>
+    <tr className={classNames.row} onClick={() => copy(channel.sender, 'App ID')}>
       <td className="two wide">App ID</td>
       <td>{channel.sender}</td>
     </tr>
-    <tr className={classNames.row} onClick={() => copy(channel.channel, "Channel ID")}>
+    <tr className={classNames.row} onClick={() => copy(channel.channel, 'Channel ID')}>
       <td className="two wide">Channel ID</td>
       <td>{channel.channel}</td>
     </tr>
-    <tr className={classNames.row} onClick={() => copy(channel.login, "User ID")}>
+    <tr className={classNames.row} onClick={() => copy(channel.login, 'User ID')}>
       <td className="two wide">User ID</td>
       <td>{channel.login}</td>
     </tr>
-    <tr className={classNames.row} onClick={() => copy(channel.pwd, "Password")}>
+    <tr className={classNames.row} onClick={() => copy(channel.pwd, 'Password')}>
       <td className="two wide">Password</td>
       <td>{channel.pwd}</td>
     </tr>

@@ -16,8 +16,8 @@ class Dashboard extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.isInSandboxMode != this.props.isInSandboxMode)
-      this.refresh();
+    if (nextProps.isInSandboxMode != this.props.isInSandboxMode)
+      { this.refresh(); }
   }
 
   refresh = () => {
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => ({
   totalCount: selectors.getTotalCount(state),
   startDate: selectors.getStartDate(state),
   endDate: selectors.getEndDate(state),
-  labels: selectors.getLabels(state),
+  labels: selectors.getLabels(state)
 });
 
 export default connect(mapStateToProps, actions)(Dashboard);

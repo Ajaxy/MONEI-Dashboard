@@ -4,7 +4,7 @@ import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
-import {DATE_FORMAT_LONG} from 'lib/constants'
+import {DATE_FORMAT_LONG} from 'lib/constants';
 import moment from 'moment';
 
 class Transactions extends Component {
@@ -19,8 +19,8 @@ class Transactions extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.isInSandboxMode != this.props.isInSandboxMode)
-      this.componentWillMount();
+    if (nextProps.isInSandboxMode != this.props.isInSandboxMode)
+      { this.componentWillMount(); }
   }
 
   loadMore = () => {
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => ({
   isDetailsModalOpen: selectors.getIsDetailsModalOpen(state),
   isInSandboxMode: profileSelectors.getIsInSandboxMode(state),
   transactionViewed: selectors.getViewedTransaction(state),
-  page: selectors.getPage(state),
+  page: selectors.getPage(state)
 });
 
 export default connect(mapStateToProps, actions)(Transactions);

@@ -23,7 +23,7 @@ const Header = ({
 }) => (
   <header className="ui inverted green fixed menu large">
     <div className="ui container">
-      <IndexLink to="/" className={cx("ui medium header item", classNames.logo)}>
+      <IndexLink to="/" className={cx('ui medium header item', classNames.logo)}>
         <Logo width={128} height={28} fill="#FFFFFF" />
       </IndexLink>
       {isAdmin ? <Link to="/users" className="item" activeClassName="active">Users</Link> : null }

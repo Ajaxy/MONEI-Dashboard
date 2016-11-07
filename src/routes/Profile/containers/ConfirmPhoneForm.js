@@ -26,7 +26,7 @@ class ConfirmPhoneForm extends Component {
         <div className="header">Please enter the code we've sent you by SMS</div>
         <div className="content">
           <div className="ui basic segment">
-            <ConfirmPhoneView {...this.props} onSubmit={this.submitForm}/>
+            <ConfirmPhoneView {...this.props} onSubmit={this.submitForm} />
           </div>
         </div>
         <div className="actions">
@@ -38,19 +38,19 @@ class ConfirmPhoneForm extends Component {
 }
 
 ConfirmPhoneForm.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   initialValues: {
-    verificationCode: '',
+    verificationCode: ''
   },
   isOpen: selectors.getIsCheckingModalVisible(state),
   isUpdating: selectors.getIsCheckingPhoneVerification(state),
-  phoneNumber: selectors.getPhoneNumberToCheck(state),
+  phoneNumber: selectors.getPhoneNumberToCheck(state)
 });
 
 export default reduxForm({
   form: 'confirm-phone-number',
-  fields: ['verificationCode'],
+  fields: ['verificationCode']
 }, mapStateToProps, actions)(ConfirmPhoneForm);

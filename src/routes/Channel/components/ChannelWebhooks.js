@@ -3,24 +3,24 @@ import {InfiniteTable} from 'components/Table';
 import WebhookRow, {NUM_COLUMNS} from './WebhookRow';
 
 const ChannelWebhooks = ({
-  channelId, 
-  webhooks, 
-  loadMore, 
-  isFetching, 
-  showCreateModal, 
+  channelId,
+  webhooks,
+  loadMore,
+  isFetching,
+  showCreateModal,
   showEditModal,
   showDeleteModal
 }) => (
   <InfiniteTable
     isFetching={isFetching}
-    isLastPage={true}
+    isLastPage
     selectable={!isFetching && webhooks.length > 0}
     numColumns={NUM_COLUMNS}
     onLoadMore={loadMore}
-    autoLoad={true}
+    autoLoad
     className="large striped single line"
-    header={<WebhookRow isHeader={true}/>}
-    footer={<WebhookRow isFooter={true} createWebhook={showCreateModal}/>}
+    header={<WebhookRow isHeader />}
+    footer={<WebhookRow isFooter createWebhook={showCreateModal} />}
   >
     {
       (webhooks.length > 0 || isFetching) ? webhooks.map((webhook, index) =>

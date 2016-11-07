@@ -9,7 +9,7 @@ const mapStateToProps = (state, props) => ({
   userId: selectors.getUserId(state),
   isAdmin: selectors.getIsAdmin(state),
   isUsingAuth0UserPass: selectors.getIsUsingAuth0UserPass(state),
-  appMetadata: selectors.getAppMetadata(state),
+  appMetadata: selectors.getAppMetadata(state)
 });
 
 export default connect(mapStateToProps, actions)(ProfileView);

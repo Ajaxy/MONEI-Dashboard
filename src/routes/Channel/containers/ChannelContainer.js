@@ -7,13 +7,13 @@ import ChannelView from '../components/ChannelView';
 
 class Channel extends Component {
   componentWillMount() {
-    if(!this.props.channel.name) 
-      this.props.fetchChannel();
+    if (!this.props.channel.name)
+      { this.props.fetchChannel(); }
   }
 
   render() {
     const {channelId} = this.props;
-    return <ChannelView baseUrl={`/channels/${channelId}`} {...this.props}/>;
+    return <ChannelView baseUrl={`/channels/${channelId}`} {...this.props} />;
   }
 }
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state, props) => ({
   channel: selectors.getChannel(state),
   isFetching: channelsSelectors.getIsFetching(state),
   channelId: props.params.channelId,
-  currentTab: props.params.currentTab,
+  currentTab: props.params.currentTab
 });
 
 export default connect(mapStateToProps, actions)(Channel);

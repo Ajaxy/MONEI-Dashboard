@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Button from 'components/Button'
+import Button from 'components/Button';
 import Loader from 'components/Loader';
 import classNames from './BankAccountsView.scss';
 import AddBankAccount from '../containers/AddBankAccountContainer';
@@ -44,7 +44,7 @@ const BankAccountsView = ({
       <ConfirmDelete />
     </section>
   );
-}
+};
 
 BankAccountsView.propTypes = {
   addBankAccountStart: PropTypes.func.isRequired

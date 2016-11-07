@@ -1,6 +1,5 @@
 import axios from 'axios';
 import storage from 'store';
-import {omitInternalProps} from 'lib/utils';
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
 import {buildCreds, signRequest} from 'lib/aws';

@@ -16,14 +16,14 @@ class Onboarding extends Component {
   }
 
   render() {
-    return <OnboardingView {...this.props}/>;
+    return <OnboardingView {...this.props} />;
   }
 }
 
 const mapStateToProps = (state) => ({
   user: profileSelectors.getProfile(state),
   step: selectors.getStep(state),
-  percentage: selectors.getPercentage(state),
+  percentage: selectors.getPercentage(state)
 });
 
 export default connect(mapStateToProps, actions)(Onboarding);

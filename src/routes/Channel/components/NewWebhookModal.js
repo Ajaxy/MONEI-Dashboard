@@ -9,9 +9,9 @@ const NewWebhookModal = ({
   fields: {url, webhookState, events},
   handleSubmit,
   onSubmit,
-  size, 
-  style, 
-  isOpen, 
+  size,
+  style,
+  isOpen,
   onClose,
   isCreating
 }) => {
@@ -22,7 +22,7 @@ const NewWebhookModal = ({
       <div className="header">Create webhook</div>
       <div className="content">
         <form className="ui form large">
-          <Input {...url} type="text" name="url" placeholder="URL" label="URL"/>
+          <Input {...url} type="text" name="url" placeholder="URL" label="URL" />
           <Select
             {...webhookState}
             label="Status"
@@ -35,7 +35,7 @@ const NewWebhookModal = ({
             {...events}
             label="Events"
             name="events"
-            multiple={true}
+            multiple
             search>
             <SelectItem value="transaction.created">new transaction</SelectItem>
             <SelectItem value="transaction.updated">transaction update</SelectItem>
@@ -43,16 +43,16 @@ const NewWebhookModal = ({
         </form>
       </div>
       <div className="actions">
-        <Button 
-          disabled={isCreating} 
+        <Button
+          disabled={isCreating}
           onClick={onClose}>
           Cancel
         </Button>
-        <Button 
-          primary={true} 
-          disabled={isCreating} 
-          loading={isCreating} 
-          className="green" 
+        <Button
+          primary
+          disabled={isCreating}
+          loading={isCreating}
+          className="green"
           onClick={handleSubmit(onSubmit)}>
           Save
         </Button>
@@ -66,7 +66,7 @@ NewWebhookModal.propTypes = {
   size: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
 };
 
 export default NewWebhookModal;

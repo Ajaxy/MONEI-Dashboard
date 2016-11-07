@@ -18,13 +18,13 @@ class StoresForm extends Component {
   submitForm = ({store_url, store_goods, iban, acquirer, acquirer_office}) => {
     const {user, country, updateStep, updateProfile, openConfirmRegisterModal} = this.props;
     return new Promise(async (resolve, reject) => {
-      if(!isUrlValid(store_url)) {
-        return reject({store_url: "Please enter valid url"});
+      if (!isUrlValid(store_url)) {
+        return reject({store_url: 'Please enter valid url'});
       }
-      if(country != 'Spain' && !_iban.isValid(iban)) {
-        return reject({iban: "Please enter valid IBAN number"});
+      if (country != 'Spain' && !_iban.isValid(iban)) {
+        return reject({iban: 'Please enter valid IBAN number'});
       }
-      if(acquirer == 'BBVA' && (acquirer_office.length > 4 || !/[0-9]+/.test(acquirer_office))) {
+      if (acquirer == 'BBVA' && (acquirer_office.length > 4 || !/[0-9]+/.test(acquirer_office))) {
         return reject({acquirer_office: "Please enter your Bank's office number"});
       }
 
@@ -32,11 +32,11 @@ class StoresForm extends Component {
         store_url, store_goods, iban, acquirer, acquirer_office
       });
 
-      if(user_metadata.country != "Spain")
-        user_metadata.acquirer = USER_ACQUIRERS.Technoactivity;
+      if (user_metadata.country != 'Spain')
+        { user_metadata.acquirer = USER_ACQUIRERS.Technoactivity; }
 
       const success = await updateProfile(user.user_id, {user_metadata});
-      if(success) openConfirmRegisterModal();
+      if (success) openConfirmRegisterModal();
       updateStep(user);
     });
   };
@@ -52,8 +52,8 @@ class StoresForm extends Component {
 
   render() {
     return <div>
-      <StoresView {...this.props} onSubmit={this.submitForm}/>
-      <ConfirmRegisterView {...this.props} onRegister={this.registerUser}/>
+      <StoresView {...this.props} onSubmit={this.submitForm} />
+      <ConfirmRegisterView {...this.props} onRegister={this.registerUser} />
     </div>;
   }
 }
@@ -64,14 +64,14 @@ const mapStateToProps = (state) => ({
     store_goods: profileSelectors.getStoreGoods(state),
     iban: profileSelectors.getIban(state),
     acquirer: profileSelectors.getAcquirer(state),
-    acquirer_office: profileSelectors.getAcquirerOffice(state),
+    acquirer_office: profileSelectors.getAcquirerOffice(state)
   },
   country: profileSelectors.getCountry(state),
   isModifying: profileSelectors.getIsModifying(state),
-  isConfirmRegisterOpen: selectors.getIsConfirmRegisterOpen(state),
+  isConfirmRegisterOpen: selectors.getIsConfirmRegisterOpen(state)
 });
 
 export default reduxForm({
   form: 'onboarding-stores-form',
-  fields: ['store_url', 'store_goods', 'iban', 'acquirer', 'acquirer_office'],
+  fields: ['store_url', 'store_goods', 'iban', 'acquirer', 'acquirer_office']
 }, mapStateToProps, actions)(StoresForm);

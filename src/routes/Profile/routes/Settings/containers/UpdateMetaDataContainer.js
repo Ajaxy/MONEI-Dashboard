@@ -30,8 +30,7 @@ const mapStateToProps = (state) => {
       ...profile.user_metadata
     },
     validate: createValidator(rules)
-  }
-
+  };
 };
 
 export default reduxForm({

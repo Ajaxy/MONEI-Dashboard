@@ -13,7 +13,7 @@ export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
     const previous = getPage(getState());
 
     // start from first page so clear all customers in the list
-    if(!page || filter !== previous.filter || forceRefresh) {
+    if (!page || filter !== previous.filter || forceRefresh) {
       dispatch({type: types.CLEAR_CUSTOMERS});
     }
 
@@ -28,7 +28,7 @@ export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
         ids: normalized.result,
         nextPage: result.nextPage,
         length: normalized.result.length,
-        filter,
+        filter
       });
     } catch (error) {
       dispatch({

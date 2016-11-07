@@ -12,11 +12,11 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
     const previous = getPage(getState());
 
     // prevent double requests
-    if(!forceRefresh && page === previous.page && from === previous.from && to === previous.to)
-      return;
+    if (!forceRefresh && page === previous.page && from === previous.from && to === previous.to)
+      { return; }
 
     // if we selected a new Date, let's clear the current list
-    if(!page || from !== previous.from || to !== previous.to || forceRefresh) {
+    if (!page || from !== previous.from || to !== previous.to || forceRefresh) {
       dispatch({type: types.CLEAR_TRANSACTIONS});
     }
 
@@ -32,7 +32,7 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
         nextPage: transactions.nextPage,
         page,
         from,
-        to,
+        to
       });
     } catch (error) {
       dispatch({
@@ -50,9 +50,9 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
 
 export const viewTransactionStart = (transactionId) => ({
   type: types.VIEW_TRANSACTIONS_START,
-  transactionId,
+  transactionId
 });
 
 export const viewTransactionCancel = () => ({
-  type: types.VIEW_TRANSACTIONS_CANCEL,
+  type: types.VIEW_TRANSACTIONS_CANCEL
 });

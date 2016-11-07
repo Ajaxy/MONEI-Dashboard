@@ -53,25 +53,25 @@ const totalCount = (state = 0, action) => {
   }
 };
 
-const startDate = (state = "", action) => {
+const startDate = (state = '', action) => {
   switch (action.type) {
     case types.FETCH_DASHBOARD_SUCCESS:
       return moment(action.from).format('DD MMM YYYY');
     case types.FETCH_DASHBOARD_REQUEST:
     case types.FETCH_DASHBOARD_FAIL:
-      return "";
+      return '';
     default:
       return state;
   }
 };
 
-const endDate = (state = "", action) => {
+const endDate = (state = '', action) => {
   switch (action.type) {
     case types.FETCH_DASHBOARD_SUCCESS:
       return moment(action.to).format('DD MMM YYYY');
     case types.FETCH_DASHBOARD_REQUEST:
     case types.FETCH_DASHBOARD_FAIL:
-      return "";
+      return '';
     default:
       return state;
   }
@@ -109,6 +109,6 @@ export default combineReducers({
   totalCount,
   startDate,
   endDate,
-  labels,
+  labels
 });
 

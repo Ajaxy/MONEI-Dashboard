@@ -9,13 +9,13 @@ const AdminDataForm = ({
   fields: {mid, mlogin, mpwd, role, status, acquirer, iban, comment},
   handleSubmit,
   onSubmit,
-  isUpdating,
+  isUpdating
 }) => (
   <div className="ui basic segment">
     <form className="ui large form" target="#" onSubmit={handleSubmit(onSubmit)}>
-      <Input {...mid} label="Sender" type="text"/>
-      <Input {...mlogin} label="User login" type="text"/>
-      <Input {...mpwd} label="User password" type="text"/>
+      <Input {...mid} label="Sender" type="text" />
+      <Input {...mlogin} label="User login" type="text" />
+      <Input {...mpwd} label="User password" type="text" />
       <Select
         {...role}
         label="Role"
@@ -55,8 +55,8 @@ const AdminDataForm = ({
           </SelectItem>
         ))}
       </Select>
-      <Input {...iban} label="IBAN number" type="text"/>
-      <Input {...comment} label="Comment" type="text"/>
+      <Input {...iban} label="IBAN number" type="text" />
+      <Input {...comment} label="Comment" type="text" />
       <Input
         name="update" type="submit" value="Update" label={false} disabled={isUpdating}
         className="ui button right floated green"
@@ -69,7 +69,7 @@ AdminDataForm.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  isUpdating: PropTypes.bool.isRequired,
+  isUpdating: PropTypes.bool.isRequired
 };
 
 export default AdminDataForm;

@@ -18,10 +18,10 @@ const CustomersView = ({customers, loadMore, filterUsers, page, isFetching, isLa
       selectable={false}
       numColumns={2}
       onLoadMore={loadMore}
-      autoLoad={true}
+      autoLoad
       count={page.lastItem}
       className="large striped single line"
-      header={<CustomerRow isHeader={true}/>}
+      header={<CustomerRow isHeader />}
     >
       {
         (customers.length > 0 || isFetching) ? customers.map((customer, index) =>
@@ -41,7 +41,7 @@ CustomersView.propTypes = {
   filterUsers: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
-  page: PropTypes.object.isRequired,
+  page: PropTypes.object.isRequired
 };
 
 export default CustomersView;

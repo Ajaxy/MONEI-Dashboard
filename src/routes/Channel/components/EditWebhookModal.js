@@ -7,20 +7,20 @@ import Button from 'components/Button';
 
 const EditWebhookModal = ({
   fields: {url, webhookState, events},
-  size, 
-  style, 
-  isOpen, 
-  handleSubmit, 
-  onSubmit, 
-  onClose, 
+  size,
+  style,
+  isOpen,
+  handleSubmit,
+  onSubmit,
+  onClose,
   isUpdating
 }) => {
   return (
-    <Modal size="small" style="standard" isOpen={true}>
+    <Modal size="small" style="standard" isOpen>
       <div className="header">Edit webhook</div>
       <div className="content">
         <form className="ui form large">
-          <Input {...url} type="text" name="url" placeholder="URL" label="URL"/>
+          <Input {...url} type="text" name="url" placeholder="URL" label="URL" />
           <Select
             {...webhookState}
             label="Status"
@@ -33,7 +33,7 @@ const EditWebhookModal = ({
             {...events}
             label="Events"
             name="events"
-            multiple={true}
+            multiple
             search>
             <SelectItem value="transaction.created">new transaction</SelectItem>
             <SelectItem value="transaction.updated">transaction update</SelectItem>
@@ -41,16 +41,16 @@ const EditWebhookModal = ({
         </form>
       </div>
       <div className="actions">
-        <Button 
-          disabled={isUpdating} 
+        <Button
+          disabled={isUpdating}
           onClick={onClose}>
           Cancel
         </Button>
-        <Button 
-          primary={true} 
-          disabled={isUpdating} 
-          loading={isUpdating} 
-          className="green" 
+        <Button
+          primary
+          disabled={isUpdating}
+          loading={isUpdating}
+          className="green"
           onClick={handleSubmit(onSubmit)}>
           Save
         </Button>
@@ -60,7 +60,7 @@ const EditWebhookModal = ({
 };
 
 EditWebhookModal.propTypes = {
-  fields: PropTypes.object.isRequired,
+  fields: PropTypes.object.isRequired
 };
 
 export default EditWebhookModal;

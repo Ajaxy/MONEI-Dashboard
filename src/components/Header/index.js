@@ -27,7 +27,7 @@ class HeaderContainer extends Component {
       viewOnboarding={this.viewOnboarding}
       viewChannels={this.viewChannels}
       {...this.props}
-    />
+    />;
   }
 }
 
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => ({
   isAdmin: selectors.getIsAdmin(state),
   isMerchant: selectors.getIsMerchant(state),
   isInSandboxMode: selectors.getIsInSandboxMode(state),
-  isVerificationRequested: selectors.getIsVerificationRequested(state),
+  isVerificationRequested: selectors.getIsVerificationRequested(state)
 });
 
 export default connect(mapStateToProps, mapActionCreators)(HeaderContainer);

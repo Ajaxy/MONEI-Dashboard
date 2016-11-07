@@ -9,7 +9,7 @@ const SignIn = ({isSandboxInitialized, isAuthenticated}) => {
           <div className="ui text loader">Loading</div>
         </div>
       </div>
-    )
+    );
   }
   return (
     <section className={classNames.container}>
@@ -17,6 +17,5 @@ const SignIn = ({isSandboxInitialized, isAuthenticated}) => {
     </section>
   );
 };
-
 
 export default SignIn;

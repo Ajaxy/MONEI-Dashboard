@@ -15,14 +15,14 @@ const addRow = (list, store, key, title, capitalize = false) => {
 
 const PersonalDataView = ({user}) => {
   const rows = [];
-  addRow(rows, user.user_metadata, "profile_type", "Profile Type", true);
-  addRow(rows, user.app_metadata, "phone_number", "Phone");
-  addRow(rows, user.user_metadata, "country", "Country");
-  addRow(rows, user.user_metadata, "id_number", "ID Number");
-  addRow(rows, user.user_metadata, "vat_number", "VAT Number");
-  addRow(rows, user.user_metadata, "document_name", "Document");
-  addRow(rows, user.user_metadata, "store_url", "Store URL");
-  addRow(rows, user.user_metadata, "store_goods", "Store Goods");
+  addRow(rows, user.user_metadata, 'profile_type', 'Profile Type', true);
+  addRow(rows, user.app_metadata, 'phone_number', 'Phone');
+  addRow(rows, user.user_metadata, 'country', 'Country');
+  addRow(rows, user.user_metadata, 'id_number', 'ID Number');
+  addRow(rows, user.user_metadata, 'vat_number', 'VAT Number');
+  addRow(rows, user.user_metadata, 'document_name', 'Document');
+  addRow(rows, user.user_metadata, 'store_url', 'Store URL');
+  addRow(rows, user.user_metadata, 'store_goods', 'Store Goods');
   if (rows.length > 0) {
     return (
       <Table className="large definition">
@@ -41,7 +41,7 @@ const PersonalDataView = ({user}) => {
 PersonalDataView.propTypes = {
   user: PropTypes.shape({
     user_metadata: PropTypes.object.isRequired,
-    app_metadata: PropTypes.object.isRequired,
+    app_metadata: PropTypes.object.isRequired
   }).isRequired
 };
 

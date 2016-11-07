@@ -37,7 +37,7 @@ export const copy = (text, name) => dispatch => {
   copyTextToClipboard(text);
   dispatch(addMessage({
     text: `${name} copied to clipboard`,
-    style: "success",
+    style: 'success'
   }));
 };
 
@@ -70,7 +70,7 @@ export const fetchWebhooks = (channelId) => async dispatch => {
     dispatch({
       type: types.FETCH_WEBHOOKS_SUCCESS,
       byId: normalized.entities.webhooks,
-      ids: normalized.result,
+      ids: normalized.result
     });
   } catch (error) {
     dispatch({type: types.FETCH_WEBHOOKS_FAIL});
@@ -83,7 +83,6 @@ export const fetchWebhooks = (channelId) => async dispatch => {
   }
 };
 
-
 export const createWebhook = (webhook) => async dispatch => {
   dispatch({type: types.CREATE_WEBHOOKS_REQUEST});
   try {
@@ -92,7 +91,7 @@ export const createWebhook = (webhook) => async dispatch => {
     dispatch({
       type: types.CREATE_WEBHOOKS_SUCCESS,
       byId: normalized.entities.webhooks,
-      ids: normalized.result,
+      ids: normalized.result
     });
   } catch (error) {
     dispatch({type: types.CREATE_WEBHOOKS_FAIL});
@@ -113,7 +112,7 @@ export const updateWebhook = (webhook) => async dispatch => {
     dispatch({
       type: types.UPDATE_WEBHOOKS_SUCCESS,
       byId: normalized.entities.webhooks,
-      ids: normalized.result,
+      ids: normalized.result
     });
   } catch (error) {
     dispatch({type: types.UPDATE_WEBHOOKS_FAIL});

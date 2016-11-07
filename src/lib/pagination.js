@@ -8,7 +8,7 @@ export const getPageInfo = (current, previous, params) => {
     length,
     limit,
     startItem: start,
-    lastItem: lastItem,
+    lastItem,
     currentPage,
     lastPage,
     furthestPage: Math.max(currentPage, previous.furthestPage || 0),
@@ -22,6 +22,6 @@ export const getPageDefaults = () => {
     current: 0,
     lastLoaded: 0,
     furthestPage: 0,
-    furthestItem: 0,
+    furthestItem: 0
   };
 };

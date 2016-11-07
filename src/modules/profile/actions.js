@@ -1,6 +1,5 @@
 import * as api from 'lib/api';
 import * as types from './types';
-import storage from 'store';
 import {getProfile, getIsUser, getAppMetadata} from './selectors';
 import {addMessage} from 'modules/messages/actions';
 
@@ -56,12 +55,12 @@ export const updateProfile = ({user_id, user_metadata}) => {
 };
 
 export const initSandbox = () => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const state = getState();
     const profile = getProfile(state);
     const isUser = getIsUser(state);
     const appMetadata = getAppMetadata(state);
-    if(!isUser || appMetadata.smid) {
+    if (!isUser || appMetadata.smid) {
       return dispatch({
         type: types.INIT_PROFILE_SANDBOX
       });
@@ -74,7 +73,7 @@ export const initSandbox = () => {
       dispatch({
         type: types.INIT_PROFILE_SANDBOX
       });
-    } catch(error) {
+    } catch (error) {
       dispatch(addMessage({text: error}));
     }
   };

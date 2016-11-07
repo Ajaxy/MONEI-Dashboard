@@ -1,6 +1,5 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
-import {isEmpty} from 'lib/utils';
 import base64 from 'base64-url';
 import {USER_ROLES} from 'lib/enums';
 
@@ -26,7 +25,7 @@ export const getUserId = createSelector(
   data => data.user_id
 );
 
-export const getAppMetadata =  createSelector(
+export const getAppMetadata = createSelector(
   getProfile,
   profile => profile.app_metadata || {}
 );
@@ -38,7 +37,7 @@ export const getUserMetadata = createSelector(
 
 export const getName = createSelector(
   getUserMetadata,
-  userMetadata => userMetadata.name || ""
+  userMetadata => userMetadata.name || ''
 );
 
 export const getAcquirer = createSelector(
@@ -58,7 +57,7 @@ export const getCompanyName = createSelector(
 
 export const getCountry = createSelector(
   getUserMetadata,
-  userMetadata => userMetadata.country || ""
+  userMetadata => userMetadata.country || ''
 );
 
 export const getDocumentName = createSelector(
@@ -108,12 +107,12 @@ export const getIsPhoneVerified = createSelector(
 
 export const getIsUser = createSelector(
   getAppMetadata,
-  appMetadata => appMetadata.role == USER_ROLES.User
+  appMetadata => appMetadata.role === USER_ROLES.User
 );
 
 export const getIsAdmin = createSelector(
   getAppMetadata,
-  appMetadata => appMetadata.role == USER_ROLES.Admin
+  appMetadata => appMetadata.role === USER_ROLES.Admin
 );
 
 export const getIsMerchant = createSelector(
@@ -133,7 +132,7 @@ export const getIsVerificationRequested = createSelector(
 
 export const getIsUsingAuth0UserPass = createSelector(
   getUserId,
-  userId => userId.indexOf("auth0") === 0
+  userId => userId.indexOf('auth0') === 0
 );
 
 export const getUserIdBase64 = createSelector(

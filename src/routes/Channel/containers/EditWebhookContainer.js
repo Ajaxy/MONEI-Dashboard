@@ -29,8 +29,8 @@ class EditWebhook extends Component {
   }
 
   render() {
-    return <EditWebhookModal 
-      onSubmit={this.submitForm} 
+    return <EditWebhookModal
+      onSubmit={this.submitForm}
       {...this.props}
     />;
   }
@@ -40,9 +40,9 @@ const mapStateToProps = (state, props) => ({
   initialValues: {
     url: props.webhook.url,
     webhookState: props.webhook.webhookState,
-    events: props.webhook.events,
+    events: props.webhook.events
   },
-  isUpdating: selectors.getIsUpdatingWebhooks(state),
+  isUpdating: selectors.getIsUpdatingWebhooks(state)
 });
 
 export default reduxForm({

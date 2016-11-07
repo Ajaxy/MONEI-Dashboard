@@ -17,7 +17,7 @@ const ChannelRow = ({channel, onClick, isHeader, isFooter}) => {
   } else if (isFooter) {
     return (
       <tr>
-        <th colSpan={NUM_COLUMNS}></th>
+        <th colSpan={NUM_COLUMNS} />
       </tr>
     );
   } else {

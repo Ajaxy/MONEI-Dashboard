@@ -20,7 +20,7 @@ const TransactionsView = ({
   isFetching,
   isLastPage,
   isDetailsModalOpen,
-  transactionViewed,
+  transactionViewed
 }) => {
   const today = moment();
   const lastWeek = moment().subtract(7, 'days');
@@ -67,10 +67,10 @@ const TransactionsView = ({
         selectable={!isFetching && transactions.length > 0}
         numColumns={NUM_COLUMNS}
         onLoadMore={loadMore}
-        autoLoad={true}
+        autoLoad
         className="large single line"
-        header={<TransactionRow isHeader={true} />}
-        footer={<TransactionRow totalAmount={totalAmount} isFooter={true} />}
+        header={<TransactionRow isHeader />}
+        footer={<TransactionRow totalAmount={totalAmount} isFooter />}
       >
         {
           (transactions.length > 0 || isFetching) ? transactions.map((tx, index) =>
@@ -80,8 +80,8 @@ const TransactionsView = ({
               onClick={viewDetails}
             />)
             : <tr>
-            <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
-          </tr>
+              <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
+            </tr>
         }
       </InfiniteTable>
       <TransactionDetails
@@ -91,7 +91,7 @@ const TransactionsView = ({
         onClose={closeDetails} />
     </section>
   );
-}
+};
 
 TransactionsView.propTypes = {
   transactions: PropTypes.array.isRequired,
@@ -104,7 +104,7 @@ TransactionsView.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
   isDetailsModalOpen: PropTypes.bool.isRequired,
-  transactionViewed: PropTypes.object,
+  transactionViewed: PropTypes.object
 };
 
 export default TransactionsView;

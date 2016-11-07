@@ -9,12 +9,12 @@ const getOnboardingStepFromProfile = (profile) => {
   let nextStep = 0;
   const userMetadata = profile.user_metadata || {};
   const appMetadata = profile.app_metadata || {};
-  if(userMetadata.name && userMetadata.profile_type && userMetadata.country && appMetadata.phone_number)
-    nextStep = 1;
-  if(userMetadata.document_name && (
+  if (userMetadata.name && userMetadata.profile_type && userMetadata.country && appMetadata.phone_number)
+    { nextStep = 1; }
+  if (userMetadata.document_name && (
     (userMetadata.profile_type == 'company' && userMetadata.company_name && userMetadata.vat_number) ||
     (userMetadata.profile_type == 'individual' && userMetadata.id_number)))
-    nextStep = 2;
+    { nextStep = 2; }
   return nextStep;
 };
 
@@ -22,32 +22,32 @@ const getOnboardingPercentage = (profile) => {
   let percentage = 0;
   const userMetadata = profile.user_metadata || {};
   const appMetadata = profile.app_metadata || {};
-  if(userMetadata.name && userMetadata.profile_type && userMetadata.country && appMetadata.phone_number)
-    percentage = 40;
-  if(userMetadata.document_name && (
+  if (userMetadata.name && userMetadata.profile_type && userMetadata.country && appMetadata.phone_number)
+    { percentage = 40; }
+  if (userMetadata.document_name && (
     (userMetadata.profile_type == 'company' && userMetadata.company_name && userMetadata.vat_number) ||
     (userMetadata.profile_type == 'individual' && userMetadata.id_number)))
-    percentage = 70;
-  if(userMetadata.store_url && userMetadata.store_goods)
-    percentage = 90;
-  if(userMetadata.country == "Spain" && userMetadata.acquirer)
-    percentage = 100;
-  if(userMetadata.country != "Spain" && userMetadata.iban)
-    percentage = 100;
-  if(userMetadata.acquirer == "BBVA" && userMetadata.acquirer_office)
-    percentage = 100;
+    { percentage = 70; }
+  if (userMetadata.store_url && userMetadata.store_goods)
+    { percentage = 90; }
+  if (userMetadata.country == 'Spain' && userMetadata.acquirer)
+    { percentage = 100; }
+  if (userMetadata.country != 'Spain' && userMetadata.iban)
+    { percentage = 100; }
+  if (userMetadata.acquirer == 'BBVA' && userMetadata.acquirer_office)
+    { percentage = 100; }
   return percentage;
 };
 
 const notifiedSteps = [];
 const step = (state = 0, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case types.ONBOARDING_UPDATE_STEP:
       return getOnboardingStepFromProfile(action.data);
     case types.ONBOARDING_NEXT_STEP:
       const nextState = state + 1;
       if (notifiedSteps.indexOf(nextState) == -1) {
-        trackEvent(`monei_step_${nextState}_completed`)
+        trackEvent(`monei_step_${nextState}_completed`);
         notifiedSteps.push(nextState);
       }
       return nextState;
@@ -59,7 +59,7 @@ const step = (state = 0, action) => {
 };
 
 const percentage = (state = 0, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case types.ONBOARDING_UPDATE_STEP:
     case types.ONBOARDING_NEXT_STEP:
     case types.ONBOARDING_PREV_STEP:
@@ -129,6 +129,6 @@ export default combineReducers({
   isConfirmDeleteOpen,
   isConfirmRegisterOpen,
   isUploading,
-  isDeleting,
+  isDeleting
 });
 

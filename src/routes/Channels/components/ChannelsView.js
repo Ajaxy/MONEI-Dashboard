@@ -7,14 +7,14 @@ const ChannelsView = ({channels, loadMore, viewChannel, isFetching}) => (
     <h1 className="ui header">Channels</h1>
     <InfiniteTable
       isFetching={isFetching}
-      isLastPage={true}
+      isLastPage
       selectable={!isFetching && channels.length > 0}
       numColumns={NUM_COLUMNS}
       onLoadMore={loadMore}
-      autoLoad={true}
+      autoLoad
       className="large striped single line"
-      header={<ChannelRow isHeader={true}/>}
-      footer={<ChannelRow isFooter={true}/>}
+      header={<ChannelRow isHeader />}
+      footer={<ChannelRow isFooter />}
     >
       {
         (channels.length > 0 || isFetching) ? channels.map((channel, index) =>

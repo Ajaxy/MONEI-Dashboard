@@ -20,7 +20,7 @@ export const fetchTransactionStats = () => {
         totalCount,
         labels,
         from,
-        to,
+        to
       });
     } catch (error) {
       dispatch({
@@ -29,9 +29,9 @@ export const fetchTransactionStats = () => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchTransactionStats())
+          dispatch(fetchTransactionStats());
         }
       }));
     }
-  }
+  };
 };

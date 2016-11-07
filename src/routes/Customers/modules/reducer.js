@@ -46,7 +46,7 @@ const page = (state = {}, action) => {
       return {
         lastItem: state.lastItem + length,
         nextPage,
-        filter,
+        filter
       };
     default:
       return state;
@@ -57,6 +57,6 @@ export default combineReducers({
   ids,
   byId,
   page,
-  isFetching,
+  isFetching
 });
 

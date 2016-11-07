@@ -5,22 +5,22 @@ import Loader from 'components/Loader';
 class InfiniteTable extends Component {
   componentDidMount() {
     const {autoLoad} = this.props;
-    if(autoLoad) this.initBottomListener();
+    if (autoLoad) this.initBottomListener();
   }
 
   componentDidUpdate() {
-    this.element.visibility("refresh");
+    this.element.visibility('refresh');
   }
 
   componentWillUnmount() {
-    this.element.visibility("destroy");
+    this.element.visibility('destroy');
   }
 
   initBottomListener() {
     setTimeout(() => {
       this.element.visibility({
         once: false,
-        //!TODO: Figure out how to recheck visibility
+        //! TODO: Figure out how to recheck visibility
         // on update without setting continuous to true.
         continuous: true,
         observeChanges: true,
@@ -28,9 +28,9 @@ class InfiniteTable extends Component {
         initialCheck: false,
         onBottomVisible: () => {
           const {onLoadMore, isLastPage, isFetching} = this.props;
-          if(!isLastPage && !isFetching) onLoadMore();
+          if (!isLastPage && !isFetching) onLoadMore();
         }
-      })
+      });
     }, 1000);
   }
 
@@ -44,30 +44,30 @@ class InfiniteTable extends Component {
             ...children,
             ((isFetching) ? (
               <tr key={typeof children == 'array' ?
-                children.length: 999999}>
+                children.length : 999999}>
                 <td colSpan={numColumns}>
-                  <Loader active={true} inline={true}/>
+                  <Loader active inline />
                 </td>
               </tr>
-            ): null)
+            ) : null)
           ]}
           footer={
             this.props.footer ? this.props.footer :
-            <tr>
-              <th colSpan={numColumns-1} ><h3>
-                {count ? `Showing ${count} ` : ''}
-                {total ? `of ${total}` : count ? `items` : ''}
-              </h3></th>
-              <th className="right aligned">
-                {(!isLastPage && !autoLoad) ?
-                  <button
-                    className="ui basic button center"
-                    disabled={isFetching}
-                    onClick={onLoadMore}
+              <tr>
+                <th colSpan={numColumns - 1} ><h3>
+                  {count ? `Showing ${count} ` : ''}
+                  {total ? `of ${total}` : count ? `items` : ''}
+                </h3></th>
+                <th className="right aligned">
+                  {(!isLastPage && !autoLoad) ?
+                    <button
+                      className="ui basic button center"
+                      disabled={isFetching}
+                      onClick={onLoadMore}
                   >Show more</button>
                   : null}
-              </th>
-            </tr>
+                </th>
+              </tr>
           }
         />
       </div>
@@ -81,7 +81,7 @@ InfiniteTable.propTypes = Object.assign({}, Table.propTypes, {
   autoLoad: PropTypes.bool,
   onLoadMore: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isLastPage: PropTypes.bool.isRequired,
+  isLastPage: PropTypes.bool.isRequired
 });
 
 export default InfiniteTable;

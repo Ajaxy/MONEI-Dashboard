@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
     currency: 'required'
   };
   if (values.country === 'Spain') {
-    rules.iban = 'required|iban'
+    rules.iban = 'required|iban';
   }
   if (values.country === 'United States') {
     rules.routingNumber = 'required|routingNumber';
@@ -40,7 +40,7 @@ const mapStateToProps = (state) => {
       country
     },
     validate: createValidator(rules)
-  }
+  };
 };
 
 export default reduxForm({
