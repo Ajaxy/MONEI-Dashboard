@@ -1,6 +1,9 @@
 import React, {PropTypes} from 'react';
 import Input from 'components/Input';
 import Confirm from 'components/Modal/Confirm';
+import {CURRENCIES} from 'lib/constants';
+import Select, {SelectItem} from 'components/Select';
+import cx from 'classnames';
 
 const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur}) => (
   <div className="ui icon input">
@@ -12,12 +15,21 @@ const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur}) => (
 const AddBankAccount = ({
   isOpen,
   isAdding,
-  fields: {number},
+  fields: {
+    iban,
+    routingNumber,
+    accountNumber,
+    country,
+    currency
+  },
+  values,
+  isUsFormat,
   handleSubmit,
   invalid,
   resetForm,
   addBankAccount,
-  addBankAccountCancel
+  addBankAccountCancel,
+  countries
 }) => {
   const onSubmit = (formProps) => {
     addBankAccount(formProps);
@@ -26,9 +38,9 @@ const AddBankAccount = ({
     addBankAccountCancel();
     resetForm();
   };
-  const cleanNumber = (e) => {
+  const cleanIban = (e) => {
     const value = e.target.value.replace(/\s/g, '');
-    number.onChange(value);
+    iban.onChange(value);
   };
   return (
     <Confirm
@@ -41,12 +53,45 @@ const AddBankAccount = ({
       confirmText="Add"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...number}
+        <Select
+          {...country}
+          label="Country"
+          search>
+          {countries.map(country => (
+            <SelectItem
+              key={country.code}
+              value={country.name}>
+              <i className={cx(country.code.toLowerCase(), 'flag')} />
+              {country.name}
+            </SelectItem>
+          ))}
+        </Select>
+        <Select
+          {...currency}
+          label="Currency">
+          {CURRENCIES.map((currency, i) => (
+            <SelectItem
+              key={i}
+              value={currency}>
+              {currency}
+            </SelectItem>
+          ))}
+        </Select>
+        {!isUsFormat && <Input
+          {...iban}
           component={BankAccountInput}
-          onChange={cleanNumber}
-          label="Your bank account number"
-          hint="where you want your money to be settled" />
+          onChange={cleanIban}
+          label="Bank account number (IBAN)"
+          hint="where you want your money to be settled" />}
+        {isUsFormat && <Input
+          {...routingNumber}
+          component={BankAccountInput}
+          label="Routing number"
+          hint="is normally found on a check provided by your bank" />}
+        {isUsFormat && <Input
+          {...accountNumber}
+          component={BankAccountInput}
+          label="Account number"/>}
       </form>
     </Confirm>
   );
@@ -54,7 +99,7 @@ const AddBankAccount = ({
 
 AddBankAccount.propTypes = {
   fields: PropTypes.shape({
-    number: PropTypes.object.isRequired
+    iban: PropTypes.object.isRequired
   }),
   addBankAccount: PropTypes.func.isRequired,
   addBankAccountCancel: PropTypes.func.isRequired,

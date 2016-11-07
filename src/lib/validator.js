@@ -7,17 +7,8 @@ messages.required = 'This field is required';
 Validator.setMessages('en', messages);
 
 Validator.register('phoneNumber', value => value.match(/^\+\d{10,14}$/), 'Incorrect format');
-Validator.register('bankAccount',
-  value => {
-    if (/^[a-z]/i.test(value.toLowerCase())) {
-      return IBAN.isValid(value)
-    }
-    if (/^[0-9]{13,26}$/.test(value)) {
-      return aba.validate(value.substring(0, 9))
-    }
-    return false;
-  },
-  'Incorrect format'
-);
+Validator.register('iban', value => IBAN.isValid(value), 'Incorrect IBAN format');
+Validator.register('routingNumber', value => aba.validate(value), 'Incorrect routing number');
+Validator.register('accountNumber', value => /^[0-9]{4,17}$/.test(value), 'Incorrect routing number');
 
 export default Validator;

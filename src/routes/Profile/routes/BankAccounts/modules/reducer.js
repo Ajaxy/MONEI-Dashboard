@@ -1,7 +1,61 @@
 import * as types from './types';
 import {combineReducers} from 'redux';
+import {mergeArrays} from 'lib/utils';
 
 export const stateKey = 'profileBankAccounts';
+
+const ids = (state = [], action) => {
+  switch (action.type) {
+    case types.FETCH_BANK_ACCOUNTS_SUCCESS:
+      return [...action.ids];
+    case types.ADD_BANK_ACCOUNT_SUCCESS:
+      return mergeArrays(state, [action.bankAccountId]);
+    default:
+      return state;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+      let index = state.indexOf(action.bankAccountId);
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
+  }
+};
+
+const byId = (state = {}, action) => {
+  switch (action.type) {
+    case types.FETCH_BANK_ACCOUNTS_SUCCESS:
+      return {...action.byId};
+    case types.ADD_BANK_ACCOUNT_SUCCESS:
+      return {...state, ...action.byId};
+    default:
+      return state;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+      const newState = {...state};
+      delete newState[action.bankAccountId];
+      return newState;
+  }
+};
+
+const isFetching = (state = false, action) => {
+  switch (action.type) {
+    case types.FETCH_BANK_ACCOUNTS_REQUEST:
+      return true;
+    case types.FETCH_BANK_ACCOUNTS_SUCCESS:
+    case types.FETCH_BANK_ACCOUNTS_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isUpToDate = (state = false, action) => {
+  switch (action.type) {
+    case types.FETCH_BANK_ACCOUNTS_SUCCESS:
+      return true;
+    default:
+      return state;
+  }
+};
 
 const isAdding = (state = false, action) => {
   switch (action.type) {
@@ -20,6 +74,7 @@ const isAddModalOpen = (state = false, action) => {
     case types.ADD_BANK_ACCOUNT_START:
       return true;
     case types.ADD_BANK_ACCOUNT_CANCEL:
+    case types.ADD_BANK_ACCOUNT_SUCCESS:
     case types.ADD_BANK_ACCOUNT_FAIL:
       return false;
     default:
@@ -27,7 +82,51 @@ const isAddModalOpen = (state = false, action) => {
   }
 };
 
+const isDeleting = (state = false, action) => {
+  switch (action.type) {
+    case types.DELETE_BANK_ACCOUNT_REQUEST:
+      return true;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+    case types.DELETE_BANK_ACCOUNT_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isDeleteModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.DELETE_BANK_ACCOUNT_START:
+      return true;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+    case types.DELETE_BANK_ACCOUNT_FAIL:
+    case types.DELETE_BANK_ACCOUNT_CANCEL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const bankAccountToDelete = (state = null, action) => {
+  switch (action.type) {
+    case types.DELETE_BANK_ACCOUNT_START:
+      return action.bankAccountId;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+    case types.DELETE_BANK_ACCOUNT_CANCEL:
+      return null;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
+  ids,
+  byId,
+  isFetching,
+  isUpToDate,
   isAdding,
-  isAddModalOpen
+  isDeleting,
+  isAddModalOpen,
+  isDeleteModalOpen,
+  bankAccountToDelete
 });

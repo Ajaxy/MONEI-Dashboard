@@ -146,6 +146,23 @@ export const updateWebhook = (webhook) =>
 export const deleteWebhook = (webhookId) =>
   apiClient.delete(`webhooks/${webhookId}`);
 
+// Account
+
+export const fetchAccount = () =>
+  apiClient.get('account');
+
+export const updateAccount = (data = {}) =>
+  apiClient.post('account', data);
+
+export const fetchBankAccounts = () =>
+  apiClient.get('account/bank-accounts');
+
+export const createBankAccount = (data = {}) =>
+  apiClient.post('account/bank-accounts', data);
+
+export const deleteBankAccount = (accountId) =>
+  apiClient.delete(`account/bank-accounts/${accountId}`);
+
 // Phone verification
 
 export const phoneVerificationStart = ({phoneNumber}) =>
