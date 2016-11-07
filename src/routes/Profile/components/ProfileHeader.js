@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import IndexLink from 'react-router/lib/IndexLink';
 import Link from 'react-router/lib/Link';
 
-const ProfileHeader = () => (
+const ProfileHeader = ({isUser}) => (
   <div className="ui secondary pointing large menu no-padding">
     <IndexLink to="/profile" className="item" activeClassName="active">
       Overview
@@ -10,9 +10,9 @@ const ProfileHeader = () => (
     <Link to="/profile/settings" className="item" activeClassName="active">
       Settings
     </Link>
-    <Link to="/profile/bank-accounts" className="item" activeClassName="active">
+    {isUser && <Link to="/profile/bank-accounts" className="item" activeClassName="active">
       Bank accounts
-    </Link>
+    </Link>}
   </div>
 );
 

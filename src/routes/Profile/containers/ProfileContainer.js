@@ -8,6 +8,7 @@ const mapStateToProps = (state, props) => ({
   profile: selectors.getProfile(state),
   userId: selectors.getUserId(state),
   isAdmin: selectors.getIsAdmin(state),
+  isUser: selectors.getIsUser(state),
   isUsingAuth0UserPass: selectors.getIsUsingAuth0UserPass(state),
   appMetadata: selectors.getAppMetadata(state)
 });

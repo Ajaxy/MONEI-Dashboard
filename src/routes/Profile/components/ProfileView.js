@@ -3,16 +3,17 @@ import ProfileHeader from './ProfileHeader';
 import cx from 'classnames';
 import {NO_LOCALIZE} from 'lib/constants';
 
-export const ProfileView = ({profile, children}) => (
+export const ProfileView = ({profile, children, isUser}) => (
   <section className="ui basic segment">
     <h1 className={cx('ui header', NO_LOCALIZE)}>{profile.name}</h1>
-    <ProfileHeader />
+    <ProfileHeader isUser={isUser} />
     {children}
   </section>
 );
 
 ProfileView.propTypes = {
   children: PropTypes.element.isRequired,
+  isUser: PropTypes.bool.isRequired,
   profile: PropTypes.shape({
     name: PropTypes.string
   }).isRequired

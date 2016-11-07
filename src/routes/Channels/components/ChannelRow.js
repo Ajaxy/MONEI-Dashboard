@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import cx from 'classnames';
 import classNames from './ChannelRow.scss';
 
 export const NUM_COLUMNS = 4;
