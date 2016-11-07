@@ -4,9 +4,8 @@ import * as types from './types';
 import {replace} from 'react-router-redux';
 import storage from 'store';
 import {addMessage} from 'modules/messages/actions';
-import {fetchProfile, updateProfileLocally, initSandbox} from 'modules/profile/actions';
+import {updateProfileLocally, initSandbox} from 'modules/profile/actions';
 import logo from 'static/logo.svg';
-import * as notifications from 'modules/notifications/actions';
 
 const lock = new Auth0Lock(
   APP_CONFIG.auth0.clientID,
@@ -77,7 +76,7 @@ export const showLock = () => {
     icon: logo
   };
   return dispatch => {
-    lock.hide(() => lock.show(lockOptions, async (error, profile, token) => {
+    lock.hide(() => lock.show(lockOptions, async(error, profile, token) => {
       if (error) return;
       storage.set('profile', profile);
       storage.set('authToken', token);
@@ -122,7 +121,7 @@ export const resetToken = (token) => {
         return resolve(data.id_token);
       });
     });
-  }
+  };
 };
 
 export const getTokenInfo = (idToken) => {
@@ -160,7 +159,7 @@ export const changePassword = (email, password) => {
       email,
       password
     }, (error, data) => {
-      if(error) return reject(error);
+      if (error) return reject(error);
       resolve(data);
     });
   });

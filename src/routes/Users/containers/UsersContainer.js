@@ -47,7 +47,7 @@ const mapStateToProps = (state) => ({
   page: selectors.getPage(state),
   users: selectors.getUsers(state),
   isFetching: selectors.getIsFetching(state),
-  isLastPage: selectors.getIsLastPage(state),
+  isLastPage: selectors.getIsLastPage(state)
 });
 
 export default connect(mapStateToProps, actions)(Users);

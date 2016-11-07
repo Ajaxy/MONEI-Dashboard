@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-//!TODO: Move these utility functions to a model class or something.
+//! TODO: Move these utility functions to a model class or something.
 // Maybe we can add helper methods to normalizr schema.
 
 export const isFailed = (code) => {
@@ -36,10 +36,10 @@ export const getCurrencySymbol = (currency) => {
   return symbol;
 };
 
-export const getAmount = (paymentType, currency, amount, showNegative=true) => {
-  let formatted = getCurrencySymbol(currency) + ( isNaN(amount) ? 'N/A' : amount);
-  if(showNegative && isRefund(paymentType))
-    formatted = '-' + formatted;
+export const getAmount = (paymentType, currency, amount, showNegative = true) => {
+  let formatted = getCurrencySymbol(currency) + (isNaN(amount) ? 'N/A' : amount);
+  if (showNegative && isRefund(paymentType))
+    { formatted = '-' + formatted; }
   return formatted;
 };
 

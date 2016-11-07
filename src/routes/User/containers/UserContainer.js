@@ -9,7 +9,7 @@ class User extends Component {
     fetchUser: PropTypes.func.isRequired,
     verifyUser: PropTypes.func.isRequired,
     loginAsUser: PropTypes.func.isRequired,
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired
   };
 
   componentDidMount() {
@@ -28,7 +28,7 @@ const mapStateToProps = (state, props) => ({
   isFetching: selectors.getIsFetching(state),
   isUpdating: selectors.getIsUpdating(state),
   isUpToDate: selectors.getIsUpToDate(state),
-  userId: props.params.userId,
+  userId: props.params.userId
 });
 
 export default connect(mapStateToProps, actions)(User);

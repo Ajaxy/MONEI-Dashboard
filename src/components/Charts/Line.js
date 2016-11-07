@@ -7,9 +7,9 @@ class LineChart extends Component {
       type: 'line',
       data: {
         labels,
-        datasets,
+        datasets
       },
-      options,
+      options
     });
   }
 
@@ -32,7 +32,7 @@ class LineChart extends Component {
 LineChart.propTypes = {
   labels: PropTypes.array,
   datasets: PropTypes.array,
-  options: PropTypes.object,
+  options: PropTypes.object
 };
 
 export default LineChart;

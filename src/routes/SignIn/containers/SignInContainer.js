@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as actions from 'modules/auth/actions';
 import * as selectors from 'modules/auth/selectors';
-import {getIsSandboxInitialized} from 'modules/profile/selectors'
+import {getIsSandboxInitialized} from 'modules/profile/selectors';
 import SignInView from '../components/SignInView';
 
 class SignIn extends Component {

@@ -8,17 +8,17 @@ class ChannelZapierContainer extends Component {
   componentWillMount() {
     const {channelId, zapierToken, createZapierToken} = this.props;
     if (!zapierToken)
-      createZapierToken(channelId);
+      { createZapierToken(channelId); }
   }
 
   render() {
-    return <ChannelZapier {...this.props}/>;
+    return <ChannelZapier {...this.props} />;
   }
 }
 
 const mapStateToProps = (state, props) => ({
   zapierToken: selectors.getZapierToken(state),
-  isFetching: selectors.getIsFetchingZapierToken(state),
+  isFetching: selectors.getIsFetchingZapierToken(state)
 });
 
 export default connect(mapStateToProps, actions)(ChannelZapierContainer);

@@ -10,25 +10,25 @@ import {getPageInfo, getPageDefaults} from 'lib/pagination';
 export const fetchUsers = (page = 1, filter = null, forceRefresh = false) => {
   return async(dispatch, getState) => {
     const previous = getPage(getState());
-    if(page > previous.lastPage) return;
+    if (page > previous.lastPage) return;
 
     dispatch({type: types.FETCH_USERS_REQUEST});
     if (!forceRefresh && (filter === previous.filter && page < previous.furthestPage)) {
       // either the page is already up to date or it's beyond the maximum page
       // so we just increment the current page
-      const start = Object.assign({}, previous, {start: (page-1)*PAGE_LIMIT});
+      const start = Object.assign({}, previous, {start: (page - 1) * PAGE_LIMIT});
       const currentPage = getPageInfo(start, previous, {filter});
       dispatch({
         type: types.FETCH_USERS_SUCCESS,
-        page: currentPage,
+        page: currentPage
       });
       return;
     }
 
-    if(filter !== previous.filter) {
+    if (filter !== previous.filter) {
       dispatch({
         type: types.CLEAR_USERS,
-        page: getPageDefaults(),
+        page: getPageDefaults()
       });
     }
 
@@ -40,7 +40,7 @@ export const fetchUsers = (page = 1, filter = null, forceRefresh = false) => {
         type: types.FETCH_USERS_SUCCESS,
         byId: normalized.entities.users,
         ids: normalized.result,
-        page: currentPage,
+        page: currentPage
       });
     } catch (error) {
       dispatch({

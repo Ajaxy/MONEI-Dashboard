@@ -14,14 +14,14 @@ export const resetPassword = (email, password) => {
       dispatch({type: types.CHANGE_PASSWORD_SUCCESS});
       dispatch(addMessage({
         text: 'Please follow the instructions we sent to your email.',
-        style: 'success',
+        style: 'success'
       }));
-    } catch(e) {
+    } catch (e) {
       dispatch({type: types.CHANGE_PASSWORD_FAIL});
       dispatch(addMessage({
         text: e.message,
         onRetry() {
-          dispatch(resetPassword(email, password))
+          dispatch(resetPassword(email, password));
         }
       }));
     }
@@ -35,12 +35,12 @@ export const verifyPhoneNumber = (phoneNumber) => {
       const result = await api.verifyPhoneStart(phoneNumber);
       dispatch({type: types.PHONE_VERIFICATION_SUCCESS});
       dispatch(openCheckingModal(phoneNumber));
-    } catch(error) {
+    } catch (error) {
       dispatch({type: types.PHONE_VERIFICATION_FAIL});
       dispatch(addMessage({
         type: error,
         onRetry() {
-          dispatch(verifyPhoneStart(phoneNumber))
+          dispatch(verifyPhoneStart(phoneNumber));
         }
       }));
     }
@@ -60,12 +60,12 @@ export const checkPhoneNumber = (phoneNumber, verificationCode) => {
       trackEvent('monei_phone_verified', {
         phone: phoneNumber
       });
-    } catch(error) {
+    } catch (error) {
       dispatch({type: types.PHONE_VERIFICATION_CHECK_FAIL});
       dispatch(addMessage({
         type: error,
         onRetry() {
-          dispatch(checkPhoneNumber(phoneNumber))
+          dispatch(checkPhoneNumber(phoneNumber));
         }
       }));
     }

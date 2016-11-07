@@ -56,7 +56,7 @@ const phoneNumberToCheck = (state = '', action) => {
     case types.PHONE_VERIFICATION_CHECK_START:
       return action.data;
     case types.PHONE_VERIFICATION_CHECK_STOP:
-      return "";
+      return '';
     default:
       return state;
   }
@@ -67,6 +67,6 @@ export default combineReducers({
   isRequestingPhoneVerification,
   isCheckingPhoneVerification,
   isCheckingModalVisible,
-  phoneNumberToCheck,
+  phoneNumberToCheck
 });
 

@@ -7,9 +7,9 @@ import cx from 'classnames';
 import classNames from './ConfirmDeleteWebhook.scss';
 
 const ConfirmDeleteWebhook = ({
-  size, 
-  style, 
-  isOpen, 
+  size,
+  style,
+  isOpen,
   onDelete,
   onClose,
   isDeleting
@@ -20,21 +20,21 @@ const ConfirmDeleteWebhook = ({
     >
       <div className="header">Deleting webhook</div>
       <div className="content big">
-        <div className={cx("ui basic segment center aligned", classNames.text)}>
+        <div className={cx('ui basic segment center aligned', classNames.text)}>
           Are you sure, you want to delete the webhook?
         </div>
       </div>
       <div className="actions">
-        <Button 
-          disabled={isDeleting} 
+        <Button
+          disabled={isDeleting}
           onClick={onClose}>
           Cancel
         </Button>
-        <Button 
-          primary={true} 
-          disabled={isDeleting} 
-          loading={isDeleting} 
-          negative={true}
+        <Button
+          primary
+          disabled={isDeleting}
+          loading={isDeleting}
+          negative
           onClick={onDelete}>
           Delete
         </Button>
@@ -47,7 +47,7 @@ ConfirmDeleteWebhook.propTypes = {
   size: PropTypes.string.isRequired,
   style: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
 };
 
 export default ConfirmDeleteWebhook;

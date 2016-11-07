@@ -40,6 +40,6 @@ const isFetching = (state = false, action) => {
 export default combineReducers({
   ids,
   byId,
-  isFetching,
+  isFetching
 });
 

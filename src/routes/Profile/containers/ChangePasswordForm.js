@@ -17,33 +17,33 @@ class ChangePasswordForm extends Component {
       }
       if (!confirmPassword) {
         return reject({confirmPassword: 'Required'});
-      } else if(newPassword != confirmPassword) {
+      } else if (newPassword != confirmPassword) {
         return reject({confirmPassword: 'Passwords do not match'});
       }
-      await resetPassword(user.email, newPassword)
+      await resetPassword(user.email, newPassword);
       resetForm();
       resolve();
     });
   };
 
   render() {
-    return <ChangePasswordView {...this.props} onSubmit={this.submitForm}/>;
+    return <ChangePasswordView {...this.props} onSubmit={this.submitForm} />;
   }
 }
 
 ChangePasswordForm.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   initialValues: {
     newPassword: '',
-    confirmPassword: '',
+    confirmPassword: ''
   },
-  isUpdating: selectors.getIsChangingPassword(state),
+  isUpdating: selectors.getIsChangingPassword(state)
 });
 
 export default reduxForm({
   form: 'change-password',
-  fields: ['newPassword', 'confirmPassword'],
+  fields: ['newPassword', 'confirmPassword']
 }, mapStateToProps, actions)(ChangePasswordForm);

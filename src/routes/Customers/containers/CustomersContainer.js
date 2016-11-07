@@ -15,8 +15,8 @@ class Customers extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.isInSandboxMode != this.props.isInSandboxMode)
-      this.props.fetchCustomers();
+    if (nextProps.isInSandboxMode != this.props.isInSandboxMode)
+      { this.props.fetchCustomers(); }
   }
 
   filterUsers = (filter) => {

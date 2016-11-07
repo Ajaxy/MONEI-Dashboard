@@ -7,7 +7,7 @@ class DatePicker extends Component {
     const {onChange} = this.props;
     this.element.calendar({
       type: 'date',
-      onChange,
+      onChange
     });
   }
 
@@ -16,11 +16,11 @@ class DatePicker extends Component {
     return (
       <div
         ref={el => { this.element = $(el); }}
-        className={cx("ui calendar", className)}
+        className={cx('ui calendar', className)}
       >
         <div className="ui input left icon">
-          <i className="calendar icon"/>
-          <input type="text" {...{placeholder, defaultValue}}/>
+          <i className="calendar icon" />
+          <input type="text" {...{placeholder, defaultValue}} />
         </div>
       </div>
     );
@@ -31,7 +31,7 @@ DatePicker.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 export default DatePicker;

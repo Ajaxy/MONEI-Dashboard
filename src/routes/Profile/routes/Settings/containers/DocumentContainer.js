@@ -8,11 +8,11 @@ import DocumentView from '../components/DocumentView';
 class Document extends Component {
   componentWillMount() {
     const {documentName, getFileUrl} = this.props;
-    if(documentName) getFileUrl(documentName);
+    if (documentName) getFileUrl(documentName);
   }
 
   componentWillUpdate({documentName}) {
-    if(documentName && documentName != this.props.documentName) {
+    if (documentName && documentName != this.props.documentName) {
       this.props.getFileUrl(documentName);
     }
   }
@@ -20,7 +20,7 @@ class Document extends Component {
   render() {
     return (
       <DocumentView {...this.props} />
-    )
+    );
   }
 }
 

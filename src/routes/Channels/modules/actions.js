@@ -18,7 +18,7 @@ export const fetchChannels = () => {
       dispatch({
         type: types.FETCH_CHANNELS_SUCCESS,
         byId: normalized.entities.channels,
-        ids: normalized.result,
+        ids: normalized.result
       });
     } catch (error) {
       dispatch({

@@ -14,8 +14,8 @@ export default function(ComposedComponent) {
     };
 
     render() {
-      if(!this.props.isAdmin) {
-        return <NotFound/>;
+      if (!this.props.isAdmin) {
+        return <NotFound />;
       }
       return <ComposedComponent {...this.props} />;
     }

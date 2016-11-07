@@ -17,18 +17,18 @@ const Input = ({
   const Component = rest.mask ? InputElement : component || 'input';
   const labelText = label || humanize(rest.name);
   const errorText = Array.isArray(error) ? error[0] : error;
-  const componentProps = Component === 'input' ?
-    omitProps(rest,
-      'initialValue',
-      'autofill',
-      'onUpdate',
-      'valid',
-      'dirty',
-      'pristine',
-      'active',
-      'visited',
-      'autofilled'
-    ) : rest;
+  const componentProps = Component === 'input'
+    ? omitProps(rest,
+    'initialValue',
+    'autofill',
+    'onUpdate',
+    'valid',
+    'dirty',
+    'pristine',
+    'active',
+    'visited',
+    'autofilled'
+  ) : rest;
   return (
     <div className={cx('field', fieldClass, {error: touched && invalid})}>
       {label !== false && <label htmlFor={rest.name}>{labelText}</label>}

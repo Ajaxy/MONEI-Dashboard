@@ -9,9 +9,9 @@ class ChangePhoneForm extends Component {
   submitForm = ({phoneNumber}) => {
     const {verifyPhoneNumber} = this.props;
     return new Promise(async (resolve, reject) => {
-      if(!phoneNumber) {
+      if (!phoneNumber) {
         return reject({phoneNumber: 'Required'});
-      } else if(!/^\+\d{10,14}$/.test(phoneNumber)) {
+      } else if (!/^\+\d{10,14}$/.test(phoneNumber)) {
         return reject({phoneNumber: 'Phone number should have at least 10 digits and starts with +'});
       }
       await verifyPhoneNumber(phoneNumber);
@@ -26,12 +26,12 @@ class ChangePhoneForm extends Component {
 
 const mapStateToProps = (state) => ({
   initialValues: {
-    phoneNumber: profileSelectors.getPhoneNumber(state),
+    phoneNumber: profileSelectors.getPhoneNumber(state)
   },
-  isUpdating: selectors.getIsRequestingPhoneVerification(state),
+  isUpdating: selectors.getIsRequestingPhoneVerification(state)
 });
 
 export default reduxForm({
   form: 'verify-phone-number',
-  fields: ['phoneNumber'],
+  fields: ['phoneNumber']
 }, mapStateToProps, actions)(ChangePhoneForm);

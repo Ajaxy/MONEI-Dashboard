@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {PAYMENT_TYPES} from 'lib/enums';
-import {formatDate} from 'lib/utils'
+import {formatDate} from 'lib/utils';
 import {
   getAmount,
   isFailed,
@@ -41,8 +41,8 @@ const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false
         <td>
           {
             isFailed(result.code) ?
-            <i className="remove icon red large"/> :
-            <i className="checkmark icon green large"/>
+              <i className="remove icon red large" /> :
+                <i className="checkmark icon green large" />
           }
         </td>
         <td>{PAYMENT_TYPES[transaction.paymentType]}</td>

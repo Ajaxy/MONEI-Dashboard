@@ -37,7 +37,7 @@ export const signRequest = (request, credentials) => {
   if (!data) delete headers['Content-Type'];
 
   const options = aws4.sign({
-    service: "execute-api",
+    service: 'execute-api',
     region: APP_CONFIG.region,
     host: parser.host,
     path: parser.path + params,
@@ -57,7 +57,7 @@ export const signRequest = (request, credentials) => {
 
 const getS3Bucket = () => {
   return new AWS.S3({params: {Bucket: APP_CONFIG.userBucket}, region: APP_CONFIG.region});
-}
+};
 
 export const fileUpload = (userId, file, onProgress) => {
   return new Promise((resolve, reject) => {
@@ -66,7 +66,7 @@ export const fileUpload = (userId, file, onProgress) => {
     getS3Bucket().putObject(params, (err, data) => {
       err ? reject(err) : resolve(data);
     }).on('httpUploadProgress', (progress) => {
-      if(onProgress) onProgress(progress);
+      if (onProgress) onProgress(progress);
     });
   });
 };

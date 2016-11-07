@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import classNames from './CustomerRow.scss';
 
 const CustomerRow = ({customer, isHeader = false}) => {
-  if(isHeader) {
+  if (isHeader) {
     return (
       <tr>
         <th>Name</th>

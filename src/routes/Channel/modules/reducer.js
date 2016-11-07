@@ -5,7 +5,7 @@ import storage from 'store';
 
 export const stateKey = 'activeChannel';
 
-const defaultZapierToken = storage.get('zapier_api_token') || "";
+const defaultZapierToken = storage.get('zapier_api_token') || '';
 const zapierToken = (state = defaultZapierToken, action) => {
   switch (action.type) {
     case types.FETCH_ZAPIER_TOKEN_SUCCESS:
@@ -130,6 +130,6 @@ export default combineReducers({
   isFetchingWebhooks,
   isCreatingWebhooks,
   isUpdatingWebhooks,
-  isDeletingWebhooks,
+  isDeletingWebhooks
 });
 

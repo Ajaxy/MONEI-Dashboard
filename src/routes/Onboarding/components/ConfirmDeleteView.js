@@ -7,12 +7,12 @@ import cx from 'classnames';
 const ConfirmDeleteView = ({
   isConfirmDeleteOpen,
   closeConfirmDeleteModal,
-  onDelete,
+  onDelete
 }) => (
   <Modal isOpen={isConfirmDeleteOpen} size="small">
     <div className="header">Are you sure?</div>
     <div className="content big">
-      <div className={cx("ui basic segment center aligned", classNames.text)}>
+      <div className={cx('ui basic segment center aligned', classNames.text)}>
         You are going to remove attached document.
       </div>
     </div>

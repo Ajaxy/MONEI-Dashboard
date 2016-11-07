@@ -6,7 +6,7 @@ import {normalize} from 'normalizr';
 import {getIsUpToDate} from './selectors';
 import {signOut} from 'modules/auth/actions';
 
-export const fetchUser = (userId, forceRefresh=false) => {
+export const fetchUser = (userId, forceRefresh = false) => {
   return async(dispatch, getState) => {
     const isUpToDate = getIsUpToDate(getState());
     if (isUpToDate && !forceRefresh) return;
@@ -17,7 +17,7 @@ export const fetchUser = (userId, forceRefresh=false) => {
       dispatch({
         type: types.FETCH_USER_SUCCESS,
         byId: normalized.entities.users,
-        userId: normalized.result,
+        userId: normalized.result
       });
     } catch (error) {
       dispatch({
@@ -42,11 +42,11 @@ export const verifyUser = (userId) => {
       dispatch({
         type: types.UPDATE_USER_SUCCESS,
         byId: normalized.entities.users,
-        userId: normalized.result,
+        userId: normalized.result
       });
       dispatch(addMessage({
-        text: "User was successfully verified",
-        style: "success",
+        text: 'User was successfully verified',
+        style: 'success'
       }));
     } catch (error) {
       dispatch({
@@ -78,7 +78,7 @@ export const loginAsUser = (userId) => {
         }
       }));
     }
-  }
+  };
 };
 
 export const updateUser = (userId, {app_metadata, user_metadata}) => {
@@ -90,11 +90,11 @@ export const updateUser = (userId, {app_metadata, user_metadata}) => {
       dispatch({
         type: types.UPDATE_USER_SUCCESS,
         byId: normalized.entities.users,
-        userId: normalized.result,
+        userId: normalized.result
       });
       dispatch(addMessage({
-        text: "User was updated",
-        style: "success",
+        text: 'User was updated',
+        style: 'success'
       }));
     } catch (error) {
       dispatch({

@@ -3,7 +3,7 @@ import cx from 'classnames';
 import humanize from 'humanize-string';
 import {omitProps} from 'lib/utils';
 import DateTime from 'react-datetime';
-import {DATE_FORMAT_LONG} from 'lib/constants'
+import {DATE_FORMAT_LONG} from 'lib/constants';
 import './DateTimeInput.scss';
 
 const Input = ({

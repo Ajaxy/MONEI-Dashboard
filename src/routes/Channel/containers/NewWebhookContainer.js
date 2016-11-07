@@ -29,12 +29,12 @@ class NewWebhook extends Component {
   }
 
   render() {
-    return <NewWebhookModal onSubmit={this.submitForm} {...this.props}/>;
+    return <NewWebhookModal onSubmit={this.submitForm} {...this.props} />;
   }
 }
 
 const mapStateToProps = (state, props) => ({
-  isCreating: selectors.getIsCreatingWebhooks(state),
+  isCreating: selectors.getIsCreatingWebhooks(state)
 });
 
 export default reduxForm({

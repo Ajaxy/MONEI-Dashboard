@@ -8,16 +8,16 @@ class Search extends Component {
     const {searchDelay} = this.props;
     return new Promise(resolve => {
       if (this.timerId) clearTimeout(this.timerId);
-      this.timerId = setTimeout((function (innerValue) {
-        return function () {
+      this.timerId = setTimeout((function(innerValue) {
+        return function() {
           resolve(innerValue);
-        }
+        };
       })(value), searchDelay || DEFAULT_DELAY);
     });
   }
 
   handleKeydown = (e) => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
       const {onSearch} = this.props;
       onSearch(e.target.value);
     }
@@ -33,7 +33,7 @@ class Search extends Component {
   render() {
     const {placeholder, defaultValue, className} = this.props;
     return (
-      <div className={cx("ui search", className)}>
+      <div className={cx('ui search', className)}>
         <div className="ui icon input">
           <input
             type="text"
@@ -42,7 +42,7 @@ class Search extends Component {
             onKeyDown={this.handleKeydown}
             onChange={this.handleChange}
           />
-          <i className="search icon"></i>
+          <i className="search icon" />
         </div>
       </div>
     );
@@ -54,7 +54,7 @@ Search.propTypes = {
   searchDelay: PropTypes.number,
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
-  className: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default Search;

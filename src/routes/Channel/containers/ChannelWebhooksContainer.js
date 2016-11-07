@@ -29,8 +29,8 @@ class ChannelWebhooksContainer extends Component {
   }
 
   render() {
-    return <ChannelWebhooks 
-      loadMore={this.loadMore} 
+    return <ChannelWebhooks
+      loadMore={this.loadMore}
       showCreateModal={this.showCreateModal}
       showEditModal={this.showEditModal}
       showDeleteModal={this.showDeleteModal}
@@ -44,7 +44,7 @@ const mapStateToProps = (state, props) => ({
   isFetching: selectors.getIsFetchingWebhooks(state),
   isCreating: selectors.getIsCreatingWebhooks(state),
   isUpdating: selectors.getIsUpdatingWebhooks(state),
-  isDeleting: selectors.getIsDeletingWebhooks(state),
+  isDeleting: selectors.getIsDeletingWebhooks(state)
 });
 
 export default connect(mapStateToProps, actions)(ChannelWebhooksContainer);

@@ -15,13 +15,13 @@ class Channels extends Component {
   };
 
   componentWillMount() {
-    if(!this.props.channels || this.props.channels.length === 0)
-      this.props.fetchChannels();
+    if (!this.props.channels || this.props.channels.length === 0)
+      { this.props.fetchChannels(); }
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.isInSandboxMode != this.props.isInSandboxMode)
-      this.props.fetchChannels();
+    if (nextProps.isInSandboxMode != this.props.isInSandboxMode)
+      { this.props.fetchChannels(); }
   }
 
   loadMore = () => {
@@ -47,7 +47,7 @@ class Channels extends Component {
 const mapStateToProps = (state) => ({
   channels: selectors.getChannels(state),
   isFetching: selectors.getIsFetching(state),
-  isInSandboxMode: profileSelectors.getIsInSandboxMode(state),
+  isInSandboxMode: profileSelectors.getIsInSandboxMode(state)
 });
 
-export default connect(mapStateToProps, actions)(Channels); 
+export default connect(mapStateToProps, actions)(Channels);

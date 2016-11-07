@@ -15,15 +15,15 @@ class ConfirmDelete extends Component {
   }
 
   render() {
-    return <ConfirmDeleteWebhook 
-      onDelete={this.deleteWebhook} 
+    return <ConfirmDeleteWebhook
+      onDelete={this.deleteWebhook}
       {...this.props}
     />;
   }
 }
 
 const mapStateToProps = (state, props) => ({
-  isDeleting: selectors.getIsDeletingWebhooks(state),
+  isDeleting: selectors.getIsDeletingWebhooks(state)
 });
 
 export default connect(mapStateToProps, actions)(ConfirmDelete);

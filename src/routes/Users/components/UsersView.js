@@ -20,9 +20,9 @@ const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, is
       onLoadMore={loadMore}
       total={page.total}
       count={page.lastItem}
-      autoLoad={true}
+      autoLoad
       className="large striped single line"
-      header={<UserRow isHeader={true}/>}
+      header={<UserRow isHeader />}
     >
       {
         (users.length > 0 || isFetching) ? users.map((user, index) =>
@@ -45,7 +45,7 @@ UsersView.propTypes = {
   loadMore: PropTypes.func.isRequired,
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  filterUsers: PropTypes.func.isRequired,
+  filterUsers: PropTypes.func.isRequired
 };
 
 export default UsersView;

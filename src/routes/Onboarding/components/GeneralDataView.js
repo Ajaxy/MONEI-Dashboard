@@ -7,15 +7,15 @@ import ConfirmPhoneForm from 'routes/Profile/containers/ConfirmPhoneForm';
 import COUNTRIES from 'lib/countries';
 
 const GeneralDataView = ({
-  fields: {name, profile_type, country}, 
+  fields: {name, profile_type, country},
   handleSubmit,
   onSubmit,
   user,
-  isModifying,
+  isModifying
 }) => (
   <section className="ui basic segment">
     <form className="ui form large">
-      <Input {...name} type="text" name="name" placeholder="Name and surname" label="Name"/>
+      <Input {...name} type="text" name="name" placeholder="Name and surname" label="Name" />
       <Select
         {...profile_type}
         label="Profile Type"
@@ -33,15 +33,15 @@ const GeneralDataView = ({
           <SelectItem key={index} value={country.name}>{country.name}</SelectItem>
         ))}
       </Select>
-      <div className="field"/>
+      <div className="field" />
     </form>
-    <ChangePhoneForm user={user} isLabeled={false}/>
-    <ConfirmPhoneForm user={user}/>
+    <ChangePhoneForm user={user} isLabeled={false} />
+    <ConfirmPhoneForm user={user} />
     <div className="ui right aligned relaxed grid">
       <div className="column">
-        <Button 
-          type="submit" 
-          className="large green" 
+        <Button
+          type="submit"
+          className="large green"
           loading={isModifying}
           disabled={!name.value || !profile_type.value || !country.value || !user.app_metadata.phone_number}
           onClick={handleSubmit(onSubmit)}>
@@ -50,6 +50,6 @@ const GeneralDataView = ({
       </div>
     </div>
   </section>
-);      
+);
 
 export default GeneralDataView;

@@ -8,11 +8,11 @@ const DocumentView = ({
   documentUrl,
   isUploading,
   uploadFile,
-  deleteFileStart,
+  deleteFileStart
 }) => {
   const onFileChange = (e) => {
     const {files} = e.target;
-    if(files.length > 0) uploadFile(files[0]);
+    if (files.length > 0) uploadFile(files[0]);
   };
   return (
     <div>
@@ -21,7 +21,7 @@ const DocumentView = ({
       </p>}
       {documentUrl && <Button type="button"
         onClick={deleteFileStart}>
-        <i className="icon trash"/>
+        <i className="icon trash" />
         Delete
       </Button>}
       {!documentUrl && <FileButton
@@ -29,7 +29,7 @@ const DocumentView = ({
         accept="image/*, application/pdf"
         loading={isUploading}
         onChange={onFileChange}>
-        <i className="icon cloud upload"/>
+        <i className="icon cloud upload" />
         Upload
       </FileButton>}
       <ConfirmDelete />

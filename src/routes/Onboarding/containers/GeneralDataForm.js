@@ -25,12 +25,12 @@ const mapStateToProps = (state) => ({
   initialValues: {
     name: profileSelectors.getName(state),
     profile_type: profileSelectors.getProfileType(state),
-    country: profileSelectors.getCountry(state),
+    country: profileSelectors.getCountry(state)
   },
-  isModifying: profileSelectors.getIsModifying(state),
+  isModifying: profileSelectors.getIsModifying(state)
 });
 
 export default reduxForm({
   form: 'onboarding-general-data',
-  fields: ['name', 'profile_type', 'country'],
+  fields: ['name', 'profile_type', 'country']
 }, mapStateToProps, actions)(GeneralDataForm);
