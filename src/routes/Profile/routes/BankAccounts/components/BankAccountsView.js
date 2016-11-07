@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
+import cx from 'classnames';
 import classNames from './BankAccountsView.scss';
 import AddBankAccount from '../containers/AddBankAccountContainer';
 import ConfirmDelete from '../containers/ConfirmDeleteContainer';
@@ -13,7 +14,7 @@ const BankAccountsView = ({
   isUpToDate
 }) => {
   const Empty = () => (
-    <div className="item center aligned">
+    <div className={cx('sixteen wide column', classNames.empty)}>
       <h3 className="ui header">You don't have bank accounts yet.</h3>
     </div>
   );
