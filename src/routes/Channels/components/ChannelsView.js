@@ -4,7 +4,7 @@ import ChannelRow, {NUM_COLUMNS} from './ChannelRow';
 
 const ChannelsView = ({channels, loadMore, viewChannel, isFetching}) => (
   <section className="ui basic segment padded-bottom">
-    <h1 className="ui header">Channels</h1>
+    <h1 className="ui header">Sub Accounts</h1>
     <InfiniteTable
       isFetching={isFetching}
       isLastPage

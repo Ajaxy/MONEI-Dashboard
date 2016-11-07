@@ -9,7 +9,7 @@ const ChannelRow = ({channel, onClick, isHeader, isFooter}) => {
     return (
       <tr>
         <th>Name</th>
-        <th>Channel ID</th>
+        <th>Sub Account ID</th>
         <th>Status</th>
         <th>Currency</th>
       </tr>

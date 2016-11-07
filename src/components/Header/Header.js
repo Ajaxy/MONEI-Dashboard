@@ -63,7 +63,7 @@ const Header = ({
           {isUser &&
           <Link to="/channels" className="item" activeClassName="active" onClick={viewChannels}>
             <i className="payment icon" />
-            Channels
+            Sub accounts
           </Link>
           }
           <a className="item" onClick={signOut}>
