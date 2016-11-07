@@ -3,9 +3,11 @@ import Button from 'components/Button'
 import Loader from 'components/Loader';
 import classNames from './BankAccountsView.scss';
 import AddBankAccount from '../containers/AddBankAccountContainer';
+import ConfirmDelete from '../containers/ConfirmDeleteContainer';
 import BankAccountItem from './BankAccountItem';
 const BankAccountsView = ({
   addBankAccountStart,
+  deleteBankAccountStart,
   bankAccounts,
   isFetching,
   isUpToDate
@@ -28,9 +30,10 @@ const BankAccountsView = ({
       </h2>
       <div className={classNames.wrapper}>
         <Loader active={isFetching} inline={false} dimmerClassName={classNames.dimmer} />
-        <div className="ui big very relaxed divided list">
+        <div className="ui stackable three column grid">
           {bankAccounts.length > 0 ? bankAccounts.map((bankAccount, i) => (<BankAccountItem
-            bankAccount={bankAccount}
+            {...bankAccount}
+            onDelete={deleteBankAccountStart}
             key={i} />))
             : isUpToDate && <Empty />
           }
@@ -38,6 +41,7 @@ const BankAccountsView = ({
         {isFetching && !isUpToDate && <div className={classNames.placeholder} />}
       </div>
       <AddBankAccount />
+      <ConfirmDelete />
     </section>
   );
 }

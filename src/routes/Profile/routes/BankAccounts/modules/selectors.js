@@ -23,7 +23,22 @@ export const getIsAdding = createSelector(
   bankAccounts => bankAccounts.isAdding
 );
 
+export const getIsDeleting = createSelector(
+  bankAccountsSelector,
+  bankAccounts => bankAccounts.isDeleting
+);
+
+export const getIsDeleteModalOpen = createSelector(
+  bankAccountsSelector,
+  bankAccounts => bankAccounts.isDeleteModalOpen
+);
+
 export const getIsAddModalOpen = createSelector(
   bankAccountsSelector,
   bankAccounts => bankAccounts.isAddModalOpen
+);
+
+export const getDeletingBankAccount = createSelector(
+  bankAccountsSelector,
+  bankAccounts => bankAccounts.byId[bankAccounts.bankAccountToDelete] || {}
 );

@@ -12,6 +12,12 @@ const ids = (state = [], action) => {
       return mergeArrays(state, [action.bankAccountId]);
     default:
       return state;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+      let index = state.indexOf(action.bankAccountId);
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
   }
 };
 
@@ -23,6 +29,10 @@ const byId = (state = {}, action) => {
       return {...state, ...action.byId};
     default:
       return state;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+      const newState = {...state};
+      delete newState[action.bankAccountId];
+      return newState;
   }
 };
 
@@ -72,11 +82,51 @@ const isAddModalOpen = (state = false, action) => {
   }
 };
 
+const isDeleting = (state = false, action) => {
+  switch (action.type) {
+    case types.DELETE_BANK_ACCOUNT_REQUEST:
+      return true;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+    case types.DELETE_BANK_ACCOUNT_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isDeleteModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.DELETE_BANK_ACCOUNT_START:
+      return true;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+    case types.DELETE_BANK_ACCOUNT_FAIL:
+    case types.DELETE_BANK_ACCOUNT_CANCEL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const bankAccountToDelete = (state = null, action) => {
+  switch (action.type) {
+    case types.DELETE_BANK_ACCOUNT_START:
+      return action.bankAccountId;
+    case types.DELETE_BANK_ACCOUNT_SUCCESS:
+    case types.DELETE_BANK_ACCOUNT_CANCEL:
+      return null;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   ids,
   byId,
   isFetching,
   isUpToDate,
   isAdding,
-  isAddModalOpen
+  isDeleting,
+  isAddModalOpen,
+  isDeleteModalOpen,
+  bankAccountToDelete
 });

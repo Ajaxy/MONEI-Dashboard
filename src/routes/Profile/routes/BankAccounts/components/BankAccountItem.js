@@ -1,11 +1,8 @@
 import React, {PropTypes} from 'react';
-import Link from 'react-router/lib/Link';
 import cx from 'classnames';
 import classNames from './BankAccountItem.scss';
-import Button from 'components/Button';
 
-const ImportsTableRow = ({bankAccount}) => {
-  const isVerified = bankAccount.isVerified;
+const ImportsTableRow = ({isVerified, last4Digits, country, currency, id, onDelete}) => {
   const iconClass = cx(
     classNames.icon,
     'large middle aligned icon',
@@ -15,21 +12,28 @@ const ImportsTableRow = ({bankAccount}) => {
     }
   );
   return (
-    <div className="item">
-      <i className={iconClass} />
-      <div className="content">
-        <h3 className="header">
-          {bankAccount.last4Digits}
-        </h3>
-        <small className="description" style={{opacity: 0.5}}>
-          {isVerified ? 'verified' : 'pending verification'}
-        </small>
+    <div className="column">
+      <div className={cx('ui icon message', classNames.bankAccount)}>
+        <i className={iconClass} />
+        <i className="close icon red" onClick={() => onDelete(id)} />
+        <div className="content">
+          <div className="header text grey">
+            <small className={classNames.dots}>{new Array(21).join('•')}</small>
+            {last4Digits}
+          </div>
+          <p>
+            {currency} ({country})
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 ImportsTableRow.propTypes = {
-  bankAccount: PropTypes.object.isRequired
+  isVerified: PropTypes.bool.isRequired,
+  last4Digits: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired
 };
 
 export default ImportsTableRow;
