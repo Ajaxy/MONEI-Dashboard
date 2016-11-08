@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import GettingStarted from '../components/GettingStartedView';
-import {getIsVerificationRequested, getDocumentName, getIsPhoneVerified} from 'modules/Profile/selectors';
+import {getIsVerificationRequested, getDocumentName, getIsPhoneVerified} from 'modules/profile/selectors';
 import {getIsPersonalDataReady} from 'routes/Profile/routes/Settings/modules/selectors'
 import * as actions from 'routes/Profile/routes/Settings/modules/actions';
 
