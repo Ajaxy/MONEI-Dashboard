@@ -48,7 +48,7 @@ const isEditingPhone = (state = false, action) => {
   }
 };
 
-const isVerifying = (state = false, action) => {
+const isVerifyingPhone = (state = false, action) => {
   switch (action.type) {
     case types.PHONE_VERIFICATION_START_REQUEST:
       return true;
@@ -133,17 +133,54 @@ const isDeleteModalOpen = (state = false, action) => {
   }
 };
 
+const isRequestingVerification = (state = false, action) => {
+  switch (action.type) {
+    case types.PROFILE_VERIFICATION_REQUEST:
+      return true;
+    case types.PROFILE_VERIFICATION_SUCCESS:
+    case types.PROFILE_VERIFICATION_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isVerificationModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.PROFILE_VERIFICATION_START:
+      return true;
+    case types.PROFILE_VERIFICATION_SUCCESS:
+    case types.PROFILE_VERIFICATION_FAIL:
+    case types.PROFILE_VERIFICATION_CANCEL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isPersonalDataReady = (state = false, action) => {
+  switch (action.type) {
+    case types.PERSONAL_DATA_READY:
+      return action.isReady;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isChangingPassword,
   isUpdatingMetaData,
   isPhoneVerificationStarted,
-  isVerifying,
+  isRequestingVerification,
+  isVerificationModalOpen,
+  isVerifyingPhone,
   isCheckingCode,
   isEditingPhone,
   phoneNumber,
   isFileUploading,
   isFileDeleting,
   fileUrl,
+  isPersonalDataReady,
   isDeleteModalOpen
 });
 

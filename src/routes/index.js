@@ -11,6 +11,7 @@ import OnboardingRoute from './Onboarding';
 import ProfileRoute from './Profile';
 import ChannelRoute from './Channel';
 import ChannelsRoute from './Channels';
+import GettingStartedRoute from './GettingStarted';
 import NotFoundRoute from './NotFound';
 
 export const createRoutes = (store) => ({
@@ -28,6 +29,7 @@ export const createRoutes = (store) => ({
     ProfileRoute(store),
     ChannelRoute(store),
     ChannelsRoute(store),
+    GettingStartedRoute,
     NotFoundRoute
   ]
 });

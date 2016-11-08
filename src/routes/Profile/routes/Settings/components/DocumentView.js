@@ -8,7 +8,8 @@ const DocumentView = ({
   documentUrl,
   isUploading,
   uploadFile,
-  deleteFileStart
+  deleteFileStart,
+  disabled
 }) => {
   const onFileChange = (e) => {
     const {files} = e.target;
@@ -19,12 +20,12 @@ const DocumentView = ({
       {documentUrl && <p>
         <a href={documentUrl} target="_blank">{documentName}</a>
       </p>}
-      {documentUrl && <Button type="button"
+      {!disabled && documentUrl && <Button type="button"
         onClick={deleteFileStart}>
         <i className="icon trash" />
         Delete
       </Button>}
-      {!documentUrl && <FileButton
+      {!disabled && !documentUrl && <FileButton
         type="button"
         accept="image/*, application/pdf"
         loading={isUploading}

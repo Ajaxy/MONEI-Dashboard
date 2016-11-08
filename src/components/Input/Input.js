@@ -17,7 +17,7 @@ const Input = ({
   const Component = rest.mask ? InputElement : component || 'input';
   const labelText = label || humanize(rest.name);
   const errorText = Array.isArray(error) ? error[0] : error;
-  const componentProps = Component === 'input'
+  const componentProps = Component === 'input' || InputElement
     ? omitProps(rest,
     'initialValue',
     'autofill',

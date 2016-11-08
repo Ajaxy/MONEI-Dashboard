@@ -1,6 +1,7 @@
 import * as api from 'lib/api';
 import * as types from './types';
 import {getPhoneNumber} from './selectors';
+import {trackEvent} from 'lib/intercom';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
 import {updateProfile, updateProfileLocally} from 'modules/profile/actions';
@@ -195,3 +196,45 @@ export const getFileUrl = (name) => {
     }
   };
 };
+
+export const validatePersonalData = (isReady) => ({
+  type: types.PERSONAL_DATA_READY,
+  isReady
+});
+
+export const requestVerificationStart = () => ({
+  type: types.PROFILE_VERIFICATION_START
+});
+
+export const requestVerificationCancel = () => ({
+  type: types.PROFILE_VERIFICATION_CANCEL
+});
+
+export const requestVerification = () => {
+  return async (dispatch, getState) => {
+    const profile = getProfile(getState());
+    profile.user_metadata.verification_requested = true;
+    dispatch({
+      type: types.PROFILE_VERIFICATION_REQUEST
+    });
+    try {
+      const success = await dispatch(updateProfile(profile));
+      dispatch({
+        type: types.PROFILE_VERIFICATION_SUCCESS
+      });
+      trackEvent('monei_requested_verification');
+      dispatch(addMessage({
+        text: 'Verification is pending. We will check your data as soon as possible.',
+        style: 'success'
+      }));
+    } catch (error) {
+      dispatch({
+        type: types.PROFILE_VERIFICATION_FAIL
+      });
+      dispatch(addMessage({
+        text: error
+      }));
+    }
+  };
+};
+

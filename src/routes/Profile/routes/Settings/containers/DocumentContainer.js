@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {getDocumentName} from 'modules/profile/selectors';
+import {getDocumentName, getIsVerificationRequested} from 'modules/profile/selectors';
 import * as selectors from '../modules/selectors';
 import * as actions from '../modules/actions';
 import DocumentView from '../components/DocumentView';
@@ -25,6 +25,7 @@ class Document extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  disabled: getIsVerificationRequested(state),
   documentName: getDocumentName(state),
   documentUrl: selectors.getFileUrl(state),
   isUploading: selectors.getIsFileUploading(state)

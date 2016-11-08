@@ -34,7 +34,10 @@ CheckBox.propTypes = {
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool,
   name: PropTypes.string,
-  value: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string
+  ]),
   fitted: PropTypes.bool,
   toggle: PropTypes.bool,
   slider: PropTypes.bool,

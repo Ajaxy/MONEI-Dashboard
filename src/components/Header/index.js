@@ -13,7 +13,7 @@ class HeaderContainer extends Component {
 
   viewOnboarding = () => {
     trackEvent('monei_verification_started');
-    this.context.router.push('/onboarding');
+    this.context.router.push('/getting-started');
   };
 
   viewChannels = () => {

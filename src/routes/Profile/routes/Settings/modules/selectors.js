@@ -13,9 +13,14 @@ export const getIsPhoneVerificationStarted = createSelector(
   settings => settings.isPhoneVerificationStarted
 );
 
-export const getIsVerifying = createSelector(
+export const getIsVerifyingPhone = createSelector(
   settingsSelector,
-  settings => settings.isVerifying
+  settings => settings.isVerifyingPhone
+);
+
+export const getIsRequestingVerification = createSelector(
+  settingsSelector,
+  settings => settings.isRequestingVerification
 );
 
 export const getIsCheckingCode = createSelector(
@@ -56,4 +61,14 @@ export const getFileUrl = createSelector(
 export const getIsDeleteModalOpen = createSelector(
   settingsSelector,
   settings => settings.isDeleteModalOpen
+);
+
+export const getIsVerificationModalOpen = createSelector(
+  settingsSelector,
+  settings => settings.isVerificationModalOpen
+);
+
+export const getIsPersonalDataReady = createSelector(
+  settingsSelector,
+  settings => settings.isPersonalDataReady
 );

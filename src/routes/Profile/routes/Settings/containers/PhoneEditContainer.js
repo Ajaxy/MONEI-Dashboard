@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
   const country = getCountry(phoneNumber, profile.geoip);
   return {
     countries,
-    isVerifying: selectors.getIsVerifying(state),
+    isVerifying: selectors.getIsVerifyingPhone(state),
     isPhoneVerified: getIsPhoneVerified(state),
     currentPhoneNumber: phoneNumber,
     initialValues: {
