@@ -43,6 +43,7 @@ const UpdateMetaData = ({
         {isAppSettingsVisible && <div className="field">
           <CheckBox
             {...isHintsDisabled}
+            className="green"
             onChange={disableHints}
             toggle
             label="Disable application hints"

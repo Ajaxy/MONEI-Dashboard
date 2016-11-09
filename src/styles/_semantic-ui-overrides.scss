@@ -136,3 +136,7 @@ i.icon.loading {
 .ui.toggle.checkbox.inverted input ~ label:before {
   background-color: rgba(0,0,0,.5) !important;
 }
+
+.ui.toggle.checkbox.green input:checked~label:before {
+  background-color: #00796b !important;
+}
