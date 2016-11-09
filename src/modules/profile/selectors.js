@@ -130,6 +130,11 @@ export const getIsVerificationRequested = createSelector(
   userMetadata => userMetadata.verification_requested
 );
 
+export const getIsVerified = createSelector(
+  getAppMetadata,
+  appMetadata => appMetadata.verified
+);
+
 export const getIsUsingAuth0UserPass = createSelector(
   getUserId,
   userId => userId.indexOf('auth0') === 0
@@ -153,5 +158,8 @@ export const getIsInSandboxMode = createSelector(
 export const getIsReadyForProduction = createSelector(
   profileSelector,
   getIsVerificationRequested,
-  (profile, isVerificationRequested) => !isVerificationRequested && profile.isReadyForProduction
+  getIsVerified,
+  (profile, isVerificationRequested, isVerified) => (
+    !isVerified && !isVerificationRequested && profile.isReadyForProduction
+  )
 );

@@ -1,6 +1,6 @@
 import {reduxForm, getValues} from 'redux-form';
 import UpdateMetaDataView from '../components/UpdateMetaData';
-import {getProfile, getIsCompany, getIsVerificationRequested} from 'modules/profile/selectors';
+import {getProfile, getIsCompany, getIsVerificationRequested, getIsVerified} from 'modules/profile/selectors';
 import {updateProfileLocally} from 'modules/profile/actions';
 import * as selectors from '../modules/selectors';
 import * as actions from '../modules/actions';
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
   const isCompany = values.profile_type === 'company';
   const rules = {
     name: 'required',
-    store_url: 'required',
+    store_url: 'required|url',
     store_goods: 'required',
   };
   if (isCompany) {
@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
   }
   return {
     countries,
-    disabled: getIsVerificationRequested(state),
+    disabled: getIsVerificationRequested(state) || getIsVerified(state),
     isUpdatingMetaData: selectors.getIsUpdatingMetaData(state),
     isCompany: getIsCompany(state),
     initialValues: {
