@@ -14,8 +14,12 @@ For example:
 @import "semantic-ui-overrides";
 @import "shopify";
 
-.ui {
-  font-family: 'Muli', sans-serif !important;
+body {
+  font-family: 'Muli', sans-serif;
+}
+
+h1, h2, h3, h4, h5, .ui {
+  font-family: inherit !important;
 }
 
 .clearing:after {
