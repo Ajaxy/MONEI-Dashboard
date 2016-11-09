@@ -73,10 +73,20 @@ const isInSandboxMode = (state = defaultSandboxMode, action) => {
   }
 };
 
+const isReadyForProduction = (state = false, action) => {
+  switch (action.type) {
+    case types.VALIDATE_PROFILE:
+      return action.isValid;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isFetching,
   isModifying,
   isSandboxInitialized,
   isInSandboxMode,
+  isReadyForProduction,
   data
 });

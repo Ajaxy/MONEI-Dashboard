@@ -8,30 +8,31 @@ import cx from 'classnames';
 
 const GettingStartedView = ({
   isAllowedVerification,
-  requestVerificationStart,
-  isVerificationRequested
-}) => (
-  <section className={cx('ui main text container', classNames.container)}>
-    <h1>Getting started</h1>
-    <p>Please complete a few easy steps to start using MONEI in production</p>
-    <PhoneVerification
-      title="1. Verify your phone"
-      className={classNames.form} />
-    <br />
-    <UpdateMetaData
-      title="2. Fill up your personal data"
-      isAppSettingsVisible={false}
-      className={classNames.form}/>
-    <br />
-    {!isVerificationRequested && <Button
-      className={cx('basic orange', classNames.verifyButton)}
-      disabled={!isAllowedVerification}
-      onClick={requestVerificationStart}>
-      Request verification
-    </Button>}
-    <ConfirmVerification />
-  </section>
-);
+  requestVerificationStart
+}) => {
+  return (
+    <section className={cx('ui main text container', classNames.container)}>
+      <h1>Getting started</h1>
+      <p>Please complete a few easy steps to start using MONEI in production</p>
+      <PhoneVerification
+        title="1. Verify your phone"
+        className={classNames.form} />
+      <br />
+      <UpdateMetaData
+        title="2. Fill up your personal data"
+        isAppSettingsVisible={false}
+        className={classNames.form}/>
+      <br />
+      {isAllowedVerification && <Button
+        className={cx('orange large', classNames.verifyButton)}
+        onClick={requestVerificationStart}>
+        <i className="icon checkmark box" />
+        Request verification
+      </Button>}
+      <ConfirmVerification />
+    </section>
+  );
+}
 
 GettingStartedView.propTypes = {
 

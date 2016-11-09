@@ -1,7 +1,8 @@
 import * as api from 'lib/api';
 import * as types from './types';
-import {getProfile, getIsUser, getAppMetadata} from './selectors';
+import * as selectors from './selectors';
 import {addMessage} from 'modules/messages/actions';
+import Validator from 'lib/validator';
 
 export const fetchProfile = () => {
   return async dispatch => {
@@ -25,10 +26,15 @@ export const fetchProfile = () => {
   };
 };
 
-export const updateProfileLocally = (data) => ({
-  type: types.UPDATE_PROFILE_LOCALLY,
-  data
-});
+export const updateProfileLocally = (data) => {
+  return dispatch => {
+    dispatch({
+      type: types.UPDATE_PROFILE_LOCALLY,
+      data
+    });
+    dispatch(validateUserProfile());
+  };
+};
 
 export const updateProfile = ({user_id, user_metadata}) => {
   return async dispatch => {
@@ -39,6 +45,7 @@ export const updateProfile = ({user_id, user_metadata}) => {
         type: types.UPDATE_PROFILE_SUCCESS,
         data
       });
+      dispatch(validateUserProfile());
       return data;
     } catch (error) {
       dispatch({
@@ -57,9 +64,9 @@ export const updateProfile = ({user_id, user_metadata}) => {
 export const initSandbox = () => {
   return async(dispatch, getState) => {
     const state = getState();
-    const profile = getProfile(state);
-    const isUser = getIsUser(state);
-    const appMetadata = getAppMetadata(state);
+    const profile = selectors.getProfile(state);
+    const isUser = selectors.getIsUser(state);
+    const appMetadata = selectors.getAppMetadata(state);
     if (!isUser || appMetadata.smid) {
       return dispatch({
         type: types.INIT_PROFILE_SANDBOX
@@ -83,3 +90,33 @@ export const setSandboxMode = (state) => ({
   type: types.SET_PROFILE_SANDBOX,
   data: state
 });
+
+export const validateUserProfile = () => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const userMetadata = selectors.getUserMetadata(state);
+    const appMetadata = selectors.getAppMetadata(state);
+    const isCompany = selectors.getIsCompany(state);
+    const rules = {
+      name: 'required',
+      store_url: 'required',
+      store_goods: 'required',
+      document_name: 'required',
+      phone_number: 'required'
+    };
+    if (isCompany) {
+      rules.vat_number = 'required';
+      rules.company_name = 'required';
+    }
+    if (!isCompany) {
+      rules.id_number = 'required';
+    }
+    const validator = new Validator({...userMetadata, ...appMetadata}, rules);
+    validator.passes();
+    console.log(validator);
+    dispatch({
+      type: types.VALIDATE_PROFILE,
+      isValid: validator.errorCount === 0
+    });
+  };
+};

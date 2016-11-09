@@ -96,7 +96,7 @@ const UpdateMetaData = ({
           type="submit"
           loading={isUpdatingMetaData}
           disabled={invalid || isUpdatingMetaData}>
-          Save settings
+          Save
         </Button>}
       </form>
     </div>

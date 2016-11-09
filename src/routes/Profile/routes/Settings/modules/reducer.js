@@ -158,15 +158,6 @@ const isVerificationModalOpen = (state = false, action) => {
   }
 };
 
-const isPersonalDataReady = (state = false, action) => {
-  switch (action.type) {
-    case types.PERSONAL_DATA_READY:
-      return action.isReady;
-    default:
-      return state;
-  }
-};
-
 export default combineReducers({
   isChangingPassword,
   isUpdatingMetaData,
@@ -180,7 +171,6 @@ export default combineReducers({
   isFileUploading,
   isFileDeleting,
   fileUrl,
-  isPersonalDataReady,
   isDeleteModalOpen
 });
 

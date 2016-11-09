@@ -1,4 +1,3 @@
-import React, {Component, PropTypes} from 'react';
 import {reduxForm, getValues} from 'redux-form';
 import UpdateMetaDataView from '../components/UpdateMetaData';
 import {getProfile, getIsCompany, getIsVerificationRequested} from 'modules/profile/selectors';
@@ -7,23 +6,6 @@ import * as selectors from '../modules/selectors';
 import * as actions from '../modules/actions';
 import countries, {findByCode} from 'lib/countries';
 import Validator from 'lib/validator';
-
-class UpdateMetaData extends Component {
-
-  componentWillReceiveProps(np) {
-    this.props.validatePersonalData(!np.invalid);
-  }
-
-  componentDidMount() {
-    this.props.validatePersonalData(!this.props.invalid)
-  }
-
-  render() {
-    return (
-      <UpdateMetaDataView {...this.props} />
-    );
-  }
-}
 
 const createValidator = (rules) => {
   return values => {
@@ -58,7 +40,8 @@ const mapStateToProps = (state) => {
     initialValues: {
       country,
       profile_type: 'individual',
-      ...profile.user_metadata
+      ...profile.user_metadata,
+      ...values
     },
     validate: createValidator(rules)
   };
@@ -80,4 +63,4 @@ export default reduxForm({
   },
   mapStateToProps,
   {...actions, updateProfileLocally}
-)(UpdateMetaData);
+)(UpdateMetaDataView);

@@ -67,8 +67,3 @@ export const getIsVerificationModalOpen = createSelector(
   settingsSelector,
   settings => settings.isVerificationModalOpen
 );
-
-export const getIsPersonalDataReady = createSelector(
-  settingsSelector,
-  settings => settings.isPersonalDataReady
-);

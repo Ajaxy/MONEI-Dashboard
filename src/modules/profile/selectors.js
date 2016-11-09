@@ -149,3 +149,8 @@ export const getIsInSandboxMode = createSelector(
   profileSelector,
   profile => profile.isInSandboxMode
 );
+
+export const getIsReadyForProduction = createSelector(
+  profileSelector,
+  profile => profile.isReadyForProduction
+);

@@ -5,12 +5,12 @@ import {trackEvent} from 'lib/intercom';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
 import {updateProfile, updateProfileLocally} from 'modules/profile/actions';
-import {getUserId, getProfile, getIsAdmin} from 'modules/profile/selectors';
+import * as selectors from 'modules/profile/selectors';
 import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 
 export const updateUserMetaData = (data) => {
   return async (dispatch, getState) => {
-    const userId = getUserId(getState());
+    const userId = selectors.getUserId(getState());
     dispatch({
       type: types.UPDATE_PROFILE_METADATA_REQUEST
     });
@@ -99,7 +99,7 @@ export const phoneVerificationCheck = ({verificationCode}) => {
   return async (dispatch, getState) => {
     const state = getState();
     const phoneNumber = getPhoneNumber(state);
-    const profile = getProfile(getState());
+    const profile = selectors.getProfile(getState());
     dispatch({
       type: types.PHONE_VERIFICATION_CHECK_REQUEST
     });
@@ -129,7 +129,7 @@ export const phoneVerificationCheck = ({verificationCode}) => {
 export const uploadFile = (file) => {
   return async (dispatch, getState) => {
     const state = getState();
-    const profile = getProfile(state);
+    const profile = selectors.getProfile(state);
     dispatch({type: types.FILE_UPLOAD_REQUEST});
     try {
       await fileUpload(profile.user_id, file);
@@ -159,7 +159,7 @@ export const deleteFileCancel = () => ({
 export const deleteFile = () => {
   return async (dispatch, getState) => {
     const state = getState();
-    const profile = getProfile(state);
+    const profile = selectors.getProfile(state);
     dispatch({type: types.FILE_DELETE_REQUEST});
     try {
       await fileDelete(profile.user_id, profile.user_metadata.document_name);
@@ -181,8 +181,8 @@ export const deleteFile = () => {
 export const getFileUrl = (name) => {
   return async (dispatch, getState) => {
     const state = getState();
-    const profile = getProfile(state);
-    const isAdmin = getIsAdmin(state);
+    const profile = selectors.getProfile(state);
+    const isAdmin = selectors.getIsAdmin(state);
     try {
       const data = await fileGetUrl(profile.user_id, name, isAdmin);
       dispatch({type: types.FILE_URL_UPDATE, data});
@@ -197,9 +197,9 @@ export const getFileUrl = (name) => {
   };
 };
 
-export const validatePersonalData = (isReady) => ({
-  type: types.PERSONAL_DATA_READY,
-  isReady
+export const validatePersonalData = (isValid) => ({
+  type: types.VALIDATE_PROFILE,
+  isValid
 });
 
 export const requestVerificationStart = () => ({
@@ -212,7 +212,7 @@ export const requestVerificationCancel = () => ({
 
 export const requestVerification = () => {
   return async (dispatch, getState) => {
-    const profile = getProfile(getState());
+    const profile = selectors.getProfile(getState());
     profile.user_metadata.verification_requested = true;
     dispatch({
       type: types.PROFILE_VERIFICATION_REQUEST
@@ -237,4 +237,3 @@ export const requestVerification = () => {
     }
   };
 };
-
