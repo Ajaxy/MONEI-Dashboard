@@ -14,7 +14,7 @@ const ChannelView = ({channel, baseUrl, channelId, currentTab, zapierToken, copy
       {isSandboxMode && <span className="text orange">(only for testing purposes)</span>}
     </h1>
     <div className="ui secondary pointing large menu no-padding">
-      <Link className="item" activeClassName="active" to={`${baseUrl}/guides`}>Quick Start Guides</Link>
+      <Link className="item" activeClassName="active" to={`${baseUrl}/guides`}>Ecommerce Guides</Link>
       <Link className="item" activeClassName="active" to={`${baseUrl}/settings`}>Settings</Link>
       <Link className="item" activeClassName="active" to={`${baseUrl}/zapier`}>Zapier</Link>
       <Link className="item" activeClassName="active" to={`${baseUrl}/webhooks`}>Webhooks</Link>
