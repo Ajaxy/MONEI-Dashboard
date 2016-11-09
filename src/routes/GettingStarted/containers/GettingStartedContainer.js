@@ -5,8 +5,7 @@ import GettingStarted from '../components/GettingStartedView';
 
 const mapStateToProps = (state) => {
   return {
-    isAllowedVerification: !selectors.getIsVerificationRequested(state)
-    && selectors.getIsReadyForProduction(state)
+    isAllowedVerification: selectors.getIsReadyForProduction(state)
   }
 };
 

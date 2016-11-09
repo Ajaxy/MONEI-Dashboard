@@ -1,12 +1,18 @@
 import React, {PropTypes} from 'react';
 import Confirm from 'components/Modal/Confirm';
 
-const ConfirmVerification = ({isOpen, isVerifying, requestVerificationCancel, requestVerification}) => (
+const ConfirmVerification = ({
+  isOpen,
+  isVerifying,
+  requestVerificationCancel,
+  requestVerification,
+  redirect
+}) => (
   <Confirm
     isOpen={isOpen}
     isLoading={isVerifying}
     onCancel={requestVerificationCancel}
-    onConfirm={requestVerification}
+    onConfirm={() => requestVerification({redirect})}
     confirmText="Confirm"
     confirmClass="positive">
     <p>

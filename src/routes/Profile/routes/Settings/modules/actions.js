@@ -7,6 +7,7 @@ import {addMessage} from 'modules/messages/actions';
 import {updateProfile, updateProfileLocally} from 'modules/profile/actions';
 import * as selectors from 'modules/profile/selectors';
 import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
+import {push} from 'react-router-redux';
 
 export const updateUserMetaData = (data) => {
   return async (dispatch, getState) => {
@@ -210,7 +211,7 @@ export const requestVerificationCancel = () => ({
   type: types.PROFILE_VERIFICATION_CANCEL
 });
 
-export const requestVerification = () => {
+export const requestVerification = ({redirect}) => {
   return async (dispatch, getState) => {
     const profile = selectors.getProfile(getState());
     profile.user_metadata.verification_requested = true;
@@ -227,6 +228,9 @@ export const requestVerification = () => {
         text: 'Verification is pending. We will check your data as soon as possible.',
         style: 'success'
       }));
+      if (redirect) {
+        dispatch(push('/'));
+      }
     } catch (error) {
       dispatch({
         type: types.PROFILE_VERIFICATION_FAIL

@@ -152,5 +152,6 @@ export const getIsInSandboxMode = createSelector(
 
 export const getIsReadyForProduction = createSelector(
   profileSelector,
-  profile => profile.isReadyForProduction
+  getIsVerificationRequested,
+  (profile, isVerificationRequested) => !isVerificationRequested && profile.isReadyForProduction
 );

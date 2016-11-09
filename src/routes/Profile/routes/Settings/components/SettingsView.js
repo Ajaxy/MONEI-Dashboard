@@ -21,10 +21,10 @@ const SettingsView = ({
       </div>
     </div>
     <br />
-    {!isVerificationRequested && <Button
-      className="basic orange"
-      disabled={!isAllowedVerification}
+    {isAllowedVerification && <Button
+      className="orange"
       onClick={requestVerificationStart}>
+      <i className="icon checkmark box" />
       Request verification
     </Button>}
     <ConfirmVerification />

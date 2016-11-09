@@ -29,7 +29,7 @@ const GettingStartedView = ({
         <i className="icon checkmark box" />
         Request verification
       </Button>}
-      <ConfirmVerification />
+      <ConfirmVerification redirect/>
     </section>
   );
 }
