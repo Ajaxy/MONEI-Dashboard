@@ -4,6 +4,9 @@ import classNames from './ChannelGuide.scss';
 import ShopifyGuide from './ShopifyGuide';
 import PrestaShopGuide from './PrestaShopGuide';
 import WooCommerceGuide from './WooCommerceGuide';
+import shopifyLogo from 'static/shopify-logo.png';
+import woocommerceLogo from 'static/woocommerce-logo.png';
+import prestashopLogo from 'static/prestashop-logo.png';
 
 const ChannelGuide = ({
   channel,
@@ -37,13 +40,13 @@ const ChannelGuide = ({
         <div className="ui three column grid">
           <div className="row">
             <div className={cx('column', classNames.link)} onClick={() => selectPlatform(1)}>
-              <img src="/woocommerce-logo.png" alt="WooCommerce" />
+              <img src={woocommerceLogo} alt="WooCommerce" />
             </div>
             <div className={cx('column', classNames.link)} onClick={() => selectPlatform(2)}>
-              <img src="/shopify-logo.png" alt="Shopify" />
+              <img src={shopifyLogo} alt="Shopify" />
             </div>
             <div className={cx('column', classNames.link)} onClick={() => selectPlatform(3)}>
-              <img src="/prestashop-logo.png" alt="PrestaShop" />
+              <img src={prestashopLogo} alt="PrestaShop" />
             </div>
           </div>
         </div>
