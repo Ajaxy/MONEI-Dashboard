@@ -22,19 +22,10 @@ AdminDataContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  initialValues: {
-    mid: selectors.getAppMetadata(state).mid,
-    mlogin: selectors.getAppMetadata(state).mlogin,
-    mpwd: selectors.getAppMetadata(state).mpwd,
-    role: `${selectors.getAppMetadata(state).role || 0}`,
-    status: selectors.getAppMetadata(state).status,
-    acquirer: selectors.getUserMetadata(state).acquirer,
-    iban: selectors.getUserMetadata(state).iban,
-    comment: selectors.getAppMetadata(state).comment
-  }
+  initialValues: selectors.getAppMetadata(state)
 });
 
 export default reduxForm({
   form: 'admin',
-  fields: ['mid', 'mlogin', 'mpwd', 'role', 'status', 'acquirer', 'iban', 'comment']
+  fields: ['mid', 'mlogin', 'mpwd', 'role', 'status', 'acquirer', 'comment']
 }, mapStateToProps, actions)(AdminDataContainer);

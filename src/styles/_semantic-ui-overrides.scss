@@ -41,6 +41,13 @@ $ui-colors: (
   }
 }
 
+.text.overflow {
+  text-overflow: ellipsis;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .ui.basic.segment {
   min-height: 100px;
 }

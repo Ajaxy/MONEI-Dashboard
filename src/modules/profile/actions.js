@@ -113,7 +113,6 @@ export const validateUserProfile = () => {
     }
     const validator = new Validator({...userMetadata, ...appMetadata}, rules);
     validator.passes();
-    console.log(validator);
     dispatch({
       type: types.VALIDATE_PROFILE,
       isValid: validator.errorCount === 0

@@ -11,6 +11,7 @@ const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, is
       placeholder="Search name..."
       onSearch={filterUsers}
       defaultValue={page.filter}
+      inputClass="fluid"
       className={classNames.paddedBottom}
     />
     <InfiniteTable

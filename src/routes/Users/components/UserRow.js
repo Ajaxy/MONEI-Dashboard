@@ -12,6 +12,7 @@ const UserRow = ({user, userMetadata, appMetadata, viewUser = () => {}, isHeader
         <th>Name</th>
         <th>Store URL</th>
         <th>Acquirer</th>
+        <th>Country</th>
         <th>Status</th>
         <th className="right aligned">Verified</th>
       </tr>
@@ -22,16 +23,17 @@ const UserRow = ({user, userMetadata, appMetadata, viewUser = () => {}, isHeader
         <td>
           <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
         </td>
-        <td>{userMetadata.name || user.email}</td>
-        <td>
+        <td className="text overflow">{userMetadata.name || user.email}</td>
+        <td className="text overflow">
           {userMetadata.store_url ?
-            <a href={userMetadata.store_url} onClick={e => e.stopPropagation()}>
+            <a href={userMetadata.store_url} target="_blank" onClick={e => e.stopPropagation()}>
               {userMetadata.store_url}
             </a>
             : <p>{userMetadata.store_url}</p>
           }
         </td>
         <td>{userMetadata.acquirer}</td>
+        <td>{userMetadata.country}</td>
         <td>{humanize(appMetadata.status || '')}</td>
         <td className="right aligned">
           {appMetadata.verified ?
@@ -44,6 +46,6 @@ const UserRow = ({user, userMetadata, appMetadata, viewUser = () => {}, isHeader
   }
 };
 
-export const NUM_COLUMNS = 6;
+export const NUM_COLUMNS = 7;
 
 export default UserRow;

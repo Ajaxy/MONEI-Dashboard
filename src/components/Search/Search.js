@@ -31,10 +31,10 @@ class Search extends Component {
   };
 
   render() {
-    const {placeholder, defaultValue, className} = this.props;
+    const {placeholder, defaultValue, className, inputClass} = this.props;
     return (
       <div className={cx('ui search', className)}>
-        <div className="ui icon input">
+        <div className={cx('ui icon input', inputClass)}>
           <input
             type="text"
             placeholder={placeholder || 'Search keyword...'}
@@ -54,7 +54,8 @@ Search.propTypes = {
   searchDelay: PropTypes.number,
   placeholder: PropTypes.string,
   defaultValue: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  inputClass: PropTypes.string
 };
 
 export default Search;

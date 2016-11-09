@@ -38,7 +38,7 @@ const AdminDataForm = ({
           <SelectItem
             key={i}
             value={status}>
-            {humanize(status)}
+            {status === 'validated' ? 'Validated by MONEI' : humanize(status)}
           </SelectItem>
         ))}
       </Select>
@@ -55,7 +55,6 @@ const AdminDataForm = ({
           </SelectItem>
         ))}
       </Select>
-      <Input {...iban} label="IBAN number" type="text" />
       <Input {...comment} label="Comment" type="text" />
       <Input
         name="update" type="submit" value="Update" label={false} disabled={isUpdating}
