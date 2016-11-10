@@ -18,16 +18,15 @@ export default {
       region
     });
 
-    config.S3Plugin = {
-      s3Options: {
-        accessKeyId: process.env.DEV_ACCESS_KEY_ID,
-        secretAccessKey: process.env.DEV_SECRET_ACCESS_KEY,
-        region
-      },
-      s3UploadOptions: {
+    config.S3 = {
+      region,
+      accessKeyId: process.env.DEV_ACCESS_KEY_ID,
+      secretAccessKey: process.env.DEV_SECRET_ACCESS_KEY,
+      params: {
         Bucket: 'monei-v2-dashboard-development'
       }
     };
+
     return config;
   },
 
@@ -47,20 +46,23 @@ export default {
       region
     });
 
-    config.S3Plugin = {
-      s3Options: {
-        accessKeyId: process.env.PROD_AWS_KEY,
-        secretAccessKey: process.env.PROD_AWS_SECRET,
-        region
-      },
-      s3UploadOptions: {
+    config.S3 = {
+      region,
+      accessKeyId: process.env.PROD_AWS_KEY,
+      secretAccessKey: process.env.PROD_AWS_SECRET,
+      params: {
         Bucket: process.env.PROD_S3_BUCKET_NAME
-      },
-      cloudfrontInvalidateOptions: {
-        DistributionId: process.env.PROD_CF_DISTRIBUTION_ID,
-        Items: ['/index.html']
       }
     };
+    config.cloudfront = {
+      credentials: {
+        accessKeyId: 'AKIAJGU5HX6CVBBNALSA',
+        secretAccessKey: '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'
+      },
+      region,
+      distributionId: process.env.PROD_CF_DISTRIBUTION_ID
+    };
+
     return config;
   }
 };

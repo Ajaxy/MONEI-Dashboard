@@ -66,14 +66,14 @@
       }
     },
     "deploy": {
-      "command": "npm run build -- -- --s3",
+      "command": "npm run build && gulp",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
     "deploy:prod": {
-      "command": "npm run build -- -- --s3",
+      "command": "npm run build && gulp",
       "env": {
         "NODE_ENV": "production",
         "STAGE": "production",
@@ -159,6 +159,11 @@
     "extract-text-webpack-plugin": "^2.0.0-beta.3",
     "file-loader": "^0.9.0",
     "fs-extra": "^0.30.0",
+    "gulp": "^3.9.1",
+    "gulp-awspublish": "^3.3.0",
+    "gulp-if": "^2.0.2",
+    "gulp-invalidate-cloudfront": "^0.1.2",
+    "gulp-rename": "^1.2.2",
     "history": "^2.0.1",
     "html-webpack-plugin": "^2.22.0",
     "html2canvas": "^0.5.0-beta4",
@@ -230,7 +235,6 @@
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^2.1.0-beta.0",
     "webpack-hot-middleware": "^2.12.2",
-    "webpack-s3-plugin": "^0.9.0",
     "yargs": "^6.3.0"
   }
 }

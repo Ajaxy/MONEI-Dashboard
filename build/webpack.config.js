@@ -4,7 +4,6 @@ import cssnano from 'cssnano';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import ExtendedDefinePlugin from 'extended-define-webpack-plugin';
-import S3Plugin from 'webpack-s3-plugin';
 import config from '../config';
 import _debug from 'debug';
 
@@ -99,13 +98,6 @@ if (__DEV__) {
         warnings: false
       }
     })
-  );
-}
-
-if (config.deployToS3) {
-  debug(`Deploing to s3 in ${config.stage}`);
-  webpackConfig.plugins.push(
-    new S3Plugin(config.S3Plugin)
   );
 }
 

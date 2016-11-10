@@ -20,8 +20,6 @@ debug('Creating default configuration.');
 const config = {
   env: process.env.NODE_ENV || 'development',
   stage: process.env.STAGE || 'development',
-  deployToS3: argv.s3,
-
   // ----------------------------------
   // Project Structure
   // ----------------------------------
