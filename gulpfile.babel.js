@@ -15,7 +15,7 @@ const invalidationBatch = {
   CallerReference: new Date().toString(),
   Paths: {
     Quantity: 1,
-    Items: ['/*']
+    Items: ['/index.html']
   }
 };
 
