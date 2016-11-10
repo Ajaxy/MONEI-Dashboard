@@ -20,8 +20,8 @@ export default {
 
     config.S3 = {
       region,
-      accessKeyId: process.env.DEV_ACCESS_KEY_ID,
-      secretAccessKey: process.env.DEV_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.DEV_AWS_KEY,
+      secretAccessKey: process.env.DEV_AWS_SECRET,
       params: {
         Bucket: 'monei-v2-dashboard-development'
       }
@@ -48,19 +48,19 @@ export default {
 
     config.S3 = {
       region,
-      accessKeyId: process.env.PROD_AWS_KEY,
-      secretAccessKey: process.env.PROD_AWS_SECRET,
+      accessKeyId: process.env.AWS_KEY,
+      secretAccessKey: process.env.AWS_SECRET,
       params: {
-        Bucket: process.env.PROD_S3_BUCKET_NAME
+        Bucket: process.env.S3_BUCKET_NAME
       }
     };
     config.cloudfront = {
       credentials: {
-        accessKeyId: 'AKIAJGU5HX6CVBBNALSA',
-        secretAccessKey: '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'
+        accessKeyId: process.env.AWS_KEY,
+        secretAccessKey: process.env.AWS_SECRET
       },
       region,
-      distributionId: process.env.PROD_CF_DISTRIBUTION_ID
+      distributionId: process.env.CF_DISTRIBUTION_ID
     };
 
     return config;
