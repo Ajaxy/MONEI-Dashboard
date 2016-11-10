@@ -19,19 +19,11 @@ const mapStateToProps = (state) => {
   const profile = getProfile(state);
   const country = findByCode(profile.geoip.country_code).name;
   const values = getValues(state.form.updateMetaData) || {};
-  const isCompany = values.profile_type === 'company';
   const rules = {
-    name: 'required',
-    store_url: 'required|url',
-    store_goods: 'required',
+    store_url: 'url',
+    id_number: 'min:5',
+    vat_number: 'min:5'
   };
-  if (isCompany) {
-    rules.vat_number = 'required';
-    rules.company_name = 'required';
-  }
-  if (!isCompany) {
-    rules.id_number = 'required';
-  }
   return {
     countries,
     disabled: getIsVerificationRequested(state) || getIsVerified(state),
