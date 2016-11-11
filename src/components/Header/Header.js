@@ -61,7 +61,7 @@ const Header = ({
             Profile
           </Link>
           {isUser &&
-          <Link to="/channels" className="item" activeClassName="active" onClick={viewChannels}>
+          <Link to="/sub-accounts" className="item" activeClassName="active" onClick={viewChannels}>
             <i className="payment icon" />
             Sub accounts
           </Link>

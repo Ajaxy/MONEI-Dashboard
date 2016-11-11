@@ -125,7 +125,7 @@ export const updateUserMetaData = (userId, data) =>
 
 // Channels
 
-export const fetchChannels = (sandbox) =>
+export const fetchSubAccounts = (sandbox) =>
   apiClient.get('channels', {sandbox});
 
 export const createZapierApiToken = (channelId) =>

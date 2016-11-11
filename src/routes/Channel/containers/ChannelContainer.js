@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {getIsInSandboxMode} from 'modules/profile/selectors';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
-import * as channelsSelectors from 'routes/Channels/modules/selectors';
+import * as channelsSelectors from '../../SubAccounts/modules/selectors';
 import ChannelView from '../components/ChannelView';
 
 class Channel extends Component {

@@ -1,9 +1,9 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
-import {getActiveChannel} from 'routes/Channels/modules/selectors';
+import {getActiveSubAccount} from '../../SubAccounts/modules/selectors';
 
 const channelSelector = state => state[stateKey];
-export const getChannel = getActiveChannel;
+export const getChannel = getActiveSubAccount;
 
 export const getZapierToken = createSelector(
   channelSelector,

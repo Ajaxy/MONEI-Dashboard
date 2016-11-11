@@ -1,7 +1,7 @@
 import * as api from 'lib/api';
 import * as types from './types';
 import * as schema from 'schema/webhooks';
-import {fetchChannels} from 'routes/Channels/modules/actions';
+import {fetchChannels} from '../../SubAccounts/modules/actions';
 import {copyTextToClipboard} from 'lib/utils';
 import {addMessage} from 'modules/messages/actions';
 import {showModal} from 'modules/modals/actions';
