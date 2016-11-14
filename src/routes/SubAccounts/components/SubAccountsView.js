@@ -3,7 +3,7 @@ import classNames from './SubAccountsView.scss'
 import SubAccountItem from './SubAccountItem';
 import Loader from 'components/Loader';
 
-const SubAccountsView = ({subAccounts, isFetching, isUpToDate}) => {
+const SubAccountsView = ({subAccounts, isFetching, isUpToDate, isInSandboxMode}) => {
   const Empty = () => (
     <div className="item center aligned">
       <h3 className="ui header">You don't have sub accounts yet.</h3>
@@ -19,6 +19,7 @@ const SubAccountsView = ({subAccounts, isFetching, isUpToDate}) => {
         <div className="ui big very relaxed divided list">
           {subAccounts.length > 0 ? subAccounts.map((subAccount, i) => (<SubAccountItem
             subAccount={subAccount}
+            isSandboxMode={isInSandboxMode}
             key={i} />))
             : isUpToDate && <Empty />
           }
@@ -27,6 +28,13 @@ const SubAccountsView = ({subAccounts, isFetching, isUpToDate}) => {
       </div>
     </section>
   );
+};
+
+SubAccountsView.propTypes = {
+  subAccounts: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isUpToDate: PropTypes.bool.isRequired,
+  isInSandboxMode: PropTypes.bool.isRequired
 };
 
 export default SubAccountsView;

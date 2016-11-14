@@ -4,13 +4,13 @@ import cx from 'classnames';
 import classNames from './SubAccountItem.scss';
 import DropDownMenu from 'components/DropDownMenu';
 
-const SubAccountItem = ({subAccount}) => {
+const SubAccountItem = ({subAccount, isSandboxMode}) => {
   const iconClass = cx(
     classNames.icon,
     'large middle aligned icon',
     {
-      'green check circle': subAccount.state === 'LIVE',
-      'grey info circle': subAccount.state === 'TEST'
+      'green check circle': subAccount.state === 'LIVE' && !isSandboxMode,
+      'grey info circle': subAccount.state === 'TEST' || isSandboxMode
     }
   );
   return (
@@ -47,10 +47,14 @@ const SubAccountItem = ({subAccount}) => {
       <i className={iconClass} />
       <div className="content">
         <h3 className="header">
-          <Link to={`/channels/${subAccount.channel}/guides`}>{subAccount.name}</Link>
+          <Link to={`/channels/${subAccount.channel}/guides`}>
+            {subAccount.name}
+          </Link>
         </h3>
-        <small className="description" style={{opacity: 0.5}}>
-          {subAccount.state}
+        <small className="description">
+          {isSandboxMode
+            ? <span className="text orange">only for testing purposes</span>
+            : <span className="text grey">{subAccount.state}</span>}
         </small>
       </div>
     </div>
