@@ -6,7 +6,7 @@ import GettingStarted from '../components/GettingStartedView';
 const mapStateToProps = (state) => {
   return {
     isAllowedVerification: selectors.getIsReadyForProduction(state)
-  }
+  };
 };
 
 export default connect(mapStateToProps, actions)(GettingStarted);

@@ -67,7 +67,8 @@ const ChangePasswordView = ({
       </div>
     </form>
   </div>
-); };
+);
+};
 
 ChangePasswordView.propTypes = {
   fields: PropTypes.object.isRequired,

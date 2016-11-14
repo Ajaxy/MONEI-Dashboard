@@ -22,18 +22,18 @@ const ChannelGuide = ({
       { selectedPlatform === 0 ?
         <h2 className="ui header">Select your platform</h2>
         :
-          <div className="ui massive breadcrumb">
-            <a className="section" onClick={() => selectPlatform(0)}>Select your platform</a>
-            <i className="right chevron icon divider" />
-            { selectedPlatform === 1 ?
-              <span className="active section">WooCommerce</span>
+        <div className="ui massive breadcrumb">
+          <a className="section" onClick={() => selectPlatform(0)}>Select your platform</a>
+          <i className="right chevron icon divider" />
+          { selectedPlatform === 1 ?
+            <span className="active section">WooCommerce</span>
             : selectedPlatform === 2 ?
               <span className="active section">Shopify</span>
             : selectedPlatform === 3 ?
               <span className="active section">PrestaShop</span>
             : null
           }
-          </div>
+        </div>
       }
 
       { selectedPlatform === 0 ?

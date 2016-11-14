@@ -19,8 +19,9 @@ class Transactions extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.isInSandboxMode != this.props.isInSandboxMode)
-      { this.componentWillMount(); }
+    if (nextProps.isInSandboxMode != this.props.isInSandboxMode) {
+      this.componentWillMount();
+    }
   }
 
   loadMore = () => {

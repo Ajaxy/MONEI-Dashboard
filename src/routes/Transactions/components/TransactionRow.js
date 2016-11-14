@@ -42,7 +42,7 @@ const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false
           {
             isFailed(result.code) ?
               <i className="remove icon red large" /> :
-                <i className="checkmark icon green large" />
+              <i className="checkmark icon green large" />
           }
         </td>
         <td>{PAYMENT_TYPES[transaction.paymentType]}</td>

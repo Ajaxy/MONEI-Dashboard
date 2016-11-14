@@ -10,7 +10,7 @@ const UserHeader = ({user, verifyUser, loginAsUser, isUpdating}) => (
       <a href={`mailto:${user.email}`} target="_top">{user.email}</a>
       <div className="sub header">{user.email_verified ? ' (verified)' : ' (not verified)'}</div>
     </div>
-    {(user.user_metadata.verification_requested && typeof verifyUser == 'function') ?
+    {(user.user_metadata.verification_requested && typeof verifyUser === 'function') ?
       <Button
         primary
         disabled={isUpdating}
@@ -21,7 +21,7 @@ const UserHeader = ({user, verifyUser, loginAsUser, isUpdating}) => (
       </Button>
       : null
     }
-    {typeof loginAsUser == 'function' ?
+    {typeof loginAsUser === 'function' ?
       <Button
         primary
         disabled={isUpdating}

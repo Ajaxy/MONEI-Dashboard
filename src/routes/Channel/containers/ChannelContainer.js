@@ -8,8 +8,9 @@ import ChannelView from '../components/ChannelView';
 
 class Channel extends Component {
   componentWillMount() {
-    if (!this.props.channel.name)
-      { this.props.fetchChannel(); }
+    if (!this.props.channel.name) {
+      this.props.fetchChannel();
+    }
   }
 
   render() {

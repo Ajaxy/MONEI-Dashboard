@@ -40,19 +40,19 @@ const mapStateToProps = (state) => {
 };
 
 export default reduxForm({
-    form: 'updateMetaData',
-    fields: [
-      'name',
-      'profile_type',
-      'country',
-      'company_name',
-      'vat_number',
-      'id_number',
-      'store_url',
-      'store_goods',
-      'isHintsDisabled'
-    ]
-  },
+  form: 'updateMetaData',
+  fields: [
+    'name',
+    'profile_type',
+    'country',
+    'company_name',
+    'vat_number',
+    'id_number',
+    'store_url',
+    'store_goods',
+    'isHintsDisabled'
+  ]
+},
   mapStateToProps,
   {...actions, updateProfileLocally}
 )(UpdateMetaDataView);

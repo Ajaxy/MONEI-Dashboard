@@ -7,8 +7,9 @@ import ChannelZapier from '../components/ChannelZapier';
 class ChannelZapierContainer extends Component {
   componentWillMount() {
     const {channelId, zapierToken, createZapierToken} = this.props;
-    if (!zapierToken)
-      { createZapierToken(channelId); }
+    if (!zapierToken) {
+      createZapierToken(channelId);
+    }
   }
 
   render() {
