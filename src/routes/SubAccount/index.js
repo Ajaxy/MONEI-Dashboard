@@ -4,7 +4,7 @@ import OverviewRoute from './routes/Overview';
 
 // Sync route definition
 export default {
-  path: '/sub-account/:subAccountId',
+  path: '/sub-accounts/:subAccountId',
   component: RequireAuth(SubAccount),
   indexRoute: OverviewRoute,
   childRoutes: []

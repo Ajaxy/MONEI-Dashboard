@@ -1,33 +1,33 @@
 import React, {PropTypes} from 'react';
 import {Table} from 'components/Table';
 
-const SubAccountOverview = ({channel, copyToClipboard}) => (
+const SubAccountOverview = ({subAccount, copyToClipboard}) => (
   <Table className="large definition" selectable>
-    <tr onClick={() => copyToClipboard(channel.sender, 'App ID')}>
+    <tr onClick={() => copyToClipboard(subAccount.sender, 'App ID')}>
       <td className="two wide">App ID</td>
-      <td>{channel.sender}</td>
+      <td>{subAccount.sender}</td>
     </tr>
-    <tr onClick={() => copyToClipboard(channel.channel, 'Channel ID')}>
+    <tr onClick={() => copyToClipboard(subAccount.channel, 'Channel ID')}>
       <td className="two wide">Channel ID</td>
-      <td>{channel.channel}</td>
+      <td>{subAccount.channel}</td>
     </tr>
-    <tr onClick={() => copyToClipboard(channel.login, 'User ID')}>
+    <tr onClick={() => copyToClipboard(subAccount.login, 'User ID')}>
       <td className="two wide">User ID</td>
-      <td>{channel.login}</td>
+      <td>{subAccount.login}</td>
     </tr>
-    <tr onClick={() => copyToClipboard(channel.pwd, 'Password')}>
+    <tr onClick={() => copyToClipboard(subAccount.pwd, 'Password')}>
       <td className="two wide">Password</td>
-      <td>{channel.pwd}</td>
+      <td>{subAccount.pwd}</td>
     </tr>
     <tr>
       <td className="two wide">Status</td>
-      <td>{channel.state}</td>
+      <td>{subAccount.state}</td>
     </tr>
   </Table>
 );
 
 SubAccountOverview.propTypes = {
-  channel: PropTypes.array.isRequired,
+  subAccount: PropTypes.array.isRequired,
   copyToClipboard: PropTypes.func.isRequired
 };
 
