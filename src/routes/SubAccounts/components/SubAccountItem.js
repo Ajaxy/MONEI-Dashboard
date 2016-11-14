@@ -20,15 +20,15 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
           <Link
             to={`/sub-accounts/${subAccount.channel}`}
             className="ui button">
-            Ecommerce Guides
+            Overview
           </Link>
           <DropDownMenu className="button icon floating">
             <i className="dropdown icon" />
             <div className="menu">
               <Link
-                to={`/sub-accounts/${subAccount.channel}`}
+                to={`/sub-accounts/${subAccount.channel}/guides`}
                 className="item">
-                Overview
+                Ecommerce Guides
               </Link>
               <Link
                 to={`/sub-accounts/${subAccount.channel}/zapier`}
