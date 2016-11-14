@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 const ShopifyGuide = ({channel, copy, showNewMessage, isInSandboxMode, isMerchant}) => (
   <div className="ui left aligned basic padded segment">
     <p>Open your Shopify Dashboard and go to the section <strong>Settings → Payments → Accept Credit Cards.</strong>&nbsp;
-    Go to            <strong>Acept Credit Cards</strong> section.</p>
+    Go to                      <strong>Acept Credit Cards</strong> section.</p>
     <p>Select <strong>MONEI</strong> from the menu <strong>Select a Credit Card Gateway</strong>.</p>
     <img className="ui fluid image shopify-screenshot" src="/shopify-screenshot.png" alt="shopify-screenshot" />
     <p>Paste your credentials and set the checkboxes as shown below. You can copy each field below to the clipboard by clicking on it.</p>

@@ -22,7 +22,7 @@ const ChangePhoneView = ({
                 <input {...phoneNumberProps} type="text" placeholder="+1234567890" />
               </div>
               :
-                <Input {...phoneNumber} type="text" placeholder="+1234567890" label="Phone number with country code" />
+              <Input {...phoneNumber} type="text" placeholder="+1234567890" label="Phone number with country code" />
             }
             { isLabeled && phoneNumber.touched && phoneNumber.invalid && phoneNumber.error &&
               <div className="ui basic red pointing prompt label">{phoneNumber.error}</div>}

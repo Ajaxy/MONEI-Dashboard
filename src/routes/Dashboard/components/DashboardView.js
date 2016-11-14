@@ -82,16 +82,16 @@ const DashboardView = ({
         </h3>
         {isFetching ?
           <Loader active inline={false} /> :
-            <div>
-              <LineChart
-                labels={labels}
-                datasets={[{
-                  data: amountPerDay,
-                  ...DATASET_OPTIONS
-                }]}
-                options={AMOUNTS_OPTIONS}
+          <div>
+            <LineChart
+              labels={labels}
+              datasets={[{
+                data: amountPerDay,
+                ...DATASET_OPTIONS
+              }]}
+              options={AMOUNTS_OPTIONS}
             />
-            </div>
+          </div>
         }
       </div>
     </div>
@@ -102,16 +102,16 @@ const DashboardView = ({
         </h3>
         {isFetching ?
           <Loader active inline={false} /> :
-            <div>
-              <LineChart
-                labels={labels}
-                datasets={[{
-                  data: countPerDay,
-                  ...DATASET_OPTIONS
-                }]}
-                options={COUNT_OPTIONS}
+          <div>
+            <LineChart
+              labels={labels}
+              datasets={[{
+                data: countPerDay,
+                ...DATASET_OPTIONS
+              }]}
+              options={COUNT_OPTIONS}
             />
-            </div>
+          </div>
         }
       </div>
     </div>

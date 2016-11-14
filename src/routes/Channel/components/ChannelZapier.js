@@ -12,7 +12,7 @@ const ChannelZapier = ({zapierToken, isFetching, copy}) => (
     <tr className={classNames.row} onClick={() => copy(zapierToken, 'API Token')}>
       <td className="two wide">API Token</td>
       { !zapierToken ? <td><Loader isFetching inline /></td> : null}
-      {!!zapierToken ? <td>{zapierToken}</td> : null}
+      {zapierToken ? <td>{zapierToken}</td> : null}
     </tr>
     <tr className="center aligned">
       <td colSpan="2"><a target="_blank" href={ZAPIER_INSTRUCTIONS_URL}>Zapier instructions</a></td>

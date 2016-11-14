@@ -14,10 +14,11 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    if (this.props.isAdmin)
-      { this.context.router.replace('/users'); }
-    else
-      { this.context.router.replace('/dashboard'); }
+    if (this.props.isAdmin) {
+      this.context.router.replace('/users');
+    } else {
+      this.context.router.replace('/dashboard');
+    }
   }
 
   render() {

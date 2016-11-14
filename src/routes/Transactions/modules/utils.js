@@ -38,8 +38,9 @@ export const getCurrencySymbol = (currency) => {
 
 export const getAmount = (paymentType, currency, amount, showNegative = true) => {
   let formatted = getCurrencySymbol(currency) + (isNaN(amount) ? 'N/A' : amount);
-  if (showNegative && isRefund(paymentType))
-    { formatted = '-' + formatted; }
+  if (showNegative && isRefund(paymentType)) {
+    formatted = '-' + formatted;
+  }
   return formatted;
 };
 

@@ -21,7 +21,7 @@ const GettingStartedView = ({
       <UpdateMetaData
         title="2. Fill up your personal data"
         isAppSettingsVisible={false}
-        className={classNames.form}/>
+        className={classNames.form} />
       <br />
       {isAllowedVerification && <Button
         className={cx('orange large', classNames.verifyButton)}
@@ -29,10 +29,10 @@ const GettingStartedView = ({
         <i className="icon checkmark box" />
         Request verification
       </Button>}
-      <ConfirmVerification redirect/>
+      <ConfirmVerification redirect />
     </section>
   );
-}
+};
 
 GettingStartedView.propTypes = {
 

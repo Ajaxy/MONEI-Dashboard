@@ -12,8 +12,9 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
     const previous = getPage(getState());
 
     // prevent double requests
-    if (!forceRefresh && page === previous.page && from === previous.from && to === previous.to)
-      { return; }
+    if (!forceRefresh && page === previous.page && from === previous.from && to === previous.to) {
+      return;
+    }
 
     // if we selected a new Date, let's clear the current list
     if (!page || from !== previous.from || to !== previous.to || forceRefresh) {

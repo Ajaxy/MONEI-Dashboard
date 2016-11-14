@@ -20,7 +20,7 @@
       performance = [],
 
       query = arguments[0],
-      methodInvoked = (typeof query == 'string'),
+      methodInvoked = (typeof query === 'string'),
       queryArguments = [].slice.call(arguments, 1),
       returnedValue
       ;
@@ -388,11 +388,9 @@
               if (date) {
                 var forceSet = target.hasClass(className.today);
                 module.selectDate(date, forceSet);
-              }
-              else if (focusDate) {
+              } else if (focusDate) {
                 module.set.focusDate(focusDate);
-              }
-              else if (mode) {
+              } else if (mode) {
                 module.set.mode(mode);
               }
             },
@@ -509,8 +507,7 @@
               try {
                 document.createEvent('TouchEvent');
                 return true;
-              }
-              catch (e) {
+              } catch (e) {
                 return false;
               }
             },
@@ -725,22 +722,18 @@
             module.debug('Changing setting', name, value);
             if ($.isPlainObject(name)) {
               $.extend(true, settings, name);
-            }
-            else if (value !== undefined) {
+            } else if (value !== undefined) {
               settings[name] = value;
-            }
-            else {
+            } else {
               return settings[name];
             }
           },
           internal: function(name, value) {
             if ($.isPlainObject(name)) {
               $.extend(true, module, name);
-            }
-            else if (value !== undefined) {
+            } else if (value !== undefined) {
               module[name] = value;
-            }
-            else {
+            } else {
               return module[name];
             }
           },
@@ -748,8 +741,7 @@
             if (settings.debug) {
               if (settings.performance) {
                 module.performance.log(arguments);
-              }
-              else {
+              } else {
                 module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
                 module.debug.apply(console, arguments);
               }
@@ -759,8 +751,7 @@
             if (settings.verbose && settings.debug) {
               if (settings.performance) {
                 module.performance.log(arguments);
-              }
-              else {
+              } else {
                 module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
                 module.verbose.apply(console, arguments);
               }
@@ -810,8 +801,7 @@
                 console.groupCollapsed(title);
                 if (console.table) {
                   console.table(performance);
-                }
-                else {
+                } else {
                   $.each(performance, function(index, data) {
                     console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
                   });
@@ -830,7 +820,7 @@
               ;
             passedArguments = passedArguments || queryArguments;
             context = element || context;
-            if (typeof query == 'string' && object !== undefined) {
+            if (typeof query === 'string' && object !== undefined) {
               query = query.split(/[\. ]/);
               maxDepth = query.length - 1;
               $.each(query, function(depth, value) {
@@ -840,19 +830,15 @@
                   ;
                 if ($.isPlainObject(object[camelCaseValue]) && (depth != maxDepth)) {
                   object = object[camelCaseValue];
-                }
-                else if (object[camelCaseValue] !== undefined) {
+                } else if (object[camelCaseValue] !== undefined) {
                   found = object[camelCaseValue];
                   return false;
-                }
-                else if ($.isPlainObject(object[value]) && (depth != maxDepth)) {
+                } else if ($.isPlainObject(object[value]) && (depth != maxDepth)) {
                   object = object[value];
-                }
-                else if (object[value] !== undefined) {
+                } else if (object[value] !== undefined) {
                   found = object[value];
                   return false;
-                }
-                else {
+                } else {
                   module.error(error.method, query);
                   return false;
                 }
@@ -860,17 +846,14 @@
             }
             if ($.isFunction(found)) {
               response = found.apply(context, passedArguments);
-            }
-            else if (found !== undefined) {
+            } else if (found !== undefined) {
               response = found;
             }
             if ($.isArray(returnedValue)) {
               returnedValue.push(response);
-            }
-            else if (returnedValue !== undefined) {
+            } else if (returnedValue !== undefined) {
               returnedValue = [returnedValue, response];
-            }
-            else if (response !== undefined) {
+            } else if (response !== undefined) {
               returnedValue = response;
             }
             return found;
@@ -882,8 +865,7 @@
             module.initialize();
           }
           module.invoke(query);
-        }
-        else {
+        } else {
           if (instance !== undefined) {
             instance.invoke('destroy');
           }

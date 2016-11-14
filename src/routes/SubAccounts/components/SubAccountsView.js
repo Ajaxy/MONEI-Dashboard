@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import classNames from './SubAccountsView.scss'
+import classNames from './SubAccountsView.scss';
 import SubAccountItem from './SubAccountItem';
 import Loader from 'components/Loader';
 
