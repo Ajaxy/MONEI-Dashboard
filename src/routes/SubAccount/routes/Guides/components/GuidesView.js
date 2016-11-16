@@ -58,10 +58,12 @@ const GuidesView = ({
       }
     </section>
     {selectedPlatform === 0 && <div className="ui center aligned vertical segment">
-      <p>Your platform is not here?&nbsp;
+      <p>
+        Your platform is not here? {' '}
         <a href="#" onClick={showNewMessage}>Contact us!</a>
       </p>
-      <p>Are you hot on building your own MONEI integration?&nbsp;
+      <p>
+        Are you hot on building your own MONEI integration? {' '}
         <a href="https://docs.monei.net/" target="_blank">Click here to read the API docs!</a>
       </p>
     </div>}

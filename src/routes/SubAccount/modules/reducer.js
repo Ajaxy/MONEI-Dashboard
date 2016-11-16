@@ -6,7 +6,8 @@ export const stateKey = 'activeChannel';
 const selectedPlatform = (state = 0, action) => {
   switch (action.type) {
     case types.UPDATE_SELECTED_PLATFORM:
-      return action.platform || 0;
+      console.log(action);
+      return action.platform;
     default:
       return state;
   }

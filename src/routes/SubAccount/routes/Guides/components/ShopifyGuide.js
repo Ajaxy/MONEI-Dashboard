@@ -3,9 +3,11 @@ import shopifyScreenshot from 'static/shopify-screenshot.png';
 
 const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}) => (
   <div className="ui vertical segment">
-    <p>Open your Shopify Dashboard and go to the section <strong>Settings → Payments → Accept Credit
+    <p>
+      Open your Shopify Dashboard and go to the section <strong>Settings → Payments → Accept Credit
       Cards.</strong>&nbsp;
-      Go to <strong>Acept Credit Cards</strong> section.</p>
+      Go to <strong>Acept Credit Cards</strong> section.
+    </p>
     <p>Select <strong>MONEI</strong> from the menu <strong>Select a Credit Card Gateway</strong>.</p>
     <img className="ui fluid image shopify-screenshot" src={shopifyScreenshot} alt="shopify-screenshot" />
     <p>Paste your credentials and set the checkboxes as shown below. You can copy each field below to the clipboard by
@@ -18,15 +20,14 @@ const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxM
           money
           changing hands.
           Transaction fees are not charged by Shopify</p>
-        {!isInSandboxMode ?
-          <p className="shopify-text"><b>To activate the test mode please enable the "Test mode" switch in the header of
-            your dashboard</b></p> : null}
-        { isInSandboxMode && isMerchant ?
-          <p className="shopify-text">
-            <b>To activate a production mode please disable "Test mode" switch in the header of your dashboard</b>
-          </p>
-          : null
-        }
+        {!isInSandboxMode &&
+        <p className="shopify-text">
+          <b>To activate the test mode please enable the "Test mode" switch in the header of
+            your dashboard</b>
+        </p>}
+        {isInSandboxMode && isMerchant && <p className="shopify-text">
+          <b>To activate a production mode please disable "Test mode" switch in the header of your dashboard</b>
+        </p>}
         <p className="shopify-text">For testing you can use <a
           href="https://docs.monei.net/reference/parameters#test-accounts" target="_blank"><b>Credit Card Test
           Accounts</b></a> or any valid credit card.</p>
@@ -57,11 +58,13 @@ const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxM
           </div>
           <div className="shopify-form__row">
             <label>Login</label>
-            <input type="text" value={subAccount.login} readOnly onClick={() => copyToClipboard(subAccount.login, 'Login')} />
+            <input type="text" value={subAccount.login} readOnly
+                   onClick={() => copyToClipboard(subAccount.login, 'Login')} />
           </div>
           <div className="shopify-form__row">
             <label>Password</label>
-            <input type="text" value={subAccount.pwd} readOnly onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
+            <input type="text" value={subAccount.pwd} readOnly
+                   onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
           </div>
 
           <h3 className="shopify-form__heading">Cards accepted</h3>
