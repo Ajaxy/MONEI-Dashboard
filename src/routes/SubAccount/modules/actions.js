@@ -1,3 +1,4 @@
+import * as types from './types';
 import {copyTextToClipboard} from 'lib/utils';
 import {addMessage} from 'modules/messages/actions';
 
@@ -8,3 +9,8 @@ export const copyToClipboard = (text, name) => dispatch => {
     style: 'success'
   }));
 };
+
+export const selectPlatform = (platform = 0) => ({
+  type: types.UPDATE_SELECTED_PLATFORM,
+  platform
+});

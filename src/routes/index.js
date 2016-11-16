@@ -28,7 +28,7 @@ export const createRoutes = (store) => ({
     ProfileRoute(store),
     ChannelRoute(store),
     SubAccountsRoute(store),
-    SubAccountRoute,
+    SubAccountRoute(store),
     GettingStartedRoute,
     NotFoundRoute
   ]

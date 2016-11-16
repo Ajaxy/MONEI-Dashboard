@@ -8,22 +8,26 @@ import shopifyLogo from 'static/shopify-logo.png';
 import woocommerceLogo from 'static/woocommerce-logo.png';
 import prestashopLogo from 'static/prestashop-logo.png';
 
+const showNewMessage = (e) => {
+  e.preventDefault();
+  window.Intercom('showNewMessage');
+};
+
 const ChannelGuide = ({
   channel,
   copy,
   selectedPlatform,
   selectPlatform,
-  showNewMessage,
   isInSandboxMode,
   isMerchant
 }) => (
   <div className="ui segments">
     <div className="ui basic segment">
-      { selectedPlatform === 0 ?
-        <h2 className="ui header">Select your platform</h2>
-        :
-        <div className="ui massive breadcrumb">
-          <a className="section" onClick={() => selectPlatform(0)}>Select your platform</a>
+        <div className="ui breadcrumb">
+          { selectedPlatform === 0
+            ? <span className="selection">Select your platform</span>
+            : <a className="section" onClick={() => selectPlatform(0)}>Select your platform</a>
+          }
           <i className="right chevron icon divider" />
           { selectedPlatform === 1 ?
             <span className="active section">WooCommerce</span>
@@ -34,8 +38,6 @@ const ChannelGuide = ({
             : null
           }
         </div>
-      }
-
       { selectedPlatform === 0 ?
         <div className="ui three column grid">
           <div className="row">
