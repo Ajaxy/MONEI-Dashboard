@@ -3,6 +3,7 @@ import SubAccount from './containers/SubAccountContainer';
 import RequireAuth from 'containers/RequireAuth';
 import OverviewRoute from './routes/Overview';
 import GuidesRoute from './routes/Guides';
+import ZapierRoute from './routes/Zapier';
 import reducer, {stateKey} from './modules/reducer';
 
 export default (store) => {
@@ -12,7 +13,8 @@ export default (store) => {
     component: RequireAuth(SubAccount),
     indexRoute: OverviewRoute,
     childRoutes: [
-      GuidesRoute
+      GuidesRoute,
+      ZapierRoute
     ]
   }
 };
