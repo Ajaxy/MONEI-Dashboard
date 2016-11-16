@@ -2,6 +2,8 @@ import * as types from './types';
 import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
 
+export const stateKey = 'webhooks';
+
 const ids = (state = [], action) => {
   switch (action.type) {
     case types.FETCH_WEBHOOKS_REQUEST:
@@ -31,6 +33,15 @@ const byId = (state = {}, action) => {
       const newState = {...state};
       delete newState[action.webhookId];
       return newState;
+    default:
+      return state;
+  }
+};
+
+const isUpToDate = (state = false, action) => {
+  switch (action.type) {
+    case types.FETCH_WEBHOOKS_SUCCESS:
+      return true;
     default:
       return state;
   }
@@ -118,6 +129,7 @@ const isSaveModalOpen = (state = false, action) => {
 export default combineReducers({
   ids,
   byId,
+  isUpToDate,
   activeId,
   isDeleteModalOpen,
   isSaveModalOpen,

@@ -4,6 +4,7 @@ import RequireAuth from 'containers/RequireAuth';
 import OverviewRoute from './routes/Overview';
 import GuidesRoute from './routes/Guides';
 import ZapierRoute from './routes/Zapier';
+import WebhooksRoute from './routes/Webhooks';
 import reducer, {stateKey} from './modules/reducer';
 
 export default (store) => {
@@ -14,7 +15,8 @@ export default (store) => {
     indexRoute: OverviewRoute,
     childRoutes: [
       GuidesRoute,
-      ZapierRoute
+      ZapierRoute,
+      WebhooksRoute(store)
     ]
   }
 };

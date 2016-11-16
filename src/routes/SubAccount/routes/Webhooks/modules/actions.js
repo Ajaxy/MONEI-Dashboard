@@ -1,28 +1,33 @@
 import * as api from 'lib/api';
 import * as types from './types';
 import * as schema from 'schema/webhooks';
+import {getIsUpToDate} from './selectors';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
-export const fetchWebhooks = (channelId) => async dispatch => {
-  dispatch({type: types.FETCH_WEBHOOKS_REQUEST});
-  try {
-    const data = await api.fetchWebhooks(channelId);
-    const normalized = normalize(data.items, schema.arrayOfWebhooks);
-    dispatch({
-      type: types.FETCH_WEBHOOKS_SUCCESS,
-      byId: normalized.entities.webhooks,
-      ids: normalized.result
-    });
-  } catch (error) {
-    dispatch({type: types.FETCH_WEBHOOKS_FAIL});
-    dispatch(addMessage({
-      text: error,
-      onRetry() {
-        dispatch(fetchWebhooks(channelId));
-      }
-    }));
-  }
+export const fetchWebhooks = (subAccountId) => {
+  return async (dispatch, getState) => {
+    const isUpToDate = getIsUpToDate(getState());
+    if (isUpToDate) return;
+    dispatch({type: types.FETCH_WEBHOOKS_REQUEST});
+    try {
+      const data = await api.fetchWebhooks(subAccountId);
+      const normalized = normalize(data.items, schema.arrayOfWebhooks);
+      dispatch({
+        type: types.FETCH_WEBHOOKS_SUCCESS,
+        byId: normalized.entities.webhooks,
+        ids: normalized.result
+      });
+    } catch (error) {
+      dispatch({type: types.FETCH_WEBHOOKS_FAIL});
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(fetchWebhooks(subAccountId));
+        }
+      }));
+    }
+  };
 };
 
 export const saveWebhookStart = () => ({
