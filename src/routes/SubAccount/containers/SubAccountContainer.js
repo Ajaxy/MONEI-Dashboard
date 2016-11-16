@@ -6,9 +6,19 @@ import {getActiveSubAccount, getIsFetching, getIsUpToDate} from 'routes/SubAccou
 import SubAccountView from '../components/SubAccountView';
 
 class Channel extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
   componentWillMount() {
     if (!this.props.isUpToDate) {
       this.props.fetchSubAccounts();
+    }
+  }
+
+  componentWillReceiveProps(np) {
+    if (np.isSandboxMode !== this.props.isSandboxMode) {
+      this.context.router.replace('/sub-accounts');
     }
   }
 
