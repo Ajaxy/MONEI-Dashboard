@@ -10,7 +10,7 @@ import prestashopLogo from 'static/prestashop-logo.png';
 
 const GuidesView = ({
   subAccount,
-  copy,
+  copyToClipboard,
   selectedPlatform,
   selectPlatform,
   showNewMessage,
@@ -51,7 +51,7 @@ const GuidesView = ({
         : selectedPlatform === 1 ?
         <WooCommerceGuide />
         : selectedPlatform === 2 ?
-        <ShopifyGuide {...{subAccount, copy, showNewMessage, isInSandboxMode, isMerchant}} />
+        <ShopifyGuide {...{subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}} />
         : selectedPlatform === 3 ?
         <PrestaShopGuide />
         : null

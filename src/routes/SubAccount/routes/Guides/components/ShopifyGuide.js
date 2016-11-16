@@ -1,12 +1,13 @@
 import React, {PropTypes} from 'react';
+import shopifyScreenshot from 'static/shopify-screenshot.png';
 
-const ShopifyGuide = ({subAccount, copy, showNewMessage, isInSandboxMode, isMerchant}) => (
+const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}) => (
   <div className="ui vertical segment">
     <p>Open your Shopify Dashboard and go to the section <strong>Settings → Payments → Accept Credit
       Cards.</strong>&nbsp;
       Go to <strong>Acept Credit Cards</strong> section.</p>
     <p>Select <strong>MONEI</strong> from the menu <strong>Select a Credit Card Gateway</strong>.</p>
-    <img className="ui fluid image shopify-screenshot" src="/shopify-screenshot.png" alt="shopify-screenshot" />
+    <img className="ui fluid image shopify-screenshot" src={shopifyScreenshot} alt="shopify-screenshot" />
     <p>Paste your credentials and set the checkboxes as shown below. You can copy each field below to the clipboard by
       clicking on it.</p>
     <p>The data below is real and specific for your Shopify store. Click on the <strong>Activate</strong> button and
@@ -47,20 +48,20 @@ const ShopifyGuide = ({subAccount, copy, showNewMessage, isInSandboxMode, isMerc
           <div className="shopify-form__row">
             <label>Sender ID</label>
             <input type="text" value={subAccount.sender} readOnly
-                   onClick={() => copy(subAccount.sender, 'Sender ID')} />
+                   onClick={() => copyToClipboard(subAccount.sender, 'Sender ID')} />
           </div>
           <div className="shopify-form__row">
             <label>Channel ID</label>
             <input type="text" value={subAccount.channel} readOnly
-                   onClick={() => copy(subAccount.channel, 'Channel ID')} />
+                   onClick={() => copyToClipboard(subAccount.channel, 'Channel ID')} />
           </div>
           <div className="shopify-form__row">
             <label>Login</label>
-            <input type="text" value={subAccount.login} readOnly onClick={() => copy(subAccount.login, 'Login')} />
+            <input type="text" value={subAccount.login} readOnly onClick={() => copyToClipboard(subAccount.login, 'Login')} />
           </div>
           <div className="shopify-form__row">
             <label>Password</label>
-            <input type="text" value={subAccount.pwd} readOnly onClick={() => copy(subAccount.pwd, 'Password')} />
+            <input type="text" value={subAccount.pwd} readOnly onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
           </div>
 
           <h3 className="shopify-form__heading">Cards accepted</h3>
