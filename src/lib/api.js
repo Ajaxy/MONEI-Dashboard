@@ -136,11 +136,11 @@ export const createZapierApiToken = (channelId) =>
 export const fetchWebhooks = (channelId) =>
   apiClient.get('webhooks', {params: {channelId, slug: 'transaction'}});
 
-export const saveWebhook = (webhook) =>
-  apiClient.post('webhooks', {...webhook});
+export const createWebhook = (webhook) =>
+  apiClient.post('webhooks', webhook);
 
 export const updateWebhook = (webhook) =>
-  apiClient.patch(`webhooks/${webhook.id}`, {...webhook});
+  apiClient.patch(`webhooks/${webhook.id}`, webhook);
 
 export const deleteWebhook = (webhookId) =>
   apiClient.delete(`webhooks/${webhookId}`);

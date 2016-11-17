@@ -27,21 +27,21 @@ const UserView = ({
         </span>
       </h1>
       {isFetching ? <Loader active={isFetching} inline={false} /> :
-      <div className="ui segments">
-        <div className="ui segment padded-bottom">
-          <UserHeader {...{user, verifyUser, loginAsUser, isUpdating}} />
-          <h4 className="ui horizontal divider header">
-            <i className="bar chart icon" />
+        <div className="ui segments">
+          <div className="ui segment padded-bottom">
+            <UserHeader {...{user, verifyUser, loginAsUser, isUpdating}} />
+            <h4 className="ui horizontal divider header">
+              <i className="bar chart icon" />
               Personal Data
             </h4>
-          <PersonalDataView user={user} />
-          <h4 className="ui horizontal divider header">
-            <i className="bar chart icon" />
+            <PersonalDataView user={user} />
+            <h4 className="ui horizontal divider header">
+              <i className="bar chart icon" />
               Admin Data
             </h4>
-          <AdminDataForm {...{user, updateUser, isUpdating}} />
+            <AdminDataForm {...{user, updateUser, isUpdating}} />
+          </div>
         </div>
-      </div>
       }
     </section>
   );

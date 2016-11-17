@@ -18,25 +18,25 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
       <div className="right floated content">
         <div className="ui buttons">
           <Link
-            to={`/channels/${subAccount.channel}/guides`}
+            to={`/sub-accounts/${subAccount.channel}`}
             className="ui button">
-            Ecommerce Guides
+            Overview
           </Link>
           <DropDownMenu className="button icon floating">
             <i className="dropdown icon" />
             <div className="menu">
               <Link
-                to={`/channels/${subAccount.channel}/settings`}
+                to={`/sub-accounts/${subAccount.channel}/guides`}
                 className="item">
-                Settings
+                Ecommerce Guides
               </Link>
               <Link
-                to={`/channels/${subAccount.channel}/zapier`}
+                to={`/sub-accounts/${subAccount.channel}/zapier`}
                 className="item">
                 Zapier
               </Link>
               <Link
-                to={`/channels/${subAccount.channel}/webhooks`}
+                to={`/sub-accounts/${subAccount.channel}/webhooks`}
                 className="item">
                 Webhooks
               </Link>
@@ -47,7 +47,7 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
       <i className={iconClass} />
       <div className="content">
         <h3 className="header">
-          <Link to={`/channels/${subAccount.channel}/guides`}>
+          <Link to={`/sub-accounts/${subAccount.channel}`}>
             {subAccount.name}
           </Link>
         </h3>
