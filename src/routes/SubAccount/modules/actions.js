@@ -16,21 +16,22 @@ export const selectPlatform = (platform = 0) => ({
   platform
 });
 
-export const createZapierToken = (channelId) => {
+export const createZapierToken = (subAccountId) => {
   return async dispatch => {
     dispatch({type: types.CREATE_ZAPIER_TOKEN_REQUEST});
     try {
-      const token = await api.createZapierApiToken(channelId);
+      const token = await api.createZapierApiToken(subAccountId);
       dispatch({
         type: types.CREATE_ZAPIER_TOKEN_SUCCESS,
-        token
+        token,
+        subAccountId
       });
     } catch (error) {
       dispatch({type: types.CREATE_ZAPIER_TOKEN_FAIL});
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(createZapierToken(channelId));
+          dispatch(createZapierToken(subAccountId));
         }
       }));
     }

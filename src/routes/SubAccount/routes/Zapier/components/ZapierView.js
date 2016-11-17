@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 const ZAPIER_INSTRUCTIONS_URL = 'https://s3.amazonaws.com/microapps-open-assets/MONEI-Zapier-Instruction.pdf';
-const ChannelZapier = ({zapierToken, isFetching, copyToClipboard}) => (
+const ChannelZapier = ({subAccount, isFetching, copyToClipboard}) => (
   <section className="ui vertical segment">
     <p>
       <a href="https://zapier.com/" target="_blank">Zapier</a> {' '}
@@ -12,10 +12,8 @@ const ChannelZapier = ({zapierToken, isFetching, copyToClipboard}) => (
         <div className="field">
           <label>API Token</label>
           <textarea
-            onClick={() => copyToClipboard(zapierToken, 'Zapier API Token')}
-            rows="4" readOnly>
-            {zapierToken}
-          </textarea>
+            onClick={() => copyToClipboard(subAccount.zapierToken, 'Zapier API Token')}
+            rows="4" readOnly value={subAccount.zapierToken || 'Loading...'} />
         </div>
       </div>
     </div>

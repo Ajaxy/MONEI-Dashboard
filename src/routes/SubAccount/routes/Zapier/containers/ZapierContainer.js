@@ -6,8 +6,8 @@ import ZapierView from '../components/ZapierView';
 
 class Zapier extends Component {
   componentWillMount() {
-    const {subAccount, zapierToken, createZapierToken} = this.props;
-    if (!zapierToken) {
+    const {subAccount, createZapierToken} = this.props;
+    if (!subAccount.zapierToken) {
       createZapierToken(subAccount.channel);
     }
   }
@@ -19,7 +19,6 @@ class Zapier extends Component {
 
 const mapStateToProps = (state, props) => ({
   subAccount: selectors.getSubAccount(state),
-  zapierToken: selectors.getZapierToken(state),
   isFetching: selectors.getIsCreatingZapierToken(state)
 });
 

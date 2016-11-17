@@ -10,11 +10,6 @@ export const getSelectedPlatform = createSelector(
   subAccount => subAccount.selectedPlatform
 );
 
-export const getZapierToken = createSelector(
-  subAccountSelector,
-  subAccount => subAccount.zapierToken
-);
-
 export const getIsCreatingZapierToken = createSelector(
   subAccountSelector,
   subAccount => subAccount.isCreatingZapierToken
