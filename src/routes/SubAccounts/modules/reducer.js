@@ -1,6 +1,6 @@
 import * as types from './types';
 import {SET_PROFILE_SANDBOX} from 'modules/profile/types';
-import {CREATE_ZAPIER_TOKEN_SUCCESS} from 'routes/SubAccount/modules/types'
+import {CREATE_ZAPIER_TOKEN_SUCCESS} from 'routes/SubAccount/modules/types';
 import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
 

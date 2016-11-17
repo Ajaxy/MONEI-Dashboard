@@ -53,21 +53,21 @@ class InfiniteTable extends Component {
           ]}
           footer={
             this.props.footer ? this.props.footer :
-            <tr>
-              <th colSpan={numColumns - 1} ><h3>
-                {count ? `Showing ${count} ` : ''}
-                {total ? `of ${total}` : count ? `items` : ''}
-              </h3></th>
-              <th className="right aligned">
-                {(!isLastPage && !autoLoad) ?
-                  <button
-                    className="ui basic button center"
-                    disabled={isFetching}
-                    onClick={onLoadMore}
+              <tr>
+                <th colSpan={numColumns - 1} ><h3>
+                  {count ? `Showing ${count} ` : ''}
+                  {total ? `of ${total}` : count ? `items` : ''}
+                </h3></th>
+                <th className="right aligned">
+                  {(!isLastPage && !autoLoad) ?
+                    <button
+                      className="ui basic button center"
+                      disabled={isFetching}
+                      onClick={onLoadMore}
                   >Show more</button>
                   : null}
-              </th>
-            </tr>
+                </th>
+              </tr>
           }
         />
       </div>

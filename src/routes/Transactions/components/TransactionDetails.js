@@ -53,7 +53,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
             <td>
               {isFailed(result.code) ?
                 <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p> :
-                <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
+                  <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
               }
               <h5 className={cx('ui header', classNames.noMarginTop)}>
                 <div className="sub header">{result.description}</div>

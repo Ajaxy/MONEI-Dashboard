@@ -27,9 +27,9 @@ const GuidesView = ({
       { selectedPlatform === 1 ?
         <span className="active section">WooCommerce</span>
         : selectedPlatform === 2 ?
-        <span className="active section">Shopify</span>
+          <span className="active section">Shopify</span>
         : selectedPlatform === 3 ?
-        <span className="active section">PrestaShop</span>
+          <span className="active section">PrestaShop</span>
         : null
       }
     </div>
@@ -49,11 +49,11 @@ const GuidesView = ({
           </div>
         </div>
         : selectedPlatform === 1 ?
-        <WooCommerceGuide />
+          <WooCommerceGuide />
         : selectedPlatform === 2 ?
-        <ShopifyGuide {...{subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}} />
+          <ShopifyGuide {...{subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}} />
         : selectedPlatform === 3 ?
-        <PrestaShopGuide />
+          <PrestaShopGuide />
         : null
       }
     </section>

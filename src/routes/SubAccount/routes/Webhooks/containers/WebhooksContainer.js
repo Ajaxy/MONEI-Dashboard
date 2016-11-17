@@ -11,7 +11,7 @@ class ChannelWebhooksContainer extends Component {
   }
 
   render() {
-    return <WebhooksView  {...this.props} />;
+    return <WebhooksView {...this.props} />;
   }
 }
 

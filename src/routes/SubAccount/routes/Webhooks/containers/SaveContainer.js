@@ -28,7 +28,7 @@ const mapStateToProps = (state, props) => {
     initialValues: webhook,
     isOpen: selectors.getIsSaveModalOpen(state),
     isSaving: selectors.getIsSaving(state)
-  }
+  };
 };
 
 export default reduxForm({

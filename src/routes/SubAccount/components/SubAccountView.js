@@ -17,7 +17,7 @@ const SubAccountView = ({subAccount, subAccountId, isSandboxMode, children}) => 
         {' '}
         {isSandboxMode && <span className="text orange">(only for testing purposes)</span>}
       </h1>
-      <SubAccountHeader id={subAccountId}/>
+      <SubAccountHeader id={subAccountId} />
       {children}
     </section>
   );
