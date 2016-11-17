@@ -11,6 +11,10 @@ class HeaderContainer extends Component {
     router: PropTypes.object
   };
 
+  static propTypes = {
+    isInSandboxMode: PropTypes.bool.isRequired
+  };
+
   viewOnboarding = () => {
     trackEvent('monei_verification_started');
     this.context.router.push('/getting-started');

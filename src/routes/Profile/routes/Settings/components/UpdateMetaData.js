@@ -87,7 +87,7 @@ const UpdateMetaData = ({
           <label>
             {isCompany ? 'Upload document of company incorporation' : 'Upload your identity document' }
           </label>
-          <DocumentUpload />
+          <DocumentUpload disabled={disabled} />
         </div>
         <br />
         <Input {...store_url} disabled={disabled} label="Your store website url" />

@@ -19,7 +19,7 @@ const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxM
         <p className="shopify-text">Test Mode allows you to test the functionality of your payment gateway without any
           money
           changing hands.
-          Tra</p>
+        </p>
         {!isInSandboxMode &&
         <p className="shopify-text">
           <b>To activate the test mode please enable the "Test mode" switch in the header of

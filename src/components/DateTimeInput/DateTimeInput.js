@@ -55,12 +55,16 @@ Input.propTypes = {
     PropTypes.bool
   ]),
   fieldClass: PropTypes.string,
+  inputClass: PropTypes.string,
   error: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.string
   ]),
   touched: PropTypes.bool,
   invalid: PropTypes.bool,
+  fluid: PropTypes.bool,
+  closeOnSelect: PropTypes.bool,
+  dateFormat: PropTypes.string,
   mask: PropTypes.string
 };
 

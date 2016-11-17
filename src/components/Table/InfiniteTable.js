@@ -37,35 +37,39 @@ class InfiniteTable extends Component {
   render() {
     const {children, numColumns, count, total, autoLoad, isLastPage, isFetching, onLoadMore} = this.props;
     return (
-      <div ref={(s) => { this.element = $(s); }}>
+      <div ref={(s) => {
+        this.element = $(s);
+      }}>
         <Table
           {...this.props}
           children={[
             ...children,
-            ((isFetching) ? (
-              <tr key={typeof children === 'array' ?
+            ((isFetching)
+              ? (<tr key={typeof children === 'array' ?
                 children.length : 999999}>
                 <td colSpan={numColumns}>
                   <Loader active inline />
                 </td>
               </tr>
-            ) : null)
+            )
+              : null)
           ]}
           footer={
             this.props.footer ? this.props.footer :
               <tr>
-                <th colSpan={numColumns - 1} ><h3>
+                <th colSpan={numColumns - 1}><h3>
                   {count ? `Showing ${count} ` : ''}
                   {total ? `of ${total}` : count ? `items` : ''}
                 </h3></th>
                 <th className="right aligned">
-                  {(!isLastPage && !autoLoad) ?
-                    <button
-                      className="ui basic button center"
-                      disabled={isFetching}
-                      onClick={onLoadMore}
-                  >Show more</button>
-                  : null}
+                  {(!isLastPage && !autoLoad)
+                    ? <button
+                    className="ui basic button center"
+                    disabled={isFetching}
+                    onClick={onLoadMore}>
+                    Show more
+                  </button>
+                    : null}
                 </th>
               </tr>
           }
