@@ -30,8 +30,9 @@ export const fetchWebhooks = (subAccountId) => {
   };
 };
 
-export const saveWebhookStart = () => ({
+export const saveWebhookStart = (webhookId) => ({
   type: types.SAVE_WEBHOOK_START,
+  webhookId
 });
 
 export const saveWebhookCancel = () => ({
@@ -41,7 +42,7 @@ export const saveWebhookCancel = () => ({
 export const saveWebhook = (webhook) => async dispatch => {
   dispatch({type: types.SAVE_WEBHOOK_REQUEST});
   try {
-    const data = await api[webhook.id ? 'updateWebhook' : 'saveWebhook'](webhook);
+    const data = await api[webhook.id ? 'updateWebhook' : 'createWebhook'](webhook);
     const normalized = normalize(data, schema.webhook);
     dispatch({
       type: types.SAVE_WEBHOOK_SUCCESS,
