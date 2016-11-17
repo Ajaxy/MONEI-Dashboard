@@ -24,8 +24,8 @@ class Document extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  disabled: getIsVerificationRequested(state),
+const mapStateToProps = (state, ownProps) => ({
+  disabled: getIsVerificationRequested(state) || ownProps.disabled,
   documentName: getDocumentName(state),
   documentUrl: selectors.getFileUrl(state),
   isUploading: selectors.getIsFileUploading(state)
