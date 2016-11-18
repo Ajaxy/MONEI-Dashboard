@@ -7,14 +7,16 @@ import UserView from '../components/UserView';
 class User extends Component {
   static propTypes = {
     fetchUser: PropTypes.func.isRequired,
+    fetchSubAccounts: PropTypes.func.isRequired,
     verifyUser: PropTypes.func.isRequired,
     loginAsUser: PropTypes.func.isRequired,
     userId: PropTypes.string.isRequired
   };
 
   componentDidMount() {
-    const {userId} = this.props;
-    this.props.fetchUser(userId, true);
+    const {userId, fetchUser, fetchSubAccounts} = this.props;
+    fetchUser(userId, true);
+    fetchSubAccounts(userId);
   }
 
   render() {
@@ -25,9 +27,12 @@ class User extends Component {
 const mapStateToProps = (state, props) => ({
   user: selectors.getUser(state),
   userMetadata: selectors.getUserMetadata(state),
+  subAccounts: selectors.getSubAccounts(state),
   isFetching: selectors.getIsFetching(state),
   isUpdating: selectors.getIsUpdating(state),
   isUpToDate: selectors.getIsUpToDate(state),
+  isSyncing: selectors.getIsSyncing(state),
+  isFetchingSubAccounts: selectors.getIsFetchingSubAccounts(state),
   userId: props.params.userId
 });
 

@@ -21,7 +21,7 @@ const Button = ({
     className={cx('ui button', className,
     {loading, active, green: primary, positive, negative, basic, icon})}
     type={type}
-    disabled={disabled}
+    disabled={disabled || loading}
     onClick={onClick}>
     {children}
   </button>
