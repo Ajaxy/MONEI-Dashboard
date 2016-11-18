@@ -123,6 +123,12 @@ export const impersonateUser = (userId, {redirect_uri}) =>
 export const updateUserMetaData = (userId, data) =>
   authApiClient.patch(`users/${userId}`, {user_metadata: data});
 
+export const syncUser = (userId, mid) =>
+  apiClient.post(`users/${userId}/sync`, {mid});
+
+export const fetchUserSubAccounts = (userId) =>
+  apiClient.get(`users/${userId}/channels`);
+
 // Channels
 
 export const fetchSubAccounts = (sandbox) =>

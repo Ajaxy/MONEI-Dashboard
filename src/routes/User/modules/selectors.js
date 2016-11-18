@@ -1,9 +1,8 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
-import {PAGE_LIMIT} from 'lib/constants';
 import {getActiveUser} from 'routes/Users/modules/selectors';
 
-const usersSelector = state => state[stateKey];
+const userSelector = state => state[stateKey];
 const defaultUserMetadata = {profile_type: 'individual'};
 
 export const getUser = createSelector(
@@ -25,16 +24,31 @@ export const getUserMetadata = createSelector(
 );
 
 export const getIsFetching = createSelector(
-  usersSelector,
-  users => users.isFetching
+  userSelector,
+  user => user.isFetching
 );
 
 export const getIsUpdating = createSelector(
-  usersSelector,
-  users => users.isUpdating
+  userSelector,
+  user => user.isUpdating
 );
 
 export const getIsUpToDate = createSelector(
-  usersSelector,
-  users => users.isUpToDate
+  userSelector,
+  user => user.isUpToDate
+);
+
+export const getSubAccounts = createSelector(
+  userSelector,
+  user => user.subAccountIds.map(id => user.subAccountsById[id])
+);
+
+export const getIsSyncing = createSelector(
+  userSelector,
+  user => user.isSyncing
+);
+
+export const getIsFetchingSubAccounts = createSelector(
+  userSelector,
+  user => user.isFetchingSubAccounts
 );

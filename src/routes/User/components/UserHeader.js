@@ -13,10 +13,9 @@ const UserHeader = ({user, verifyUser, loginAsUser, isUpdating}) => (
     {(user.user_metadata.verification_requested && typeof verifyUser === 'function') ?
       <Button
         primary
-        disabled={isUpdating}
+        loading={isUpdating}
         onClick={() => verifyUser(user.user_id)}
-        className={cx('right floated green', classNames.button)}
-      >
+        className={cx('right floated green', classNames.button)}>
         Verify User
       </Button>
       : null
@@ -24,10 +23,9 @@ const UserHeader = ({user, verifyUser, loginAsUser, isUpdating}) => (
     {typeof loginAsUser === 'function' ?
       <Button
         primary
-        disabled={isUpdating}
+        loading={isUpdating}
         onClick={() => loginAsUser(user.user_id)}
-        className={cx('right floated green', classNames.button)}
-      >
+        className={cx('right floated green', classNames.button)}>
         Login as User
       </Button>
       : null
