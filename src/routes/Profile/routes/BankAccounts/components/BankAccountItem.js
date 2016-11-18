@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import classNames from './BankAccountItem.scss';
 
-const ImportsTableRow = ({isVerified, last4Digits, country, currency, id, onDelete}) => {
+const ImportsTableRow = ({isVerified, last4Digits, country, currency, id, onDelete, isDeletable}) => {
   const iconClass = cx(
     classNames.icon,
     'large middle aligned icon',
@@ -15,7 +15,7 @@ const ImportsTableRow = ({isVerified, last4Digits, country, currency, id, onDele
     <div className="column">
       <div className={cx('ui icon message', classNames.bankAccount)}>
         <i className={iconClass} />
-        <i className="close icon red" onClick={() => onDelete(id)} />
+        {isDeletable && <i className="close icon red" onClick={() => onDelete(id)} />}
         <div className="content">
           <div className="header text grey">
             <small className={classNames.dots}>{new Array(21).join('•')}</small>

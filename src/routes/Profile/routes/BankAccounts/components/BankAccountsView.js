@@ -34,6 +34,7 @@ const BankAccountsView = ({
         <div className="ui stackable three column grid">
           {bankAccounts.length > 0 ? bankAccounts.map((bankAccount, i) => (<BankAccountItem
             {...bankAccount}
+            isDeletable={bankAccounts.length > 1}
             onDelete={deleteBankAccountStart}
             key={i} />))
             : isUpToDate && <Empty />
