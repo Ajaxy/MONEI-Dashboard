@@ -10,7 +10,8 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
     'large middle aligned icon',
     {
       'green check circle': subAccount.state === 'LIVE' && !isSandboxMode,
-      'grey info circle': subAccount.state === 'TEST' || isSandboxMode
+      'grey info circle': subAccount.state === 'TEST' || isSandboxMode,
+      'grey ban': subAccount.state === 'DISABLED'
     }
   );
   return (
@@ -18,7 +19,7 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
       <div className="right floated content">
         <div className="ui buttons">
           <Link
-            to={`/sub-accounts/${subAccount.channel}`}
+            to={`/sub-accounts/${subAccount.id}`}
             className="ui button">
             Overview
           </Link>
@@ -26,19 +27,24 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
             <i className="dropdown icon" />
             <div className="menu">
               <Link
-                to={`/sub-accounts/${subAccount.channel}/guides`}
+                to={`/sub-accounts/${subAccount.id}/guides`}
                 className="item">
                 Ecommerce Guides
               </Link>
               <Link
-                to={`/sub-accounts/${subAccount.channel}/zapier`}
+                to={`/sub-accounts/${subAccount.id}/zapier`}
                 className="item">
                 Zapier
               </Link>
               <Link
-                to={`/sub-accounts/${subAccount.channel}/webhooks`}
+                to={`/sub-accounts/${subAccount.id}/webhooks`}
                 className="item">
                 Webhooks
+              </Link>
+              <Link
+                to={`/sub-accounts/${subAccount.id}/settings`}
+                className="item">
+                Settings
               </Link>
             </div>
           </DropDownMenu>
@@ -47,8 +53,8 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
       <i className={iconClass} />
       <div className="content">
         <h3 className="header">
-          <Link to={`/sub-accounts/${subAccount.channel}`}>
-            {subAccount.name}
+          <Link to={`/sub-accounts/${subAccount.id}`}>
+            {subAccount.customName}
           </Link>
         </h3>
         <small className="description">

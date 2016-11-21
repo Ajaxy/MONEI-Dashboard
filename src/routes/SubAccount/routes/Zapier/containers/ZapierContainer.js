@@ -8,7 +8,7 @@ class Zapier extends Component {
   componentWillMount() {
     const {subAccount, createZapierToken} = this.props;
     if (!subAccount.zapierToken) {
-      createZapierToken(subAccount.channel);
+      createZapierToken(subAccount.id);
     }
   }
 

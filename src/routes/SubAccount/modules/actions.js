@@ -2,6 +2,8 @@ import * as types from './types';
 import * as api from 'lib/api';
 import {copyTextToClipboard} from 'lib/utils';
 import {addMessage} from 'modules/messages/actions';
+import * as schema from 'schema/subAccounts';
+import {normalize} from 'normalizr';
 
 export const copyToClipboard = (text, name) => dispatch => {
   copyTextToClipboard(text);
@@ -32,6 +34,34 @@ export const createZapierToken = (subAccountId) => {
         text: error,
         onRetry() {
           dispatch(createZapierToken(subAccountId));
+        }
+      }));
+    }
+  };
+};
+
+
+export const updateSubAccount = (subAccountId, data) => {
+  return async dispatch => {
+    dispatch({type: types.UPDATE_SUB_ACCOUNT_REQUEST});
+    try {
+      const subAccount = await api.updateSubAccount(subAccountId, data);
+      const normalized = normalize(subAccount, schema.subAccount);
+      dispatch({
+        type: types.UPDATE_SUB_ACCOUNT_SUCCESS,
+        byId: normalized.entities.subAccounts,
+        subAccountId: normalized.result
+      });
+      dispatch(addMessage({
+        text: 'Sub account was updated.',
+        style: 'success'
+      }));
+    } catch (error) {
+      dispatch({type: types.UPDATE_SUB_ACCOUNT_FAIL});
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(updateSubAccount(subAccountId, data));
         }
       }));
     }

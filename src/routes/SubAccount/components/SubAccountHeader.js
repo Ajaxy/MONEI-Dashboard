@@ -8,6 +8,7 @@ const SubAccountHeader = ({id}) => (
     <Link className="item" activeClassName="active" to={`/sub-accounts/${id}/guides`}>Ecommerce Guides</Link>
     <Link className="item" activeClassName="active" to={`/sub-accounts/${id}/zapier`}>Zapier</Link>
     <Link className="item" activeClassName="active" to={`/sub-accounts/${id}/webhooks`}>Webhooks</Link>
+    <Link className="item" activeClassName="active" to={`/sub-accounts/${id}/settings`}>Settings</Link>
   </div>
 );
 

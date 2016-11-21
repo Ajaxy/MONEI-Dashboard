@@ -1,8 +1,7 @@
 import * as types from './types';
 import {combineReducers} from 'redux';
-import storage from 'store';
 
-export const stateKey = 'activeChannel';
+export const stateKey = 'activeSubAccount';
 
 const selectedPlatform = (state = 0, action) => {
   switch (action.type) {
@@ -26,7 +25,20 @@ const isCreatingZapierToken = (state = false, action) => {
   }
 };
 
+const isUpdating = (state = false, action) => {
+  switch (action.type) {
+    case types.UPDATE_SUB_ACCOUNT_REQUEST:
+      return true;
+    case types.UPDATE_SUB_ACCOUNT_SUCCESS:
+    case types.UPDATE_SUB_ACCOUNT_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   selectedPlatform,
-  isCreatingZapierToken
+  isCreatingZapierToken,
+  isUpdating
 });

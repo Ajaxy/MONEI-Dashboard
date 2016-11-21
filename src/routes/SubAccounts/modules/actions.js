@@ -13,8 +13,11 @@ export const fetchSubAccounts = () => {
     dispatch({type: types.FETCH_SUB_ACCOUNTS_REQUEST});
     try {
       const sandbox = getIsInSandboxMode(getState());
-      const result = await api.fetchSubAccounts(sandbox);
-      const normalized = normalize(result, schema.arrayOfSubAccounts);
+      const subAccounts = await api.fetchSubAccounts(sandbox);
+      const normalized = normalize(
+        subAccounts.items,
+        schema.arrayOfSubAccounts
+      );
       dispatch({
         type: types.FETCH_SUB_ACCOUNTS_SUCCESS,
         byId: normalized.entities.subAccounts,

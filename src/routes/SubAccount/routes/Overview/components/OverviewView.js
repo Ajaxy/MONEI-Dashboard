@@ -7,9 +7,9 @@ const SubAccountOverview = ({subAccount, copyToClipboard}) => (
       <td className="two wide">App ID</td>
       <td>{subAccount.sender}</td>
     </tr>
-    <tr onClick={() => copyToClipboard(subAccount.channel, 'Channel ID')}>
+    <tr onClick={() => copyToClipboard(subAccount.id, 'Channel ID')}>
       <td className="two wide">Channel ID</td>
-      <td>{subAccount.channel}</td>
+      <td>{subAccount.id}</td>
     </tr>
     <tr onClick={() => copyToClipboard(subAccount.login, 'User ID')}>
       <td className="two wide">User ID</td>
@@ -27,7 +27,7 @@ const SubAccountOverview = ({subAccount, copyToClipboard}) => (
 );
 
 SubAccountOverview.propTypes = {
-  subAccount: PropTypes.array.isRequired,
+  subAccount: PropTypes.object.isRequired,
   copyToClipboard: PropTypes.func.isRequired
 };
 

@@ -14,3 +14,8 @@ export const getIsCreatingZapierToken = createSelector(
   subAccountSelector,
   subAccount => subAccount.isCreatingZapierToken
 );
+
+export const getIsUpdating = createSelector(
+  subAccountSelector,
+  subAccount => subAccount.isUpdating
+);

@@ -127,12 +127,15 @@ export const syncUser = (userId, mid) =>
   apiClient.post(`users/${userId}/sync`, {mid});
 
 export const fetchUserSubAccounts = (userId) =>
-  apiClient.get(`users/${userId}/channels`);
+  apiClient.get(`users/${userId}/sub-accounts`);
 
-// Channels
+// Sub Accounts
 
 export const fetchSubAccounts = (sandbox) =>
-  apiClient.get('channels', {sandbox});
+  apiClient.get('sub-accounts', {sandbox});
+
+export const updateSubAccount = (subAccountId, data) =>
+  apiClient.patch(`sub-accounts/${subAccountId}`, data);
 
 export const createZapierApiToken = (channelId) =>
   apiClient.post('zapier/token/create', {channelId, slug: 'transaction', events: ['transaction.all']});
