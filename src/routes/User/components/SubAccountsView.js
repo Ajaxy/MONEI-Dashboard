@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Button from 'components/Button';
+import Loader from 'components/Loader';
 import cx from 'classnames';
 
 const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user}) => (

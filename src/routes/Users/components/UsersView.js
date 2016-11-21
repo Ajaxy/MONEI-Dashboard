@@ -6,7 +6,6 @@ import classNames from './UsersView.scss';
 
 const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, isLastPage}) => (
   <section className="ui basic segment padded-bottom">
-    <h1 className="ui header">Users</h1>
     <Search
       placeholder="Search name..."
       onSearch={filterUsers}

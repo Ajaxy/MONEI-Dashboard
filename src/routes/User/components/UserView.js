@@ -1,7 +1,4 @@
 import React, {PropTypes} from 'react';
-import cx from 'classnames';
-import classNames from './UserView.scss';
-import {Link} from 'react-router';
 import Loader from 'components/Loader';
 import UserHeader from './UserHeader';
 import PersonalDataView from './PersonalDataView';
@@ -10,7 +7,6 @@ import SubAccounts from '../containers/SubAccountsContainer';
 
 const UserView = ({
   user,
-  userMetadata,
   verifyUser,
   loginAsUser,
   updateUser,
@@ -24,13 +20,6 @@ const UserView = ({
         <Loader active={isFetching} inline />
       </section>
         : <section className="ui vertical segment padded-bottom">
-        <h1 className={cx('ui header', classNames.breadcrumb)}>
-          <Link className={cx('ui section', classNames.link)} to="/users">Users</Link>
-          <span className="divider"> / </span>
-          <span className={cx('ui section', classNames.link)}>
-          {userMetadata.name || user.email}
-        </span>
-        </h1>
         <div>
           <UserHeader {...{user, verifyUser, loginAsUser, isUpdating}} />
           <h4 className="ui horizontal divider header">
