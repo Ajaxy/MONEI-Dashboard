@@ -3,10 +3,10 @@ import cx from 'classnames';
 import classNames from './UserView.scss';
 import {Link} from 'react-router';
 import Loader from 'components/Loader';
-import Button from 'components/Button';
 import UserHeader from './UserHeader';
 import PersonalDataView from './PersonalDataView';
 import AdminDataForm from '../containers/AdminDataForm';
+import SubAccounts from '../containers/SubAccountsContainer';
 
 const UserView = ({
   user,
@@ -14,11 +14,7 @@ const UserView = ({
   verifyUser,
   loginAsUser,
   updateUser,
-  syncUser,
-  subAccounts,
-  isSyncing,
   isFetching,
-  isFetchingSubAccounts,
   isUpdating
 }) => {
   return (
@@ -47,45 +43,11 @@ const UserView = ({
             Admin Data
           </h4>
           <AdminDataForm {...{user, updateUser, isUpdating}} />
-          <h4 className="ui horizontal divider header">
+          {user.app_metadata.mid &&  <h4 className="ui horizontal divider header">
             <i className="payment icon" />
             Sub accounts
-          </h4>
-          <table className="ui large striped table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Sub Account ID</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {isFetchingSubAccounts && <tr>
-                <td colSpan="3">
-                  <Loader active />
-                </td>
-              </tr>}
-              {!isFetchingSubAccounts && subAccounts.length === 0 && <tr>
-                <td colSpan="3">
-                  <h4 className="ui header centered">
-                    This user doesn't have sub accounts yet, or you need to sync data with PayOn.
-                  </h4>
-                </td>
-              </tr>}
-              {subAccounts.map(subAccount => <tr>
-                <td>{subAccount.name}</td>
-                <td>{subAccount.channelId}</td>
-                <td>{subAccount.state}</td>
-              </tr>)}
-            </tbody>
-          </table>
-          <Button
-            primary
-            loading={isSyncing}
-            onClick={() => syncUser(user.user_id, user.app_metadata.mid)}
-            className={cx('right floated green')}>
-            Sync user data with PayOn
-            </Button>
+          </h4>}
+          {user.app_metadata.mid && <SubAccounts />}
         </div>
       </section>}
     </div>
