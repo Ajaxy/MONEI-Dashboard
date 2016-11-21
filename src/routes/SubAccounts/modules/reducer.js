@@ -1,6 +1,6 @@
 import * as types from './types';
 import {SET_PROFILE_SANDBOX} from 'modules/profile/types';
-import {CREATE_ZAPIER_TOKEN_SUCCESS} from 'routes/SubAccount/modules/types';
+import * as subAccountTypes from 'routes/SubAccount/modules/types';
 import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
 
@@ -23,7 +23,15 @@ const byId = (state = {}, action) => {
       return {};
     case types.FETCH_SUB_ACCOUNTS_SUCCESS:
       return {...state, ...action.byId};
-    case CREATE_ZAPIER_TOKEN_SUCCESS:
+    case subAccountTypes.UPDATE_SUB_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        [action.subAccountId]: {
+          ...state[action.subAccountId],
+          ...action.byId[action.subAccountId]
+        }
+      };
+    case subAccountTypes.CREATE_ZAPIER_TOKEN_SUCCESS:
       return {
         ...state,
         [action.subAccountId]: {

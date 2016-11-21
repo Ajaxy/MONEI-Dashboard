@@ -1,7 +1,7 @@
 import * as api from 'lib/api';
 import * as types from './types';
 import * as schema from 'schema/users';
-import * as subSchema from 'schema/userSubAccounts';
+import * as subSchema from 'schema/subAccounts';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 import {getIsUpToDate} from './selectors';
@@ -147,9 +147,9 @@ export const fetchSubAccounts = (userId) => {
   return async dispatch => {
     dispatch({type: types.FETCH_USER_SUB_ACCOUNTS_REQUEST});
     try {
-      const result = await api.fetchUserSubAccounts(userId);
+      const subAccounts = await api.fetchUserSubAccounts(userId);
       const normalized = normalize(
-        result.items,
+        subAccounts.items,
         subSchema.arrayOfSubAccounts
       );
       dispatch({

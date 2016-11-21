@@ -1,17 +1,11 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
-import {PAGE_LIMIT} from 'lib/constants';
 
 const subAccountsSelector = state => state[stateKey];
 const activeSubAccountIdSelector = state => state.router.params.subAccountId;
 export const getSubAccounts = createSelector(
   subAccountsSelector,
-  subAccounts => subAccounts.ids.map(id => subAccounts.byId[id]).slice(0, PAGE_LIMIT)
-);
-
-export const getSubAccountIds = createSelector(
-  subAccountsSelector,
-  subAccounts => subAccounts.ids
+  subAccounts => subAccounts.ids.map(id => subAccounts.byId[id])
 );
 
 export const getActiveSubAccount = createSelector(

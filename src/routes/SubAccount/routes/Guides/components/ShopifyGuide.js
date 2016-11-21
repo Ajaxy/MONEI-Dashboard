@@ -53,8 +53,8 @@ const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxM
           </div>
           <div className="shopify-form__row">
             <label>Channel ID</label>
-            <input type="text" value={subAccount.channel} readOnly
-              onClick={() => copyToClipboard(subAccount.channel, 'Channel ID')} />
+            <input type="text" value={subAccount.id} readOnly
+              onClick={() => copyToClipboard(subAccount.id, 'Channel ID')} />
           </div>
           <div className="shopify-form__row">
             <label>Login</label>

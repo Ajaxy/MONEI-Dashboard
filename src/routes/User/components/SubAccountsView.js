@@ -29,7 +29,7 @@ const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user}) =
         {subAccounts.map((subAccount, i) => (
           <tr key={i}>
             <td>{subAccount.name}</td>
-            <td>{subAccount.channelId}</td>
+            <td>{subAccount.id}</td>
             <td>{subAccount.state}</td>
           </tr>
         ))}
