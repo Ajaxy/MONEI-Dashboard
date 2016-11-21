@@ -7,7 +7,7 @@ import {fetchBankAccounts} from 'routes/Profile/routes/BankAccounts/modules/acti
 
 class SettingsForm extends Component {
   static propTypes = {
-    fetchSubAccounts: PropTypes.func.isRequired
+    fetchBankAccounts: PropTypes.func.isRequired
   };
 
   componentDidMount() {

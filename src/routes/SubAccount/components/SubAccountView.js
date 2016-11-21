@@ -3,7 +3,7 @@ import SubAccountHeader from './SubAccountHeader';
 import Loader from 'components/Loader';
 
 const SubAccountView = ({subAccount, subAccountId, isSandboxMode, children}) => {
-  if (!subAccount.name) {
+  if (!subAccount.customName) {
     return (
       <section className="ui basic segment">
         <Loader active inline />
@@ -13,7 +13,7 @@ const SubAccountView = ({subAccount, subAccountId, isSandboxMode, children}) => 
   return (
     <section className="ui basic segment padded-bottom">
       <h1 className="ui header">
-        {subAccount.name}
+        {subAccount.customName}
         {' '}
         {isSandboxMode && <span className="text orange">(only for testing purposes)</span>}
       </h1>

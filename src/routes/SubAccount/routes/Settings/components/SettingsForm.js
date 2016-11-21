@@ -24,11 +24,11 @@ const SettingsForm = ({
           hint="where you want your money to be settled"
           loading={isFetching}
           {...bankAccountId}>
-          {bankAccounts.map((sender, i) => (
+          {bankAccounts.map((bankAccount, i) => (
             <SelectItem
               key={i}
-              value={bankAccounts.id}>
-              {bankAccounts.last4Digits}
+              value={bankAccount.id}>
+              <small className="text grey">{new Array(21).join('•')}</small> {bankAccount.last4Digits}
             </SelectItem>
           ))}
         </Select>
@@ -37,7 +37,7 @@ const SettingsForm = ({
           loading={isLoading}
           type="submit"
           disabled={invalid || isLoading}>
-          Update
+          Save
         </Button>
       </form>
     </div>

@@ -45,13 +45,17 @@ export const updateSubAccount = (subAccountId, data) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_SUB_ACCOUNT_REQUEST});
     try {
-      const result = await api.updateSubAccount(subAccountId, data);
-      const normalized = normalize(result, schema.subAccount);
+      const subAccount = await api.updateSubAccount(subAccountId, data);
+      const normalized = normalize(subAccount, schema.subAccount);
       dispatch({
         type: types.UPDATE_SUB_ACCOUNT_SUCCESS,
         byId: normalized.entities.subAccounts,
         subAccountId: normalized.result
       });
+      dispatch(addMessage({
+        text: 'Sub account was updated.',
+        style: 'success'
+      }));
     } catch (error) {
       dispatch({type: types.UPDATE_SUB_ACCOUNT_FAIL});
       dispatch(addMessage({

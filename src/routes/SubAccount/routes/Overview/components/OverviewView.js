@@ -27,7 +27,7 @@ const SubAccountOverview = ({subAccount, copyToClipboard}) => (
 );
 
 SubAccountOverview.propTypes = {
-  subAccount: PropTypes.array.isRequired,
+  subAccount: PropTypes.object.isRequired,
   copyToClipboard: PropTypes.func.isRequired
 };
 
