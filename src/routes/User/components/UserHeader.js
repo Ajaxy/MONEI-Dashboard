@@ -10,26 +10,20 @@ const UserHeader = ({user, verifyUser, loginAsUser, isUpdating}) => (
       <a href={`mailto:${user.email}`} target="_top">{user.email}</a>
       <div className="sub header">{user.email_verified ? ' (verified)' : ' (not verified)'}</div>
     </div>
-    {(user.user_metadata.verification_requested && typeof verifyUser === 'function') ?
-      <Button
-        primary
-        loading={isUpdating}
-        onClick={() => verifyUser(user.user_id)}
-        className={cx('right floated green', classNames.button)}>
-        Verify User
-      </Button>
-      : null
-    }
-    {typeof loginAsUser === 'function' ?
-      <Button
-        primary
-        loading={isUpdating}
-        onClick={() => loginAsUser(user.user_id)}
-        className={cx('right floated green', classNames.button)}>
-        Login as User
-      </Button>
-      : null
-    }
+    {(user.user_metadata.verification_requested && verifyUser) && <Button
+      primary
+      loading={isUpdating}
+      onClick={() => verifyUser(user.user_id)}
+      className={cx('right floated green', classNames.button)}>
+      Verify User
+    </Button>}
+    {loginAsUser && <Button
+      primary
+      loading={isUpdating}
+      onClick={() => loginAsUser(user.user_id)}
+      className={cx('right floated green', classNames.button)}>
+      Login as User
+    </Button>}
   </h2>
 );
 

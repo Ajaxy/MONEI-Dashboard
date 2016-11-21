@@ -26,11 +26,13 @@ const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user}) =
             </h4>
           </td>
         </tr>}
-        {subAccounts.map(subAccount => <tr>
-          <td>{subAccount.name}</td>
-          <td>{subAccount.channelId}</td>
-          <td>{subAccount.state}</td>
-        </tr>)}
+        {subAccounts.map((subAccount, i) => (
+          <tr key={i}>
+            <td>{subAccount.name}</td>
+            <td>{subAccount.channelId}</td>
+            <td>{subAccount.state}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
     <Button

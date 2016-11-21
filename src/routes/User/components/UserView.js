@@ -45,7 +45,6 @@ const UserView = ({
 
 UserView.propTypes = {
   user: PropTypes.object.isRequired,
-  userMetadata: PropTypes.object.isRequired,
   verifyUser: PropTypes.func.isRequired,
   loginAsUser: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
