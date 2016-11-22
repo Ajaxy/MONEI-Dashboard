@@ -15,15 +15,22 @@ const createValidator = (rules) => {
 };
 
 const mapStateToProps = (state) => {
-  const values = getValues(state.form.addBankAccount) || {};
+  const values = getValues(state.form.saveBankAccount) || {};
   const profile = getProfile(state);
   const country = findByCode(profile.geoip.country_code).name;
   const bankAccount = selectors.getActiveBankAccount(state);
+  const bankAccounts = selectors.getBankAccounts(state);
+  Validator.register(
+    'isPrimary',
+    value => value && !bankAccounts.some(a => a.isPrimary && a.id !== bankAccount.id) || !value,
+    'You can have only one primary bank account'
+  );
   let isUsFormat = false;
   const rules = {
     name: 'required',
     country: 'required',
-    currency: 'required'
+    currency: 'required',
+    isPrimary: 'isPrimary'
   };
   if (values.country === 'Spain') {
     rules.iban = 'required|iban';

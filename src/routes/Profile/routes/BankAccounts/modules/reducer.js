@@ -8,7 +8,7 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case types.FETCH_BANK_ACCOUNTS_SUCCESS:
       return [...action.ids];
-    case types.ADD_BANK_ACCOUNT_SUCCESS:
+    case types.SAVE_BANK_ACCOUNT_SUCCESS:
       return mergeArrays(state, [action.bankAccountId]);
     default:
       return state;
@@ -25,7 +25,7 @@ const byId = (state = {}, action) => {
   switch (action.type) {
     case types.FETCH_BANK_ACCOUNTS_SUCCESS:
       return {...action.byId};
-    case types.ADD_BANK_ACCOUNT_SUCCESS:
+    case types.SAVE_BANK_ACCOUNT_SUCCESS:
       return {...state, ...action.byId};
     default:
       return state;

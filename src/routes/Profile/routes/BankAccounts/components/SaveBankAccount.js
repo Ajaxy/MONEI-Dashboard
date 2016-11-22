@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import Input from 'components/Input';
-import CheckBox from 'components/CheckBox';
+import CheckBoxInput from 'components/CheckBoxInput';
 import Confirm from 'components/Modal/Confirm';
 import {CURRENCIES} from 'lib/constants';
 import Select, {SelectItem} from 'components/Select';
@@ -97,9 +97,7 @@ const SaveBankAccount = ({
           {...accountNumber}
           component={BankAccountInput}
           label="Account number" />}
-        <div className="field">
-          <CheckBox {...isPrimary} label="Is primary bank account"/>
-        </div>
+        <CheckBoxInput {...isPrimary} label="Is primary bank account"/>
       </form>
     </Confirm>
   );
