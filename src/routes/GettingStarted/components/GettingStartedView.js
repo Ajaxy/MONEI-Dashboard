@@ -35,7 +35,8 @@ const GettingStartedView = ({
 };
 
 GettingStartedView.propTypes = {
-
+  isAllowedVerification: PropTypes.bool.isRequired,
+  requestVerificationStart: PropTypes.func.isRequired
 };
 
 export default GettingStartedView;

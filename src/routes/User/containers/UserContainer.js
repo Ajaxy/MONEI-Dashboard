@@ -13,8 +13,8 @@ class User extends Component {
   };
 
   componentDidMount() {
-    const {userId} = this.props;
-    this.props.fetchUser(userId, true);
+    const {userId, fetchUser} = this.props;
+    fetchUser(userId, true);
   }
 
   render() {
@@ -24,7 +24,6 @@ class User extends Component {
 
 const mapStateToProps = (state, props) => ({
   user: selectors.getUser(state),
-  userMetadata: selectors.getUserMetadata(state),
   isFetching: selectors.getIsFetching(state),
   isUpdating: selectors.getIsUpdating(state),
   isUpToDate: selectors.getIsUpToDate(state),

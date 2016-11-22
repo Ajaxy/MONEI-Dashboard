@@ -8,8 +8,8 @@ import DashboardRoute from './Dashboard';
 import CustomersRoute from './Customers';
 import TransactionsRoute from './Transactions';
 import ProfileRoute from './Profile';
-import ChannelRoute from './Channel';
 import SubAccountsRoute from './SubAccounts';
+import SubAccountRoute from './SubAccount';
 import GettingStartedRoute from './GettingStarted';
 import NotFoundRoute from './NotFound';
 
@@ -25,8 +25,8 @@ export const createRoutes = (store) => ({
     DashboardRoute(store),
     TransactionsRoute(store),
     ProfileRoute(store),
-    ChannelRoute(store),
     SubAccountsRoute(store),
+    SubAccountRoute(store),
     GettingStartedRoute,
     NotFoundRoute
   ]

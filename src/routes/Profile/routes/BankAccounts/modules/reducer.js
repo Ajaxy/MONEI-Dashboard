@@ -8,7 +8,7 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case types.FETCH_BANK_ACCOUNTS_SUCCESS:
       return [...action.ids];
-    case types.ADD_BANK_ACCOUNT_SUCCESS:
+    case types.SAVE_BANK_ACCOUNT_SUCCESS:
       return mergeArrays(state, [action.bankAccountId]);
     default:
       return state;
@@ -25,7 +25,7 @@ const byId = (state = {}, action) => {
   switch (action.type) {
     case types.FETCH_BANK_ACCOUNTS_SUCCESS:
       return {...action.byId};
-    case types.ADD_BANK_ACCOUNT_SUCCESS:
+    case types.SAVE_BANK_ACCOUNT_SUCCESS:
       return {...state, ...action.byId};
     default:
       return state;
@@ -57,25 +57,25 @@ const isUpToDate = (state = false, action) => {
   }
 };
 
-const isAdding = (state = false, action) => {
+const isSaving = (state = false, action) => {
   switch (action.type) {
-    case types.ADD_BANK_ACCOUNT_REQUEST:
+    case types.SAVE_BANK_ACCOUNT_REQUEST:
       return true;
-    case types.ADD_BANK_ACCOUNT_SUCCESS:
-    case types.ADD_BANK_ACCOUNT_FAIL:
+    case types.SAVE_BANK_ACCOUNT_SUCCESS:
+    case types.SAVE_BANK_ACCOUNT_FAIL:
       return false;
     default:
       return state;
   }
 };
 
-const isAddModalOpen = (state = false, action) => {
+const isSaveModalOpen = (state = false, action) => {
   switch (action.type) {
-    case types.ADD_BANK_ACCOUNT_START:
+    case types.SAVE_BANK_ACCOUNT_START:
       return true;
-    case types.ADD_BANK_ACCOUNT_CANCEL:
-    case types.ADD_BANK_ACCOUNT_SUCCESS:
-    case types.ADD_BANK_ACCOUNT_FAIL:
+    case types.SAVE_BANK_ACCOUNT_CANCEL:
+    case types.SAVE_BANK_ACCOUNT_SUCCESS:
+    case types.SAVE_BANK_ACCOUNT_FAIL:
       return false;
     default:
       return state;
@@ -107,12 +107,15 @@ const isDeleteModalOpen = (state = false, action) => {
   }
 };
 
-const bankAccountToDelete = (state = null, action) => {
+const activeId = (state = null, action) => {
   switch (action.type) {
     case types.DELETE_BANK_ACCOUNT_START:
+    case types.SAVE_BANK_ACCOUNT_START:
       return action.bankAccountId;
     case types.DELETE_BANK_ACCOUNT_SUCCESS:
     case types.DELETE_BANK_ACCOUNT_CANCEL:
+    case types.SAVE_BANK_ACCOUNT_SUCCESS:
+    case types.SAVE_BANK_ACCOUNT_CANCEL:
       return null;
     default:
       return state;
@@ -124,9 +127,9 @@ export default combineReducers({
   byId,
   isFetching,
   isUpToDate,
-  isAdding,
+  isSaving,
   isDeleting,
-  isAddModalOpen,
+  isSaveModalOpen,
   isDeleteModalOpen,
-  bankAccountToDelete
+  activeId
 });

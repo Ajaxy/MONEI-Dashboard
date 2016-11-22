@@ -14,4 +14,8 @@ const PaginatedTable = (props) => (
   />
 );
 
+PaginatedTable.propTypes = {
+  numColumns: PropTypes.number
+};
+
 export default PaginatedTable;

@@ -3,11 +3,11 @@ import Button from 'components/Button';
 import Loader from 'components/Loader';
 import cx from 'classnames';
 import classNames from './BankAccountsView.scss';
-import AddBankAccount from '../containers/AddBankAccountContainer';
+import AddBankAccount from '../containers/SaveBankAccountContainer';
 import ConfirmDelete from '../containers/ConfirmDeleteContainer';
 import BankAccountItem from './BankAccountItem';
 const BankAccountsView = ({
-  addBankAccountStart,
+  saveBankAccountStart,
   deleteBankAccountStart,
   bankAccounts,
   isFetching,
@@ -24,7 +24,7 @@ const BankAccountsView = ({
         Bank accounts
         <Button
           primary
-          onClick={addBankAccountStart}
+          onClick={saveBankAccountStart}
           className="right floated">
           Add account
         </Button>
@@ -34,7 +34,9 @@ const BankAccountsView = ({
         <div className="ui stackable three column grid">
           {bankAccounts.length > 0 ? bankAccounts.map((bankAccount, i) => (<BankAccountItem
             {...bankAccount}
+            isDeletable={bankAccounts.length > 1}
             onDelete={deleteBankAccountStart}
+            onEdit={saveBankAccountStart}
             key={i} />))
             : isUpToDate && <Empty />
           }
@@ -48,7 +50,7 @@ const BankAccountsView = ({
 };
 
 BankAccountsView.propTypes = {
-  addBankAccountStart: PropTypes.func.isRequired
+  saveBankAccountStart: PropTypes.func.isRequired
 };
 
 export default BankAccountsView;

@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import IndexLink from 'react-router/lib/IndexLink';
 import Link from 'react-router/lib/Link';
 import Logo from 'components/Logo';
@@ -75,5 +75,18 @@ const Header = ({
     </div>
   </header>
 );
+
+Header.propTypes = {
+  profile: PropTypes.object.isRequired,
+  signOut: PropTypes.func.isRequired,
+  isUser: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+  isMerchant: PropTypes.bool.isRequired,
+  isInSandboxMode: PropTypes.bool.isRequired,
+  isVerificationRequested: PropTypes.bool,
+  setSandboxMode: PropTypes.func.isRequired,
+  viewOnboarding: PropTypes.func.isRequired,
+  viewChannels: PropTypes.func.isRequired
+};
 
 export default Header;

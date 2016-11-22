@@ -16,7 +16,7 @@ class Dashboard extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.isInSandboxMode != this.props.isInSandboxMode) {
+    if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
       this.refresh();
     }
   }

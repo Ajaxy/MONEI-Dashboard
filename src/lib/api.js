@@ -123,10 +123,19 @@ export const impersonateUser = (userId, {redirect_uri}) =>
 export const updateUserMetaData = (userId, data) =>
   authApiClient.patch(`users/${userId}`, {user_metadata: data});
 
-// Channels
+export const syncUser = (userId, mid) =>
+  apiClient.post(`users/${userId}/sync`, {mid});
+
+export const fetchUserSubAccounts = (userId) =>
+  apiClient.get(`users/${userId}/sub-accounts`);
+
+// Sub Accounts
 
 export const fetchSubAccounts = (sandbox) =>
-  apiClient.get('channels', {sandbox});
+  apiClient.get('sub-accounts', {sandbox});
+
+export const updateSubAccount = (subAccountId, data) =>
+  apiClient.patch(`sub-accounts/${subAccountId}`, data);
 
 export const createZapierApiToken = (channelId) =>
   apiClient.post('zapier/token/create', {channelId, slug: 'transaction', events: ['transaction.all']});
@@ -136,11 +145,11 @@ export const createZapierApiToken = (channelId) =>
 export const fetchWebhooks = (channelId) =>
   apiClient.get('webhooks', {params: {channelId, slug: 'transaction'}});
 
-export const saveWebhook = (webhook) =>
-  apiClient.post('webhooks', {...webhook});
+export const createWebhook = (webhook) =>
+  apiClient.post('webhooks', webhook);
 
 export const updateWebhook = (webhook) =>
-  apiClient.patch(`webhooks/${webhook.id}`, {...webhook});
+  apiClient.patch(`webhooks/${webhook.id}`, webhook);
 
 export const deleteWebhook = (webhookId) =>
   apiClient.delete(`webhooks/${webhookId}`);
@@ -158,6 +167,9 @@ export const fetchBankAccounts = () =>
 
 export const createBankAccount = (data = {}) =>
   apiClient.post('account/bank-accounts', data);
+
+export const updateBankAccount = (bankAccount) =>
+  apiClient.patch(`account/bank-accounts/${bankAccount.id}`, bankAccount);
 
 export const deleteBankAccount = (accountId) =>
   apiClient.delete(`account/bank-accounts/${accountId}`);

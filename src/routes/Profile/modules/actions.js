@@ -1,6 +1,6 @@
 import * as api from 'lib/api';
 import * as types from './types';
-import * as schemas from 'schema/users';
+import storage from 'store';
 import {changePassword} from 'modules/auth/actions';
 import {addMessage} from 'modules/messages/actions';
 import {updateProfileLocally} from 'modules/profile/actions';
@@ -32,7 +32,7 @@ export const verifyPhoneNumber = (phoneNumber) => {
   return async dispatch => {
     dispatch({type: types.PHONE_VERIFICATION_REQUEST});
     try {
-      const result = await api.verifyPhoneStart(phoneNumber);
+      await api.verifyPhoneStart(phoneNumber);
       dispatch({type: types.PHONE_VERIFICATION_SUCCESS});
       dispatch(openCheckingModal(phoneNumber));
     } catch (error) {
@@ -40,7 +40,7 @@ export const verifyPhoneNumber = (phoneNumber) => {
       dispatch(addMessage({
         type: error,
         onRetry() {
-          dispatch(verifyPhoneStart(phoneNumber));
+          dispatch(verifyPhoneNumber(phoneNumber));
         }
       }));
     }
@@ -51,7 +51,7 @@ export const checkPhoneNumber = (phoneNumber, verificationCode) => {
   return async dispatch => {
     dispatch({type: types.PHONE_VERIFICATION_CHECK_REQUEST});
     try {
-      const result = await api.verifyPhoneCheck(phoneNumber, verificationCode);
+      await api.verifyPhoneCheck(phoneNumber, verificationCode);
       const profile = storage.get('profile');
       profile.app_metadata.phone_number = phoneNumber;
       dispatch(updateProfileLocally(profile));

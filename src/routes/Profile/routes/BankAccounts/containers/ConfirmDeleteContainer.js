@@ -6,7 +6,7 @@ import ConfirmDelete from '../components/ConfirmDelete';
 const mapStateToProps = (state) => ({
   isDeleting: selectors.getIsDeleting(state),
   isOpen: selectors.getIsDeleteModalOpen(state),
-  bankAccount: selectors.getDeletingBankAccount(state)
+  bankAccount: selectors.getActiveBankAccount(state)
 });
 
 export default connect(mapStateToProps, actions)(ConfirmDelete);

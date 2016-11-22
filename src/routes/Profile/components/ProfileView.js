@@ -16,7 +16,7 @@ export const ProfileView = ({profile, children, isUser, isVerified}) => (
 ProfileView.propTypes = {
   children: PropTypes.element.isRequired,
   isUser: PropTypes.bool.isRequired,
-  isVerified: PropTypes.bool.isRequired,
+  isVerified: PropTypes.bool,
   profile: PropTypes.shape({
     name: PropTypes.string
   }).isRequired
