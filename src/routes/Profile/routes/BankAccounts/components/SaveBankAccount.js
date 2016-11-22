@@ -13,9 +13,10 @@ const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur}) => (
   </div>
 );
 
-const AddBankAccount = ({
+const SaveBankAccount = ({
   isOpen,
-  isAdding,
+  isSaving,
+  bankAccount,
   fields: {
     name,
     isPrimary,
@@ -29,15 +30,15 @@ const AddBankAccount = ({
   handleSubmit,
   invalid,
   resetForm,
-  addBankAccount,
-  addBankAccountCancel,
+  saveBankAccount,
+  saveBankAccountCancel,
   countries
 }) => {
   const onSubmit = (formProps) => {
-    addBankAccount(formProps);
+    saveBankAccount({...bankAccount, ...formProps});
   };
   const onCancel = () => {
-    addBankAccountCancel();
+    saveBankAccountCancel();
     resetForm();
   };
   const cleanIban = (e) => {
@@ -47,12 +48,12 @@ const AddBankAccount = ({
   return (
     <Confirm
       isOpen={isOpen}
-      isLoading={isAdding}
+      isLoading={isSaving}
       isDisabled={invalid}
       onCancel={onCancel}
       onConfirm={handleSubmit(onSubmit)}
-      headerText="Add new bank account"
-      confirmText="Add"
+      headerText={(bankAccount.id ? 'Edit' : 'Add new') + ' bank account'}
+      confirmText="Save"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Input {...name} />
@@ -103,17 +104,18 @@ const AddBankAccount = ({
   );
 };
 
-AddBankAccount.propTypes = {
+SaveBankAccount.propTypes = {
   fields: PropTypes.shape({
     iban: PropTypes.object.isRequired
   }),
-  addBankAccount: PropTypes.func.isRequired,
-  addBankAccountCancel: PropTypes.func.isRequired,
+  bankAccount: PropTypes.object,
+  saveBankAccount: PropTypes.func.isRequired,
+  saveBankAccountCancel: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   invalid: PropTypes.bool.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  isAdding: PropTypes.bool.isRequired
+  isSaving: PropTypes.bool.isRequired
 };
 
-export default AddBankAccount;
+export default SaveBankAccount;

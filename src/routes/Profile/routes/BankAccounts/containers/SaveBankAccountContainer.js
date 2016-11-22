@@ -2,7 +2,7 @@ import {reduxForm, getValues} from 'redux-form';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import Validator from 'lib/validator';
-import AddBankAccount from '../components/AddBankAccount';
+import SaveBankAccount from '../components/SaveBankAccount';
 import {getProfile} from 'modules/profile/selectors';
 import countries, {findByCode} from 'lib/countries';
 
@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
   const values = getValues(state.form.addBankAccount) || {};
   const profile = getProfile(state);
   const country = findByCode(profile.geoip.country_code).name;
+  const bankAccount = selectors.getActiveBankAccount(state);
   let isUsFormat = false;
   const rules = {
     name: 'required',
@@ -35,17 +36,16 @@ const mapStateToProps = (state) => {
   return {
     countries,
     isUsFormat,
-    isAdding: selectors.getIsAdding(state),
-    isOpen: selectors.getIsAddModalOpen(state),
-    initialValues: {
-      country
-    },
+    bankAccount,
+    isSaving: selectors.getIsSaving(state),
+    isOpen: selectors.getIsSaveModalOpen(state),
+    initialValues: {country, ...bankAccount},
     validate: createValidator(rules)
   };
 };
 
 export default reduxForm({
-  form: 'addBankAccount',
+  form: 'saveBankAccount',
   fields: [
     'name',
     'isPrimary',
@@ -55,4 +55,4 @@ export default reduxForm({
     'country',
     'currency'
   ]
-}, mapStateToProps, actions)(AddBankAccount);
+}, mapStateToProps, actions)(SaveBankAccount);

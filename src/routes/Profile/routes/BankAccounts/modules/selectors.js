@@ -18,9 +18,9 @@ export const getIsUpToDate = createSelector(
   bankAccounts => bankAccounts.isUpToDate
 );
 
-export const getIsAdding = createSelector(
+export const getIsSaving = createSelector(
   bankAccountsSelector,
-  bankAccounts => bankAccounts.isAdding
+  bankAccounts => bankAccounts.isSaving
 );
 
 export const getIsDeleting = createSelector(
@@ -33,12 +33,12 @@ export const getIsDeleteModalOpen = createSelector(
   bankAccounts => bankAccounts.isDeleteModalOpen
 );
 
-export const getIsAddModalOpen = createSelector(
+export const getIsSaveModalOpen = createSelector(
   bankAccountsSelector,
-  bankAccounts => bankAccounts.isAddModalOpen
+  bankAccounts => bankAccounts.isSaveModalOpen
 );
 
-export const getDeletingBankAccount = createSelector(
+export const getActiveBankAccount = createSelector(
   bankAccountsSelector,
-  bankAccounts => bankAccounts.byId[bankAccounts.bankAccountToDelete] || {}
+  bankAccounts => bankAccounts.byId[bankAccounts.activeId] || {}
 );

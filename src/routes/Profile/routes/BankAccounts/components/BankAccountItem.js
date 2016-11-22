@@ -11,6 +11,7 @@ const ImportsTableRow = ({
   currency,
   id,
   onDelete,
+  onEdit,
   isDeletable
 }) => {
   const iconClass = cx(
@@ -21,6 +22,10 @@ const ImportsTableRow = ({
       'help': !isVerified
     }
   );
+  const handleEdit = (e) => {
+    e.preventDefault();
+    onEdit(id);
+  };
   return (
     <div className="column">
       <div className={cx('ui icon message', {teal: isPrimary}, classNames.bankAccount)}>
@@ -28,7 +33,7 @@ const ImportsTableRow = ({
         {isDeletable && <i className="close icon red" onClick={() => onDelete(id)} />}
         <div className="content">
           <div className="header">
-            {name} {isPrimary && '[primary]'}
+            <a href="#" onClick={handleEdit}>{name}</a> {isPrimary && '[primary]'}
           </div>
           <p>
             <span className="text grey">

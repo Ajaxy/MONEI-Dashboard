@@ -5,14 +5,6 @@ import * as schema from 'schema/bankAccounts';
 import {normalize} from 'normalizr';
 import {addMessage} from 'modules/messages/actions';
 
-export const addBankAccountStart = () => ({
-  type: types.ADD_BANK_ACCOUNT_START
-});
-
-export const addBankAccountCancel = () => ({
-  type: types.ADD_BANK_ACCOUNT_CANCEL
-});
-
 export const fetchBankAccounts = () => {
   return async (dispatch, getState) => {
     const isUpToDate = getIsUpToDate(getState());
@@ -42,19 +34,29 @@ export const fetchBankAccounts = () => {
   };
 };
 
-export const addBankAccount = ({iban, routingNumber, accountNumber, ...rest}) => {
+export const saveBankAccountStart = (bankAccountId) => ({
+  type: types.SAVE_BANK_ACCOUNT_START,
+  bankAccountId
+});
+
+export const saveBankAccountCancel = () => ({
+  type: types.SAVE_BANK_ACCOUNT_CANCEL
+});
+
+export const saveBankAccount = ({id, iban, routingNumber, accountNumber, ...rest}) => {
   return async dispatch => {
     dispatch({
-      type: types.ADD_BANK_ACCOUNT_REQUEST
+      type: types.SAVE_BANK_ACCOUNT_REQUEST
     });
     try {
-      const bankAccount = await api.createBankAccount({
+      const bankAccount = await api[id ? 'updateBankAccount' : 'createBankAccount']({
         number: iban || routingNumber + accountNumber,
+        id,
         ...rest
       });
       const normalized = normalize(bankAccount, schema.bankAccount);
       dispatch({
-        type: types.ADD_BANK_ACCOUNT_SUCCESS,
+        type: types.SAVE_BANK_ACCOUNT_SUCCESS,
         byId: normalized.entities.bankAccounts,
         bankAccountId: normalized.result
       });
@@ -64,7 +66,7 @@ export const addBankAccount = ({iban, routingNumber, accountNumber, ...rest}) =>
       }));
     } catch (error) {
       dispatch({
-        type: types.ADD_BANK_ACCOUNT_FAIL
+        type: types.SAVE_BANK_ACCOUNT_FAIL
       });
       dispatch(addMessage({text: error}));
     }

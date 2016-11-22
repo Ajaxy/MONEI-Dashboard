@@ -42,8 +42,8 @@ export const saveWebhookCancel = () => ({
 export const saveWebhook = (webhook) => async dispatch => {
   dispatch({type: types.SAVE_WEBHOOK_REQUEST});
   try {
-    const data = await api[webhook.id ? 'updateWebhook' : 'createWebhook'](webhook);
-    const normalized = normalize(data, schema.webhook);
+    const webhook = await api[webhook.id ? 'updateWebhook' : 'createWebhook'](webhook);
+    const normalized = normalize(webhook, schema.webhook);
     dispatch({
       type: types.SAVE_WEBHOOK_SUCCESS,
       byId: normalized.entities.webhooks,
