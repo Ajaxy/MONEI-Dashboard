@@ -2,39 +2,58 @@ import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import classNames from './BankAccountItem.scss';
 
-const ImportsTableRow = ({isVerified, last4Digits, country, currency, id, onDelete, isDeletable}) => {
+const BankAccountItem = ({
+  isVerified,
+  name,
+  isPrimary,
+  last4Digits,
+  country,
+  currency,
+  id,
+  onDelete,
+  onEdit,
+  isDeletable
+}) => {
   const iconClass = cx(
     classNames.icon,
     'large middle aligned icon',
     {
-      'green check': isVerified,
-      'grey help': !isVerified
+      'credit card': isVerified,
+      'help': !isVerified
     }
   );
+  const handleEdit = (e) => {
+    e.preventDefault();
+    onEdit(id);
+  };
   return (
     <div className="column">
-      <div className={cx('ui icon message', classNames.bankAccount)}>
+      <div className={cx('ui icon message', {teal: isPrimary}, classNames.bankAccount)}>
         <i className={iconClass} />
         {isDeletable && <i className="close icon red" onClick={() => onDelete(id)} />}
         <div className="content">
-          <div className="header text grey">
-            <small className={classNames.dots}>{new Array(21).join('•')}</small>
-            {last4Digits}
+          <div className="header">
+            <a href="#" onClick={handleEdit}>{name}</a> {isPrimary && '(primary)'}
           </div>
           <p>
-            {currency} ({country})
+            <span className="text grey">
+              <span className={classNames.dots}>{new Array(21).join('•')}</span>
+              {last4Digits}
+            </span>
+            <br />
+            {currency} / {country}
           </p>
         </div>
       </div>
     </div>
   );
 };
-ImportsTableRow.propTypes = {
+BankAccountItem.propTypes = {
   isVerified: PropTypes.bool.isRequired,
   last4Digits: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired
 };
 
-export default ImportsTableRow;
+export default BankAccountItem;
 

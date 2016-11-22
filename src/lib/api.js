@@ -168,6 +168,9 @@ export const fetchBankAccounts = () =>
 export const createBankAccount = (data = {}) =>
   apiClient.post('account/bank-accounts', data);
 
+export const updateBankAccount = (bankAccount) =>
+  apiClient.patch(`account/bank-accounts/${bankAccount.id}`, bankAccount);
+
 export const deleteBankAccount = (accountId) =>
   apiClient.delete(`account/bank-accounts/${accountId}`);
 

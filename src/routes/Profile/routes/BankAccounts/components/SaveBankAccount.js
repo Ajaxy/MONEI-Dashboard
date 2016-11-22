@@ -1,41 +1,44 @@
 import React, {PropTypes} from 'react';
 import Input from 'components/Input';
+import CheckBoxInput from 'components/CheckBoxInput';
 import Confirm from 'components/Modal/Confirm';
 import {CURRENCIES} from 'lib/constants';
 import Select, {SelectItem} from 'components/Select';
 import cx from 'classnames';
 
-const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur}) => (
+const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur, placeholder}) => (
   <div className="ui icon input">
-    <input type="text" value={value} name={name} onChange={onChange} onBlur={onBlur} />
+    <input type="text" {...{value, name, onChange, onBlur, placeholder}} />
     {dirty && valid && <i className="check green icon" />}
   </div>
 );
 
-const AddBankAccount = ({
+const SaveBankAccount = ({
   isOpen,
-  isAdding,
+  isSaving,
+  bankAccount,
   fields: {
+    name,
+    isPrimary,
     iban,
     routingNumber,
     accountNumber,
     country,
     currency
   },
-  values,
   isUsFormat,
   handleSubmit,
   invalid,
   resetForm,
-  addBankAccount,
-  addBankAccountCancel,
+  saveBankAccount,
+  saveBankAccountCancel,
   countries
 }) => {
   const onSubmit = (formProps) => {
-    addBankAccount(formProps);
+    saveBankAccount({...bankAccount, ...formProps});
   };
   const onCancel = () => {
-    addBankAccountCancel();
+    saveBankAccountCancel();
     resetForm();
   };
   const cleanIban = (e) => {
@@ -45,14 +48,15 @@ const AddBankAccount = ({
   return (
     <Confirm
       isOpen={isOpen}
-      isLoading={isAdding}
+      isLoading={isSaving}
       isDisabled={invalid}
       onCancel={onCancel}
       onConfirm={handleSubmit(onSubmit)}
-      headerText="Add new bank account"
-      confirmText="Add"
+      headerText={(bankAccount.id ? 'Edit' : 'Add new') + ' bank account'}
+      confirmText="Save"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
+        <Input {...name} />
         <Select
           {...country}
           label="Country"
@@ -81,6 +85,7 @@ const AddBankAccount = ({
           {...iban}
           component={BankAccountInput}
           onChange={cleanIban}
+          placeholder={new Array(21).join('•') + (bankAccount.last4Digits || '')}
           label="Bank account number (IBAN)"
           hint="where you want your money to be settled" />}
         {isUsFormat && <Input
@@ -92,22 +97,24 @@ const AddBankAccount = ({
           {...accountNumber}
           component={BankAccountInput}
           label="Account number" />}
+        <CheckBoxInput {...isPrimary} label="Is primary bank account"/>
       </form>
     </Confirm>
   );
 };
 
-AddBankAccount.propTypes = {
+SaveBankAccount.propTypes = {
   fields: PropTypes.shape({
     iban: PropTypes.object.isRequired
   }),
-  addBankAccount: PropTypes.func.isRequired,
-  addBankAccountCancel: PropTypes.func.isRequired,
+  bankAccount: PropTypes.object,
+  saveBankAccount: PropTypes.func.isRequired,
+  saveBankAccountCancel: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   invalid: PropTypes.bool.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  isAdding: PropTypes.bool.isRequired
+  isSaving: PropTypes.bool.isRequired
 };
 
-export default AddBankAccount;
+export default SaveBankAccount;
