@@ -42,7 +42,7 @@ export const fetchBankAccounts = () => {
   };
 };
 
-export const addBankAccount = ({iban, routingNumber, accountNumber, country, currency}) => {
+export const addBankAccount = ({iban, routingNumber, accountNumber, ...rest}) => {
   return async dispatch => {
     dispatch({
       type: types.ADD_BANK_ACCOUNT_REQUEST
@@ -50,8 +50,7 @@ export const addBankAccount = ({iban, routingNumber, accountNumber, country, cur
     try {
       const bankAccount = await api.createBankAccount({
         number: iban || routingNumber + accountNumber,
-        country,
-        currency
+        ...rest
       });
       const normalized = normalize(bankAccount, schema.bankAccount);
       dispatch({

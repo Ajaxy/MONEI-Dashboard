@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Input from 'components/Input';
+import CheckBox from 'components/CheckBox';
 import Confirm from 'components/Modal/Confirm';
 import {CURRENCIES} from 'lib/constants';
 import Select, {SelectItem} from 'components/Select';
@@ -16,13 +17,14 @@ const AddBankAccount = ({
   isOpen,
   isAdding,
   fields: {
+    name,
+    isPrimary,
     iban,
     routingNumber,
     accountNumber,
     country,
     currency
   },
-  values,
   isUsFormat,
   handleSubmit,
   invalid,
@@ -53,6 +55,7 @@ const AddBankAccount = ({
       confirmText="Add"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
+        <Input {...name} />
         <Select
           {...country}
           label="Country"
@@ -92,6 +95,9 @@ const AddBankAccount = ({
           {...accountNumber}
           component={BankAccountInput}
           label="Account number" />}
+        <div className="field">
+          <CheckBox {...isPrimary} label="Is primary bank account"/>
+        </div>
       </form>
     </Confirm>
   );

@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
   const country = findByCode(profile.geoip.country_code).name;
   let isUsFormat = false;
   const rules = {
+    name: 'required',
     country: 'required',
     currency: 'required'
   };
@@ -45,5 +46,13 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'addBankAccount',
-  fields: ['iban', 'routingNumber', 'accountNumber', 'country', 'currency']
+  fields: [
+    'name',
+    'isPrimary',
+    'iban',
+    'routingNumber',
+    'accountNumber',
+    'country',
+    'currency'
+  ]
 }, mapStateToProps, actions)(AddBankAccount);

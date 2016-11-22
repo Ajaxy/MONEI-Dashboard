@@ -7,7 +7,7 @@ const CheckBox = ({
   onChange,
   checked,
   name = '',
-  value,
+  value = false,
   label,
   fitted,
   toggle,

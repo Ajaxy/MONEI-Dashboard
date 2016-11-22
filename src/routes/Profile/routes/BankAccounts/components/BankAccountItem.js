@@ -2,27 +2,41 @@ import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import classNames from './BankAccountItem.scss';
 
-const ImportsTableRow = ({isVerified, last4Digits, country, currency, id, onDelete, isDeletable}) => {
+const ImportsTableRow = ({
+  isVerified,
+  name,
+  isPrimary,
+  last4Digits,
+  country,
+  currency,
+  id,
+  onDelete,
+  isDeletable
+}) => {
   const iconClass = cx(
     classNames.icon,
     'large middle aligned icon',
     {
-      'green check': isVerified,
-      'grey help': !isVerified
+      'credit card': isVerified,
+      'help': !isVerified
     }
   );
   return (
     <div className="column">
-      <div className={cx('ui icon message', classNames.bankAccount)}>
+      <div className={cx('ui icon message', {teal: isPrimary}, classNames.bankAccount)}>
         <i className={iconClass} />
         {isDeletable && <i className="close icon red" onClick={() => onDelete(id)} />}
         <div className="content">
-          <div className="header text grey">
-            <small className={classNames.dots}>{new Array(21).join('•')}</small>
-            {last4Digits}
+          <div className="header">
+            {name} {isPrimary && '[primary]'}
           </div>
           <p>
-            {currency} ({country})
+            <span className="text grey">
+              <span className={classNames.dots}>{new Array(21).join('•')}</span>
+              {last4Digits}
+            </span>
+            <br />
+            {currency} / {country}
           </p>
         </div>
       </div>
