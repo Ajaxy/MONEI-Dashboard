@@ -6,9 +6,9 @@ import {CURRENCIES} from 'lib/constants';
 import Select, {SelectItem} from 'components/Select';
 import cx from 'classnames';
 
-const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur}) => (
+const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur, placeholder}) => (
   <div className="ui icon input">
-    <input type="text" value={value} name={name} onChange={onChange} onBlur={onBlur} />
+    <input type="text" {...{value, name, onChange, onBlur, placeholder}} />
     {dirty && valid && <i className="check green icon" />}
   </div>
 );
@@ -85,6 +85,7 @@ const SaveBankAccount = ({
           {...iban}
           component={BankAccountInput}
           onChange={cleanIban}
+          placeholder={new Array(21).join('•') + (bankAccount.last4Digits || '')}
           label="Bank account number (IBAN)"
           hint="where you want your money to be settled" />}
         {isUsFormat && <Input

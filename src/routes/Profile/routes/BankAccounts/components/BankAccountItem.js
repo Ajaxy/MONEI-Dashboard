@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import classNames from './BankAccountItem.scss';
 
-const ImportsTableRow = ({
+const BankAccountItem = ({
   isVerified,
   name,
   isPrimary,
@@ -33,7 +33,7 @@ const ImportsTableRow = ({
         {isDeletable && <i className="close icon red" onClick={() => onDelete(id)} />}
         <div className="content">
           <div className="header">
-            <a href="#" onClick={handleEdit}>{name}</a> {isPrimary && '[primary]'}
+            <a href="#" onClick={handleEdit}>{name}</a> {isPrimary && '(primary)'}
           </div>
           <p>
             <span className="text grey">
@@ -48,12 +48,12 @@ const ImportsTableRow = ({
     </div>
   );
 };
-ImportsTableRow.propTypes = {
+BankAccountItem.propTypes = {
   isVerified: PropTypes.bool.isRequired,
   last4Digits: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired
 };
 
-export default ImportsTableRow;
+export default BankAccountItem;
 
