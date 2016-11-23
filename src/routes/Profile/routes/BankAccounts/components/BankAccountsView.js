@@ -34,7 +34,7 @@ const BankAccountsView = ({
         <div className="ui stackable three column grid">
           {bankAccounts.length > 0 ? bankAccounts.map((bankAccount, i) => (<BankAccountItem
             {...bankAccount}
-            isDeletable={bankAccounts.length > 1}
+            isDeletable={bankAccounts.length > 1 && !bankAccount.isPrimary}
             onDelete={deleteBankAccountStart}
             onEdit={saveBankAccountStart}
             key={i} />))
