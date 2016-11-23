@@ -32,10 +32,16 @@ const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user, ba
             <tr key={i}>
               <td>{subAccount.name}</td>
               <td>
-                {bankAccount.number} {' '}
-                <span className="text grey">
-                  {bankAccount.currency} / {bankAccount.country}
-                </span>
+                {
+                  bankAccount.number
+                  ? <span>
+                    {bankAccount.number} {' '}
+                    <span className="text grey">
+                    {bankAccount.currency} / {bankAccount.country}
+                    </span>
+                  </span>
+                  : <span className="text grey">No attached bank account</span>
+                }
               </td>
               <td>{subAccount.state}</td>
             </tr>
