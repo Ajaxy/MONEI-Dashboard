@@ -37,8 +37,15 @@ const mapStateToProps = (state, props) => ({
   isFetching: selectors.getIsFetching(state)
 });
 
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const bankAccount = stateProps.bankAccounts.find(a => a.isPrimary) || {};
+  const props = {...stateProps, ...dispatchProps, ...ownProps};
+  props.initialValues = {bankAccountId: bankAccount.id, ...props.initialValues};
+  return props;
+};
+
 export default reduxForm({
   form: 'SubAccountSettings',
   fields: ['customName', 'bankAccountId'],
   validate
-}, mapStateToProps, {fetchBankAccounts})(SettingsForm);
+}, mapStateToProps, {fetchBankAccounts}, mergeProps)(SettingsForm);

@@ -28,7 +28,11 @@ const SettingsForm = ({
             <SelectItem
               key={i}
               value={bankAccount.id}>
-              <small className="text grey">{new Array(21).join('•')}</small> {bankAccount.last4Digits}
+              {bankAccount.name} {' '}
+              <span className="text grey">
+                ...{bankAccount.last4Digits} {' '}
+                {bankAccount.isPrimary && '(primary)'}
+              </span>
             </SelectItem>
           ))}
         </Select>
