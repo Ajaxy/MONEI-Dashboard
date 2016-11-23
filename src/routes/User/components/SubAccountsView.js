@@ -3,13 +3,13 @@ import Button from 'components/Button';
 import Loader from 'components/Loader';
 import cx from 'classnames';
 
-const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user}) => (
+const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user, bankAccountById}) => (
   <section>
     <table className="ui large striped table">
       <thead>
         <tr>
           <th>Name</th>
-          <th>Sub Account ID</th>
+          <th>Attached bank account</th>
           <th>Status</th>
         </tr>
       </thead>
@@ -26,13 +26,21 @@ const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user}) =
             </h4>
           </td>
         </tr>}
-        {subAccounts.map((subAccount, i) => (
-          <tr key={i}>
-            <td>{subAccount.name}</td>
-            <td>{subAccount.id}</td>
-            <td>{subAccount.state}</td>
-          </tr>
-        ))}
+        {subAccounts.map((subAccount, i) => {
+          const bankAccount = bankAccountById[subAccount.bankAccountId] || {};
+          return (
+            <tr key={i}>
+              <td>{subAccount.name}</td>
+              <td>
+                {bankAccount.number} {' '}
+                <span className="text grey">
+                  {bankAccount.currency} / {bankAccount.country}
+                </span>
+              </td>
+              <td>{subAccount.state}</td>
+            </tr>
+          )
+        })}
       </tbody>
     </table>
     <Button

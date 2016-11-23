@@ -43,6 +43,16 @@ export const getSubAccounts = createSelector(
   user => user.subAccountIds.map(id => user.subAccountsById[id])
 );
 
+export const getBankAccountById = createSelector(
+  userSelector,
+  user => user.bankAccountsById
+);
+
+export const getBankAccounts = createSelector(
+  userSelector,
+  user => user.bankAccountIds.map(id => user.bankAccountsById[id])
+);
+
 export const getIsSyncing = createSelector(
   userSelector,
   user => user.isSyncing
@@ -51,4 +61,9 @@ export const getIsSyncing = createSelector(
 export const getIsFetchingSubAccounts = createSelector(
   userSelector,
   user => user.isFetchingSubAccounts
+);
+
+export const getIsFetchingBankAccounts = createSelector(
+  userSelector,
+  user => user.isFetchingBankAccounts
 );

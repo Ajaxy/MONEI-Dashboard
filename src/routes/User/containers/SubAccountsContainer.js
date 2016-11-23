@@ -6,12 +6,14 @@ import SubAccountsView from '../components/SubAccountsView';
 
 class SubAccounts extends Component {
   static propTypes = {
-    fetchSubAccounts: PropTypes.func.isRequired
+    fetchSubAccounts: PropTypes.func.isRequired,
+    fetchBankAccounts: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    const {user, fetchSubAccounts} = this.props;
+    const {user, fetchSubAccounts, fetchBankAccounts} = this.props;
     fetchSubAccounts(user.user_id);
+    fetchBankAccounts(user.user_id);
   }
 
   render() {
@@ -22,8 +24,9 @@ class SubAccounts extends Component {
 const mapStateToProps = (state, props) => ({
   user: selectors.getUser(state),
   subAccounts: selectors.getSubAccounts(state),
+  bankAccountById: selectors.getBankAccountById(state),
   isSyncing: selectors.getIsSyncing(state),
-  isFetching: selectors.getIsFetchingSubAccounts(state),
+  isFetching: selectors.getIsFetchingSubAccounts(state)
 });
 
 export default connect(mapStateToProps, actions)(SubAccounts);
