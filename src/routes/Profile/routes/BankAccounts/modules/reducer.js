@@ -10,14 +10,14 @@ const ids = (state = [], action) => {
       return [...action.ids];
     case types.SAVE_BANK_ACCOUNT_SUCCESS:
       return mergeArrays(state, [action.bankAccountId]);
-    default:
-      return state;
     case types.DELETE_BANK_ACCOUNT_SUCCESS:
       let index = state.indexOf(action.bankAccountId);
       return [
         ...state.slice(0, index),
         ...state.slice(index + 1)
       ];
+    default:
+      return state;
   }
 };
 
@@ -27,12 +27,12 @@ const byId = (state = {}, action) => {
       return {...action.byId};
     case types.SAVE_BANK_ACCOUNT_SUCCESS:
       return {...state, ...action.byId};
-    default:
-      return state;
     case types.DELETE_BANK_ACCOUNT_SUCCESS:
       const newState = {...state};
       delete newState[action.bankAccountId];
       return newState;
+    default:
+      return state;
   }
 };
 

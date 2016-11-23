@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
   const country = findByCode(profile.geoip.country_code).name;
   const bankAccount = selectors.getActiveBankAccount(state);
   const bankAccounts = selectors.getBankAccounts(state);
+  const isNew = !bankAccount.id;
   Validator.register(
     'isPrimary',
     value => value && !bankAccounts.some(a => a.isPrimary && a.id !== bankAccount.id) || !value,
@@ -33,11 +34,16 @@ const mapStateToProps = (state) => {
     isPrimary: 'isPrimary'
   };
   if (values.country === 'Spain') {
-    rules.iban = 'required|iban';
+    rules.iban = 'iban';
+    if (isNew) rules.iban += '|required'
   }
   if (values.country === 'United States') {
-    rules.routingNumber = 'required|routingNumber';
-    rules.accountNumber = 'required|accountNumber';
+    rules.routingNumber = 'routingNumber';
+    rules.accountNumber = 'accountNumber';
+    if (isNew) {
+      rules.routingNumber += '|required';
+      rules.accountNumber += '|required';
+    }
     isUsFormat = true;
   }
   return {
