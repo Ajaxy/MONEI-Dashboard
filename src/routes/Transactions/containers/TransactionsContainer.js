@@ -29,6 +29,16 @@ class Transactions extends Component {
     this.props.fetchTransactions(page.from, page.to, page.nextPage);
   };
 
+  goToNextPage = () => {
+    const {page} = this.props;
+    this.props.fetchTransactions(page.from, page.to, page.nextPage, true);
+  };
+
+  goToPrevPage = () => {
+    const {page} = this.props;
+    this.props.fetchTransactions(page.from, page.to, page.prevPage, true);
+  };
+
   filterByDate = (fromDate, toDate) => {
     const from = moment(fromDate).startOf('day').valueOf();
     const to = moment(toDate).endOf('day').valueOf();
@@ -50,7 +60,8 @@ class Transactions extends Component {
   render() {
     return (
       <TransactionsView
-        loadMore={this.loadMore}
+        goToNextPage={this.goToNextPage}
+        goToPrevPage={this.goToPrevPage}
         filterByDate={this.filterByDate}
         viewDetails={this.viewDetails}
         closeDetails={this.closeDetails}
@@ -67,6 +78,7 @@ const mapStateToProps = (state) => ({
   transactions: selectors.getTransactions(state),
   totalAmount: selectors.getTotalAmount(state),
   isFetching: selectors.getIsFetching(state),
+  isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),
   isDetailsModalOpen: selectors.getIsDetailsModalOpen(state),
   isInSandboxMode: profileSelectors.getIsInSandboxMode(state),

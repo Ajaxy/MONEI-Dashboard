@@ -31,6 +31,7 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
         byId: normalized.entities.transactions,
         ids: normalized.result,
         nextPage: transactions.nextPage,
+        prevPage: transactions.prevPage,
         page,
         from,
         to

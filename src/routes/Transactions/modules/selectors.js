@@ -7,7 +7,7 @@ const customersSelector = state => state[stateKey];
 const activeTransactionIdSelector = state => state.router.params.customerId;
 export const getTransactions = createSelector(
   customersSelector,
-  customers => customers.ids.map(id => customers.byId[id]).slice(0, PAGE_LIMIT)
+  customers => customers.ids.map(id => customers.byId[id])
 );
 
 export const getTransactionIds = createSelector(
@@ -33,6 +33,11 @@ export const getIsDetailsModalOpen = createSelector(
 export const getPage = createSelector(
   customersSelector,
   customers => customers.page
+);
+
+export const getIsFirstPage = createSelector(
+  getPage,
+  page => !page.prevPage
 );
 
 export const getIsLastPage = createSelector(

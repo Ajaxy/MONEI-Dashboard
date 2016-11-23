@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {InfiniteTable} from 'components/Table';
+import {PaginatedTable} from 'components/Table';
 import TransactionRow, {NUM_COLUMNS} from './TransactionRow';
 import TransactionDetails from './TransactionDetails';
 import DateTimeInput from 'components/DateTimeInput';
@@ -12,12 +12,14 @@ const TransactionsView = ({
   fromDate,
   toDate,
   totalAmount,
-  loadMore,
+  goToNextPage,
+  goToPrevPage,
   filterByDate,
   viewDetails,
   closeDetails,
   printPage,
   isFetching,
+  isFirstPage,
   isLastPage,
   isDetailsModalOpen,
   transactionViewed
@@ -62,12 +64,12 @@ const TransactionsView = ({
           Last week
         </Button>
       </div>
-      <InfiniteTable
-        {...{isFetching, isLastPage}}
+      <PaginatedTable
+        {...{isFetching, isFirstPage, isLastPage}}
         selectable={!isFetching && transactions.length > 0}
         numColumns={NUM_COLUMNS}
-        onLoadMore={loadMore}
-        autoLoad
+        onNextPage={goToNextPage}
+        onPrevPage={goToPrevPage}
         className="large single line"
         header={<TransactionRow isHeader />}
         footer={<TransactionRow totalAmount={totalAmount} isFooter />}
@@ -83,7 +85,7 @@ const TransactionsView = ({
               <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
             </tr>
         }
-      </InfiniteTable>
+      </PaginatedTable>
       <TransactionDetails
         transaction={transactionViewed}
         isOpen={isDetailsModalOpen}
