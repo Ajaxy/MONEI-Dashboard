@@ -14,6 +14,7 @@ const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur, placehol
 );
 
 const SaveBankAccount = ({
+  forcePrimary,
   isOpen,
   isSaving,
   bankAccount,
@@ -97,7 +98,7 @@ const SaveBankAccount = ({
           {...accountNumber}
           component={BankAccountInput}
           label="Account number" />}
-        <CheckBoxInput {...isPrimary} label="Is primary bank account"/>
+        <CheckBoxInput {...isPrimary} disabled={forcePrimary} label="Is primary bank account"/>
       </form>
     </Confirm>
   );
@@ -114,7 +115,8 @@ SaveBankAccount.propTypes = {
   resetForm: PropTypes.func.isRequired,
   invalid: PropTypes.bool.isRequired,
   isOpen: PropTypes.bool.isRequired,
-  isSaving: PropTypes.bool.isRequired
+  isSaving: PropTypes.bool.isRequired,
+  forcePrimary: PropTypes.bool
 };
 
 export default SaveBankAccount;
