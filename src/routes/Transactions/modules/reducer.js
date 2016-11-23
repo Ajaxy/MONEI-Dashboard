@@ -65,6 +65,7 @@ const page = (state = {}, action) => {
       return {
         page: action.page,
         nextPage: action.nextPage,
+        prevPage: action.prevPage,
         from: action.from,
         to: action.to
       };
