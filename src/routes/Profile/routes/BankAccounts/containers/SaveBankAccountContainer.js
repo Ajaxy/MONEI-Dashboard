@@ -14,7 +14,7 @@ const createValidator = (rules) => {
   };
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const values = getValues(state.form.saveBankAccount) || {};
   const profile = getProfile(state);
   const country = findByCode(profile.geoip.country_code).name;
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
     bankAccount,
     isSaving: selectors.getIsSaving(state),
     isOpen: selectors.getIsSaveModalOpen(state),
-    initialValues: {country, ...bankAccount},
+    initialValues: {country, ...bankAccount, ...ownProps.initialValues},
     validate: createValidator(rules)
   };
 };
