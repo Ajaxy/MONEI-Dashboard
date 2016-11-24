@@ -84,6 +84,31 @@ const isFetchingSubAccounts = (state = false, action) => {
   }
 };
 
+const isUpdatingSubAccount = (state = false, action) => {
+  switch (action.type) {
+    case types.UPDATE_USER_SUB_ACCOUNT_REQUEST:
+      return true;
+    case types.UPDATE_USER_SUB_ACCOUNT_SUCCESS:
+    case types.UPDATE_USER_SUB_ACCOUNT_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isUpdateModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.UPDATE_USER_SUB_ACCOUNT_START:
+      return true;
+    case types.UPDATE_USER_SUB_ACCOUNT_CANCEL:
+    case types.UPDATE_USER_SUB_ACCOUNT_SUCCESS:
+    case types.UPDATE_USER_SUB_ACCOUNT_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const isFetchingBankAccounts = (state = false, action) => {
   switch (action.type) {
     case types.FETCH_USER_BANK_ACCOUNTS_REQUEST:
@@ -102,6 +127,19 @@ const isSubAccountsUpToDate = (state = false, action) => {
       return true;
     case FETCH_USER_REQUEST:
       return false;
+    default:
+      return state;
+  }
+};
+
+const activeSubAccountId = (state = null, action) => {
+  switch (action.type) {
+    case types.UPDATE_USER_SUB_ACCOUNT_START:
+      return action.subAccountId;
+    case types.UPDATE_USER_SUB_ACCOUNT_SUCCESS:
+    case types.UPDATE_USER_SUB_ACCOUNT_FAIL:
+    case types.UPDATE_USER_SUB_ACCOUNT_CANCEL:
+      return null;
     default:
       return state;
   }
@@ -127,6 +165,9 @@ export default combineReducers({
   bankAccountIds,
   bankAccountsById,
   isSubAccountsUpToDate,
-  isBankAccountsUpToDate
+  isBankAccountsUpToDate,
+  isUpdatingSubAccount,
+  isUpdateModalOpen,
+  activeSubAccountId
 });
 

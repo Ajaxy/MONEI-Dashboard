@@ -44,6 +44,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default reduxForm({
-  form: 'change-password',
+  form: 'changePassword',
   fields: ['newPassword', 'confirmPassword']
 }, mapStateToProps, actions)(ChangePasswordForm);

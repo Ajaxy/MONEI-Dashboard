@@ -38,6 +38,21 @@ export const getIsSubAccountsUpToDate = createSelector(
   subAccounts => subAccounts.isSubAccountsUpToDate
 );
 
+export const getIsUpdatingSubAccount = createSelector(
+  subAccounts,
+  subAccounts => subAccounts.isUpdatingSubAccount
+);
+
+export const getIsUpdateModalOpen = createSelector(
+  subAccounts,
+  subAccounts => subAccounts.isUpdateModalOpen
+);
+
+export const getActiveSubAccount = createSelector(
+  subAccounts,
+  subAccounts => subAccounts.subAccountsById[subAccounts.activeSubAccountId] || {}
+);
+
 export const getIsBankAccountsUpToDate = createSelector(
   subAccounts,
   subAccounts => subAccounts.isBankAccountsUpToDate

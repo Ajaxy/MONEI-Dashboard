@@ -29,6 +29,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default reduxForm({
-  form: 'admin',
+  form: 'userSettings',
   fields: ['mid', 'mlogin', 'mpwd', 'role', 'status', 'acquirer', 'comment']
 }, mapStateToProps, actions)(Settings);

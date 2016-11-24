@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
+import EditSubAccount from '../containers/UpdateSubAccountContainer';
 import cx from 'classnames';
 
 const SubAccountsView = ({
@@ -10,7 +11,8 @@ const SubAccountsView = ({
   syncUser,
   user,
   bankAccountById,
-  copyToClipboard
+  copyToClipboard,
+  updateSubAccountStart
 }) => (
   <section>
     <table className="ui large striped table">
@@ -38,7 +40,12 @@ const SubAccountsView = ({
           const bankAccount = bankAccountById[subAccount.bankAccountId] || {};
           return (
             <tr key={i}>
-              <td>{subAccount.name}</td>
+              <td>
+                <a href="#" onClick={(e) => {
+                  e.preventDefault();
+                  updateSubAccountStart(subAccount.id)
+                }}>{subAccount.name}</a>
+              </td>
               <td>
                 {
                   bankAccount.number
@@ -68,6 +75,7 @@ const SubAccountsView = ({
       className={cx('right floated green')}>
       Sync user data with PayOn
     </Button>
+    <EditSubAccount userId={user.user_id}/>
   </section>
 );
 

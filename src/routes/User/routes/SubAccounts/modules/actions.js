@@ -77,7 +77,16 @@ export const fetchSubAccounts = (userId) => {
   };
 };
 
-export const updateSubAccounts = (userId, subAccountId, data) => {
+export const updateSubAccountStart = (subAccountId) => ({
+  type: types.UPDATE_USER_SUB_ACCOUNT_START,
+  subAccountId
+});
+
+export const updateSubAccountCancel = () => ({
+  type: types.UPDATE_USER_SUB_ACCOUNT_CANCEL
+});
+
+export const updateSubAccount = (userId, subAccountId, data) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_USER_SUB_ACCOUNT_REQUEST});
     try {

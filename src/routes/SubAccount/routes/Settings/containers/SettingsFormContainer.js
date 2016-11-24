@@ -45,7 +45,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 };
 
 export default reduxForm({
-  form: 'SubAccountSettings',
+  form: 'subAccountSettings',
   fields: ['customName', 'bankAccountId'],
   validate
 }, mapStateToProps, {fetchBankAccounts}, mergeProps)(SettingsForm);

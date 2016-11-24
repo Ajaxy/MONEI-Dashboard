@@ -3,7 +3,7 @@ import Input from 'components/Input';
 import Select, {SelectItem} from 'components/Select';
 import Confirm from 'components/Modal/Confirm';
 
-const SaveModal = ({
+const SaveWebhook = ({
   isOpen,
   isSaving,
   fields: {url, webhookState, events},
@@ -53,7 +53,7 @@ const SaveModal = ({
   );
 };
 
-SaveModal.propTypes = {
+SaveWebhook.propTypes = {
   webhook: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   saveWebhook: PropTypes.func.isRequired,
@@ -65,4 +65,4 @@ SaveModal.propTypes = {
   isOpen: PropTypes.bool.isRequired
 };
 
-export default SaveModal;
+export default SaveWebhook;
