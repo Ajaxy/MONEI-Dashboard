@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
 import PersonalDataView from 'routes/User/components/PersonalDataView';
 
-export const OverviewView = ({profile}) => {
+export const OverviewView = ({user}) => {
   return (
-    <PersonalDataView user={profile} />
+    <PersonalDataView user={user} />
   );
 };
 

@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react';
-import AdminDataForm from '../components/AdminDataForm';
+import SettingsView from '../components/SettingsView';
 import {reduxForm} from 'redux-form';
-import * as actions from '../modules/actions';
-import * as selectors from '../modules/selectors';
+import * as actions from 'routes/User/modules/actions';
+import * as selectors from 'routes/User/modules/selectors';
 
-class AdminDataContainer extends Component {
+class Settings extends Component {
   submitForm = ({mid, mlogin, mpwd, role, status, acquirer, iban, comment}) => {
     const {user, updateUser} = this.props;
     const app_metadata = Object.assign({}, user.app_metadata, {mid, mlogin, mpwd, role, status, comment});
@@ -13,11 +13,11 @@ class AdminDataContainer extends Component {
   };
 
   render() {
-    return <AdminDataForm {...this.props} onSubmit={this.submitForm} />;
+    return <SettingsView {...this.props} onSubmit={this.submitForm} />;
   }
 }
 
-AdminDataContainer.propTypes = {
+Settings.propTypes = {
   user: PropTypes.object.isRequired
 };
 
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => ({
 export default reduxForm({
   form: 'admin',
   fields: ['mid', 'mlogin', 'mpwd', 'role', 'status', 'acquirer', 'comment']
-}, mapStateToProps, actions)(AdminDataContainer);
+}, mapStateToProps, actions)(Settings);

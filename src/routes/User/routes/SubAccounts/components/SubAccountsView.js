@@ -26,7 +26,7 @@ const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user, ba
             </h4>
           </td>
         </tr>}
-        {subAccounts.map((subAccount, i) => {
+        {!isFetching && subAccounts.map((subAccount, i) => {
           const bankAccount = bankAccountById[subAccount.bankAccountId] || {};
           return (
             <tr key={i}>
