@@ -77,6 +77,35 @@ export const fetchSubAccounts = (userId) => {
   };
 };
 
+export const updateSubAccounts = (userId, subAccountId, data) => {
+  return async dispatch => {
+    dispatch({type: types.UPDATE_USER_SUB_ACCOUNT_REQUEST});
+    try {
+      const subAccount = await api.updateUserSubAccount(userId, subAccountId, data);
+      const normalized = normalize(subAccount, subSchema.subAccount);
+      dispatch({
+        type: types.UPDATE_USER_SUB_ACCOUNT_SUCCESS,
+        byId: normalized.entities.subAccounts,
+        subAccountId: normalized.result
+      });
+      dispatch(addMessage({
+        text: 'Sub account was updated.',
+        style: 'success'
+      }));
+    } catch (error) {
+      dispatch({
+        type: types.UPDATE_USER_SUB_ACCOUNT_FAIL
+      });
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(syncUser(userId));
+        }
+      }));
+    }
+  };
+};
+
 export const fetchBankAccounts = (userId) => {
   return async (dispatch, getState) => {
     const isUpToDate = getIsBankAccountsUpToDate(getState());

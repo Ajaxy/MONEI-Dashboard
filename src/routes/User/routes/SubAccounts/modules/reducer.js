@@ -23,6 +23,14 @@ const subAccountsById = (state = {}, action) => {
     case types.SYNC_USER_SUCCESS:
     case types.FETCH_USER_SUB_ACCOUNTS_SUCCESS:
       return {...state, ...action.byId};
+    case types.UPDATE_USER_SUB_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        [action.subAccountId]: {
+          ...state[action.subAccountId],
+          ...action.byId[action.subAccountId]
+        }
+      };
     default:
       return state;
   }

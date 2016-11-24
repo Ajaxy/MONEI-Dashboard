@@ -129,6 +129,9 @@ export const syncUser = (userId, mid) =>
 export const fetchUserSubAccounts = (userId) =>
   apiClient.get(`users/${userId}/sub-accounts`);
 
+export const updateUserSubAccount = (userId, subAccountId, data) =>
+  apiClient.get(`users/${userId}/sub-accounts/${subAccountId}`, data);
+
 export const fetchUserBankAccounts = (userId) =>
   apiClient.get(`users/${userId}/bank-accounts`);
 
