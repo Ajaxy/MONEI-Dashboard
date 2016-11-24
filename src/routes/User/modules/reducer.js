@@ -38,98 +38,9 @@ const isUpToDate = (state = false, action) => {
   }
 };
 
-const subAccountIds = (state = [], action) => {
-  switch (action.type) {
-    case types.FETCH_USER_REQUEST:
-      return [];
-    case types.SYNC_USER_SUCCESS:
-    case types.FETCH_USER_SUB_ACCOUNTS_SUCCESS:
-      return mergeArrays(state, action.ids);
-    default:
-      return state;
-  }
-};
-
-const subAccountsById = (state = {}, action) => {
-  switch (action.type) {
-    case types.FETCH_USER_REQUEST:
-      return {};
-    case types.SYNC_USER_SUCCESS:
-    case types.FETCH_USER_SUB_ACCOUNTS_SUCCESS:
-      return {...state, ...action.byId};
-    default:
-      return state;
-  }
-};
-
-const bankAccountIds = (state = [], action) => {
-  switch (action.type) {
-    case types.FETCH_USER_REQUEST:
-      return [];
-    case types.FETCH_USER_BANK_ACCOUNTS_SUCCESS:
-      return mergeArrays(state, action.ids);
-    default:
-      return state;
-  }
-};
-
-const bankAccountsById = (state = {}, action) => {
-  switch (action.type) {
-    case types.FETCH_USER_REQUEST:
-      return {};
-    case types.FETCH_USER_BANK_ACCOUNTS_SUCCESS:
-      return {...state, ...action.byId};
-    default:
-      return state;
-  }
-};
-
-const isSyncing = (state = false, action) => {
-  switch (action.type) {
-    case types.SYNC_USER_REQUEST:
-      return true;
-    case types.SYNC_USER_SUCCESS:
-    case types.SYNC_USER_FAIL:
-      return false;
-    default:
-      return state;
-  }
-};
-
-const isFetchingSubAccounts = (state = false, action) => {
-  switch (action.type) {
-    case types.FETCH_USER_SUB_ACCOUNTS_REQUEST:
-      return true;
-    case types.FETCH_USER_SUB_ACCOUNTS_SUCCESS:
-    case types.FETCH_USER_SUB_ACCOUNTS_FAIL:
-      return false;
-    default:
-      return state;
-  }
-};
-
-const isFetchingBankAccounts = (state = false, action) => {
-  switch (action.type) {
-    case types.FETCH_USER_BANK_ACCOUNTS_REQUEST:
-      return true;
-    case types.FETCH_USER_BANK_ACCOUNTS_SUCCESS:
-    case types.FETCH_USER_BANK_ACCOUNTS_FAIL:
-      return false;
-    default:
-      return state;
-  }
-};
-
 export default combineReducers({
   isFetching,
   isUpdating,
-  isUpToDate,
-  isSyncing,
-  isFetchingBankAccounts,
-  isFetchingSubAccounts,
-  subAccountIds,
-  subAccountsById,
-  bankAccountIds,
-  bankAccountsById
+  isUpToDate
 });
 

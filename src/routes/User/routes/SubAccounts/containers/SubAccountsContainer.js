@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import * as actions from 'routes/User/modules/actions';
-import * as selectors from 'routes/User/modules/selectors';
+import * as actions from '../modules/actions';
+import * as selectors from '../modules/selectors';
+import {getUser} from 'routes/User/modules/selectors';
 import SubAccountsView from '../components/SubAccountsView';
 
 class SubAccounts extends Component {
@@ -22,7 +23,7 @@ class SubAccounts extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  user: selectors.getUser(state),
+  user: getUser(state),
   subAccounts: selectors.getSubAccounts(state),
   bankAccountById: selectors.getBankAccountById(state),
   isSyncing: selectors.getIsSyncing(state),

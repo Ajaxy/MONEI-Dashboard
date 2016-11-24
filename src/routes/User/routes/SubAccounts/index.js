@@ -1,7 +1,11 @@
+import {injectReducer} from 'store/reducers';
+import reducer, {stateKey} from './modules/reducer';
 import SubAccounts from './containers/SubAccountsContainer';
 
-// Sync route definition
-export default {
-  path: 'sub-accounts',
-  component: SubAccounts
+export default (store) => {
+  injectReducer(store, {key: stateKey, reducer});
+  return {
+    path: 'sub-accounts',
+    component: SubAccounts
+  };
 };

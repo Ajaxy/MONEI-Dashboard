@@ -3,7 +3,15 @@ import Button from 'components/Button';
 import Loader from 'components/Loader';
 import cx from 'classnames';
 
-const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user, bankAccountById}) => (
+const SubAccountsView = ({
+  subAccounts,
+  isFetching,
+  isSyncing,
+  syncUser,
+  user,
+  bankAccountById,
+  copyToClipboard
+}) => (
   <section>
     <table className="ui large striped table">
       <thead>
@@ -35,7 +43,11 @@ const SubAccountsView = ({subAccounts, isFetching, isSyncing, syncUser, user, ba
                 {
                   bankAccount.number
                   ? <span>
-                    {bankAccount.number} {' '}
+                    <span
+                      className="clickable"
+                      onClick={() => copyToClipboard(bankAccount.number, 'Bank account number')}>
+                      {bankAccount.number}
+                    </span> {' '}
                     <span className="text grey">
                     {bankAccount.currency} / {bankAccount.country}
                     </span>

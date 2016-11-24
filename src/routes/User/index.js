@@ -15,7 +15,7 @@ export default (store) => {
     component: RequireAuth(RequireAdmin(User)),
     childRoutes: [
       SettingsRoute,
-      SubAccountsRoute
+      SubAccountsRoute(store)
     ]
   };
 };
