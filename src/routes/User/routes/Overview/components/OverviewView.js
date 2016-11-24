@@ -8,7 +8,7 @@ export const OverviewView = ({user}) => {
 };
 
 OverviewView.propTypes = {
-  profile: PropTypes.shape({
+  user: PropTypes.shape({
     name: PropTypes.string
   }).isRequired
 };

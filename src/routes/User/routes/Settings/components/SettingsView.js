@@ -5,7 +5,7 @@ import Select, {SelectItem} from 'components/Select';
 import {USER_ROLES, USER_STATUSES, USER_ACQUIRERS} from 'lib/enums';
 import humanize from 'humanize-string';
 
-const AdminDataForm = ({
+const SettingsView = ({
   fields: {mid, mlogin, mpwd, role, status, acquirer, iban, comment},
   handleSubmit,
   onSubmit,
@@ -62,11 +62,11 @@ const AdminDataForm = ({
   </div>
 );
 
-AdminDataForm.propTypes = {
+SettingsView.propTypes = {
   fields: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   isUpdating: PropTypes.bool.isRequired
 };
 
-export default AdminDataForm;
+export default SettingsView;

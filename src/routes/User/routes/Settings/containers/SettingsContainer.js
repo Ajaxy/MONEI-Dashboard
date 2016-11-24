@@ -5,6 +5,11 @@ import * as actions from 'routes/User/modules/actions';
 import * as selectors from 'routes/User/modules/selectors';
 
 class Settings extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    updateUser: PropTypes.func.isRequired
+  };
+
   submitForm = ({mid, mlogin, mpwd, role, status, acquirer, iban, comment}) => {
     const {user, updateUser} = this.props;
     const app_metadata = Object.assign({}, user.app_metadata, {mid, mlogin, mpwd, role, status, comment});
@@ -17,12 +22,10 @@ class Settings extends Component {
   }
 }
 
-Settings.propTypes = {
-  user: PropTypes.object.isRequired
-};
-
 const mapStateToProps = (state) => ({
-  initialValues: selectors.getAppMetadata(state)
+  initialValues: selectors.getAppMetadata(state),
+  user: selectors.getUser(state),
+  isUpdating: selectors.getIsUpdating(state)
 });
 
 export default reduxForm({
