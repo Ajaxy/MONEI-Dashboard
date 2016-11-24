@@ -1,17 +1,23 @@
 import React, {PropTypes} from 'react';
 import {PAYMENT_TYPES} from 'lib/enums';
+import {DATE_TIME_FORMAT_SIMPLE} from 'lib/constants';
 import {formatDate} from 'lib/utils';
 import {
   getAmount,
   isFailed,
-  isRefund,
-  getChannelName,
-  getTimeStamp
+  isRefund
 } from 'routes/Transactions/modules/utils';
 import cx from 'classnames';
 import classNames from './TransactionRow.scss';
 
-const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false, isFooter = false}) => {
+const TransactionRow = ({
+  transaction,
+  subAccount = {},
+  onClick,
+  totalAmount = 0,
+  isHeader = false,
+  isFooter = false
+}) => {
   if (isHeader) {
     return (
       <tr>
@@ -20,7 +26,7 @@ const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false
         <th>Type</th>
         <th>Customer Name</th>
         <th>Customer Email</th>
-        <th>Channel</th>
+        <th>Sub account</th>
         <th>Date</th>
       </tr>
     );
@@ -31,7 +37,7 @@ const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false
       </tr>
     );
   } else {
-    const {paymentType, currency, amount, result, customer, channelName, transactionTimestamp} = transaction;
+    const {paymentType, currency, amount, result, customer, transactionTimestamp} = transaction;
     return (
       <tr
         onClick={e => onClick(transaction.id)}
@@ -52,8 +58,8 @@ const TransactionRow = ({transaction, onClick, totalAmount = 0, isHeader = false
             {customer.email}
           </a>
         </td>
-        <td>{getChannelName(channelName)}</td>
-        <td>{formatDate(transactionTimestamp)}</td>
+        <td>{subAccount.customName}</td>
+        <td>{formatDate(transactionTimestamp, DATE_TIME_FORMAT_SIMPLE)}</td>
       </tr>
     );
   }

@@ -8,6 +8,11 @@ export const getSubAccounts = createSelector(
   subAccounts => subAccounts.ids.map(id => subAccounts.byId[id])
 );
 
+export const getSubAccountById = createSelector(
+  subAccountsSelector,
+  subAccounts => subAccounts.byId || []
+);
+
 export const getActiveSubAccount = createSelector(
   subAccountsSelector,
   activeSubAccountIdSelector,
