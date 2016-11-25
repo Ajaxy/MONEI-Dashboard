@@ -6,9 +6,9 @@ import {CURRENCIES} from 'lib/constants';
 import Select, {SelectItem} from 'components/Select';
 import cx from 'classnames';
 
-const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur, placeholder}) => (
+const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur, placeholder, disabled}) => (
   <div className="ui icon input">
-    <input type="text" {...{value, name, onChange, onBlur, placeholder}} />
+    <input type="text" {...{value, name, onChange, onBlur, placeholder, disabled}} />
     {dirty && valid && <i className="check green icon" />}
   </div>
 );
@@ -46,6 +46,7 @@ const SaveBankAccount = ({
     const value = e.target.value.replace(/\s/g, '');
     iban.onChange(value);
   };
+  const isNew = !bankAccount.id;
   return (
     <Confirm
       isOpen={isOpen}
@@ -53,13 +54,14 @@ const SaveBankAccount = ({
       isDisabled={invalid}
       onCancel={onCancel}
       onConfirm={handleSubmit(onSubmit)}
-      headerText={(bankAccount.id ? 'Edit' : 'Add new') + ' bank account'}
+      headerText={(isNew ? 'Add new' : 'Edit') + ' bank account'}
       confirmText="Save"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Input {...name} />
         <Select
           {...country}
+          disabled={!isNew}
           label="Country"
           search>
           {countries.map(country => (
@@ -73,6 +75,7 @@ const SaveBankAccount = ({
         </Select>
         <Select
           {...currency}
+          disabled={!isNew}
           label="Currency">
           {CURRENCIES.map((currency, i) => (
             <SelectItem
@@ -84,17 +87,20 @@ const SaveBankAccount = ({
         </Select>
         {!isUsFormat && <Input
           {...iban}
+          disabled={!isNew}
           component={BankAccountInput}
           onChange={cleanIban}
           placeholder={new Array(21).join('•') + (bankAccount.last4Digits || '')}
           label="Bank account number (IBAN)"
           hint="where you want your money to be settled" />}
         {isUsFormat && <Input
+          disabled={!isNew}
           {...routingNumber}
           component={BankAccountInput}
           label="Routing number"
           hint="is normally found on a check provided by your bank" />}
         {isUsFormat && <Input
+          disabled={!isNew}
           {...accountNumber}
           component={BankAccountInput}
           label="Account number" />}
