@@ -3,7 +3,8 @@ import * as types from './types';
 import * as schema from 'schema/users';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getIsUpToDate} from './selectors';
+import {getIsUpToDate, getUser} from './selectors';
+import {fileGetUrl} from 'lib/aws';
 import {signOut} from 'modules/auth/actions';
 
 export const fetchUser = (userId, forceRefresh = false) => {
@@ -104,6 +105,24 @@ export const updateUser = (userId, {app_metadata, user_metadata}) => {
         text: error,
         onRetry() {
           dispatch(updateUser(userId, {app_metadata, user_metadata}));
+        }
+      }));
+    }
+  };
+};
+
+export const fetchFileUrl = (name) => {
+  return async (dispatch, getState) => {
+    const user = getUser(getState());
+    try {
+      const data = await fileGetUrl(user.user_id, name);
+      dispatch({type: types.USER_FILE_URL_UPDATE, data});
+      return data;
+    } catch (error) {
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(fetchFileUrl(name));
         }
       }));
     }
