@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+  - "6.3.1"
+script:
+  - npm --version
+  - npm install
+  # - npm run deploy:prod
