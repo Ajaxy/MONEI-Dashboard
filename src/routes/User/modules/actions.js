@@ -115,7 +115,7 @@ export const fetchFileUrl = (name) => {
   return async (dispatch, getState) => {
     const user = getUser(getState());
     try {
-      const data = await fileGetUrl(user.user_id, name);
+      const data = await fileGetUrl(user.user_id, name, true);
       dispatch({type: types.USER_FILE_URL_UPDATE, data});
       return data;
     } catch (error) {
