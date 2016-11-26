@@ -8,17 +8,4 @@ after_success:
   - test $TRAVIS_BRANCH = "master" &&
     CF_DISTRIBUTION_ID=$STAGING_CF_DISTRIBUTION_ID S3_BUCKET_NAME=$STAGING_S3_BUCKET_NAME npm run deploy:prod
   - test $TRAVIS_BRANCH = "release" &&
-    CF_DISTRIBUTION_ID=$STAGING_CF_DISTRIBUTION_ID S3_BUCKET_NAME=$STAGING_S3_BUCKET_NAME npm run deploy:prod
-# deploy:
-#   # - provider: script
-#   #   script:
-#   #     - CF_DISTRIBUTION_ID=$PROD_CF_DISTRIBUTION_ID; S3_BUCKET_NAME=$PROD_S3_BUCKET_NAME
-#   #     - npm run deploy:prod
-#   #   on:
-#   #     branch: release
-
-#   provider: script
-#   script: CF_DISTRIBUTION_ID=$STAGING_CF_DISTRIBUTION_ID S3_BUCKET_NAME=$STAGING_S3_BUCKET_NAME npm run deploy:prod
-#   on:
-#     branch: master
-
+    CF_DISTRIBUTION_ID=$PROD_CF_DISTRIBUTION_ID S3_BUCKET_NAME=$PROD_S3_BUCKET_NAME npm run deploy:prod
