@@ -41,6 +41,8 @@ const PersonalDataView = ({user, documentUrl}) => {
     </tr>
   );
   addRow(rows, user.user_metadata, 'store_goods', 'Store Goods');
+  addRow(rows, user.user_metadata, 'shopifyStoreName', 'Shopify store');
+  addRow(rows, user.user_metadata, 'shopifyStoreEmail', 'Admin email for Shopify store');
   if (rows.length > 0) {
     return (
       <Table className="large definition">

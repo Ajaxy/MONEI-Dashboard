@@ -242,3 +242,11 @@ export const requestVerification = ({redirect}) => {
     }
   };
 };
+
+export const createShopifyStoreStart = () => ({
+  type: types.CREATE_SHOPIFY_STORE_START
+});
+
+export const createShopifyStoreCancel = () => ({
+  type: types.CREATE_SHOPIFY_STORE_CANCEL
+});
