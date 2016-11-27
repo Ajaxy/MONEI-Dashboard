@@ -92,8 +92,8 @@ export const createSandbox = (name) =>
 
 // Transactions
 
-export const fetchTransactions = ({from, to, page}, sandbox) =>
-  apiClient.get('transactions/stored', {params: {from, to, page}, sandbox});
+export const fetchTransactions = ({from, to, page, limit}, sandbox) =>
+  apiClient.get('transactions/stored', {params: {from, to, page, limit}, sandbox});
 
 export const fetchTransactionStats = (sandbox) =>
   apiClient.get('transactions/stats', {sandbox});
