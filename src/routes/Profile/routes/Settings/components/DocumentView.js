@@ -41,7 +41,7 @@ const DocumentView = ({
 DocumentView.propTypes = {
   documentName: PropTypes.string,
   documentUrl: PropTypes.string,
-  isUploading: PropTypes.bool.isRequred,
+  isUploading: PropTypes.bool,
   uploadFile: PropTypes.func.isRequired,
   deleteFileStart: PropTypes.func.isRequired,
   disabled: PropTypes.bool

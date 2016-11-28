@@ -50,9 +50,9 @@ const UserRow = ({
 };
 
 UserRow.propTypes = {
-  user: PropTypes.object.isRequired,
-  userMetadata: PropTypes.object.isRequired,
-  appMetadata: PropTypes.object.isRequired,
+  user: PropTypes.object,
+  userMetadata: PropTypes.object,
+  appMetadata: PropTypes.object,
   viewUser: PropTypes.func,
   isHeader: PropTypes.bool
 };

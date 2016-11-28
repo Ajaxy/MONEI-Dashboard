@@ -14,14 +14,14 @@ const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur, placehol
 );
 
 BankAccountInput.propTypes = {
-  valid: PropTypes.bool.isRequired,
+  valid: PropTypes.bool,
   value: PropTypes.string,
-  dirty: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired,
-  onChange: PropTypes.bool.isRequired,
-  onBlur: PropTypes.func.isRequired,
+  dirty: PropTypes.bool,
+  name: PropTypes.string,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
   placeholder: PropTypes.string,
-  disabled: PropTypes.bool.isRequired
+  disabled: PropTypes.bool
 };
 
 const SaveBankAccount = ({

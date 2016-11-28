@@ -75,7 +75,7 @@ GuidesView.propTypes = {
   copyToClipboard: PropTypes.func.isRequired,
   selectedPlatform: PropTypes.number.isRequired,
   selectPlatform: PropTypes.func.isRequired,
-  showNewMessage: PropTypes.func.isRequired,
+  showNewMessage: PropTypes.func,
   isInSandboxMode: PropTypes.bool.isRequired,
   isMerchant: PropTypes.bool.isRequired
 };

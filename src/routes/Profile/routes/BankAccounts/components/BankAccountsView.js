@@ -52,7 +52,7 @@ const BankAccountsView = ({
 BankAccountsView.propTypes = {
   saveBankAccountStart: PropTypes.func.isRequired,
   deleteBankAccountStart: PropTypes.func.isRequired,
-  bankAccounts: PropTypes.object.isRequired,
+  bankAccounts: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isUpToDate: PropTypes.bool.isRequired
 };

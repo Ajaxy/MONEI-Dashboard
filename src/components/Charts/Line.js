@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
+import Chart from 'chart.js';
 
-/* global Chart */
 class LineChart extends Component {
   componentDidMount() {
     const {labels, datasets, options} = this.props;

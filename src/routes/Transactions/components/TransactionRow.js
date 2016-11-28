@@ -60,9 +60,9 @@ const TransactionRow = ({
 };
 
 TransactionRow.propTypes = {
-  transaction: PropTypes.object.isRequired,
+  transaction: PropTypes.object,
   subAccount: PropTypes.object,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   totalAmount: PropTypes.number,
   isHeader: PropTypes.bool,
   isFooter: PropTypes.bool

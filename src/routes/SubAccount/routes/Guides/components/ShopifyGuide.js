@@ -99,7 +99,7 @@ const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxM
 ShopifyGuide.propTypes = {
   subAccount: PropTypes.object.isRequired,
   copyToClipboard: PropTypes.func.isRequired,
-  showNewMessage: PropTypes.func.isRequired,
+  showNewMessage: PropTypes.func,
   isInSandboxMode: PropTypes.bool.isRequired,
   isMerchant: PropTypes.bool.isRequired
 };
