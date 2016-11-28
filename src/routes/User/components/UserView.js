@@ -1,18 +1,18 @@
 import React, {PropTypes} from 'react';
 import Loader from 'components/Loader';
 import UserHeader from './UserHeader';
-import PersonalDataView from './PersonalDataView';
-import AdminDataForm from '../containers/AdminDataForm';
-import SubAccounts from '../containers/SubAccountsContainer';
+import IndexLink from 'react-router/lib/IndexLink';
+import Link from 'react-router/lib/Link';
 
 const UserView = ({
   user,
   verifyUser,
   loginAsUser,
-  updateUser,
   isFetching,
-  isUpdating
+  isUpdating,
+  children
 }) => {
+  const baseUrl = `/users/${encodeURI(user.user_id)}`;
   return (
     <div>
       {isFetching
@@ -20,24 +20,19 @@ const UserView = ({
         <Loader active={isFetching} inline />
       </section>
         : <section className="ui vertical segment padded-bottom">
-        <div>
-          <UserHeader {...{user, verifyUser, loginAsUser, isUpdating}} />
-          <h4 className="ui horizontal divider header">
-            <i className="bar chart icon" />
-            Personal Data
-          </h4>
-          <PersonalDataView user={user} />
-          <h4 className="ui horizontal divider header">
-            <i className="bar chart icon" />
-            Admin Data
-          </h4>
-          <AdminDataForm {...{user, updateUser, isUpdating}} />
-          {user.app_metadata.mid &&  <h4 className="ui horizontal divider header">
-            <i className="payment icon" />
+        <UserHeader {...{user, verifyUser, loginAsUser, isUpdating}} />
+        <div className="ui secondary pointing large menu no-padding">
+          <IndexLink to={baseUrl} className="item" activeClassName="active">
+            Overview
+          </IndexLink>
+          <Link to={`${baseUrl}/settings`} className="item" activeClassName="active">
+            Admin settings
+          </Link>
+          <Link to={`${baseUrl}/sub-accounts`} className="item" activeClassName="active">
             Sub accounts
-          </h4>}
-          {user.app_metadata.mid && <SubAccounts />}
+          </Link>
         </div>
+        {children}
       </section>}
     </div>
   );

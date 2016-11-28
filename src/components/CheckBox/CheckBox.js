@@ -5,6 +5,7 @@ import cx from 'classnames';
 const CheckBox = ({
   className,
   onChange,
+  disabled,
   checked,
   name = '',
   value = false,
@@ -22,6 +23,7 @@ const CheckBox = ({
         type="checkbox"
         checked={checked}
         onChange={onChange}
+        disabled={disabled}
         value={_value}
         id={name} />
       <label htmlFor={name}>{labelText}</label>
@@ -33,6 +35,7 @@ CheckBox.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool,
+  disabled: PropTypes.bool,
   name: PropTypes.string,
   value: PropTypes.oneOfType([
     PropTypes.bool,

@@ -1,10 +1,10 @@
 import * as api from 'lib/api';
 import * as types from './types';
 import * as schema from 'schema/users';
-import * as subSchema from 'schema/subAccounts';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getIsUpToDate} from './selectors';
+import {getIsUpToDate, getUser} from './selectors';
+import {fileGetUrl} from 'lib/aws';
 import {signOut} from 'modules/auth/actions';
 
 export const fetchUser = (userId, forceRefresh = false) => {
@@ -111,63 +111,22 @@ export const updateUser = (userId, {app_metadata, user_metadata}) => {
   };
 };
 
-export const syncUser = (userId, mid) => {
-  return async dispatch => {
-    dispatch({type: types.SYNC_USER_REQUEST});
+export const fetchFileUrl = (name) => {
+  return async (dispatch, getState) => {
+    const user = getUser(getState());
     try {
-      const result = await api.syncUser(userId, mid);
-      const normalized = normalize(
-        result,
-        subSchema.arrayOfSubAccounts
-      );
-      dispatch({
-        type: types.SYNC_USER_SUCCESS,
-        byId: normalized.entities.subAccounts,
-        ids: normalized.result
-      });
-      dispatch(addMessage({
-        text: 'User was synchronised',
-        style: 'success'
-      }));
+      const data = await fileGetUrl(user.user_id, name);
+      dispatch({type: types.USER_FILE_URL_UPDATE, data});
+      return data;
     } catch (error) {
-      dispatch({
-        type: types.SYNC_USER_FAIL
-      });
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(syncUser(userId, mid));
+          dispatch(fetchFileUrl(name));
         }
       }));
     }
   };
 };
 
-export const fetchSubAccounts = (userId) => {
-  return async dispatch => {
-    dispatch({type: types.FETCH_USER_SUB_ACCOUNTS_REQUEST});
-    try {
-      const subAccounts = await api.fetchUserSubAccounts(userId);
-      const normalized = normalize(
-        subAccounts.items,
-        subSchema.arrayOfSubAccounts
-      );
-      dispatch({
-        type: types.FETCH_USER_SUB_ACCOUNTS_SUCCESS,
-        byId: normalized.entities.subAccounts,
-        ids: normalized.result
-      });
-    } catch (error) {
-      dispatch({
-        type: types.FETCH_USER_SUB_ACCOUNTS_FAIL
-      });
-      dispatch(addMessage({
-        text: error,
-        onRetry() {
-          dispatch(syncUser(userId));
-        }
-      }));
-    }
-  };
-};
 

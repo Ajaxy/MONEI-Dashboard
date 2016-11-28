@@ -17,3 +17,5 @@ export const CURRENCIES = [
 
 export const DATE_FORMAT_SIMPLE = 'MMM DD, YYYY';
 export const DATE_FORMAT_LONG = 'MMMM DD, YYYY';
+export const DATE_TIME_FORMAT_SIMPLE = 'MMM DD, YYYY HH:mm';
+export const DATE_TIME_FORMAT_LONG = 'MMMM DD, YYYY HH:mm:ss';

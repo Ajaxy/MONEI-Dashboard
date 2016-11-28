@@ -179,7 +179,7 @@ export const deleteFile = () => {
   };
 };
 
-export const getFileUrl = (name) => {
+export const fetchFileUrl = (name) => {
   return async (dispatch, getState) => {
     const state = getState();
     const profile = selectors.getProfile(state);
@@ -187,11 +187,12 @@ export const getFileUrl = (name) => {
     try {
       const data = await fileGetUrl(profile.user_id, name, isAdmin);
       dispatch({type: types.FILE_URL_UPDATE, data});
+      return data;
     } catch (error) {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(getFileUrl(name));
+          dispatch(fetchFileUrl(name));
         }
       }));
     }

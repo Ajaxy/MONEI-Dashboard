@@ -42,3 +42,8 @@ export const getActiveBankAccount = createSelector(
   bankAccountsSelector,
   bankAccounts => bankAccounts.byId[bankAccounts.activeId] || {}
 );
+
+export const getPrimaryBankAccount = createSelector(
+  getBankAccounts,
+  bankAccounts => bankAccounts.find(a => a.isPrimary) || {}
+);

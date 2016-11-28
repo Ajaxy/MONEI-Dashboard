@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import WebhookItem from './WebhookItem';
-import SaveModal from '../containers/SaveContainer';
+import SaveModal from '../containers/SaveWebhookContainer';
 import DeleteModal from '../containers/ConfirmDeleteContainer';
 import Loader from 'components/Loader';
 import Button from 'components/Button';

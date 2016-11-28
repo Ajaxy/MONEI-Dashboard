@@ -22,7 +22,8 @@ const TransactionsView = ({
   isFirstPage,
   isLastPage,
   isDetailsModalOpen,
-  transactionViewed
+  transactionViewed,
+  subAccountById
 }) => {
   const today = moment();
   const lastWeek = moment().subtract(7, 'days');
@@ -72,22 +73,21 @@ const TransactionsView = ({
         onPrevPage={goToPrevPage}
         className="large single line"
         header={<TransactionRow isHeader />}
-        footer={<TransactionRow totalAmount={totalAmount} isFooter />}
-      >
-        {
-          (transactions.length > 0 || isFetching) ? transactions.map((tx, index) =>
-            <TransactionRow
-              key={index}
-              transaction={tx}
-              onClick={viewDetails}
-            />)
-            : <tr>
-              <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
-            </tr>
-        }
+        footer={<TransactionRow totalAmount={totalAmount} isFooter />}>
+        {(transactions.length > 0 || isFetching) ? transactions.map((tx, index) =>
+          <TransactionRow
+            key={index}
+            transaction={tx}
+            subAccount={subAccountById[tx.channelId]}
+            onClick={viewDetails}
+          />)
+          : <tr>
+          <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
+        </tr>}
       </PaginatedTable>
       <TransactionDetails
         transaction={transactionViewed}
+        subAccount={subAccountById[transactionViewed.channelId]}
         isOpen={isDetailsModalOpen}
         onPrint={printPage}
         onClose={closeDetails} />
@@ -98,7 +98,6 @@ const TransactionsView = ({
 TransactionsView.propTypes = {
   transactions: PropTypes.array.isRequired,
   totalAmount: PropTypes.number.isRequired,
-  loadMore: PropTypes.func.isRequired,
   filterByDate: PropTypes.func.isRequired,
   viewDetails: PropTypes.func.isRequired,
   closeDetails: PropTypes.func.isRequired,

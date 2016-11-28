@@ -6,14 +6,19 @@ import * as actions from '../modules/actions';
 import DocumentView from '../components/DocumentView';
 
 class Document extends Component {
-  componentWillMount() {
-    const {documentName, getFileUrl} = this.props;
-    if (documentName) getFileUrl(documentName);
+  static propTypes = {
+    documentName: PropTypes.string,
+    fetchFileUrl: PropTypes.func.isRequired
+  };
+
+  componentDidMount() {
+    const {documentName, fetchFileUrl} = this.props;
+    if (documentName) fetchFileUrl(documentName);
   }
 
   componentWillUpdate({documentName}) {
     if (documentName && documentName != this.props.documentName) {
-      this.props.getFileUrl(documentName);
+      this.props.fetchFileUrl(documentName);
     }
   }
 

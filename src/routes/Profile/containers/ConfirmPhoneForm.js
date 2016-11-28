@@ -51,6 +51,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default reduxForm({
-  form: 'confirm-phone-number',
+  form: 'confirmPhoneNumber',
   fields: ['verificationCode']
 }, mapStateToProps, actions)(ConfirmPhoneForm);

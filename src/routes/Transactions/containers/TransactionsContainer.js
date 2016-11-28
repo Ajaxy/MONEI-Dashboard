@@ -4,18 +4,21 @@ import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
-import {DATE_FORMAT_LONG} from 'lib/constants';
+import {fetchSubAccounts} from 'routes/SubAccounts/modules/actions';
+import {getSubAccountById} from 'routes/SubAccounts/modules/selectors';
 import moment from 'moment';
 
 class Transactions extends Component {
   static propTypes = {
-    fetchTransactions: PropTypes.func.isRequired
+    fetchTransactions: PropTypes.func.isRequired,
+    fetchSubAccounts: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     const from = moment().startOf('day').valueOf();
     const to = moment().endOf('day').valueOf();
     this.props.fetchTransactions(from, to, null, true);
+    this.props.fetchSubAccounts();
   }
 
   componentWillUpdate(nextProps) {
@@ -23,11 +26,6 @@ class Transactions extends Component {
       this.componentWillMount();
     }
   }
-
-  loadMore = () => {
-    const {page} = this.props;
-    this.props.fetchTransactions(page.from, page.to, page.nextPage);
-  };
 
   goToNextPage = () => {
     const {page} = this.props;
@@ -83,7 +81,8 @@ const mapStateToProps = (state) => ({
   isDetailsModalOpen: selectors.getIsDetailsModalOpen(state),
   isInSandboxMode: profileSelectors.getIsInSandboxMode(state),
   transactionViewed: selectors.getViewedTransaction(state),
+  subAccountById: getSubAccountById(state),
   page: selectors.getPage(state)
 });
 
-export default connect(mapStateToProps, actions)(Transactions);
+export default connect(mapStateToProps, {...actions, fetchSubAccounts})(Transactions);

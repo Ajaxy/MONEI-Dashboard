@@ -3,12 +3,13 @@ import Modal from 'components/Modal';
 import Button from 'components/Button';
 import {Table} from 'components/Table';
 import {PAYMENT_TYPES} from 'lib/enums';
+import {DATE_TIME_FORMAT_LONG} from 'lib/constants';
 import {formatDate} from 'lib/utils';
 import {getAmount, isFailed} from 'routes/Transactions/modules/utils';
 import cx from 'classnames';
 import classNames from './TransactionDetails.scss';
 
-const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
+const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint}) => {
   const {
     customer = {},
     result = {},
@@ -22,8 +23,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
     <Modal
       isOpen={isOpen}
       style="standard"
-      size="small"
-    >
+      size="small">
       <div className="header">Transaction details</div>
       <div className={cx('content', classNames.modalContent)}>
         <h4 className="ui header">Payment Details</h4>
@@ -36,13 +36,13 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
             <td>ID</td>
             <td>{transaction.id}</td>
           </tr>
-          {transaction.channelName ? <tr>
-            <td>Channel</td>
-            <td>{transaction.channelName}</td>
-          </tr> : null}
+          {subAccount && <tr>
+            <td>Sub account</td>
+            <td>{subAccount.customName}</td>
+          </tr>}
           <tr>
             <td>Date</td>
-            <td>{formatDate(transaction.transactionTimestamp, 'MMMM D, YYYY HH:mm:ss')}</td>
+            <td>{formatDate(transaction.transactionTimestamp, DATE_TIME_FORMAT_LONG)}</td>
           </tr>
           <tr>
             <td>Type</td>
@@ -53,7 +53,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
             <td>
               {isFailed(result.code) ?
                 <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p> :
-                  <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
+                <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
               }
               <h5 className={cx('ui header', classNames.noMarginTop)}>
                 <div className="sub header">{result.description}</div>
@@ -68,13 +68,13 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
             <td>{card.holder}</td>
           </tr>
           <tr>
-            <td>Last 4 digits</td>
-            <td>****** {card.last4Digits}</td>
+            <td>Bin</td>
+            <td>{card.bin}</td>
           </tr>
-          {(card.expiryMonth && card.expiryYear) ? <tr>
+          {(card.expiryMonth && card.expiryYear) && <tr>
             <td>Expires</td>
             <td>{`${card.expiryMonth}/${card.expiryYear}`}</td>
-          </tr> : null}
+          </tr>}
           <tr>
             <td>Type</td>
             <td>{transaction.paymentBrand}</td>
@@ -132,6 +132,7 @@ const TransactionDetails = ({transaction, isOpen, onClose, onPrint}) => {
 
 TransactionDetails.propTypes = {
   transaction: PropTypes.object.isRequired,
+  subAccount: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onPrint: PropTypes.func.isRequired

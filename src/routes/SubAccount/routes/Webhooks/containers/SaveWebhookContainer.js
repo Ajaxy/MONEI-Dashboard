@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import * as actions from '../modules/actions';
-import SaveModal from '../components/SaveModal';
+import SaveWebhook from '../components/SaveWebhook';
 import * as selectors from '../modules/selectors';
 import Validator from 'validatorjs';
 
@@ -32,7 +32,7 @@ const mapStateToProps = (state, props) => {
 };
 
 export default reduxForm({
-  form: 'webhook-form',
+  form: 'saveWebhook',
   fields: ['url', 'webhookState', 'events'],
   validate
-}, mapStateToProps, actions)(SaveModal);
+}, mapStateToProps, actions)(SaveWebhook);

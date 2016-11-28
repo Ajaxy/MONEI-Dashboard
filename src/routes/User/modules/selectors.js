@@ -38,17 +38,7 @@ export const getIsUpToDate = createSelector(
   user => user.isUpToDate
 );
 
-export const getSubAccounts = createSelector(
+export const getFileUrl = createSelector(
   userSelector,
-  user => user.subAccountIds.map(id => user.subAccountsById[id])
-);
-
-export const getIsSyncing = createSelector(
-  userSelector,
-  user => user.isSyncing
-);
-
-export const getIsFetchingSubAccounts = createSelector(
-  userSelector,
-  user => user.isFetchingSubAccounts
+  user => user.fileUrl
 );
