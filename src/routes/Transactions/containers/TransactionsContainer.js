@@ -11,7 +11,14 @@ import moment from 'moment';
 class Transactions extends Component {
   static propTypes = {
     fetchTransactions: PropTypes.func.isRequired,
-    fetchSubAccounts: PropTypes.func.isRequired
+    fetchSubAccounts: PropTypes.func.isRequired,
+    isInSandboxMode: PropTypes.bool.isRequired,
+    page: PropTypes.shape({
+      nextPage: PropTypes.string,
+      prevPage: PropTypes.string
+    }),
+    viewTransactionStart: PropTypes.func.isRequired,
+    viewTransactionCancel: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -22,7 +29,7 @@ class Transactions extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.isInSandboxMode != this.props.isInSandboxMode) {
+    if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
       this.componentWillMount();
     }
   }

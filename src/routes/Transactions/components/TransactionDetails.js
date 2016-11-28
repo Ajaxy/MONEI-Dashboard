@@ -51,9 +51,9 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
           <tr>
             <td>Status</td>
             <td>
-              {isFailed(result.code) ?
-                <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p> :
-                <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
+              {isFailed(result.code)
+                ? <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p>
+                : <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
               }
               <h5 className={cx('ui header', classNames.noMarginTop)}>
                 <div className="sub header">{result.description}</div>

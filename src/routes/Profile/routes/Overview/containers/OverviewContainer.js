@@ -6,6 +6,11 @@ import {getFileUrl} from '../../Settings/modules/selectors';
 import {fetchFileUrl} from '../../Settings/modules/actions';
 
 class Overview extends Component {
+  static propTypes = {
+    documentName: PropTypes.string,
+    fetchFileUrl: PropTypes.func.isRequired
+  };
+
   componentDidMount() {
     const {documentName, fetchFileUrl} = this.props;
     if (documentName) fetchFileUrl(documentName);

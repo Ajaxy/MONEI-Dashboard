@@ -29,7 +29,9 @@ const CustomersView = ({customers, loadMore, filterUsers, page, isFetching, isLa
             key={index}
             customer={customer}
           />)
-        : <tr><td colSpan="2" className="center aligned">No customers yet</td></tr>
+          : <tr>
+            <td colSpan="2" className="center aligned">No customers yet</td>
+          </tr>
       }
     </InfiniteTable>
   </section>

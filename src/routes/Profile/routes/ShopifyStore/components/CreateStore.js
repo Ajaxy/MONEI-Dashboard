@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
 import Input from 'components/Input';
-import Select, {SelectItem} from 'components/Select';
 import Confirm from 'components/Modal/Confirm';
 
 const CreateStore = ({

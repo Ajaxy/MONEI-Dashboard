@@ -5,6 +5,11 @@ import * as selectors from '../modules/selectors';
 import WebhooksView from '../components/WebhooksView';
 
 class ChannelWebhooksContainer extends Component {
+  static propTypes = {
+    fetchWebhooks: PropTypes.func.isRequired,
+    subAccountId: PropTypes.string.isRequired
+  };
+
   componentDidMount() {
     const {fetchWebhooks, subAccountId} = this.props;
     fetchWebhooks(subAccountId);

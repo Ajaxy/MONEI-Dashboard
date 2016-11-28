@@ -6,7 +6,11 @@ import UsersView from '../components/UsersView';
 
 class Users extends Component {
   static propTypes = {
-    fetchUsers: PropTypes.func.isRequired
+    fetchUsers: PropTypes.func.isRequired,
+    page: PropTypes.shape({
+      currentPage: PropTypes.number,
+      filter: PropTypes.string
+    })
   };
 
   static contextTypes = {

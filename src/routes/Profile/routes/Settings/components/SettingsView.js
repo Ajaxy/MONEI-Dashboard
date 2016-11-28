@@ -32,11 +32,9 @@ const SettingsView = ({
 );
 
 SettingsView.propTypes = {
-  isPhoneVerified: PropTypes.bool,
-  phoneNumber: PropTypes.string,
-  isVerificationStarted: PropTypes.bool,
-  isEditingPhone: PropTypes.bool,
-  phoneEditStart: PropTypes.func.isRequired
+  requestVerificationStart: PropTypes.func.isRequired,
+  isVerificationRequested: PropTypes.bool,
+  isAllowedVerification: PropTypes.bool
 };
 
 export default SettingsView;

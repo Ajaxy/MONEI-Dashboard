@@ -17,7 +17,7 @@ class Document extends Component {
   }
 
   componentWillUpdate({documentName}) {
-    if (documentName && documentName != this.props.documentName) {
+    if (documentName && documentName !== this.props.documentName) {
       this.props.fetchFileUrl(documentName);
     }
   }

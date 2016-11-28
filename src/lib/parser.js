@@ -7,8 +7,7 @@ export const parse = (html, requireUnsubscribeLink = true) => {
     }
     try {
       const template = Liquid.parse(html);
-      if (requireUnsubscribeLink &&
-        !template.root.nodelist.some(n => n.name === 'unsubscribe_url')) {
+      if (requireUnsubscribeLink && !template.root.nodelist.some(n => n.name === 'unsubscribe_url')) {
         reject('Please include {{unsubscribe_url}}');
       }
       resolve(template);

@@ -33,7 +33,9 @@ const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, is
             appMetadata={user.app_metadata || {}}
             viewUser={viewUser}
           />)
-        : <tr><td colSpan={NUM_COLUMNS} className="center aligned">No users yet</td></tr>
+          : <tr>
+            <td colSpan={NUM_COLUMNS} className="center aligned">No users yet</td>
+          </tr>
       }
     </InfiniteTable>
   </section>
@@ -45,7 +47,8 @@ UsersView.propTypes = {
   loadMore: PropTypes.func.isRequired,
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  filterUsers: PropTypes.func.isRequired
+  filterUsers: PropTypes.func.isRequired,
+  isLastPage: PropTypes.bool
 };
 
 export default UsersView;

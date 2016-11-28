@@ -107,7 +107,11 @@ TransactionsView.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
   isDetailsModalOpen: PropTypes.bool.isRequired,
-  transactionViewed: PropTypes.object
+  transactionViewed: PropTypes.object,
+  fromDate: PropTypes.string.isRequired,
+  toDate: PropTypes.string.isRequired,
+  isFirstPage: PropTypes.bool,
+  subAccountById: PropTypes.object.isRequired
 };
 
 export default TransactionsView;

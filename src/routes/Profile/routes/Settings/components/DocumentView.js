@@ -38,4 +38,13 @@ const DocumentView = ({
   );
 };
 
+DocumentView.propTypes = {
+  documentName: PropTypes.string,
+  documentUrl: PropTypes.string,
+  isUploading: PropTypes.bool.isRequred,
+  uploadFile: PropTypes.func.isRequired,
+  deleteFileStart: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
+};
+
 export default DocumentView;

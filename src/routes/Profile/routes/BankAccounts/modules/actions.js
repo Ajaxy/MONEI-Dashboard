@@ -6,7 +6,7 @@ import {normalize} from 'normalizr';
 import {addMessage} from 'modules/messages/actions';
 
 export const fetchBankAccounts = () => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const isUpToDate = getIsUpToDate(getState());
     if (isUpToDate) return;
     dispatch({

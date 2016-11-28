@@ -7,7 +7,8 @@ import * as actions from 'routes/User/modules/actions';
 class Overview extends Component {
   static propTypes = {
     documentName: PropTypes.string,
-    fetchFileUrl: PropTypes.func.isRequired
+    fetchFileUrl: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   componentDidMount() {

@@ -1,4 +1,3 @@
-import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import * as actions from '../modules/actions';
 import SaveWebhook from '../components/SaveWebhook';

@@ -49,17 +49,17 @@ const SubAccountsView = ({
               <td>
                 {
                   bankAccount.number
-                  ? <span>
-                    <span
-                      className="clickable"
-                      onClick={() => copyToClipboard(bankAccount.number, 'Bank account number')}>
-                      {bankAccount.number}
-                    </span> {' '}
-                    <span className="text grey">
-                      {bankAccount.currency} / {bankAccount.country}
+                    ? <span>
+                      <span
+                        className="clickable"
+                        onClick={() => copyToClipboard(bankAccount.number, 'Bank account number')}>
+                        {bankAccount.number}
+                      </span> {' '}
+                      <span className="text grey">
+                        {bankAccount.currency} / {bankAccount.country}
+                      </span>
                     </span>
-                  </span>
-                  : <span className="text grey">No attached bank account</span>
+                    : <span className="text grey">No attached bank account</span>
                 }
               </td>
               <td>{subAccount.state}</td>
@@ -84,7 +84,10 @@ SubAccountsView.propTypes = {
   subAccounts: PropTypes.array.isRequired,
   syncUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isSyncing: PropTypes.bool.isRequired
+  isSyncing: PropTypes.bool.isRequired,
+  bankAccountById: PropTypes.object.isRequired,
+  copyToClipboard: PropTypes.func.isRequired,
+  updateSubAccountStart: PropTypes.func.isRequired
 };
 
 export default SubAccountsView;

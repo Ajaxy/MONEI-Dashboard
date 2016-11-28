@@ -7,7 +7,8 @@ import SubAccountsView from '../components/SubAccountsView';
 
 class SubAccounts extends Component {
   static propTypes = {
-    fetchSubAccounts: PropTypes.func.isRequired
+    fetchSubAccounts: PropTypes.func.isRequired,
+    isInSandboxMode: PropTypes.bool.isRequired
   };
 
   componentDidMount() {
@@ -15,7 +16,7 @@ class SubAccounts extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isInSandboxMode != this.props.isInSandboxMode) {
+    if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
       this.props.fetchSubAccounts();
     }
   }

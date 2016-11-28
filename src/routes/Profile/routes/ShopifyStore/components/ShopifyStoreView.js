@@ -25,7 +25,8 @@ export const ShopifyStoreView = ({profile, createShopifyStoreStart}) => {
 };
 
 ShopifyStoreView.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  createShopifyStoreStart: PropTypes.func.isRequired
 };
 
 export default ShopifyStoreView;

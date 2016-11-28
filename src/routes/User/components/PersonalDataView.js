@@ -62,7 +62,8 @@ PersonalDataView.propTypes = {
   user: PropTypes.shape({
     user_metadata: PropTypes.object.isRequired,
     app_metadata: PropTypes.object.isRequired
-  }).isRequired
+  }).isRequired,
+  documentUrl: PropTypes.string
 };
 
 export default PersonalDataView;

@@ -5,6 +5,13 @@ import * as selectors from 'routes/SubAccount/modules/selectors';
 import ZapierView from '../components/ZapierView';
 
 class Zapier extends Component {
+  static propTypes = {
+    subAccount: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired,
+    createZapierToken: PropTypes.func.isRequired
+  };
+
   componentWillMount() {
     const {subAccount, createZapierToken} = this.props;
     if (!subAccount.zapierToken) {

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
 const ZAPIER_INSTRUCTIONS_URL = 'https://s3.amazonaws.com/microapps-open-assets/MONEI-Zapier-Instruction.pdf';
-const ChannelZapier = ({subAccount, isFetching, copyToClipboard}) => (
+const ZapierView = ({subAccount, isFetching, copyToClipboard}) => (
   <section className="ui vertical segment">
     <p>
       <a href="https://zapier.com/" target="_blank">Zapier</a> {' '}
@@ -24,4 +24,12 @@ const ChannelZapier = ({subAccount, isFetching, copyToClipboard}) => (
   </section>
 );
 
-export default ChannelZapier;
+ZapierView.propTypes = {
+  subAccount: PropTypes.shape({
+    zapierToken: PropTypes.string
+  }).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  copyToClipboard: PropTypes.func.isRequired
+};
+
+export default ZapierView;

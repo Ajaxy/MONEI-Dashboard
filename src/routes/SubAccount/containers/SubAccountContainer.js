@@ -10,6 +10,12 @@ class Channel extends Component {
     router: PropTypes.object
   };
 
+  static propTypes = {
+    isUpToDate: PropTypes.bool.isRequired,
+    fetchSubAccounts: PropTypes.func.isRequired,
+    isSandboxMode: PropTypes.bool.isRequired
+  };
+
   componentWillMount() {
     if (!this.props.isUpToDate) {
       this.props.fetchSubAccounts();

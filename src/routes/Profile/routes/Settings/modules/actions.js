@@ -10,7 +10,7 @@ import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 import {push} from 'react-router-redux';
 
 export const updateUserMetaData = (data) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const userId = selectors.getUserId(getState());
     dispatch({
       type: types.UPDATE_PROFILE_METADATA_REQUEST
@@ -97,7 +97,7 @@ export const phoneVerificationCancel = () => ({
 });
 
 export const phoneVerificationCheck = ({verificationCode}) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const state = getState();
     const phoneNumber = getPhoneNumber(state);
     const profile = selectors.getProfile(getState());
@@ -128,7 +128,7 @@ export const phoneVerificationCheck = ({verificationCode}) => {
 };
 
 export const uploadFile = (file) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const state = getState();
     const profile = selectors.getProfile(state);
     dispatch({type: types.FILE_UPLOAD_REQUEST});
@@ -158,7 +158,7 @@ export const deleteFileCancel = () => ({
 });
 
 export const deleteFile = () => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const state = getState();
     const profile = selectors.getProfile(state);
     dispatch({type: types.FILE_DELETE_REQUEST});
@@ -180,7 +180,7 @@ export const deleteFile = () => {
 };
 
 export const fetchFileUrl = (name) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const state = getState();
     const profile = selectors.getProfile(state);
     const isAdmin = selectors.getIsAdmin(state);
@@ -213,14 +213,14 @@ export const requestVerificationCancel = () => ({
 });
 
 export const requestVerification = ({redirect}) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const profile = selectors.getProfile(getState());
     profile.user_metadata.verification_requested = true;
     dispatch({
       type: types.PROFILE_VERIFICATION_REQUEST
     });
     try {
-      const success = await dispatch(updateProfile(profile));
+      await dispatch(updateProfile(profile));
       dispatch({
         type: types.PROFILE_VERIFICATION_SUCCESS
       });

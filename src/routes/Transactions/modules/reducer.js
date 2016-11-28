@@ -1,8 +1,7 @@
 import * as types from './types';
-import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
-export const stateKey = 'transactions';
 import {isFailed, isIncome} from './utils';
+export const stateKey = 'transactions';
 
 const ids = (state = [], action) => {
   switch (action.type) {
@@ -32,14 +31,14 @@ const totalAmount = (state = 0, action) => {
       return 0;
     case types.FETCH_TRANSACTIONS_SUCCESS:
       return action.ids.map(id =>
-          action.byId[id]
-        ).map(transaction => {
-          const {result, paymentType} = transaction;
-          if (isFailed(result.code)) return 0;
-          const amount = parseFloat(transaction.amount);
-          if (isIncome(result.code, paymentType)) return amount;
-          return -amount;
-        }).reduce((a, b) => a + b, 0);
+        action.byId[id]
+      ).map(transaction => {
+        const {result, paymentType} = transaction;
+        if (isFailed(result.code)) return 0;
+        const amount = parseFloat(transaction.amount);
+        if (isIncome(result.code, paymentType)) return amount;
+        return -amount;
+      }).reduce((a, b) => a + b, 0);
     default:
       return state;
   }

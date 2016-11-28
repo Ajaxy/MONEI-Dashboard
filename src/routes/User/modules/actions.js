@@ -112,7 +112,7 @@ export const updateUser = (userId, {app_metadata, user_metadata}) => {
 };
 
 export const fetchFileUrl = (name) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const user = getUser(getState());
     try {
       const data = await fileGetUrl(user.user_id, name, true);

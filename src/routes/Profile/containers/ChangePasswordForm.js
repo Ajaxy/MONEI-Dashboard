@@ -9,7 +9,7 @@ const MIN_PASSWORD_LENGTH = 8;
 class ChangePasswordForm extends Component {
   submitForm = ({newPassword, confirmPassword}) => {
     const {user, resetForm, resetPassword} = this.props;
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
       if (!newPassword) {
         return reject({newPassword: 'Required'});
       } else if (newPassword.length < MIN_PASSWORD_LENGTH) {

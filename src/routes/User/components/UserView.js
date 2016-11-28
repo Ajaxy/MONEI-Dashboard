@@ -43,7 +43,9 @@ UserView.propTypes = {
   verifyUser: PropTypes.func.isRequired,
   loginAsUser: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  isUpdating: PropTypes.bool.isRequired,
+  children: PropTypes.any
 };
 
 export default UserView;
