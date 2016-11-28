@@ -9,7 +9,7 @@ const ids = (state = [], action) => {
     case types.CLEAR_TRANSACTIONS:
       return [];
     case types.FETCH_TRANSACTIONS_SUCCESS:
-      return mergeArrays(state, action.ids);
+      return [...action.ids];
     default:
       return state;
   }
@@ -20,7 +20,7 @@ const byId = (state = {}, action) => {
     case types.CLEAR_TRANSACTIONS:
       return {};
     case types.FETCH_TRANSACTIONS_SUCCESS:
-      return Object.assign({}, state, action.byId);
+      return {...action.byId};
     default:
       return state;
   }
@@ -31,7 +31,7 @@ const totalAmount = (state = 0, action) => {
     case types.CLEAR_TRANSACTIONS:
       return 0;
     case types.FETCH_TRANSACTIONS_SUCCESS:
-      return state + action.ids.map(id =>
+      return action.ids.map(id =>
           action.byId[id]
         ).map(transaction => {
           const {result, paymentType} = transaction;
@@ -61,6 +61,11 @@ const page = (state = {}, action) => {
   switch (action.type) {
     case types.CLEAR_TRANSACTIONS:
       return {};
+    case types.FETCH_TRANSACTIONS_REQUEST:
+      return Object.assign({}, state, {
+        from: action.from,
+        to: action.to
+      });
     case types.FETCH_TRANSACTIONS_SUCCESS:
       return {
         page: action.page,

@@ -1,6 +1,5 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
-import {PAGE_LIMIT} from 'lib/constants';
 import moment from 'moment';
 
 const customersSelector = state => state[stateKey];

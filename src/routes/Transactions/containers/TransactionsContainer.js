@@ -29,12 +29,12 @@ class Transactions extends Component {
 
   goToNextPage = () => {
     const {page} = this.props;
-    this.props.fetchTransactions(page.from, page.to, page.nextPage, true);
+    this.props.fetchTransactions(page.from, page.to, page.nextPage);
   };
 
   goToPrevPage = () => {
     const {page} = this.props;
-    this.props.fetchTransactions(page.from, page.to, page.prevPage, true);
+    this.props.fetchTransactions(page.from, page.to, page.prevPage);
   };
 
   filterByDate = (fromDate, toDate) => {
