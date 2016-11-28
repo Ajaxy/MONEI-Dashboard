@@ -21,7 +21,7 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
       dispatch({type: types.CLEAR_TRANSACTIONS});
     }
 
-    dispatch({type: types.FETCH_TRANSACTIONS_REQUEST, page});
+    dispatch({type: types.FETCH_TRANSACTIONS_REQUEST, from, to, page});
     try {
       const sandbox = getIsInSandboxMode(getState());
       const transactions = await api.fetchTransactions({from, to, page, limit: PAGE_LIMIT}, sandbox);

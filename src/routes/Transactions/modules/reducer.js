@@ -61,6 +61,11 @@ const page = (state = {}, action) => {
   switch (action.type) {
     case types.CLEAR_TRANSACTIONS:
       return {};
+    case types.FETCH_TRANSACTIONS_REQUEST:
+      return Object.assign({}, state, {
+        from: action.from,
+        to: action.to
+      });
     case types.FETCH_TRANSACTIONS_SUCCESS:
       return {
         page: action.page,
