@@ -158,6 +158,18 @@ const isVerificationModalOpen = (state = false, action) => {
   }
 };
 
+const isShopifyModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.CREATE_SHOPIFY_STORE_START:
+      return true;
+    case types.CREATE_SHOPIFY_STORE_CANCEL:
+    case types.UPDATE_PROFILE_METADATA_SUCCESS:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isChangingPassword,
   isUpdatingMetaData,
@@ -171,6 +183,7 @@ export default combineReducers({
   isFileUploading,
   isFileDeleting,
   fileUrl,
-  isDeleteModalOpen
+  isDeleteModalOpen,
+  isShopifyModalOpen
 });
 

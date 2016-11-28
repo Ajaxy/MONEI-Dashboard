@@ -6,7 +6,7 @@ import * as selectors from '../modules/selectors';
 import Validator from 'validatorjs';
 
 const rules = {
-  url: 'url',
+  url: 'url|required',
   webhookState: 'required',
   events: 'required'
 };

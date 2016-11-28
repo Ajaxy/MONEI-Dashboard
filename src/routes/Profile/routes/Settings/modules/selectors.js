@@ -67,3 +67,8 @@ export const getIsVerificationModalOpen = createSelector(
   settingsSelector,
   settings => settings.isVerificationModalOpen
 );
+
+export const getIsShopifyModalOpen = createSelector(
+  settingsSelector,
+  settings => settings.isShopifyModalOpen
+);

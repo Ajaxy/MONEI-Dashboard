@@ -6,7 +6,7 @@ const addRow = (list, store, key, title, capitalize = false) => {
   if (store[key]) {
     list.push(
       <tr key={list.length}>
-        <td className="two wide">{title}</td>
+        <td className="three wide">{title}</td>
         <td>{capitalize ? humanize(store[key]) : store[key]}</td>
       </tr>
     );
@@ -41,6 +41,8 @@ const PersonalDataView = ({user, documentUrl}) => {
     </tr>
   );
   addRow(rows, user.user_metadata, 'store_goods', 'Store Goods');
+  addRow(rows, user.user_metadata, 'shopifyStoreName', 'Shopify store name');
+  addRow(rows, user.user_metadata, 'shopifyStoreEmail', 'Admin email for Shopify store');
   if (rows.length > 0) {
     return (
       <Table className="large definition">
