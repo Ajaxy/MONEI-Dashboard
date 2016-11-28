@@ -8,12 +8,11 @@ export default {
   development: (config) => {
     const region = 'us-east-1';
     Object.assign(config.globals.APP_CONFIG, {
-      apiBaseURL: 'https://api.monei.net/',
+      apiBaseURL: 'https://oq60megra3.execute-api.us-east-1.amazonaws.com/development',
       staticCdnURL: 'http://monei-v2-dashboard-development.s3.amazonaws.com',
       adminBucket: 'microapps-monei-verified-documents',
       userBucket: 'microapps-monei-documents',
       intercomID: 'd84d8u48',
-      stripeKey: '',
       iotEndpoint: '',
       region
     });
@@ -23,7 +22,7 @@ export default {
       accessKeyId: process.env.DEV_AWS_KEY,
       secretAccessKey: process.env.DEV_AWS_SECRET,
       params: {
-        Bucket: 'monei-v2-dashboard-development'
+        Bucket: process.env.DEV_S3_BUCKET_NAME
       }
     };
 
@@ -41,7 +40,6 @@ export default {
       adminBucket: 'microapps-monei-verified-documents',
       userBucket: 'microapps-monei-documents',
       intercomID: 'za787poa',
-      stripeKey: '',
       iotEndpoint: '',
       region
     });
