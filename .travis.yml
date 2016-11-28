@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "6.3.1"
+script:
+  - npm --version
+  - npm install
+after_success:
+ - if [[ "$TRAVIS_BRANCH" == "master" ]]; then CF_DISTRIBUTION_ID=$STAGING_CF_DISTRIBUTION_ID npm run deploy; elif [[ "$TRAVIS_BRANCH" == "release" ]]; then CF_DISTRIBUTION_ID=$PROD_CF_DISTRIBUTION_ID npm run deploy:prod; fi
+# deploy:
+#   - provider: script
+#     name: prod-deploy
+#     script: CF_DISTRIBUTION_ID=$PROD_CF_DISTRIBUTION_ID npm run deploy:prod
+#     on:
+#       branch: release
+
+#   - provider: script
+#     name: staging-deploy
+#     script: CF_DISTRIBUTION_ID=$STAGING_CF_DISTRIBUTION_ID npm run deploy
+#     on:
+#       branch: master
