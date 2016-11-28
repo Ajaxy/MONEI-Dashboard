@@ -82,8 +82,8 @@ const TransactionsView = ({
             onClick={viewDetails}
           />)
           : <tr>
-          <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
-        </tr>}
+            <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
+          </tr>}
       </PaginatedTable>
       <TransactionDetails
         transaction={transactionViewed}

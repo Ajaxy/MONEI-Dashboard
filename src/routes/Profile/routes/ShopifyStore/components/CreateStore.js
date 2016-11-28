@@ -28,8 +28,8 @@ const CreateStore = ({
       confirmText="Submit"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
-        <Input {...shopifyStoreName} label="What name should have your Shopify store?"/>
-        <Input {...shopifyStoreEmail} label="What email should be the store owner?"/>
+        <Input {...shopifyStoreName} label="What name should have your Shopify store?" />
+        <Input {...shopifyStoreEmail} label="What email should be the store owner?" />
       </form>
     </Confirm>
   );

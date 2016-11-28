@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 
+/* eslint-disable max-len */
 const Logo = (props) => (
   <svg
     width={props.width}
@@ -18,6 +19,8 @@ const Logo = (props) => (
     </g>
   </svg>
 );
+
+/* eslint-enable max-len */
 
 Logo.propTypes = {
   width: PropTypes.number,

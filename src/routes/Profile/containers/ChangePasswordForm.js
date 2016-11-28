@@ -17,7 +17,7 @@ class ChangePasswordForm extends Component {
       }
       if (!confirmPassword) {
         return reject({confirmPassword: 'Required'});
-      } else if (newPassword != confirmPassword) {
+      } else if (newPassword !== confirmPassword) {
         return reject({confirmPassword: 'Passwords do not match'});
       }
       await resetPassword(user.email, newPassword);
@@ -32,7 +32,9 @@ class ChangePasswordForm extends Component {
 }
 
 ChangePasswordForm.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  resetForm: PropTypes.funct.isRequired,
+  resetPassword: PropTypes.funct.isRequired
 };
 
 const mapStateToProps = (state) => ({

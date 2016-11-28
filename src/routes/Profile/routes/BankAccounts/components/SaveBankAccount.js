@@ -13,6 +13,17 @@ const BankAccountInput = ({dirty, valid, value, name, onChange, onBlur, placehol
   </div>
 );
 
+BankAccountInput.propTypes = {
+  valid: PropTypes.bool.isRequired,
+  value: PropTypes.string,
+  dirty: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.bool.isRequired,
+  onBlur: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool.isRequired
+};
+
 const SaveBankAccount = ({
   forcePrimary,
   isOpen,
@@ -104,7 +115,7 @@ const SaveBankAccount = ({
           {...accountNumber}
           component={BankAccountInput}
           label="Account number" />}
-        <CheckBoxInput {...isPrimary} disabled={forcePrimary} label="Is primary bank account"/>
+        <CheckBoxInput {...isPrimary} disabled={forcePrimary} label="Is primary bank account" />
       </form>
     </Confirm>
   );
@@ -112,7 +123,13 @@ const SaveBankAccount = ({
 
 SaveBankAccount.propTypes = {
   fields: PropTypes.shape({
-    iban: PropTypes.object.isRequired
+    iban: PropTypes.object.isRequired,
+    name: PropTypes.object.isRequired,
+    isPrimary: PropTypes.object.isRequired,
+    routingNumber: PropTypes.object.isRequired,
+    accountNumber: PropTypes.object.isRequired,
+    country: PropTypes.object.isRequired,
+    currency: PropTypes.object.isRequired
   }),
   bankAccount: PropTypes.object,
   saveBankAccount: PropTypes.func.isRequired,
@@ -121,8 +138,11 @@ SaveBankAccount.propTypes = {
   resetForm: PropTypes.func.isRequired,
   invalid: PropTypes.bool.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  dirty: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
-  forcePrimary: PropTypes.bool
+  forcePrimary: PropTypes.bool,
+  isUsFormat: PropTypes.bool.isRequired,
+  countries: PropTypes.array.isRequired
 };
 
 export default SaveBankAccount;

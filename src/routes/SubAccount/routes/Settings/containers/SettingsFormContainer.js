@@ -11,7 +11,7 @@ class SettingsForm extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchBankAccounts()
+    this.props.fetchBankAccounts();
   }
 
   render() {

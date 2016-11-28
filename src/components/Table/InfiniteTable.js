@@ -44,32 +44,27 @@ class InfiniteTable extends Component {
           {...this.props}
           children={[
             ...children,
-            ((isFetching)
-              ? (<tr key={typeof children === 'array' ?
-                children.length : 999999}>
-                <td colSpan={numColumns}>
-                  <Loader active inline />
-                </td>
-              </tr>
-            )
-              : null)
+            (isFetching && <tr key={Array.isArray(children) ? children.length : 999999}>
+              <td colSpan={numColumns}>
+                <Loader active inline />
+              </td>
+            </tr>)
           ]}
           footer={
-            this.props.footer ? this.props.footer :
-              <tr>
+            this.props.footer
+              ? this.props.footer
+              : <tr>
                 <th colSpan={numColumns - 1}><h3>
-                  {count ? `Showing ${count} ` : ''}
-                  {total ? `of ${total}` : count ? `items` : ''}
+                  {count && `Showing ${count} `}
+                  {total ? `of ${total}` : count && 'items'}
                 </h3></th>
                 <th className="right aligned">
-                  {(!isLastPage && !autoLoad)
-                    ? <button
+                  {!isLastPage && !autoLoad && <button
                     className="ui basic button center"
                     disabled={isFetching}
                     onClick={onLoadMore}>
-                    Show more
-                  </button>
-                    : null}
+                  Show more
+                </button>}
                 </th>
               </tr>
           }

@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import * as actions from '../../Settings/modules/actions';
 import * as selectors from '../../Settings/modules/selectors';
-import {getUserMetadata} from 'modules/profile/selectors'
+import {getUserMetadata} from 'modules/profile/selectors';
 import CreateStore from '../components/CreateStore';
 import Validator from 'validatorjs';
 

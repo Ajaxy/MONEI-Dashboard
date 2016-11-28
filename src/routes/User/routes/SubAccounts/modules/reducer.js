@@ -47,8 +47,6 @@ const bankAccountIds = (state = [], action) => {
   }
 };
 
-
-
 const bankAccountsById = (state = {}, action) => {
   switch (action.type) {
     case FETCH_USER_REQUEST:

@@ -52,7 +52,13 @@ BankAccountItem.propTypes = {
   isVerified: PropTypes.bool.isRequired,
   last4Digits: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  isPrimary: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  isDeletable: PropTypes.bool.isRequired
 };
 
 export default BankAccountItem;

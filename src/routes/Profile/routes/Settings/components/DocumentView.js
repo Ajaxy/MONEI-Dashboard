@@ -9,7 +9,7 @@ const DocumentView = ({
   isUploading,
   uploadFile,
   deleteFileStart,
-  disabled,
+  disabled
 }) => {
   const onFileChange = (e) => {
     const {files} = e.target;

@@ -26,7 +26,7 @@ const mapStateToProps = (state, props) => {
   const subAccount = selectors.getActiveSubAccount(state);
   return {
     userId: props.userId,
-    subAccount: subAccount,
+    subAccount,
     initialValues: subAccount,
     isOpen: selectors.getIsUpdateModalOpen(state),
     isUpdating: selectors.getIsUpdatingSubAccount(state)

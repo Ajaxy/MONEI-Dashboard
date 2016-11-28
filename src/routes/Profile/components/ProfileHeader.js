@@ -19,7 +19,7 @@ const ProfileHeader = ({isUser}) => (
   </div>
 );
 
-PropTypes.propTypes = {
+ProfileHeader.propTypes = {
   isUser: PropTypes.bool
 };
 

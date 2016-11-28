@@ -1,9 +1,7 @@
 import * as types from './types';
-import * as customerTypes from 'routes/Dashboard/modules/types';
-import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
-export const stateKey = 'dashboard';
 import moment from 'moment';
+export const stateKey = 'dashboard';
 
 const amountPerDay = (state = [], action) => {
   switch (action.type) {

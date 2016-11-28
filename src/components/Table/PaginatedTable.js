@@ -6,12 +6,12 @@ import classNames from './Table.scss';
 
 const PaginatedTable = (props) => (
   <div className={classNames.tableWrapper}>
-    <Loader active={props.isFetching} inline={false} dimmerClassName={classNames.dimmer}/>
+    <Loader active={props.isFetching} inline={false} dimmerClassName={classNames.dimmer} />
     <Table
       {...props}
       children={props.children.length ? props.children : (
         <tr>
-          <td colSpan={props.numColumns} className={classNames.spacer}></td>
+          <td colSpan={props.numColumns} className={classNames.spacer} />
         </tr>
       )}
       footer={
@@ -20,14 +20,12 @@ const PaginatedTable = (props) => (
             <div className="ui right floated pagination menu">
               <a
                 className={cx('icon item', {disabled: (props.isFirstPage || props.isFetching)})}
-                onClick={props.onPrevPage}
-              >
+                onClick={props.onPrevPage}>
                 <i className="left chevron icon" />
               </a>
               <a
                 className={cx('icon item', {disabled: (props.isLastPage || props.isFetching)})}
-                onClick={props.onNextPage}
-              >
+                onClick={props.onNextPage}>
                 <i className="right chevron icon" />
               </a>
             </div>
@@ -39,7 +37,13 @@ const PaginatedTable = (props) => (
 );
 
 PaginatedTable.propTypes = {
-  numColumns: PropTypes.number
+  numColumns: PropTypes.number,
+  isFetching: PropTypes.bool,
+  isFirstPage: PropTypes.bool,
+  isLastPage: PropTypes.bool,
+  onNextPage: PropTypes.func,
+  onPrevPage: PropTypes.func,
+  children: PropTypes.any
 };
 
 export default PaginatedTable;

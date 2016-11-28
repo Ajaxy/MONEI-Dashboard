@@ -4,11 +4,11 @@ import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import * as profileSelectors from 'modules/profile/selectors';
 import DashboardView from '../components/DashboardView';
-import Chart from 'chart.js/src/chart';
 
 class Dashboard extends Component {
   static propTypes = {
-    fetchTransactionStats: PropTypes.func.isRequired
+    fetchTransactionStats: PropTypes.func.isRequired,
+    isInSandboxMode: PropTypes.bool.isRequired
   };
 
   componentWillMount() {

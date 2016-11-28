@@ -50,7 +50,11 @@ const BankAccountsView = ({
 };
 
 BankAccountsView.propTypes = {
-  saveBankAccountStart: PropTypes.func.isRequired
+  saveBankAccountStart: PropTypes.func.isRequired,
+  deleteBankAccountStart: PropTypes.func.isRequired,
+  bankAccounts: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isUpToDate: PropTypes.bool.isRequired
 };
 
 export default BankAccountsView;

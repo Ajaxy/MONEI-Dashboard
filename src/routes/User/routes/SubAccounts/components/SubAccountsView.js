@@ -43,7 +43,7 @@ const SubAccountsView = ({
               <td>
                 <a href="#" onClick={(e) => {
                   e.preventDefault();
-                  updateSubAccountStart(subAccount.id)
+                  updateSubAccountStart(subAccount.id);
                 }}>{subAccount.name}</a>
               </td>
               <td>
@@ -56,7 +56,7 @@ const SubAccountsView = ({
                       {bankAccount.number}
                     </span> {' '}
                     <span className="text grey">
-                    {bankAccount.currency} / {bankAccount.country}
+                      {bankAccount.currency} / {bankAccount.country}
                     </span>
                   </span>
                   : <span className="text grey">No attached bank account</span>
@@ -64,7 +64,7 @@ const SubAccountsView = ({
               </td>
               <td>{subAccount.state}</td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
@@ -75,7 +75,7 @@ const SubAccountsView = ({
       className={cx('right floated green')}>
       Sync user data with PayOn
     </Button>
-    <EditSubAccount userId={user.user_id}/>
+    <EditSubAccount userId={user.user_id} />
   </section>
 );
 

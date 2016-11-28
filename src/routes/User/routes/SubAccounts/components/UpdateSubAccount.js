@@ -34,10 +34,10 @@ const UpdateSubAccount = ({
       confirmText="Save"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
-        <Input {...commercialConditions.europeCardRate} label="Europe card rate"/>
-        <Input {...commercialConditions.nonEuropeCardRate} label="Non Europe card rate"/>
-        <Input {...commercialConditions.fixEuropeRate} label="Fixed Europe rate"/>
-        <Input {...commercialConditions.fixNonEuropeRate} label="Fixed non Europe rate"/>
+        <Input {...commercialConditions.europeCardRate} label="Europe card rate" />
+        <Input {...commercialConditions.nonEuropeCardRate} label="Non Europe card rate" />
+        <Input {...commercialConditions.fixEuropeRate} label="Fixed Europe rate" />
+        <Input {...commercialConditions.fixNonEuropeRate} label="Fixed non Europe rate" />
         <Select
           {...commercialConditions.currency}
           name="currency">

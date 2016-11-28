@@ -35,7 +35,7 @@ const mapStateToProps = (state, ownProps) => {
   };
   if (values.country === 'Spain') {
     rules.iban = 'iban';
-    if (isNew) rules.iban += '|required'
+    if (isNew) rules.iban += '|required';
   }
   if (values.country === 'United States') {
     rules.routingNumber = 'routingNumber';

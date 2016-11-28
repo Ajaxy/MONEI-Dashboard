@@ -80,18 +80,18 @@ const DashboardView = ({
         <h3 className="ui header">Gross volume
           <div className="sub header">{`${startDate} - ${endDate}`}</div>
         </h3>
-        {isFetching ?
-          <Loader active inline={false} /> :
-            <div>
-              <LineChart
-                labels={labels}
-                datasets={[{
-                  data: amountPerDay,
-                  ...DATASET_OPTIONS
-                }]}
-                options={AMOUNTS_OPTIONS}
-            />
-            </div>
+        {isFetching
+          ? <Loader active inline={false} />
+          : <div>
+            <LineChart
+              labels={labels}
+              datasets={[{
+                data: amountPerDay,
+                ...DATASET_OPTIONS
+              }]}
+              options={AMOUNTS_OPTIONS}
+          />
+          </div>
         }
       </div>
     </div>
@@ -100,22 +100,33 @@ const DashboardView = ({
         <h3 className="ui header">Successful charges
           <div className="sub header">{`${startDate} - ${endDate}`}</div>
         </h3>
-        {isFetching ?
-          <Loader active inline={false} /> :
-            <div>
-              <LineChart
-                labels={labels}
-                datasets={[{
-                  data: countPerDay,
-                  ...DATASET_OPTIONS
-                }]}
-                options={COUNT_OPTIONS}
-            />
-            </div>
+        {isFetching
+          ? <Loader active inline={false} />
+          : <div>
+            <LineChart
+              labels={labels}
+              datasets={[{
+                data: countPerDay,
+                ...DATASET_OPTIONS
+              }]}
+              options={COUNT_OPTIONS}
+          />
+          </div>
         }
       </div>
     </div>
   </div>
 );
+
+DashboardView.propTypes = {
+  amountPerDay: PropTypes.array.isRequired,
+  countPerDay: PropTypes.array.isRequired,
+  totalAmount: PropTypes.number.isRequired,
+  totalCount: PropTypes.number.isRequired,
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired,
+  labels: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired
+};
 
 export default DashboardView;
