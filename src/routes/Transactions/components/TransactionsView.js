@@ -98,6 +98,8 @@ const TransactionsView = ({
 TransactionsView.propTypes = {
   transactions: PropTypes.array.isRequired,
   totalAmount: PropTypes.number.isRequired,
+  goToNextPage: PropTypes.func.isRequired,
+  goToPrevPage: PropTypes.func.isRequired,
   filterByDate: PropTypes.func.isRequired,
   viewDetails: PropTypes.func.isRequired,
   closeDetails: PropTypes.func.isRequired,
