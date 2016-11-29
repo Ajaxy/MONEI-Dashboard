@@ -17,7 +17,7 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
     }
 
     // if we selected a new Date, let's clear the current list
-    if (!page || from !== previous.from || to !== previous.to || forceRefresh) {
+    if (forceRefresh) {
       dispatch({type: types.CLEAR_TRANSACTIONS});
     }
 
