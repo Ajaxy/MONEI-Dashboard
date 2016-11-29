@@ -145,3 +145,33 @@ export const fetchBankAccounts = (userId) => {
   };
 };
 
+export const confirmBankAccount = (userId, subAccountId) => {
+  return async dispatch => {
+    dispatch({type: types.CONFIRM_USER_BANK_ACCOUNT_REQUEST});
+    try {
+      const subAccount = await api.confirmUserBankAccount(userId, subAccountId);
+      console.log(subAccount);
+      const normalized = normalize(subAccount, subSchema.subAccount);
+      dispatch({
+        type: types.CONFIRM_USER_BANK_ACCOUNT_SUCCESS,
+        byId: normalized.entities.subAccounts,
+        subAccountId: normalized.result
+      });
+      dispatch(addMessage({
+        text: 'Sub account was updated.',
+        style: 'success'
+      }));
+    } catch (error) {
+      dispatch({
+        type: types.CONFIRM_USER_BANK_ACCOUNT_FAIL
+      });
+      dispatch(addMessage({
+        text: error,
+        onRetry() {
+          dispatch(syncUser(userId));
+        }
+      }));
+    }
+  };
+};
+

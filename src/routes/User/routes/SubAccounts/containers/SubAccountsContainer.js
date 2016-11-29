@@ -28,7 +28,8 @@ const mapStateToProps = (state, props) => ({
   subAccounts: selectors.getSubAccounts(state),
   bankAccountById: selectors.getBankAccountById(state),
   isSyncing: selectors.getIsSyncing(state),
-  isFetching: selectors.getIsFetchingSubAccounts(state)
+  isFetching: selectors.getIsFetchingSubAccounts(state),
+  isConfirmingBankAccount: selectors.getIsConfirmingBankAccounts(state)
 });
 
 export default connect(mapStateToProps, actions)(SubAccounts);

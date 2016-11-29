@@ -42,7 +42,7 @@ const SubAccountOverview = ({subAccount, copyToClipboard, bankAccount, isFetchin
 SubAccountOverview.propTypes = {
   subAccount: PropTypes.object.isRequired,
   copyToClipboard: PropTypes.func.isRequired,
-  bankAccountById: PropTypes.object.isRequired,
+  bankAccount: PropTypes.object.isRequired,
   isFetchingBankAccounts: PropTypes.bool.isRequired
 };
 

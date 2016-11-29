@@ -38,6 +38,9 @@ const SettingsForm = ({
             </SelectItem>
           ))}
         </Select>
+        {isDisabled && <div className="ui info message">
+          We will change your bank account within 24 hours.
+        </div>}
         <Button
           primary
           loading={isLoading}

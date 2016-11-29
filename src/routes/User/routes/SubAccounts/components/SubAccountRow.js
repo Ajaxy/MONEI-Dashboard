@@ -1,0 +1,51 @@
+import React, {PropTypes} from 'react';
+import Button from 'components/Button';
+import {USER_ACQUIRERS} from 'lib/enums';
+import cx from 'classnames';
+
+const SubAccountRow = ({subAccount, onEdit, bankAccount = {}, copy, isConfirming, confirm}) => {
+  const isPending = subAccount.bankAccountStatus == 'pending';
+  const bankAccountIconClass = cx('icon', {
+    'grey wait': isPending,
+    'green check': !isPending
+  });
+  const handleEdit = (e) => {
+    e.preventDefault();
+    onEdit();
+  };
+  return (
+    <tr>
+      <td>
+        <a href="#" onClick={handleEdit}>{subAccount.name}</a>
+      </td>
+      <td>
+        {
+          bankAccount.number
+            ? <span>
+              <i className={bankAccountIconClass} />
+              <span
+                className="clickable"
+                onClick={() => copy(bankAccount.number, 'Bank account number')}>
+                {bankAccount.number}
+              </span> {' '}
+                <span className="text grey">
+                {bankAccount.currency} / {bankAccount.country}
+              </span>
+            </span>
+            : <span className="text grey">No attached bank account</span>
+        }
+      </td>
+      <td>{USER_ACQUIRERS[subAccount.acquirer]}</td>
+      <td>{subAccount.state}</td>
+      <td>
+        {isPending && <Button
+          loading={isConfirming}
+          onClick={confirm}>
+          Confirm bank account
+        </Button>}
+      </td>
+    </tr>
+  );
+}
+
+export default SubAccountRow;
