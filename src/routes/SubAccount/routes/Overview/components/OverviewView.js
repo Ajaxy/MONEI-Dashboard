@@ -28,7 +28,7 @@ const SubAccountOverview = ({subAccount, copyToClipboard, bankAccount, isFetchin
       <td className="three wide">Bank account</td>
       {isFetchingBankAccounts
         ? <td>Loading...</td>
-        : bankAccount
+        : bankAccount.id
         ? <td>{bankAccount.name} (...{bankAccount.last4Digits})</td>
         : <td>No attached bank account yet</td>}
     </tr>
