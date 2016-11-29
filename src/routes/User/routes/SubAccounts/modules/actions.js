@@ -168,7 +168,7 @@ export const confirmBankAccount = (userId, subAccountId) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(syncUser(userId));
+          dispatch(confirmBankAccount(userId, subAccountId));
         }
       }));
     }
