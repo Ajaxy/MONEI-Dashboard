@@ -6,7 +6,7 @@ import {USER_ROLES, USER_STATUSES, USER_ACQUIRERS} from 'lib/enums';
 import humanize from 'humanize-string';
 
 const SettingsView = ({
-  fields: {mid, mlogin, mpwd, role, status, acquirer, iban, comment},
+  fields: {mid, mlogin, mpwd, role, status, iban, comment},
   handleSubmit,
   onSubmit,
   isUpdating
@@ -36,17 +36,6 @@ const SettingsView = ({
               key={i}
               value={status}>
               {status === 'validated' ? 'Validated by MONEI' : humanize(status)}
-            </SelectItem>
-          ))}
-        </Select>
-        <Select
-          {...acquirer}
-          search>
-          {Object.keys(USER_ACQUIRERS).map((key, i) => (
-            <SelectItem
-              key={i}
-              value={USER_ACQUIRERS[key]}>
-              {key}
             </SelectItem>
           ))}
         </Select>

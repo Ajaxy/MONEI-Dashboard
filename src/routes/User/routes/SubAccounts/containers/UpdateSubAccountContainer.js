@@ -39,7 +39,8 @@ export default reduxForm({
     'commercialConditions.nonEuropeCardRate',
     'commercialConditions.fixEuropeRate',
     'commercialConditions.fixNonEuropeRate',
-    'commercialConditions.currency'
+    'commercialConditions.currency',
+    'acquirer'
   ],
   validate
 }, mapStateToProps, actions)(UpdateSubAccount);
