@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import Input from 'components/Input';
 import Button from 'components/Button';
 import Select, {SelectItem} from 'components/Select';
-import {USER_ROLES, USER_STATUSES, USER_ACQUIRERS} from 'lib/enums';
+import {USER_ROLES, USER_STATUSES} from 'lib/enums';
 import humanize from 'humanize-string';
 
 const SettingsView = ({

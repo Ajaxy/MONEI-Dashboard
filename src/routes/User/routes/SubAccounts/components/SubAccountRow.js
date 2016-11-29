@@ -4,7 +4,7 @@ import {USER_ACQUIRERS} from 'lib/enums';
 import cx from 'classnames';
 
 const SubAccountRow = ({subAccount, onEdit, bankAccount = {}, copy, isConfirming, confirm}) => {
-  const isPending = subAccount.bankAccountStatus == 'pending';
+  const isPending = subAccount.bankAccountStatus === 'pending';
   const bankAccountIconClass = cx('icon', {
     'grey wait': isPending,
     'green check': !isPending
@@ -28,7 +28,7 @@ const SubAccountRow = ({subAccount, onEdit, bankAccount = {}, copy, isConfirming
                 onClick={() => copy(bankAccount.number, 'Bank account number')}>
                 {bankAccount.number}
               </span> {' '}
-                <span className="text grey">
+              <span className="text grey">
                 {bankAccount.currency} / {bankAccount.country}
               </span>
             </span>
@@ -46,6 +46,15 @@ const SubAccountRow = ({subAccount, onEdit, bankAccount = {}, copy, isConfirming
       </td>
     </tr>
   );
-}
+};
+
+SubAccountRow.propTypes = {
+  subAccount: PropTypes.object.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  bankAccount: PropTypes.object,
+  copy: PropTypes.func.isRequired,
+  isConfirming: PropTypes.bool.isRequired,
+  confirm: PropTypes.func.isRequired
+};
 
 export default SubAccountRow;

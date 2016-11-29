@@ -72,7 +72,9 @@ SubAccountsView.propTypes = {
   isSyncing: PropTypes.bool.isRequired,
   bankAccountById: PropTypes.object.isRequired,
   copyToClipboard: PropTypes.func.isRequired,
-  updateSubAccountStart: PropTypes.func.isRequired
+  updateSubAccountStart: PropTypes.func.isRequired,
+  isConfirmingBankAccount: PropTypes.bool.isRequired,
+  confirmBankAccount: PropTypes.func.isRequired
 };
 
 export default SubAccountsView;

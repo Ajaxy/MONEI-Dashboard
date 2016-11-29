@@ -30,7 +30,7 @@ const mapStateToProps = (state, props) => {
     subAccount,
     bankAccount: bankAccountById[subAccount.bankAccountId] || {},
     subAccountId: props.params.subAccountId
-  }
+  };
 };
 
 export default connect(mapStateToProps, {...actions, fetchBankAccounts})(Overview);
