@@ -27,6 +27,7 @@ const TransactionsView = ({
 }) => {
   const today = moment();
   const lastWeek = moment().subtract(7, 'days');
+  const lastMonth = moment().subtract(1, 'month');
   return (
     <section className="ui basic segment padded-bottom">
       <h1 className="ui header">Transactions</h1>
@@ -63,6 +64,11 @@ const TransactionsView = ({
           className={classNames.filter}
           onClick={() => filterByDate(lastWeek, today)}>
           Last week
+        </Button>
+        <Button
+          className={classNames.filter}
+          onClick={() => filterByDate(lastMonth, today)}>
+          Last month
         </Button>
       </div>
       <PaginatedTable
