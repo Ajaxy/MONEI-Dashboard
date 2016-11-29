@@ -34,6 +34,7 @@ const TransactionRow = ({
     );
   } else {
     const {paymentType, currency, amount, result, customer, transactionTimestamp} = transaction;
+    const customerName = `${customer.givenName} ${customer.surname}`;
     return (
       <tr
         onClick={e => onClick(transaction.id)}
@@ -46,7 +47,7 @@ const TransactionRow = ({
             : <i className="checkmark icon green large" />}
         </td>
         <td>{PAYMENT_TYPES[transaction.paymentType]}</td>
-        <td>{`${customer.givenName} ${customer.surname}`}</td>
+        <td title={customerName}>{customerName}</td>
         <td>
           <a href={`mailto:${customer.email}`} onClick={e => e.stopPropagation()}>
             {customer.email}

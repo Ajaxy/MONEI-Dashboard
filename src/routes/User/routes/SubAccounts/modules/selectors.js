@@ -33,6 +33,11 @@ export const getIsFetchingBankAccounts = createSelector(
   subAccounts => subAccounts.isFetchingBankAccounts
 );
 
+export const getIsConfirmingBankAccounts = createSelector(
+  subAccounts,
+  subAccounts => subAccounts.isConfirmingBankAccount
+);
+
 export const getIsSubAccountsUpToDate = createSelector(
   subAccounts,
   subAccounts => subAccounts.isSubAccountsUpToDate

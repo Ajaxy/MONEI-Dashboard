@@ -6,6 +6,7 @@ import DateTimeInput from 'components/DateTimeInput';
 import Button from 'components/Button';
 import classNames from './TransactionsView.scss';
 import moment from 'moment';
+import cx from 'classnames';
 
 const TransactionsView = ({
   transactions,
@@ -26,11 +27,20 @@ const TransactionsView = ({
   subAccountById
 }) => {
   const today = moment();
-  const lastWeek = moment().subtract(7, 'days');
+  const lastWeek = moment().subtract(6, 'days');
+  const lastMonth = moment().subtract(30, 'days');
+  const fromDateTimestamp = moment(fromDate).startOf('day');
+  const toDateTimestamp = moment(toDate).endOf('day');
+  const selectedPeriod = toDateTimestamp - fromDateTimestamp;
   return (
     <section className="ui basic segment padded-bottom">
       <h1 className="ui header">Transactions</h1>
       <div className={classNames.filters}>
+        <a
+          className="ui icon button"
+          onClick={() => filterByDate(fromDateTimestamp - selectedPeriod, toDateTimestamp - selectedPeriod - 1)}>
+          <i className="left chevron icon" />
+        </a>
         <DateTimeInput
           fieldClass={classNames.filter}
           placeholder="From date"
@@ -54,6 +64,11 @@ const TransactionsView = ({
           value={toDate}
           onChange={(date) => filterByDate(fromDate, date)}
         />
+        <a
+          className={cx('ui icon button', {disabled: fromDateTimestamp + selectedPeriod + 1 > today})}
+          onClick={() => filterByDate(fromDateTimestamp + selectedPeriod + 1, toDateTimestamp + selectedPeriod)}>
+          <i className="right chevron icon" />
+        </a>
         <Button
           className={classNames.filter}
           onClick={() => filterByDate(today, today)}>
@@ -63,6 +78,11 @@ const TransactionsView = ({
           className={classNames.filter}
           onClick={() => filterByDate(lastWeek, today)}>
           Last week
+        </Button>
+        <Button
+          className={classNames.filter}
+          onClick={() => filterByDate(lastMonth, today)}>
+          Last month
         </Button>
       </div>
       <PaginatedTable

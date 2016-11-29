@@ -132,6 +132,9 @@ export const fetchUserSubAccounts = (userId) =>
 export const updateUserSubAccount = (userId, subAccountId, data) =>
   apiClient.patch(`users/${userId}/sub-accounts/${subAccountId}`, data);
 
+export const confirmUserBankAccount = (userId, subAccountId) =>
+  apiClient.post(`users/${userId}/sub-accounts/${subAccountId}/confirm-bank-account`);
+
 export const fetchUserBankAccounts = (userId) =>
   apiClient.get(`users/${userId}/bank-accounts`);
 
