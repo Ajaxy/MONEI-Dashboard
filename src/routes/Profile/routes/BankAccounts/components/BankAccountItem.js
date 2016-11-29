@@ -54,7 +54,7 @@ BankAccountItem.propTypes = {
   country: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  isPrimary: PropTypes.bool.isRequired,
+  isPrimary: PropTypes.bool,
   id: PropTypes.string.isRequired,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,

@@ -14,6 +14,7 @@ const SettingsView = ({
     <section className="ui vertical segment">
       <SettingsForm
         onFormSubmit={submit}
+        isDisabled={subAccount.bankAccountStatus == 'pending'}
         isLoading={isUpdating}
         initialValues={subAccount} />
     </section>
