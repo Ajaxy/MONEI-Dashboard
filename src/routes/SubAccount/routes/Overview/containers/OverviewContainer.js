@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {getActiveSubAccount} from 'routes/SubAccounts/modules/selectors';
+import * as actions from 'routes/SubAccount/modules/actions';
 import OverviewView from '../components/OverviewView';
 import * as selectors from 'routes/Profile/routes/BankAccounts/modules/selectors';
 import {fetchBankAccounts} from 'routes/Profile/routes/BankAccounts/modules/actions';
@@ -28,5 +29,4 @@ const mapStateToProps = (state, props) => ({
   subAccountId: props.params.subAccountId
 });
 
-export default connect(mapStateToProps, {fetchBankAccounts})(Overview);
-
+export default connect(mapStateToProps, {...actions, fetchBankAccounts})(Overview);
