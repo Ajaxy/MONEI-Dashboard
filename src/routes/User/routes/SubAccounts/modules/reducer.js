@@ -24,6 +24,7 @@ const subAccountsById = (state = {}, action) => {
     case types.FETCH_USER_SUB_ACCOUNTS_SUCCESS:
       return {...state, ...action.byId};
     case types.UPDATE_USER_SUB_ACCOUNT_SUCCESS:
+    case types.CONFIRM_USER_BANK_ACCOUNT_SUCCESS:
       return {
         ...state,
         [action.subAccountId]: {
@@ -88,6 +89,18 @@ const isUpdatingSubAccount = (state = false, action) => {
       return true;
     case types.UPDATE_USER_SUB_ACCOUNT_SUCCESS:
     case types.UPDATE_USER_SUB_ACCOUNT_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const isConfirmingBankAccount = (state = false, action) => {
+  switch (action.type) {
+    case types.CONFIRM_USER_BANK_ACCOUNT_REQUEST:
+      return true;
+    case types.CONFIRM_USER_BANK_ACCOUNT_SUCCESS:
+    case types.CONFIRM_USER_BANK_ACCOUNT_FAIL:
       return false;
     default:
       return state;
@@ -166,6 +179,7 @@ export default combineReducers({
   isBankAccountsUpToDate,
   isUpdatingSubAccount,
   isUpdateModalOpen,
-  activeSubAccountId
+  activeSubAccountId,
+  isConfirmingBankAccount
 });
 

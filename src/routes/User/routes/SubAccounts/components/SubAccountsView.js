@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 import EditSubAccount from '../containers/UpdateSubAccountContainer';
-import {USER_ACQUIRERS} from 'lib/enums';
+import SubAccountRow from './SubAccountRow';
 import cx from 'classnames';
 
 const SubAccountsView = ({
@@ -13,7 +13,9 @@ const SubAccountsView = ({
   user,
   bankAccountById,
   copyToClipboard,
-  updateSubAccountStart
+  updateSubAccountStart,
+  isConfirmingBankAccount,
+  confirmBankAccount
 }) => (
   <section>
     <table className="ui large striped table">
@@ -23,52 +25,32 @@ const SubAccountsView = ({
           <th>Attached bank account</th>
           <th>Acquirer</th>
           <th>Status</th>
+          <th />
         </tr>
       </thead>
       <tbody>
         {isFetching && <tr>
-          <td colSpan="4">
+          <td colSpan="5">
             <Loader active />
           </td>
         </tr>}
         {!isFetching && subAccounts.length === 0 && <tr>
-          <td colSpan="4">
+          <td colSpan="5">
             <h4 className="ui header centered">
               This user doesn't have sub accounts yet, or you need to sync data with PayOn.
             </h4>
           </td>
         </tr>}
-        {!isFetching && subAccounts.map((subAccount, i) => {
-          const bankAccount = bankAccountById[subAccount.bankAccountId] || {};
-          return (
-            <tr key={i}>
-              <td>
-                <a href="#" onClick={(e) => {
-                  e.preventDefault();
-                  updateSubAccountStart(subAccount.id);
-                }}>{subAccount.name}</a>
-              </td>
-              <td>
-                {
-                  bankAccount.number
-                    ? <span>
-                      <span
-                        className="clickable"
-                        onClick={() => copyToClipboard(bankAccount.number, 'Bank account number')}>
-                        {bankAccount.number}
-                      </span> {' '}
-                    <span className="text grey">
-                        {bankAccount.currency} / {bankAccount.country}
-                      </span>
-                    </span>
-                    : <span className="text grey">No attached bank account</span>
-                }
-              </td>
-              <td>{USER_ACQUIRERS[subAccount.acquirer]}</td>
-              <td>{subAccount.state}</td>
-            </tr>
-          );
-        })}
+        {!isFetching && subAccounts.map((subAccount, i) => (
+          <SubAccountRow
+            key={i}
+            subAccount={subAccount}
+            onEdit={() => updateSubAccountStart(subAccount.id)}
+            bankAccount={bankAccountById[subAccount.bankAccountId]}
+            copy={copyToClipboard}
+            isConfirming={isConfirmingBankAccount}
+            confirm={() => confirmBankAccount(user.user_id, subAccount.id)} />
+        ))}
       </tbody>
     </table>
     <Button
@@ -90,7 +72,9 @@ SubAccountsView.propTypes = {
   isSyncing: PropTypes.bool.isRequired,
   bankAccountById: PropTypes.object.isRequired,
   copyToClipboard: PropTypes.func.isRequired,
-  updateSubAccountStart: PropTypes.func.isRequired
+  updateSubAccountStart: PropTypes.func.isRequired,
+  isConfirmingBankAccount: PropTypes.bool.isRequired,
+  confirmBankAccount: PropTypes.func.isRequired
 };
 
 export default SubAccountsView;

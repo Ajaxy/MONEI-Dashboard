@@ -8,6 +8,7 @@ const SettingsForm = ({
     customName,
     bankAccountId
   },
+  isDisabled,
   handleSubmit,
   invalid,
   onFormSubmit,
@@ -21,6 +22,7 @@ const SettingsForm = ({
         <Input type="text" {...customName} />
         <Select
           label="Bank account"
+          disabled={isDisabled}
           hint="where you want your money to be settled"
           loading={isFetching}
           {...bankAccountId}>
@@ -36,6 +38,9 @@ const SettingsForm = ({
             </SelectItem>
           ))}
         </Select>
+        {isDisabled && <div className="ui info message">
+          We will change your bank account within 24 hours.
+        </div>}
         <Button
           primary
           loading={isLoading}
@@ -56,7 +61,8 @@ SettingsForm.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   fields: PropTypes.object.isRequired,
   bankAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool
 };
 
 export default SettingsForm;
