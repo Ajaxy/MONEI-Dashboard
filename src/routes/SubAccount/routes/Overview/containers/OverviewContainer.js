@@ -22,11 +22,15 @@ class Overview extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  bankAccountById: selectors.getBankAccountById(state),
-  isFetchingBankAccounts: selectors.getIsFetching(state),
-  subAccount: getActiveSubAccount(state),
-  subAccountId: props.params.subAccountId
-});
+const mapStateToProps = (state, props) => {
+  const subAccount = getActiveSubAccount(state);
+  const bankAccountById = selectors.getBankAccountById(state);
+  return {
+    isFetchingBankAccounts: selectors.getIsFetching(state),
+    subAccount,
+    bankAccount: bankAccountById[subAccount.bankAccountId] || {},
+    subAccountId: props.params.subAccountId
+  }
+};
 
 export default connect(mapStateToProps, {...actions, fetchBankAccounts})(Overview);
