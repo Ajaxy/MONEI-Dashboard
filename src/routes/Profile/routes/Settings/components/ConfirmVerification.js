@@ -26,7 +26,8 @@ ConfirmVerification.propTypes = {
   requestVerification: PropTypes.func.isRequired,
   requestVerificationCancel: PropTypes.func.isRequired,
   isVerifying: PropTypes.bool.isRequired,
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
+  redirect: PropTypes.bool
 };
 
 export default ConfirmVerification;

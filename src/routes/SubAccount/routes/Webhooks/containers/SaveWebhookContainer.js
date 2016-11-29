@@ -1,4 +1,3 @@
-import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import * as actions from '../modules/actions';
 import SaveWebhook from '../components/SaveWebhook';
@@ -6,7 +5,7 @@ import * as selectors from '../modules/selectors';
 import Validator from 'validatorjs';
 
 const rules = {
-  url: 'url',
+  url: 'url|required',
   webhookState: 'required',
   events: 'required'
 };

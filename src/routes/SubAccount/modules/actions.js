@@ -40,7 +40,6 @@ export const createZapierToken = (subAccountId) => {
   };
 };
 
-
 export const updateSubAccount = (subAccountId, data) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_SUB_ACCOUNT_REQUEST});

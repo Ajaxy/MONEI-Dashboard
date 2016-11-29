@@ -51,9 +51,9 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
           <tr>
             <td>Status</td>
             <td>
-              {isFailed(result.code) ?
-                <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p> :
-                  <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
+              {isFailed(result.code)
+                ? <p className={classNames.noMarginBottom}>Failed <i className="remove icon red large" /></p>
+                : <p className={classNames.noMarginBottom}>Paid <i className="checkmark icon green large" /></p>
               }
               <h5 className={cx('ui header', classNames.noMarginTop)}>
                 <div className="sub header">{result.description}</div>
@@ -68,8 +68,8 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
             <td>{card.holder}</td>
           </tr>
           <tr>
-            <td>Last 4 digits</td>
-            <td>****** {card.last4Digits}</td>
+            <td>Bin</td>
+            <td>{card.bin}</td>
           </tr>
           {(card.expiryMonth && card.expiryYear) && <tr>
             <td>Expires</td>

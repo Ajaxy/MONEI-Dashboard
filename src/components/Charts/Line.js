@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import Chart from 'chart.js';
 
 class LineChart extends Component {
   componentDidMount() {

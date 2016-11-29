@@ -24,18 +24,18 @@ const GuidesView = ({
         : <a className="section" onClick={() => selectPlatform(0)}>Select your platform</a>
       }
       { selectedPlatform !== 0 && <i className="right chevron icon divider" />}
-      { selectedPlatform === 1 ?
-        <span className="active section">WooCommerce</span>
-        : selectedPlatform === 2 ?
-          <span className="active section">Shopify</span>
-        : selectedPlatform === 3 ?
-          <span className="active section">PrestaShop</span>
+      { selectedPlatform === 1
+        ? <span className="active section">WooCommerce</span>
+        : selectedPlatform === 2
+        ? <span className="active section">Shopify</span>
+        : selectedPlatform === 3
+        ? <span className="active section">PrestaShop</span>
         : null
       }
     </div>
     <section className={classNames.guide}>
-      {selectedPlatform === 0 ?
-        <div className="ui three column grid">
+      {selectedPlatform === 0
+        ? <div className="ui three column grid">
           <div className="row">
             <div className={cx('column', classNames.link)} onClick={() => selectPlatform(1)}>
               <img src={woocommerceLogo} alt="WooCommerce" />
@@ -48,12 +48,12 @@ const GuidesView = ({
             </div>
           </div>
         </div>
-        : selectedPlatform === 1 ?
-          <WooCommerceGuide />
-        : selectedPlatform === 2 ?
-          <ShopifyGuide {...{subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}} />
-        : selectedPlatform === 3 ?
-          <PrestaShopGuide />
+        : selectedPlatform === 1
+        ? <WooCommerceGuide />
+        : selectedPlatform === 2
+        ? <ShopifyGuide {...{subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}} />
+        : selectedPlatform === 3
+        ? <PrestaShopGuide />
         : null
       }
     </section>
@@ -69,5 +69,15 @@ const GuidesView = ({
     </div>}
   </section>
 );
+
+GuidesView.propTypes = {
+  subAccount: PropTypes.object.isRequired,
+  copyToClipboard: PropTypes.func.isRequired,
+  selectedPlatform: PropTypes.number.isRequired,
+  selectPlatform: PropTypes.func.isRequired,
+  showNewMessage: PropTypes.func,
+  isInSandboxMode: PropTypes.bool.isRequired,
+  isMerchant: PropTypes.bool.isRequired
+};
 
 export default GuidesView;

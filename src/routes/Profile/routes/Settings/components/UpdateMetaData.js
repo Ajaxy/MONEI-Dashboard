@@ -80,9 +80,18 @@ const UpdateMetaData = ({
             </SelectItem>
           ))}
         </Select>
-        {isCompany && <Input {...company_name} disabled={disabled} label="Company name" />}
-        {isCompany && <Input {...vat_number} disabled={disabled} label="VAT number or registration number of the company" />}
-        {!isCompany && <Input {...id_number} disabled={disabled} label="Identity document number" />}
+        {isCompany && <Input
+          {...company_name}
+          disabled={disabled}
+          label="Company name" />}
+        {isCompany && <Input
+          {...vat_number}
+          disabled={disabled}
+          label="VAT number or registration number of the company" />}
+        {!isCompany && <Input
+          {...id_number}
+          disabled={disabled}
+          label="Identity document number" />}
         <div className="field">
           <label>
             {isCompany ? 'Upload document of company incorporation' : 'Upload your identity document' }
@@ -113,7 +122,9 @@ UpdateMetaData.propTypes = {
   isAppSettingsVisible: PropTypes.bool,
   countries: PropTypes.array.isRequired,
   className: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  values: PropTypes.object.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default UpdateMetaData;

@@ -82,8 +82,8 @@ const TransactionsView = ({
             onClick={viewDetails}
           />)
           : <tr>
-          <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
-        </tr>}
+            <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
+          </tr>}
       </PaginatedTable>
       <TransactionDetails
         transaction={transactionViewed}
@@ -98,6 +98,8 @@ const TransactionsView = ({
 TransactionsView.propTypes = {
   transactions: PropTypes.array.isRequired,
   totalAmount: PropTypes.number.isRequired,
+  goToNextPage: PropTypes.func.isRequired,
+  goToPrevPage: PropTypes.func.isRequired,
   filterByDate: PropTypes.func.isRequired,
   viewDetails: PropTypes.func.isRequired,
   closeDetails: PropTypes.func.isRequired,
@@ -105,7 +107,11 @@ TransactionsView.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
   isDetailsModalOpen: PropTypes.bool.isRequired,
-  transactionViewed: PropTypes.object
+  transactionViewed: PropTypes.object,
+  fromDate: PropTypes.string.isRequired,
+  toDate: PropTypes.string.isRequired,
+  isFirstPage: PropTypes.bool,
+  subAccountById: PropTypes.object.isRequired
 };
 
 export default TransactionsView;

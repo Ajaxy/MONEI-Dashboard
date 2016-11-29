@@ -1,6 +1,6 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 
-const PrestaShopGuide = ({}) => (
+const PrestaShopGuide = () => (
   <div className="ui center aligned basic padded segment">
     <h2 className="ui center aligned icon header">
       <i className="circular configure icon" />

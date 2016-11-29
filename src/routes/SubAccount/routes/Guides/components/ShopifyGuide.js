@@ -96,4 +96,12 @@ const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxM
   </div>
 );
 
+ShopifyGuide.propTypes = {
+  subAccount: PropTypes.object.isRequired,
+  copyToClipboard: PropTypes.func.isRequired,
+  showNewMessage: PropTypes.func,
+  isInSandboxMode: PropTypes.bool.isRequired,
+  isMerchant: PropTypes.bool.isRequired
+};
+
 export default ShopifyGuide;

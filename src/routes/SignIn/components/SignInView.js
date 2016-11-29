@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import classNames from './SignInView.scss';
 
 const SignIn = ({isSandboxInitialized, isAuthenticated}) => {
@@ -16,6 +16,11 @@ const SignIn = ({isSandboxInitialized, isAuthenticated}) => {
       <div id="lock-container" />
     </section>
   );
+};
+
+SignIn.propTypes = {
+  isSandboxInitialized: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 export default SignIn;

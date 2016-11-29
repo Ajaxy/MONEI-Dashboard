@@ -48,7 +48,7 @@ export const syncUser = (userId, mid) => {
 };
 
 export const fetchSubAccounts = (userId) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const isUpToDate = getIsSubAccountsUpToDate(getState());
     if (isUpToDate) return;
     dispatch({type: types.FETCH_USER_SUB_ACCOUNTS_REQUEST});
@@ -116,7 +116,7 @@ export const updateSubAccount = (userId, subAccountId, data) => {
 };
 
 export const fetchBankAccounts = (userId) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const isUpToDate = getIsBankAccountsUpToDate(getState());
     if (isUpToDate) return;
     dispatch({type: types.FETCH_USER_BANK_ACCOUNTS_REQUEST});

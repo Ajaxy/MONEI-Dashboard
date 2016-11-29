@@ -8,7 +8,8 @@ import SubAccountsView from '../components/SubAccountsView';
 class SubAccounts extends Component {
   static propTypes = {
     fetchSubAccounts: PropTypes.func.isRequired,
-    fetchBankAccounts: PropTypes.func.isRequired
+    fetchBankAccounts: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired
   };
 
   componentDidMount() {

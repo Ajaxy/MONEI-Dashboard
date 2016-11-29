@@ -6,7 +6,7 @@ import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
 export const fetchWebhooks = (subAccountId) => {
-  return async (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const isUpToDate = getIsUpToDate(getState());
     if (isUpToDate) return;
     dispatch({type: types.FETCH_WEBHOOKS_REQUEST});
@@ -54,7 +54,7 @@ export const saveWebhook = (webhook) => async dispatch => {
     dispatch(addMessage({
       text: error,
       onRetry() {
-        dispatch(createWebhook(webhook));
+        dispatch(saveWebhook(webhook));
       }
     }));
   }
@@ -72,7 +72,7 @@ export const deleteWebhookCancel = () => ({
 export const deleteWebhook = (webhookId) => async dispatch => {
   dispatch({type: types.DELETE_WEBHOOK_REQUEST});
   try {
-    const data = await api.deleteWebhook(webhookId);
+    await api.deleteWebhook(webhookId);
     dispatch({
       type: types.DELETE_WEBHOOK_SUCCESS,
       webhookId

@@ -1,5 +1,4 @@
 import * as types from './types';
-import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
 export const stateKey = 'activeUser';
 
@@ -38,9 +37,21 @@ const isUpToDate = (state = false, action) => {
   }
 };
 
+const fileUrl = (state = null, action) => {
+  switch (action.type) {
+    case types.USER_FILE_URL_UPDATE:
+      return action.data;
+    case types.FETCH_USER_SUCCESS:
+      return null;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isFetching,
   isUpdating,
-  isUpToDate
+  isUpToDate,
+  fileUrl
 });
 

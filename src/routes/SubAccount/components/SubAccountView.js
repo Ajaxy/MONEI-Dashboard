@@ -23,4 +23,11 @@ const SubAccountView = ({subAccount, subAccountId, isSandboxMode, children}) => 
   );
 };
 
+SubAccountView.propTypes = {
+  subAccount: PropTypes.object.isRequired,
+  subAccountId: PropTypes.string.isRequired,
+  isSandboxMode: PropTypes.bool.isRequired,
+  children: PropTypes.any
+};
+
 export default SubAccountView;

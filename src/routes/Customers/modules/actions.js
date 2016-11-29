@@ -6,7 +6,6 @@ import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 import {getPage} from './selectors';
 import {getIsInSandboxMode} from 'modules/profile/selectors';
-import {getPageInfo, getPageDefaults} from 'lib/pagination';
 
 export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
   return async(dispatch, getState) => {

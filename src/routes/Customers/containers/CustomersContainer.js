@@ -7,7 +7,12 @@ import CustomersView from '../components/CustomersView';
 
 class Customers extends Component {
   static propTypes = {
-    fetchCustomers: PropTypes.func.isRequired
+    fetchCustomers: PropTypes.func.isRequired,
+    isInSandboxMode: PropTypes.bool.isRequired,
+    page: PropTypes.shape({
+      nextPage: PropTypes.string,
+      prevPage: PropTypes.string
+    })
   };
 
   componentWillMount() {
@@ -15,7 +20,7 @@ class Customers extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.isInSandboxMode != this.props.isInSandboxMode) {
+    if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
       this.props.fetchCustomers();
     }
   }

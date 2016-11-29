@@ -1,4 +1,3 @@
-import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import * as actions from '../modules/actions';
 import UpdateSubAccount from '../components/UpdateSubAccount';
@@ -26,7 +25,7 @@ const mapStateToProps = (state, props) => {
   const subAccount = selectors.getActiveSubAccount(state);
   return {
     userId: props.userId,
-    subAccount: subAccount,
+    subAccount,
     initialValues: subAccount,
     isOpen: selectors.getIsUpdateModalOpen(state),
     isUpdating: selectors.getIsUpdatingSubAccount(state)
@@ -40,7 +39,8 @@ export default reduxForm({
     'commercialConditions.nonEuropeCardRate',
     'commercialConditions.fixEuropeRate',
     'commercialConditions.fixNonEuropeRate',
-    'commercialConditions.currency'
+    'commercialConditions.currency',
+    'acquirer'
   ],
   validate
 }, mapStateToProps, actions)(UpdateSubAccount);

@@ -9,11 +9,6 @@ import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
 
 // ========================================================
-// Author info
-// ========================================================
-window.author = 'Ranier Montalbo, https://github.com/montzkie18';
-
-// ========================================================
 // Browser History Setup
 // ========================================================
 export const history = withScroll(

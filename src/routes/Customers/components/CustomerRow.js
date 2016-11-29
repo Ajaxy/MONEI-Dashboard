@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import classNames from './CustomerRow.scss';
 
 const CustomerRow = ({customer, isHeader = false}) => {
@@ -17,6 +17,15 @@ const CustomerRow = ({customer, isHeader = false}) => {
       </tr>
     );
   }
+};
+
+CustomerRow.propTypes = {
+  customer: PropTypes.shape({
+    email: PropTypes.string,
+    givenName: PropTypes.string,
+    surname: PropTypes.string
+  }),
+  isHeader: PropTypes.bool
 };
 
 export default CustomerRow;

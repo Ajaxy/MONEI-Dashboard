@@ -31,11 +31,11 @@ const GettingStartedView = ({
         {
           bankAccount.id
             ? <div>
-            <BankAccountItem
-              {...bankAccount}
-              onEdit={() => saveBankAccountStart(bankAccount.id)} />
-            <br />
-          </div>
+              <BankAccountItem
+                {...bankAccount}
+                onEdit={() => saveBankAccountStart(bankAccount.id)} />
+              <br />
+            </div>
             : isFetching
             ? <Loader active />
             : <Button onClick={saveBankAccountStart} primary>
@@ -63,7 +63,10 @@ const GettingStartedView = ({
 
 GettingStartedView.propTypes = {
   isAllowedVerification: PropTypes.bool.isRequired,
-  requestVerificationStart: PropTypes.func.isRequired
+  requestVerificationStart: PropTypes.func.isRequired,
+  saveBankAccountStart: PropTypes.func.isRequired,
+  bankAccount: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired
 };
 
 export default GettingStartedView;

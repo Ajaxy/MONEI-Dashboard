@@ -9,7 +9,7 @@ const DocumentView = ({
   isUploading,
   uploadFile,
   deleteFileStart,
-  disabled,
+  disabled
 }) => {
   const onFileChange = (e) => {
     const {files} = e.target;
@@ -36,6 +36,15 @@ const DocumentView = ({
       <ConfirmDelete />
     </div>
   );
+};
+
+DocumentView.propTypes = {
+  documentName: PropTypes.string,
+  documentUrl: PropTypes.string,
+  isUploading: PropTypes.bool,
+  uploadFile: PropTypes.func.isRequired,
+  deleteFileStart: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 };
 
 export default DocumentView;

@@ -1,11 +1,9 @@
-import moment from 'moment';
-
 //! TODO: Move these utility functions to a model class or something.
 // Maybe we can add helper methods to normalizr schema.
 
 export const isFailed = (code) => {
   return !(/^(000\.000\.|000\.100\.1|000\.[36])/.test(code) ||
-    /^(000\.400\.0|000\.400\.100)/.test(code));
+  /^(000\.400\.0|000\.400\.100)/.test(code));
 };
 
 export const isRefund = (paymentType) => {

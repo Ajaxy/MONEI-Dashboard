@@ -9,7 +9,7 @@ const MIN_PASSWORD_LENGTH = 8;
 class ChangePasswordForm extends Component {
   submitForm = ({newPassword, confirmPassword}) => {
     const {user, resetForm, resetPassword} = this.props;
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
       if (!newPassword) {
         return reject({newPassword: 'Required'});
       } else if (newPassword.length < MIN_PASSWORD_LENGTH) {
@@ -17,7 +17,7 @@ class ChangePasswordForm extends Component {
       }
       if (!confirmPassword) {
         return reject({confirmPassword: 'Required'});
-      } else if (newPassword != confirmPassword) {
+      } else if (newPassword !== confirmPassword) {
         return reject({confirmPassword: 'Passwords do not match'});
       }
       await resetPassword(user.email, newPassword);
@@ -32,7 +32,9 @@ class ChangePasswordForm extends Component {
 }
 
 ChangePasswordForm.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  resetForm: PropTypes.funct.isRequired,
+  resetPassword: PropTypes.funct.isRequired
 };
 
 const mapStateToProps = (state) => ({

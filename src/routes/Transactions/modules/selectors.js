@@ -1,10 +1,8 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
-import {PAGE_LIMIT} from 'lib/constants';
 import moment from 'moment';
 
 const customersSelector = state => state[stateKey];
-const activeTransactionIdSelector = state => state.router.params.customerId;
 export const getTransactions = createSelector(
   customersSelector,
   customers => customers.ids.map(id => customers.byId[id])

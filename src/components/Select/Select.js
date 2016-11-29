@@ -76,7 +76,9 @@ class Select extends Component {
         {props.label !== false && <label htmlFor={props.name}>{labelText}</label>}
         <div
           className={dropDownClass}
-          ref={s => { this.element = $(s); }}>
+          ref={s => {
+            this.element = $(s);
+          }}>
           <input name={props.name} id={props.name} type="hidden" />
           <i className="dropdown icon" />
           <div className="default text">{props.placeholder || ''}</div>

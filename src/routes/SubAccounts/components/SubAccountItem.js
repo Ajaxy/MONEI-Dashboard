@@ -67,7 +67,8 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
   );
 };
 SubAccountItem.propTypes = {
-  subAccount: PropTypes.object.isRequired
+  subAccount: PropTypes.object.isRequired,
+  isSandboxMode: PropTypes.bool.isRequired
 };
 
 export default SubAccountItem;

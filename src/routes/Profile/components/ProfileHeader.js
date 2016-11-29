@@ -13,10 +13,13 @@ const ProfileHeader = ({isUser}) => (
     {isUser && <Link to="/profile/bank-accounts" className="item" activeClassName="active">
       Bank accounts
     </Link>}
+    <Link to="/profile/shopify-store" className="item" activeClassName="active">
+      Free Shopify store
+    </Link>
   </div>
 );
 
-PropTypes.propTypes = {
+ProfileHeader.propTypes = {
   isUser: PropTypes.bool
 };
 

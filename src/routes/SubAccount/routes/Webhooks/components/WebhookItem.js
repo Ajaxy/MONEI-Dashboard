@@ -38,7 +38,9 @@ const WebhookItem = ({webhook, onEdit, onDelete}) => {
   );
 };
 WebhookItem.propTypes = {
-  webhook: PropTypes.object.isRequired
+  webhook: PropTypes.object.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequred
 };
 
 export default WebhookItem;
