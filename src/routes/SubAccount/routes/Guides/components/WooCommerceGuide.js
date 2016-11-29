@@ -1,11 +1,11 @@
 import React from 'react';
 
 const WooCommerceGuide = () => (
-  <div className="ui center aligned basic padded segment">
-    <h2 className="ui center aligned icon header">
-      <i className="circular configure icon" />
-      Woocommerce documentation is under construction
-    </h2>
+  <div className="ui text container">
+    <p>
+      Download the latest version of {' '}
+      <a href="https://github.com/MONEI/WooCommerce/archive/master.zip" download>MONEI WooCommerce plugin</a>
+    </p>
   </div>
 );
 
