@@ -30,5 +30,5 @@ const mapStateToProps = (state) => ({
 
 export default reduxForm({
   form: 'userSettings',
-  fields: ['mid', 'mlogin', 'mpwd', 'role', 'status', 'acquirer', 'comment']
+  fields: ['mid', 'mlogin', 'mpwd', 'role', 'status', 'comment']
 }, mapStateToProps, actions)(Settings);

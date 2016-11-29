@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 import EditSubAccount from '../containers/UpdateSubAccountContainer';
+import {USER_ACQUIRERS} from 'lib/enums';
 import cx from 'classnames';
 
 const SubAccountsView = ({
@@ -20,17 +21,18 @@ const SubAccountsView = ({
         <tr>
           <th>Name</th>
           <th>Attached bank account</th>
+          <th>Acquirer</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
         {isFetching && <tr>
-          <td colSpan="3">
+          <td colSpan="4">
             <Loader active />
           </td>
         </tr>}
         {!isFetching && subAccounts.length === 0 && <tr>
-          <td colSpan="3">
+          <td colSpan="4">
             <h4 className="ui header centered">
               This user doesn't have sub accounts yet, or you need to sync data with PayOn.
             </h4>
@@ -55,13 +57,14 @@ const SubAccountsView = ({
                         onClick={() => copyToClipboard(bankAccount.number, 'Bank account number')}>
                         {bankAccount.number}
                       </span> {' '}
-                      <span className="text grey">
+                    <span className="text grey">
                         {bankAccount.currency} / {bankAccount.country}
                       </span>
                     </span>
                     : <span className="text grey">No attached bank account</span>
                 }
               </td>
+              <td>{USER_ACQUIRERS[subAccount.acquirer]}</td>
               <td>{subAccount.state}</td>
             </tr>
           );

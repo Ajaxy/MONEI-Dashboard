@@ -13,12 +13,11 @@ export const USER_STATUSES = Object.freeze([
 ]);
 
 export const USER_ACQUIRERS = Object.freeze({
-  '': null,
-  Banco_Sabadell: 'BS',
+  BS: 'Banco Sabadell',
   BBVA: 'BBVA',
-  EVO_Payments: 'EVO',
-  Popular_Payments: 'PP',
-  Technoactivity: 'TA'
+  EVO: 'EVO Payments',
+  PP: 'Popular Payments',
+  TA: 'Technoactivity'
 });
 
 export const PAYMENT_TYPES = Object.freeze({

@@ -3,13 +3,14 @@ import Input from 'components/Input';
 import Confirm from 'components/Modal/Confirm';
 import {CURRENCIES} from 'lib/constants';
 import Select, {SelectItem} from 'components/Select';
+import {USER_ACQUIRERS} from 'lib/enums';
 
 const UpdateSubAccount = ({
   userId,
   isOpen,
   isUpdating,
   subAccount,
-  fields: {commercialConditions},
+  fields: {commercialConditions, acquirer},
   handleSubmit,
   invalid,
   resetForm,
@@ -34,6 +35,7 @@ const UpdateSubAccount = ({
       confirmText="Save"
       confirmClass="positive">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
+        <h3>Commercial conditions</h3>
         <Input {...commercialConditions.europeCardRate} label="Europe card rate" />
         <Input {...commercialConditions.nonEuropeCardRate} label="Non Europe card rate" />
         <Input {...commercialConditions.fixEuropeRate} label="Fixed Europe rate" />
@@ -46,6 +48,18 @@ const UpdateSubAccount = ({
               key={i}
               value={currency}>
               {currency}
+            </SelectItem>
+          ))}
+        </Select>
+        <h3>Sub account settings</h3>
+        <Select
+          {...acquirer}
+          search>
+          {Object.keys(USER_ACQUIRERS).map((key, i) => (
+            <SelectItem
+              key={i}
+              value={key}>
+              {USER_ACQUIRERS[key]}
             </SelectItem>
           ))}
         </Select>
