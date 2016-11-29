@@ -5,7 +5,16 @@ script:
   - npm --version
   - npm install
 after_success:
-  - test $TRAVIS_BRANCH = "master" &&
-    CF_DISTRIBUTION_ID=$STAGING_CF_DISTRIBUTION_ID S3_BUCKET_NAME=$STAGING_S3_BUCKET_NAME npm run deploy:prod
-  - test $TRAVIS_BRANCH = "release" &&
-    CF_DISTRIBUTION_ID=$PROD_CF_DISTRIBUTION_ID S3_BUCKET_NAME=$PROD_S3_BUCKET_NAME npm run deploy:prod
+ - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then npm run deploy; rc=$?; elif [[ "$TRAVIS_BRANCH" == "release" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then npm run deploy:prod; rc=$?; fi; exit $rc;
+# deploy:
+#   - provider: script
+#     name: prod-deploy
+#     script: CF_DISTRIBUTION_ID=$PROD_CF_DISTRIBUTION_ID npm run deploy:prod
+#     on:
+#       branch: release
+
+#   - provider: script
+#     name: staging-deploy
+#     script: CF_DISTRIBUTION_ID=$STAGING_CF_DISTRIBUTION_ID npm run deploy
+#     on:
+#       branch: master
