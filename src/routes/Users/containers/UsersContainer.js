@@ -26,9 +26,9 @@ class Users extends Component {
     this.props.fetchUsers(1, filter);
   };
 
-  loadMore = () => {
+  goToPage = (pageNumber) => {
     const {page} = this.props;
-    this.props.fetchUsers(page.currentPage + 1, page.filter);
+    this.props.fetchUsers(pageNumber, page.filter);
   };
 
   viewUser = (userId) => {
@@ -39,7 +39,7 @@ class Users extends Component {
     return (
       <UsersView
         filterUsers={this.filterUsers}
-        loadMore={this.loadMore}
+        goToPage={this.goToPage}
         viewUser={this.viewUser}
         {...this.props}
       />
@@ -51,7 +51,8 @@ const mapStateToProps = (state) => ({
   page: selectors.getPage(state),
   users: selectors.getUsers(state),
   isFetching: selectors.getIsFetching(state),
-  isLastPage: selectors.getIsLastPage(state)
+  isLastPage: selectors.getIsLastPage(state),
+  isFirstPage: selectors.getIsFirstPage(state)
 });
 
 export default connect(mapStateToProps, actions)(Users);

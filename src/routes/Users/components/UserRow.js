@@ -4,9 +4,14 @@ import classNames from './UserRow.scss';
 import humanize from 'humanize-string';
 import userPic from 'static/user.png';
 
+export const NUM_COLUMNS = 6;
+
 const UserRow = ({
-  user, userMetadata, appMetadata, viewUser = () => {
-  }, isHeader = false
+  user,
+  userMetadata,
+  appMetadata,
+  viewUser,
+  isHeader
 }) => {
   if (isHeader) {
     return (
@@ -14,7 +19,6 @@ const UserRow = ({
         <th className="one wide" />
         <th>Name</th>
         <th>Store URL</th>
-        <th>Acquirer</th>
         <th>Country</th>
         <th>Status</th>
         <th className="right aligned">Verified</th>
@@ -35,7 +39,6 @@ const UserRow = ({
             : <p>{userMetadata.store_url}</p>
           }
         </td>
-        <td>{userMetadata.acquirer}</td>
         <td>{userMetadata.country}</td>
         <td>{humanize(appMetadata.status || '')}</td>
         <td className="right aligned">
@@ -56,7 +59,4 @@ UserRow.propTypes = {
   viewUser: PropTypes.func,
   isHeader: PropTypes.bool
 };
-
-export const NUM_COLUMNS = 7;
-
 export default UserRow;

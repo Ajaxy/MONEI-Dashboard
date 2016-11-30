@@ -9,7 +9,7 @@ const ids = (state = [], action) => {
     case types.CLEAR_USERS:
       return [];
     case types.FETCH_USERS_SUCCESS:
-      return mergeArrays(state, action.ids);
+      return action.ids;
     case userTypes.FETCH_USER_SUCCESS:
       return mergeArrays(state, [action.userId]);
     default:
@@ -22,7 +22,7 @@ const byId = (state = {}, action) => {
     case types.CLEAR_USERS:
       return {};
     case types.FETCH_USERS_SUCCESS:
-      return Object.assign({}, state, action.byId);
+      return action.byId;
     case userTypes.FETCH_USER_SUCCESS:
     case userTypes.UPDATE_USER_SUCCESS:
       return {
