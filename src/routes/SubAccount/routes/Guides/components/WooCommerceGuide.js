@@ -1,4 +1,7 @@
 import React from 'react';
+import YouTube from 'react-youtube';
+import classNames from './WooCommerceGuide.scss';
+import cx from 'classnames';
 
 const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerchant}) => (
   <div className="ui text container">
@@ -6,8 +9,13 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
       Download the latest version of {' '}
       <a href="https://github.com/MONEI/WooCommerce/archive/master.zip" download>MONEI WooCommerce plugin</a>
     </p>
-    <p>Copy credentials below in <b>MONEI Configuration Settings</b> as shown in video instructions</p>
-    <div className="woocommerce">
+    <p>Follow video instruction to install the plugin</p>
+    <div className={cx('ui embed', classNames.video)}>
+      <YouTube videoId="-RD7JhfPgfc" />
+    </div>
+    <br />
+    <p>Copy credentials below in <b>MONEI Configuration Settings</b> as indicated in video instructions</p>
+    <div className={cx('woocommerce', classNames.frame)}>
       <table className="form-table">
         <tbody>
           <tr>
@@ -64,6 +72,7 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
           </tr>
         </tbody>
       </table>
+
     </div>
   </div>
 );
