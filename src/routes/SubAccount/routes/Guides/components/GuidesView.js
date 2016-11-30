@@ -49,11 +49,11 @@ const GuidesView = ({
           </div>
         </div>
         : selectedPlatform === 1
-        ? <WooCommerceGuide />
+        ? <WooCommerceGuide {...{subAccount, copyToClipboard, isInSandboxMode, isMerchant}} />
         : selectedPlatform === 2
-        ? <ShopifyGuide {...{subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}} />
+        ? <ShopifyGuide {...{subAccount, copyToClipboard, isInSandboxMode, isMerchant}} />
         : selectedPlatform === 3
-        ? <PrestaShopGuide />
+        ? <PrestaShopGuide {...{subAccount, copyToClipboard, isInSandboxMode, isMerchant}} />
         : null
       }
     </section>

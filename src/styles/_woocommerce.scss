@@ -1,0 +1,534 @@
+.woocommerce {
+  background: #f1f1f1;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  table.form-table th {
+    position: relative;
+    vertical-align: top;
+    text-align: left;
+    padding: 20px 24px 20px 0;
+    width: 200px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  input, textarea {
+    box-sizing: border-box
+  }
+
+  input[type=text], input[type=search], input[type=radio], input[type=tel], input[type=time], input[type=url], input[type=week], input[type=password], input[type=checkbox], input[type=color], input[type=date], input[type=datetime], input[type=datetime-local], input[type=email], input[type=month], input[type=number], select, textarea {
+    border: 1px solid #ddd;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .07);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .07);
+    background-color: #fff;
+    color: #32373c;
+    outline: 0;
+    -webkit-transition: 50ms border-color ease-in-out;
+    transition: 50ms border-color ease-in-out
+  }
+
+  input[type=text]:focus, input[type=search]:focus, input[type=radio]:focus, input[type=tel]:focus, input[type=time]:focus, input[type=url]:focus, input[type=week]:focus, input[type=password]:focus, input[type=checkbox]:focus, input[type=color]:focus, input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=email]:focus, input[type=month]:focus, input[type=number]:focus, select:focus, textarea:focus {
+    border-color: #5b9dd9;
+    -webkit-box-shadow: 0 0 2px rgba(30, 140, 190, .8);
+    box-shadow: 0 0 2px rgba(30, 140, 190, .8)
+  }
+
+  input[type=url], input[type=email] {
+    direction: ltr
+  }
+
+  input[type=number] {
+    height: 28px;
+    line-height: 1
+  }
+
+  input[type=radio], input[type=checkbox] {
+    border: 1px solid #b4b9be;
+    background: #fff;
+    color: #555;
+    clear: none;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+    height: 16px;
+    margin: -4px 4px 0 0;
+    outline: 0;
+    padding: 0 !important;
+    text-align: center;
+    vertical-align: middle;
+    width: 16px;
+    min-width: 16px;
+    -webkit-appearance: none;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    -webkit-transition: .05s border-color ease-in-out;
+    transition: .05s border-color ease-in-out
+  }
+
+  input[type=radio]:checked + label:before {
+    color: #82878c
+  }
+
+  .wp-core-ui input[type=reset]:active, .wp-core-ui input[type=reset]:hover {
+    color: #00a0d2
+  }
+
+  p input[type=radio], p input[type=checkbox], td > input[type=checkbox] {
+    margin-top: 0
+  }
+
+  p label input[type=checkbox] {
+    margin-top: -4px
+  }
+
+  p label input[type=radio] {
+    margin-top: -2px
+  }
+
+  input[type=radio] {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    margin-right: 4px;
+    line-height: 10px
+  }
+
+  input[type=radio]:checked:before, input[type=checkbox]:checked:before {
+    float: left;
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    font: 400 21px/1 dashicons;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+  }
+
+  input[type=checkbox]:checked:before {
+    content: "\f147";
+    margin: -3px 0 0 -4px;
+    color: #1e8cbe
+  }
+
+  input[type=radio]:checked:before {
+    content: "\2022";
+    text-indent: -9999px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    font-size: 24px;
+    width: 6px;
+    height: 6px;
+    margin: 4px;
+    line-height: 16px;
+    background-color: #1e8cbe
+  }
+
+  @-moz-document url-prefix() {
+    .form-table input.tog, input[type=radio], input[type=checkbox] {
+      margin-bottom: -1px
+    }
+  }
+
+  input[type=search] {
+    -webkit-appearance: textfield
+  }
+
+  input[type=search]::-webkit-search-decoration {
+    display: none
+  }
+
+  .ie8 input[type=password] {
+    font-family: sans-serif
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit
+  }
+
+  input, select, textarea {
+    font-size: 14px;
+    -webkit-border-radius: 0;
+    border-radius: 0
+  }
+
+  textarea {
+    padding: 2px 6px;
+    line-height: 1.4;
+    resize: vertical
+  }
+
+  input[type=file] {
+    padding: 3px 0
+  }
+
+  label {
+    cursor: pointer
+  }
+
+  input, select {
+    margin: 1px;
+    padding: 3px 5px
+  }
+
+  input.code {
+    padding-top: 6px
+  }
+
+  textarea.code {
+    line-height: 1.4;
+    padding: 4px 6px 1px
+  }
+
+  input.readonly, input[readonly], textarea.readonly, textarea[readonly] {
+    background-color: #eee
+  }
+
+  ::-webkit-input-placeholder {
+    color: #72777c
+  }
+
+  ::-moz-placeholder {
+    color: #72777c;
+    opacity: 1
+  }
+
+  :-ms-input-placeholder {
+    color: #72777c
+  }
+
+  .form-invalid input, .form-invalid input:focus, .form-invalid select, .form-invalid select:focus {
+    border-color: #dc3232 !important;
+    -webkit-box-shadow: 0 0 2px rgba(204, 0, 0, .8);
+    box-shadow: 0 0 2px rgba(204, 0, 0, .8)
+  }
+
+  .form-table .form-required.form-invalid td:after {
+    content: "\f534";
+    font: 400 20px/1 dashicons;
+    color: #dc3232;
+    margin-left: -25px;
+    vertical-align: middle
+  }
+
+  .form-table .form-required.user-pass1-wrap.form-invalid td:after {
+    content: ''
+  }
+
+  .form-table .form-required.user-pass1-wrap.form-invalid .password-input-wrapper:after {
+    content: '\f534';
+    font: 400 20px/1 dashicons;
+    color: #dc3232;
+    margin: 0 6px 0 -29px;
+    vertical-align: middle
+  }
+
+  .form-input-tip {
+    color: #666
+  }
+
+  input.disabled, input:disabled, select.disabled, select:disabled, textarea.disabled, textarea:disabled {
+    background: rgba(255, 255, 255, .5);
+    border-color: rgba(222, 222, 222, .75);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .04);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .04);
+    color: rgba(51, 51, 51, .5)
+  }
+
+  input[type=file].disabled, input[type=file]:disabled, input[type=range].disabled, input[type=range]:disabled {
+    background: 0 0;
+    -webkit-box-shadow: none;
+    box-shadow: none
+  }
+
+  input[type=radio].disabled, input[type=radio].disabled:checked:before, input[type=radio]:disabled, input[type=radio]:disabled:checked:before, input[type=checkbox].disabled, input[type=checkbox].disabled:checked:before, input[type=checkbox]:disabled, input[type=checkbox]:disabled:checked:before {
+    opacity: .7
+  }
+
+  select {
+    padding: 2px;
+    line-height: 28px;
+    height: 28px
+  }
+
+  .button-cancel {
+    padding: 0 5px;
+    line-height: 2
+  }
+
+  select[multiple] {
+    height: auto
+  }
+
+  .submit {
+    padding: 1.5em 0;
+    margin: 5px 0;
+    -webkit-border-bottom-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border: none
+  }
+
+  form p.submit a.cancel:hover {
+    text-decoration: none
+  }
+
+  p.submit {
+    text-align: left;
+    margin-top: 20px;
+    padding-top: 10px
+  }
+
+  .textright p.submit {
+    border: none;
+    text-align: right
+  }
+
+  table.form-table + input + input + p.submit, table.form-table + input + p.submit, table.form-table + p.submit {
+    border-top: none;
+    padding-top: 0
+  }
+
+  table.form-table {
+    margin: 0;
+    position: relative
+  }
+
+  table.form-table .forminp-radio ul {
+    margin: 0
+  }
+
+  table.form-table .forminp-radio ul li {
+    line-height: 1.4em
+  }
+
+  table.form-table textarea.input-text {
+    height: 100%;
+    min-width: 150px;
+    display: block
+  }
+
+  table.form-table input.regular-input {
+    width: 25em
+  }
+
+  table.form-table textarea.wide-input {
+    width: 100%
+  }
+
+  table.form-table .woocommerce-help-tip, table.form-table img.help_tip {
+    padding: 0;
+    margin: -4px 0 0 5px;
+    vertical-align: middle;
+    cursor: help;
+    line-height: 1
+  }
+
+  table.form-table span.help_tip {
+    cursor: help;
+    color: #2ea2cc
+  }
+
+  table.form-table th {
+    position: relative;
+    padding-right: 24px
+  }
+
+  table.form-table .select2-container {
+    display: block;
+    max-width: 350px;
+    vertical-align: top;
+    margin-bottom: 3px
+  }
+
+  table.form-table table.widefat th {
+    padding-right: inherit
+  }
+
+  table.form-table th .woocommerce-help-tip, table.form-table th img.help_tip {
+    margin: 0 -24px 0 0;
+    float: right
+  }
+
+  table.form-table .wp-list-table .woocommerce-help-tip {
+    float: none
+  }
+
+  table.form-table fieldset {
+    margin-top: 4px
+  }
+
+  table.form-table fieldset .woocommerce-help-tip, table.form-table fieldset img.help_tip {
+    margin: -3px 0 0 5px
+  }
+
+  table.form-table fieldset p.description {
+    margin-bottom: 8px
+  }
+
+  table.form-table fieldset:first-child {
+    margin-top: 0
+  }
+
+  table.form-table .iris-picker {
+    z-index: 100;
+    display: none;
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2)
+  }
+
+  table.form-table .iris-picker .ui-slider {
+    border: 0 !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    background: none !important
+  }
+
+  table.form-table .iris-picker .ui-slider .ui-slider-handle {
+    margin-bottom: 0 !important
+  }
+
+  table.form-table .colorpickpreview {
+    padding: 3px 3px 3px 20px;
+    border: 1px solid #ddd;
+    border-right: 0
+  }
+
+  table.form-table .colorpick {
+    border-left: 0
+  }
+
+  table.form-table .image_width_settings {
+    vertical-align: middle
+  }
+
+  table.form-table .image_width_settings label {
+    margin-left: 10px
+  }
+
+  table.form-table .wc_emails_wrapper {
+    padding: 0 15px 10px 0
+  }
+
+  .form-table {
+    border-collapse: collapse;
+    margin-top: .5em;
+    width: 100%;
+    clear: both
+  }
+
+  .form-table, .form-table td, .form-table td p, .form-table th {
+    font-size: 14px
+  }
+
+  .form-table td {
+    margin-bottom: 9px;
+    padding: 15px 10px;
+    line-height: 1.3;
+    vertical-align: middle
+  }
+
+  .form-table th, .form-wrap label {
+    color: #23282d;
+    font-weight: 400;
+    text-shadow: none;
+    vertical-align: baseline
+  }
+
+  .form-table th {
+    vertical-align: top;
+    text-align: left;
+    padding: 20px 10px 20px 0;
+    width: 200px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  .form-table th.th-full {
+    width: auto;
+    font-weight: 400
+  }
+
+  .form-table td p {
+    margin-top: 4px;
+    margin-bottom: 0
+  }
+
+  .form-table .date-time-doc {
+    margin-top: 1em
+  }
+
+  .form-table p.timezone-info {
+    margin: 1em 0
+  }
+
+  .form-table td fieldset label {
+    margin: .25em 0 .5em !important;
+    display: inline-block
+  }
+
+  .form-table td fieldset label, .form-table td fieldset li, .form-table td fieldset p {
+    line-height: 1.4em
+  }
+
+  .form-table input.tog, .form-table input[type=radio] {
+    margin-top: -4px;
+    margin-right: 4px;
+    float: none
+  }
+
+  .form-table .pre {
+    padding: 8px;
+    margin: 0
+  }
+
+  table.form-table td .updated {
+    font-size: 13px
+  }
+
+  table.form-table td .updated p {
+    font-size: 13px;
+    margin: .3em 0
+  }
+
+  .form-wrap label {
+    display: block;
+    padding: 2px 0
+  }
+
+  .form-field input[type=text], .form-field input[type=password], .form-field input[type=email], .form-field input[type=number], .form-field input[type=search], .form-field input[type=tel], .form-field input[type=url], .form-field textarea {
+    border-style: solid;
+    border-width: 1px;
+    width: 95%
+  }
+
+  .form-wrap p, p.description {
+    margin: 2px 0 5px;
+    color: #666
+  }
+
+  .form-wrap p, p.description, p.help, span.description {
+    font-size: 13px;
+    font-style: italic
+  }
+
+  .form-wrap .form-field {
+    margin: 1em 0;
+    padding: 0
+  }
+
+  .form-wrap .form-field #parent {
+    max-width: 100%
+  }
+
+}
