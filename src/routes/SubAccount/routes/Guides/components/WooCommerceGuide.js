@@ -11,7 +11,7 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
     </p>
     <p>Follow video instruction to install the plugin</p>
     <div className={cx('ui embed', classNames.video)}>
-      <YouTube videoId="-RD7JhfPgfc" />
+      <YouTube videoId="w5r43JeUO-4" />
     </div>
     <br />
     <p>Copy credentials below in <b>MONEI Configuration Settings</b> as indicated in video instructions</p>
