@@ -2,16 +2,19 @@ import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
 import Validator from 'lib/validator';
 import SettingsFormView from '../components/SettingsForm';
+import {getIsInSandboxMode} from 'modules/profile/selectors';
 import * as selectors from 'routes/Profile/routes/BankAccounts/modules/selectors';
 import {fetchBankAccounts} from 'routes/Profile/routes/BankAccounts/modules/actions';
 
 class SettingsForm extends Component {
   static propTypes = {
-    fetchBankAccounts: PropTypes.func.isRequired
+    fetchBankAccounts: PropTypes.func.isRequired,
+    isInSandboxMode: PropTypes.bool.isRequired
   };
 
   componentDidMount() {
-    this.props.fetchBankAccounts();
+    const {isInSandboxMode, fetchBankAccounts} = this.props;
+    if (!isInSandboxMode) fetchBankAccounts();
   }
 
   render() {
@@ -21,21 +24,29 @@ class SettingsForm extends Component {
   }
 }
 
-const rules = {
-  customName: 'required',
-  bankAccountId: 'required'
+const createValidator = (rules) => {
+  return values => {
+    const validator = new Validator(values, rules);
+    validator.passes();
+    return validator.errors.all();
+  };
 };
 
-const validate = values => {
-  const validator = new Validator(values, rules);
-  validator.passes();
-  return validator.errors.all();
+const mapStateToProps = state => {
+  const isInSandboxMode = getIsInSandboxMode(state);
+  const rules = {
+    customName: 'required'
+  };
+  if (!isInSandboxMode) {
+    rules.bankAccountId ='required';
+  }
+  return {
+    bankAccounts: selectors.getBankAccounts(state),
+    isFetching: selectors.getIsFetching(state),
+    isInSandboxMode,
+    validate: createValidator(rules)
+  }
 };
-
-const mapStateToProps = (state, props) => ({
-  bankAccounts: selectors.getBankAccounts(state),
-  isFetching: selectors.getIsFetching(state)
-});
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const bankAccount = stateProps.bankAccounts.find(a => a.isPrimary) || {};
@@ -46,6 +57,5 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
 export default reduxForm({
   form: 'subAccountSettings',
-  fields: ['customName', 'bankAccountId'],
-  validate
+  fields: ['customName', 'bankAccountId']
 }, mapStateToProps, {fetchBankAccounts}, mergeProps)(SettingsForm);

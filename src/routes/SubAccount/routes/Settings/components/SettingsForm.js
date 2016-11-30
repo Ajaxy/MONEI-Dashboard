@@ -14,13 +14,14 @@ const SettingsForm = ({
   onFormSubmit,
   isFetching,
   bankAccounts,
-  isLoading
+  isLoading,
+  isInSandboxMode
 }) => {
   return (
     <div className="ui stackable grid">
       <form className="ui form nine wide column" onSubmit={handleSubmit(onFormSubmit)}>
         <Input type="text" {...customName} />
-        <Select
+        {!isInSandboxMode && <Select
           label="Bank account"
           disabled={isDisabled}
           hint="where you want your money to be settled"
@@ -37,7 +38,7 @@ const SettingsForm = ({
               </span>
             </SelectItem>
           ))}
-        </Select>
+        </Select>}
         {isDisabled && <div className="ui info message">
           We will change your bank account within 24 hours.
         </div>}

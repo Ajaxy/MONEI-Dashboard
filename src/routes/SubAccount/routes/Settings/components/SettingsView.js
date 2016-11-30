@@ -25,7 +25,7 @@ SettingsView.propTypes = {
   subAccount: PropTypes.object.isRequired,
   updateSubAccount: PropTypes.func.isRequired,
   isUpdating: PropTypes.bool.isRequired,
-  subAccountId: PropTypes.string.isRequired
+  subAccountId: PropTypes.string.isRequired,
 };
 
 export default SettingsView;

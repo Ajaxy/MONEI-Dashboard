@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {getIsInSandboxMode} from 'modules/profile/selectors';
 import {getActiveSubAccount} from 'routes/SubAccounts/modules/selectors';
 import * as actions from 'routes/SubAccount/modules/actions';
 import OverviewView from '../components/OverviewView';
@@ -8,11 +9,13 @@ import {fetchBankAccounts} from 'routes/Profile/routes/BankAccounts/modules/acti
 
 class Overview extends Component {
   static propTypes = {
-    fetchBankAccounts: PropTypes.func.isRequired
+    fetchBankAccounts: PropTypes.func.isRequired,
+    isInSandboxMode: PropTypes.bool.isRequired
   };
 
   componentDidMount() {
-    this.props.fetchBankAccounts();
+    const {isInSandboxMode, fetchBankAccounts} = this.props;
+    if (!isInSandboxMode) fetchBankAccounts();
   }
 
   render() {
@@ -28,6 +31,7 @@ const mapStateToProps = (state, props) => {
   return {
     isFetchingBankAccounts: selectors.getIsFetching(state),
     subAccount,
+    isInSandboxMode: getIsInSandboxMode(state),
     bankAccount: bankAccountById[subAccount.bankAccountId] || {},
     subAccountId: props.params.subAccountId
   };
