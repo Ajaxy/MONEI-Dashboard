@@ -34,3 +34,8 @@ export const getIsLastPage = createSelector(
   getPage,
   page => page.currentPage >= page.lastPage
 );
+
+export const getIsFirstPage = createSelector(
+  getPage,
+  page => page.currentPage == 1
+);

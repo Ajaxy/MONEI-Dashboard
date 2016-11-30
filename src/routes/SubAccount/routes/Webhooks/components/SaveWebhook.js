@@ -31,7 +31,7 @@ const SaveWebhook = ({
       onConfirm={handleSubmit(onSubmit)}
       headerText={webhook.id ? 'Edit' : 'Create' + ' webhook'}
       confirmText="Save"
-      confirmClass="positive">
+      confirmClass="green">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Input {...url} />
         <Select

@@ -9,7 +9,7 @@ const PaginatedTable = (props) => (
     <Loader active={props.isFetching} inline={false} dimmerClassName={classNames.dimmer} />
     <Table
       {...props}
-      children={props.children.length ? props.children : (
+      children={props.children && !props.isFetching ? props.children : (
         <tr>
           <td colSpan={props.numColumns} className={classNames.spacer} />
         </tr>

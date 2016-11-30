@@ -25,7 +25,7 @@ const CreateStore = ({
       onConfirm={handleSubmit(onSubmit)}
       headerText="Request your free Shopify store"
       confirmText="Submit"
-      confirmClass="positive">
+      confirmClass="green">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Input {...shopifyStoreName} label="What name should have your Shopify store?" />
         <Input {...shopifyStoreEmail} label="What email should be the store owner?" />

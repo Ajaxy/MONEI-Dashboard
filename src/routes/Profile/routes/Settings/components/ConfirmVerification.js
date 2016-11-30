@@ -14,7 +14,7 @@ const ConfirmVerification = ({
     onCancel={requestVerificationCancel}
     onConfirm={() => requestVerification({redirect})}
     confirmText="Confirm"
-    confirmClass="positive">
+    confirmClass="green">
     <p>
       This action will request a production access for your account. {' '}
       Please make sure you have all the data filled correctly

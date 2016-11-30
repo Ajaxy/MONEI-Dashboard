@@ -33,7 +33,7 @@ const UpdateSubAccount = ({
       onConfirm={handleSubmit(onSubmit)}
       headerText={subAccount.name}
       confirmText="Save"
-      confirmClass="positive">
+      confirmClass="green">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <h3>Commercial conditions</h3>
         <Input {...commercialConditions.europeCardRate} label="Europe card rate" />
