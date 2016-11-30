@@ -30,19 +30,18 @@ const UsersView = ({
       onPrevPage={() => goToPage(page.currentPage - 1)}
       className="large striped single line"
       header={<UserRow isHeader />}>
-      {
-        (users.length > 0 || isFetching) ? users.map((user, index) =>
-          <UserRow
-            key={index}
-            user={user}
-            userMetadata={user.user_metadata || {}}
-            appMetadata={user.app_metadata || {}}
-            viewUser={viewUser}
-          />)
-          : <tr>
-            <td colSpan={NUM_COLUMNS} className="center aligned">No users yet</td>
-          </tr>
-      }
+      {(users.length > 0 || isFetching)
+        ? users.map((user, index) =>
+        <UserRow
+          key={index}
+          user={user}
+          userMetadata={user.user_metadata || {}}
+          appMetadata={user.app_metadata || {}}
+          viewUser={viewUser}
+        />)
+        : <tr>
+        <td colSpan={NUM_COLUMNS} className="center aligned">No users yet</td>
+      </tr>}
     </PaginatedTable>
   </section>
 );

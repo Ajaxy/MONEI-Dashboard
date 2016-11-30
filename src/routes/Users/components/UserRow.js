@@ -11,7 +11,7 @@ const UserRow = ({
   userMetadata,
   appMetadata,
   viewUser,
-  isHeader
+  isHeader,
 }) => {
   if (isHeader) {
     return (
