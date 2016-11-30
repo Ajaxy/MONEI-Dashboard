@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import YouTube from 'react-youtube';
 import classNames from './WooCommerceGuide.scss';
 import cx from 'classnames';
@@ -25,7 +25,7 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <select className="select monei_mode" name="woocommerce_monei_operation_mode"
-                        id="woocommerce_monei_operation_mode" disabled value={isInSandboxMode ? 'test' : 'live'}>
+                  id="woocommerce_monei_operation_mode" disabled value={isInSandboxMode ? 'test' : 'live'}>
                   <option value="test">Test mode</option>
                   <option value="live">Live Mode</option>
                 </select>
@@ -41,8 +41,8 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <input className="input-text regular-input " type="text" name="woocommerce_monei_test_channel_id"
-                       id="woocommerce_monei_test_channel_id" value={subAccount.id} readOnly
-                       onClick={() => copyToClipboard(subAccount.id, 'Channel ID')}/>
+                  id="woocommerce_monei_test_channel_id" value={subAccount.id} readOnly
+                  onClick={() => copyToClipboard(subAccount.id, 'Channel ID')} />
               </fieldset>
             </td>
           </tr>
@@ -53,8 +53,8 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <input className="input-text regular-input " type="text" name="woocommerce_monei_test_user_id"
-                       id="woocommerce_monei_test_user_id" value={subAccount.login} readOnly
-                       onClick={() => copyToClipboard(subAccount.login, 'User ID')}/>
+                  id="woocommerce_monei_test_user_id" value={subAccount.login} readOnly
+                  onClick={() => copyToClipboard(subAccount.login, 'User ID')} />
               </fieldset>
             </td>
           </tr>
@@ -65,8 +65,8 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <input className="input-text regular-input " type="text" name="woocommerce_monei_test_password"
-                       id="woocommerce_monei_test_password" value={subAccount.pwd} readOnly
-                       onClick={() => copyToClipboard(subAccount.pwd, 'Password')}/>
+                  id="woocommerce_monei_test_password" value={subAccount.pwd} readOnly
+                  onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
               </fieldset>
             </td>
           </tr>
@@ -76,5 +76,12 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
     </div>
   </div>
 );
+
+WooCommerceGuide.propTypes = {
+  subAccount: PropTypes.object.isRequired,
+  copyToClipboard: PropTypes.func.isRequired,
+  isInSandboxMode: PropTypes.bool.isRequired,
+  isMerchant: PropTypes.bool.isRequired
+};
 
 export default WooCommerceGuide;

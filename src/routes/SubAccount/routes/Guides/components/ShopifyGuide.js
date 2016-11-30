@@ -51,22 +51,22 @@ const ShopifyGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerchant}
           <div className="shopify-form__row">
             <label>Sender ID</label>
             <input type="text" value={subAccount.sender} readOnly
-                   onClick={() => copyToClipboard(subAccount.sender, 'Sender ID')} />
+              onClick={() => copyToClipboard(subAccount.sender, 'Sender ID')} />
           </div>
           <div className="shopify-form__row">
             <label>Channel ID</label>
             <input type="text" value={subAccount.id} readOnly
-                   onClick={() => copyToClipboard(subAccount.id, 'Channel ID')} />
+              onClick={() => copyToClipboard(subAccount.id, 'Channel ID')} />
           </div>
           <div className="shopify-form__row">
             <label>Login</label>
             <input type="text" value={subAccount.login} readOnly
-                   onClick={() => copyToClipboard(subAccount.login, 'Login')} />
+              onClick={() => copyToClipboard(subAccount.login, 'Login')} />
           </div>
           <div className="shopify-form__row">
             <label>Password</label>
             <input type="text" value={subAccount.pwd} readOnly
-                   onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
+              onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
           </div>
 
           <h3 className="shopify-form__heading">Cards accepted</h3>
