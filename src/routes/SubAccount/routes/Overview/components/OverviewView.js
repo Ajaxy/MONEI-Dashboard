@@ -34,7 +34,7 @@ const SubAccountOverview = ({subAccount, copyToClipboard, bankAccount, isFetchin
     </tr>
     <tr>
       <td className="three wide">Bank account status</td>
-      <td>{humanize(subAccount.bankAccountStatus)}</td>
+      <td>{humanize(subAccount.bankAccountStatus || '')}</td>
     </tr>
   </Table>
 );
