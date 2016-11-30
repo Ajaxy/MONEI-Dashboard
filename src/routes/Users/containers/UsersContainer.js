@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import UsersView from '../components/UsersView';
@@ -10,11 +11,10 @@ class Users extends Component {
     page: PropTypes.shape({
       currentPage: PropTypes.number,
       filter: PropTypes.string
-    })
-  };
-
-  static contextTypes = {
-    router: PropTypes.object
+    }),
+    router: PropTypes.shape({
+      push: PropTypes.func.isRequired
+    }).isRequired
   };
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class Users extends Component {
   };
 
   viewUser = (userId) => {
-    this.context.router.push(`/users/${encodeURI(userId)}`);
+    this.props.router.push(`/users/${encodeURI(userId)}`);
   };
 
   render() {
@@ -55,4 +55,4 @@ const mapStateToProps = (state) => ({
   isFirstPage: selectors.getIsFirstPage(state)
 });
 
-export default connect(mapStateToProps, actions)(Users);
+export default connect(mapStateToProps, actions)(withRouter(Users));
