@@ -25,7 +25,7 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <select className="select monei_mode" name="woocommerce_monei_operation_mode"
-                  id="woocommerce_monei_operation_mode" disabled value={isInSandboxMode ? 'test' : 'live'}>
+                        id="woocommerce_monei_operation_mode" disabled value={isInSandboxMode ? 'test' : 'live'}>
                   <option value="test">Test mode</option>
                   <option value="live">Live Mode</option>
                 </select>
@@ -41,8 +41,8 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <input className="input-text regular-input " type="text" name="woocommerce_monei_test_channel_id"
-                  id="woocommerce_monei_test_channel_id" value={subAccount.id} readOnly
-                  onClick={() => copyToClipboard(subAccount.id, 'Channel ID')} />
+                       id="woocommerce_monei_test_channel_id" value={subAccount.id} readOnly
+                       onClick={() => copyToClipboard(subAccount.id, 'Channel ID')} />
               </fieldset>
             </td>
           </tr>
@@ -53,8 +53,8 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <input className="input-text regular-input " type="text" name="woocommerce_monei_test_user_id"
-                  id="woocommerce_monei_test_user_id" value={subAccount.login} readOnly
-                  onClick={() => copyToClipboard(subAccount.login, 'User ID')} />
+                       id="woocommerce_monei_test_user_id" value={subAccount.login} readOnly
+                       onClick={() => copyToClipboard(subAccount.login, 'User ID')} />
               </fieldset>
             </td>
           </tr>
@@ -65,15 +65,26 @@ const WooCommerceGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerch
             <td className="forminp">
               <fieldset>
                 <input className="input-text regular-input " type="text" name="woocommerce_monei_test_password"
-                  id="woocommerce_monei_test_password" value={subAccount.pwd} readOnly
-                  onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
+                       id="woocommerce_monei_test_password" value={subAccount.pwd} readOnly
+                       onClick={() => copyToClipboard(subAccount.pwd, 'Password')} />
               </fieldset>
             </td>
           </tr>
         </tbody>
       </table>
-
     </div>
+    <br />
+    <p>
+      You can test your configurations in our {' '}
+      <a href="http://woocommerce.demo-monei.com/" target="_blank">DEMO WooCommerce store</a>
+    </p>
+    <p>
+      <a href="http://woocommerce.demo-monei.com/wp-admin" target="_blank">DEMO WooCommerce admin dashboard</a>
+    </p>
+    <p>
+      <b>Login:</b> MONEI_user <br />
+      <b>Password:</b> MONEI_password
+    </p>
   </div>
 );
 
