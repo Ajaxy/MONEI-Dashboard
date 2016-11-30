@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import shopifyScreenshot from 'static/shopify-screenshot.png';
 
-const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxMode, isMerchant}) => (
+const ShopifyGuide = ({subAccount, copyToClipboard, isInSandboxMode, isMerchant}) => (
   <div className="ui text container">
     <p>
       Open your Shopify Dashboard and go to the section <strong>Settings → Payments → Accept Credit
@@ -101,7 +101,6 @@ const ShopifyGuide = ({subAccount, copyToClipboard, showNewMessage, isInSandboxM
 ShopifyGuide.propTypes = {
   subAccount: PropTypes.object.isRequired,
   copyToClipboard: PropTypes.func.isRequired,
-  showNewMessage: PropTypes.func,
   isInSandboxMode: PropTypes.bool.isRequired,
   isMerchant: PropTypes.bool.isRequired
 };
