@@ -1,9 +1,3 @@
 .row {
   cursor: pointer;
 }
-
-.row td:nth-child(4) {
-  max-width: 250px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}

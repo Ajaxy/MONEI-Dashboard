@@ -8,7 +8,6 @@ import classNames from './TransactionRow.scss';
 
 const TransactionRow = ({
   transaction,
-  subAccount = {},
   onClick,
   totalAmount = 0,
   isHeader = false,
@@ -17,13 +16,12 @@ const TransactionRow = ({
   if (isHeader) {
     return (
       <tr>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Type</th>
+        <th width={90}>Amount</th>
+        <th width={75}>Status</th>
+        <th width={110}>Type</th>
         <th>Customer Name</th>
         <th>Customer Email</th>
-        <th>Sub account</th>
-        <th>Date</th>
+        <th width={175}>Date</th>
       </tr>
     );
   } else if (isFooter) {
@@ -38,8 +36,7 @@ const TransactionRow = ({
     return (
       <tr
         onClick={e => onClick(transaction.id)}
-        className={cx(classNames.row, {negative: isFailed(result.code), warning: isRefund(paymentType)})}
-      >
+        className={cx(classNames.row, {negative: isFailed(result.code), warning: isRefund(paymentType)})}>
         <td>{getAmount(paymentType, currency, parseFloat(amount))}</td>
         <td>
           {isFailed(result.code)
@@ -53,7 +50,6 @@ const TransactionRow = ({
             {customer.email}
           </a>
         </td>
-        <td>{subAccount.customName}</td>
         <td>{formatDate(transactionTimestamp, DATE_TIME_FORMAT_SIMPLE)}</td>
       </tr>
     );
@@ -69,6 +65,6 @@ TransactionRow.propTypes = {
   isFooter: PropTypes.bool
 };
 
-export const NUM_COLUMNS = 7;
+export const NUM_COLUMNS = 6;
 
 export default TransactionRow;
