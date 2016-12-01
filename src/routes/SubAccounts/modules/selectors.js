@@ -2,7 +2,7 @@ import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 
 const subAccountsSelector = state => state[stateKey];
-const activeSubAccountIdSelector = state => state.router.params.subAccountId;
+const activeSubAccountIdSelector = state => state.route.params.subAccountId;
 export const getSubAccounts = createSelector(
   subAccountsSelector,
   subAccounts => subAccounts.ids.map(id => subAccounts.byId[id])
