@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {browserHistory} from 'react-router'
-import {syncHistoryWithStore} from 'react-router-redux'
+import {browserHistory} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
 import useScroll from 'use-scroll-behavior';
 import {syncParams} from 'react-router-redux-params';
 import * as api from 'lib/api';

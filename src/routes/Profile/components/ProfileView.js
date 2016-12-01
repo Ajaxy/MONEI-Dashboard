@@ -19,7 +19,8 @@ ProfileView.propTypes = {
   isVerified: PropTypes.bool,
   profile: PropTypes.shape({
     name: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  isInSandboxMode: PropTypes.bool
 };
 
 export default ProfileView;

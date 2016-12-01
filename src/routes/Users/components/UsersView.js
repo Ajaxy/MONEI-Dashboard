@@ -50,7 +50,8 @@ UsersView.propTypes = {
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   filterUsers: PropTypes.func.isRequired,
-  isLastPage: PropTypes.bool
+  isLastPage: PropTypes.bool,
+  isFirstPage: PropTypes.bool
 };
 
 export default UsersView;
