@@ -19,9 +19,9 @@ const UserRow = ({
         <th className="one wide" />
         <th>Name</th>
         <th>Store URL</th>
-        <th>Country</th>
-        <th>Status</th>
-        <th className="right aligned">Verified</th>
+        <th className="two wide">Country</th>
+        <th className="two wide">Status</th>
+        <th className="two wide right aligned">Verified</th>
       </tr>
     );
   } else {
