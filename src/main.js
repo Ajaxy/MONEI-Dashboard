@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {browserHistory} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
-import useScroll from 'use-scroll-behavior';
 import {syncParams} from 'react-router-redux-params';
 import * as api from 'lib/api';
 import createStore from './store/createStore';
@@ -13,7 +12,7 @@ import AppContainer from './containers/AppContainer';
 // ========================================================
 const initialState = window.___INITIAL_STATE__;
 const store = createStore(initialState, browserHistory);
-const history = syncHistoryWithStore(useScroll(browserHistory), store);
+const history = syncHistoryWithStore(browserHistory, store);
 
 // ========================================================
 // Track url changes
