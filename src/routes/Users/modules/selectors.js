@@ -2,7 +2,7 @@ import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 
 const usersSelector = state => state[stateKey];
-const activeUserIdSelector = state => state.router.params.userId;
+const activeUserIdSelector = state => state.route.params.userId;
 
 export const getUsers = createSelector(
   usersSelector,

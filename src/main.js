@@ -1,25 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import useRouterHistory from 'react-router/lib/useRouterHistory';
-import {createHistory, useBeforeUnload} from 'history';
+import {browserHistory} from 'react-router'
+import {syncHistoryWithStore} from 'react-router-redux'
 import withScroll from 'scroll-behavior';
-import * as api from 'lib/api';
 import {syncParams} from 'react-router-redux-params';
+import * as api from 'lib/api';
 import createStore from './store/createStore';
 import AppContainer from './containers/AppContainer';
-
-// ========================================================
-// Browser History Setup
-// ========================================================
-export const history = withScroll(
-  useRouterHistory(useBeforeUnload(createHistory))()
-);
 
 // ========================================================
 // Store and History Instantiation
 // ========================================================
 const initialState = window.___INITIAL_STATE__;
-const store = createStore(initialState, history);
+const store = createStore(initialState, browserHistory);
+const history = syncHistoryWithStore(withScroll(browserHistory), store);
 
 // ========================================================
 // Track url changes
