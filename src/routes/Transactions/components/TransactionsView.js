@@ -65,7 +65,9 @@ const TransactionsView = ({
           onChange={(date) => filterByDate(fromDate, date)}
         />
         <a
-          className={cx('ui icon button', classNames.arrowButton, {disabled: fromDateTimestamp + selectedPeriod + 1 > today})}
+          className={cx('ui icon button', classNames.arrowButton, {
+            disabled: fromDateTimestamp + selectedPeriod + 1 > today
+          })}
           onClick={() => filterByDate(fromDateTimestamp + selectedPeriod + 1, toDateTimestamp + selectedPeriod)}>
           <i className="right chevron icon" />
         </a>

@@ -37,5 +37,5 @@ export const getIsLastPage = createSelector(
 
 export const getIsFirstPage = createSelector(
   getPage,
-  page => page.currentPage == 1
+  page => page.currentPage === 1
 );

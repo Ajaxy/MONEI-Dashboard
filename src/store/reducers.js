@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {routerReducer as routing} from 'react-router-redux';
+import {routeParamsReducer as route} from 'react-router-redux-params';
 import {reducer as form} from 'redux-form';
-import {routeParamsReducer as route} from 'react-router-redux-params'
 import authReducer, {stateKey as authKey} from 'modules/auth/reducer';
 import userInfoReducer, {stateKey as userInfoKey} from '../modules/profile/reducer';
 import messagesReducer, {stateKey as messagesKey} from 'modules/messages/reducer';
@@ -22,10 +22,7 @@ export const makeRootReducer = (asyncReducers) => {
   // Clear state on sign out
   return (state, action) => {
     if (action.type === UNAUTH) {
-      state = {
-        routing: state.routing,
-        route: state.route
-      };
+      state = {routing: state.routing};
     }
     return appReducer(state, action);
   };

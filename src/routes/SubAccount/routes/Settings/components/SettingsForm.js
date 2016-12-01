@@ -63,7 +63,8 @@ SettingsForm.propTypes = {
   fields: PropTypes.object.isRequired,
   bankAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isDisabled: PropTypes.bool
+  isDisabled: PropTypes.bool,
+  isInSandboxMode: PropTypes.bool
 };
 
 export default SettingsForm;

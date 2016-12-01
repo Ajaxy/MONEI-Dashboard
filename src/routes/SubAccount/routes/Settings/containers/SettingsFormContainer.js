@@ -38,14 +38,14 @@ const mapStateToProps = state => {
     customName: 'required'
   };
   if (!isInSandboxMode) {
-    rules.bankAccountId ='required';
+    rules.bankAccountId = 'required';
   }
   return {
     bankAccounts: selectors.getBankAccounts(state),
     isFetching: selectors.getIsFetching(state),
     isInSandboxMode,
     validate: createValidator(rules)
-  }
+  };
 };
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {

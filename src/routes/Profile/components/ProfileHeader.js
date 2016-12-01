@@ -20,7 +20,8 @@ const ProfileHeader = ({isUser, isInSandboxMode}) => (
 );
 
 ProfileHeader.propTypes = {
-  isUser: PropTypes.bool
+  isUser: PropTypes.bool,
+  isInSandboxMode: PropTypes.bool
 };
 
 export default ProfileHeader;

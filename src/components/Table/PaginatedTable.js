@@ -22,10 +22,10 @@ const PaginatedTable = ({
       children={children.length > 0
         ? children
         : <tr>
-        <td colSpan={numColumns} className={classNames.spacer}>
-          {!isFetching && <h3>No {resourceName} were found.</h3>}
-        </td>
-      </tr>}
+          <td colSpan={numColumns} className={classNames.spacer}>
+            {!isFetching && <h3>No {resourceName} were found.</h3>}
+          </td>
+        </tr>}
       footer={
         <tr>
           <th colSpan={numColumns}>
