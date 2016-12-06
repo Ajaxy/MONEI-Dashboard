@@ -78,17 +78,18 @@ export const showLock = () => {
   return dispatch => {
     lock.hide(() => lock.show(lockOptions, async(error, profile, token) => {
       if (error) return;
+      dispatch({
+        type: types.AUTH_REQUEST
+      });
       storage.set('profile', profile);
       storage.set('authToken', token);
       dispatch(updateProfileLocally(profile));
       await dispatch(finalizeAuth(profile, token));
       await dispatch(initSandbox());
-      setTimeout(() => {
-        dispatch({
-          type: types.AUTH_SUCCESS
-        });
-        dispatch(replace('/'));
+      dispatch({
+        type: types.AUTH_SUCCESS
       });
+      dispatch(replace('/'));
     }));
   };
 };
@@ -96,6 +97,9 @@ export const showLock = () => {
 export const signInWithToken = (token) => {
   return async dispatch => {
     dispatch(signOut());
+    dispatch({
+      type: types.AUTH_REQUEST
+    });
     const newToken = await dispatch(resetToken(token));
     const profile = await dispatch(getTokenInfo(newToken));
     await dispatch(finalizeAuth(profile, newToken));

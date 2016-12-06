@@ -19,6 +19,19 @@ const isAuthenticated = (state = isAuthenticatedState, action) => {
   }
 };
 
+const isAuthenticating = (state = false, action) => {
+  switch (action.type) {
+    case types.AUTH_REQUEST:
+      return true;
+    case types.AUTH_FAIL:
+    case types.AUTH_SUCCESS:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
-  isAuthenticated
+  isAuthenticated,
+  isAuthenticating
 });
