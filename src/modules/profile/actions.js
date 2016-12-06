@@ -18,6 +18,7 @@ export const fetchProfile = () => {
       window.Intercom('update', data);
       return data;
     } catch (error) {
+      console.log(error);
       dispatch({
         type: types.FETCH_PROFILE_FAIL
       });

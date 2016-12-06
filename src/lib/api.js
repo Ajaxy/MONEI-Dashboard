@@ -2,7 +2,7 @@ import axios from 'axios';
 import storage from 'store';
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
-import {buildCreds, signRequest} from 'lib/aws';
+import {buildCreds} from 'lib/aws';
 
 const apiClient = axios.create({
   baseURL: APP_CONFIG.apiBaseURL
@@ -16,13 +16,6 @@ export const addInterceptors = (store) => {
   apiClient.interceptors.request.use(config => {
     const token = storage.get('authToken');
     const profile = storage.get('profile');
-    const credentials = storage.get('credentials');
-
-    // at this point, user is not yet finished authentication
-    if (!token || !profile || !credentials) {
-      return config;
-    }
-
     if (isTokenExpired(token)) {
       config.adapter = (resolve, reject) => reject({
         data: {
@@ -39,7 +32,7 @@ export const addInterceptors = (store) => {
       config.headers.smpwd = meta.smpwd;
       config.headers.smlogin = meta.smlogin;
     }
-    return signRequest(config, credentials);
+    return config;
   }, error => {
     return Promise.reject(error.data);
   });
@@ -65,7 +58,7 @@ export const addInterceptors = (store) => {
       });
       store.dispatch(signOut());
     }
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   }, error => {
     return Promise.reject(error.data);
@@ -166,10 +159,10 @@ export const deleteWebhook = (webhookId) =>
 // Account
 
 export const fetchAccount = () =>
-  apiClient.get('account');
+  apiClient.get('accounts');
 
 export const updateAccount = (data = {}) =>
-  apiClient.post('account', data);
+  apiClient.patch('accounts', data);
 
 export const fetchBankAccounts = () =>
   apiClient.get('account/bank-accounts');

@@ -3,8 +3,8 @@ import {getTokenExpirationDate} from 'lib/jwt';
 import * as types from './types';
 import {replace} from 'react-router-redux';
 import storage from 'store';
-import {addMessage} from 'modules/messages/actions';
-import {updateProfileLocally, initSandbox} from 'modules/profile/actions';
+import {fetchProfile, updateProfileLocally, initSandbox} from 'modules/profile/actions';
+import {getProfile} from 'modules/profile/selectors';
 import logo from 'static/logo.svg';
 
 const lock = new Auth0Lock(
@@ -29,8 +29,8 @@ export const signOut = () => dispatch => {
   window.Intercom('shutdown');
 };
 
-export const fetchAWSCredentials = (token) => (
-  new Promise((resolve, reject) => {
+export const fetchAWSCredentials = (token) => {
+  return new Promise((resolve, reject) => {
     const credentials = storage.get('credentials');
     if (credentials && new Date(credentials.Expiration) - new Date() > 300000) {
       return resolve(credentials);
@@ -45,8 +45,8 @@ export const fetchAWSCredentials = (token) => (
       storage.set('credentials', data.Credentials);
       return resolve(data.Credentials);
     });
-  })
-);
+  });
+};
 
 const bootIntercom = (profile) => {
   if (profile.impersonated || __DEV__) return;
@@ -81,13 +81,13 @@ export const showLock = () => {
       if (error) return;
       storage.set('profile', profile);
       storage.set('authToken', token);
-      dispatch({
-        type: types.AUTH_SUCCESS
-      });
       dispatch(updateProfileLocally(profile));
       await dispatch(finalizeAuth(profile, token));
       await dispatch(initSandbox());
       setTimeout(() => {
+        dispatch({
+          type: types.AUTH_SUCCESS
+        });
         dispatch(replace('/'));
       });
     }));
@@ -119,6 +119,7 @@ export const resetToken = (token) => {
       };
       lock.$auth0.getDelegationToken(params, (error, data) => {
         if (error) return reject(error);
+        storage.set('authToken', data.id_token);
         return resolve(data.id_token);
       });
     });
@@ -141,15 +142,13 @@ export const getTokenInfo = (idToken) => {
 
 export const finalizeAuth = (profile, idToken) => {
   const token = idToken || storage.get('authToken');
-  return dispatch => {
-    // dispatch(fetchProfile());
+  return async(dispatch, getState) => {
     dispatch(autoSignOut(token));
-    bootIntercom(profile);
-    return fetchAWSCredentials(token).then(
-      // credentials => dispatch(notifications.connect(profile, credentials)),
-      credentials => storage.set('credentials', credentials),
-      error => dispatch(addMessage({text: error}))
-    );
+    fetchAWSCredentials(token);
+    await dispatch(fetchProfile());
+    const state = getState();
+    const fetchedProfile = getProfile(state);
+    bootIntercom(fetchedProfile);
   };
 };
 

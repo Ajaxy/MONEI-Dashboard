@@ -38,6 +38,9 @@ const data = (state = profileState, action) => {
       const newProfile = {...state, ...action.data};
       storage.set('profile', newProfile);
       return newProfile;
+    case UNAUTH:
+      storage.remove('profile');
+      return {};
     default:
       return state;
   }
@@ -55,7 +58,6 @@ const isSandboxInitialized = (state = false, action) => {
 const defaultSandboxMode = storage.get('sandbox') || false;
 const isInSandboxMode = (state = defaultSandboxMode, action) => {
   switch (action.type) {
-    case types.FETCH_PROFILE_SUCCESS:
     case types.UPDATE_PROFILE_LOCALLY:
       const appMetadata = (action.data || {}).app_metadata;
       if (!appMetadata.mid) {
