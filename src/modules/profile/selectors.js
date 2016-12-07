@@ -17,7 +17,7 @@ export const getIsUpdating = createSelector(
 
 export const getProfile = createSelector(
   profileSelector,
-  profile => profile.data
+  profile => profile.data || {}
 );
 
 export const getUserId = createSelector(

@@ -5,7 +5,6 @@ import reducer, {stateKey} from './modules/reducer';
 export default (store) => {
   injectReducer(store, {key: stateKey, reducer});
   return {
-    path: 'personal-data',
     component: PersonalData
   };
 };
