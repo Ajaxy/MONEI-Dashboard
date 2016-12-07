@@ -1,29 +1,64 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 
-const profileSelector = state => state[stateKey];
+const settingsSelector = state => state[stateKey];
 
-export const getIsChangingPassword = createSelector(
-  profileSelector,
-  profile => profile.isChangingPassword
+export const getIsPhoneVerificationStarted = createSelector(
+  settingsSelector,
+  settings => settings.isPhoneVerificationStarted
 );
 
-export const getIsRequestingPhoneVerification = createSelector(
-  profileSelector,
-  profile => profile.isRequestingPhoneVerification
+export const getIsVerifyingPhone = createSelector(
+  settingsSelector,
+  settings => settings.isVerifyingPhone
 );
 
-export const getIsCheckingPhoneVerification = createSelector(
-  profileSelector,
-  profile => profile.isCheckingPhoneVerification
+export const getIsRequestingVerification = createSelector(
+  settingsSelector,
+  settings => settings.isRequestingVerification
 );
 
-export const getIsCheckingModalVisible = createSelector(
-  profileSelector,
-  profile => profile.isCheckingModalVisible
+export const getIsCheckingCode = createSelector(
+  settingsSelector,
+  settings => settings.isCheckingCode
 );
 
-export const getPhoneNumberToCheck = createSelector(
-  profileSelector,
-  profile => profile.phoneNumberToCheck
+export const getIsEditingPhone = createSelector(
+  settingsSelector,
+  settings => settings.isEditingPhone
+);
+
+export const getPhoneNumber = createSelector(
+  settingsSelector,
+  settings => settings.phoneNumber
+);
+
+export const getIsFileUploading = createSelector(
+  settingsSelector,
+  settings => settings.isFileUploading
+);
+
+export const getIsFileDeleting = createSelector(
+  settingsSelector,
+  settings => settings.isFileDeleting
+);
+
+export const getFileUrl = createSelector(
+  settingsSelector,
+  settings => settings.fileUrl
+);
+
+export const getIsDeleteModalOpen = createSelector(
+  settingsSelector,
+  settings => settings.isDeleteModalOpen
+);
+
+export const getIsVerificationModalOpen = createSelector(
+  settingsSelector,
+  settings => settings.isVerificationModalOpen
+);
+
+export const getIsShopifyModalOpen = createSelector(
+  settingsSelector,
+  settings => settings.isShopifyModalOpen
 );

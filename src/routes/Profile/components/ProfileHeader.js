@@ -10,6 +10,9 @@ const ProfileHeader = ({isUser, isInSandboxMode}) => (
     <Link to="/profile/settings" className="item" activeClassName="active">
       Settings
     </Link>
+    <Link to="/profile/personal-data" className="item" activeClassName="active">
+      Personal data
+    </Link>
     {isUser && !isInSandboxMode && <Link to="/profile/bank-accounts" className="item" activeClassName="active">
       Bank accounts
     </Link>}

@@ -2,8 +2,8 @@ import React, {PropTypes, Component} from 'react';
 import {connect} from 'react-redux';
 import OverviewView from '../components/OverviewView';
 import * as selectors from 'modules/profile/selectors';
-import {getFileUrl} from '../../Settings/modules/selectors';
-import {fetchFileUrl} from '../../Settings/modules/actions';
+import {getFileUrl} from '../../PersonalData/modules/selectors';
+import {fetchFileUrl} from '../../PersonalData/modules/actions';
 
 class Overview extends Component {
   static propTypes = {

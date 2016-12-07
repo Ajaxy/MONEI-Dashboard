@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import PhoneVerification from 'routes/Profile/routes/Settings/containers/PhoneVerificationContainer';
-import UpdateMetaData from 'routes/Profile/routes/Settings/containers/UpdateMetaDataContainer';
-import ConfirmVerification from 'routes/Profile/routes/Settings/containers/ConfirmVerificationContainer';
+import PhoneVerification from '../../Profile/routes/PersonalData/containers/PhoneVerificationContainer';
+import UpdateMetaData from '../../Profile/routes/PersonalData/containers/UpdateMetaDataContainer';
+import ConfirmVerification from '../../Profile/routes/PersonalData/containers/ConfirmVerificationContainer';
 import SaveBankAccount from 'routes/Profile/routes/BankAccounts/containers/SaveBankAccountContainer';
 import BankAccountItem from 'routes/Profile/routes/BankAccounts/components/BankAccountItem';
 import classNames from './GettingStartedView.scss';
