@@ -1,7 +1,8 @@
 import Profile from './containers/ProfileContainer';
 import OverviewRoute from './routes/Overview';
-import ShopifyStoreRoute from './routes/ShopifyStore';
 import SettingsRoute from './routes/Settings';
+import ShopifyStoreRoute from './routes/ShopifyStore';
+import PersonalDataRoute from './routes/PersonalData';
 import BankAccountsRoute from './routes/BankAccounts';
 import RequireAuth from 'containers/RequireAuth';
 
@@ -10,7 +11,8 @@ export default (store) => ({
   indexRoute: OverviewRoute,
   component: RequireAuth(Profile),
   childRoutes: [
-    SettingsRoute(store),
+    SettingsRoute,
+    PersonalDataRoute(store),
     BankAccountsRoute(store),
     ShopifyStoreRoute
   ]

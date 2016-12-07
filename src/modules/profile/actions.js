@@ -6,9 +6,7 @@ import Validator from 'lib/validator';
 
 export const fetchProfile = () => {
   return async dispatch => {
-    dispatch({
-      type: types.FETCH_PROFILE_REQUEST
-    });
+    dispatch({type: types.FETCH_PROFILE_REQUEST});
     try {
       const data = await api.fetchAccount();
       dispatch({
@@ -19,9 +17,7 @@ export const fetchProfile = () => {
       return data;
     } catch (error) {
       console.log(error);
-      dispatch({
-        type: types.FETCH_PROFILE_FAIL
-      });
+      dispatch({type: types.FETCH_PROFILE_FAIL});
       dispatch(addMessage({text: error}));
     }
   };
@@ -37,27 +33,51 @@ export const updateProfileLocally = (data) => {
   };
 };
 
-export const updateProfile = ({user_id, user_metadata}) => {
+export const updateProfile = (data) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
-      const data = await api.updateUserMetaData(user_id, user_metadata);
+      const data = await api.updateAccount(data);
       dispatch({
         type: types.UPDATE_PROFILE_SUCCESS,
         data
       });
       dispatch(validateUserProfile());
+      dispatch(addMessage({
+        style: 'success',
+        text: 'Your profile has been successfully updated'
+      }));
       return data;
     } catch (error) {
-      dispatch({
-        type: types.UPDATE_PROFILE_FAIL
-      });
+      dispatch({type: types.UPDATE_PROFILE_FAIL});
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(updateProfile({user_id, user_metadata}));
+          dispatch(updateProfile(data));
         }
       }));
+    }
+  };
+};
+
+export const updateProfileMetaData = (metadata) => {
+  return async(dispatch, getState) => {
+    const userId = selectors.getUserId(getState());
+    dispatch({type: types.UPDATE_PROFILE_REQUEST});
+    try {
+      const data = await api.updateUserMetaData(userId, metadata);
+      dispatch({
+        type: types.UPDATE_PROFILE_SUCCESS,
+        data
+      });
+      dispatch(validateUserProfile());
+      dispatch(addMessage({
+        style: 'success',
+        text: 'Your profile has been successfully updated'
+      }));
+    } catch (error) {
+      dispatch({type: types.UPDATE_PROFILE_FAIL});
+      dispatch(addMessage({text: error}));
     }
   };
 };

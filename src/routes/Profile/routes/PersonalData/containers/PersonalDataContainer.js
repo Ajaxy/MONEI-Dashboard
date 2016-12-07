@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import SettingsView from '../components/SettingsView';
+import SettingsView from '../components/PersonalDataView';
 import {getIsReadyForProduction} from 'modules/profile/selectors';
 import * as actions from '../modules/actions';
 

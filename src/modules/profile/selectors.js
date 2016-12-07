@@ -10,9 +10,9 @@ export const getIsFetching = createSelector(
   profile => profile.isFetching
 );
 
-export const getIsModifying = createSelector(
+export const getIsUpdating = createSelector(
   profileSelector,
-  profile => profile.isModifying
+  profile => profile.isUpdating
 );
 
 export const getProfile = createSelector(

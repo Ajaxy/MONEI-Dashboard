@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import * as selectors from 'modules/profile/selectors';
-import * as actions from '../../Settings/modules/actions';
+import * as actions from '../../PersonalData/modules/actions';
 import ShopifyStoreView from '../components/ShopifyStoreView';
 
 const mapStateToProps = (state) => ({

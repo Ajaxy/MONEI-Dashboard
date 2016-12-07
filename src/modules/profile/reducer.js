@@ -17,7 +17,7 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const isModifying = (state = false, action) => {
+const isUpdating = (state = false, action) => {
   switch (action.type) {
     case types.UPDATE_PROFILE_REQUEST:
       return true;
@@ -86,7 +86,7 @@ const isReadyForProduction = (state = false, action) => {
 
 export default combineReducers({
   isFetching,
-  isModifying,
+  isUpdating,
   isSandboxInitialized,
   isInSandboxMode,
   isReadyForProduction,
