@@ -5,13 +5,10 @@ import Link from 'react-router/lib/Link';
 const ProfileHeader = ({isUser, isInSandboxMode}) => (
   <div className="ui secondary pointing large menu no-padding">
     <IndexLink to="/profile" className="item" activeClassName="active">
-      Overview
+      Personal data
     </IndexLink>
     <Link to="/profile/settings" className="item" activeClassName="active">
       Settings
-    </Link>
-    <Link to="/profile/personal-data" className="item" activeClassName="active">
-      Personal data
     </Link>
     {isUser && !isInSandboxMode && <Link to="/profile/bank-accounts" className="item" activeClassName="active">
       Bank accounts

@@ -18,7 +18,6 @@ const SettingsView = ({
       <div className="ui stackable grid">
         <div className="nine wide column">
           <form className="ui form" onSubmit={handleSubmit(updateProfileMetaData)}>
-            <h3>Application settings</h3>
             <div className="field">
               <CheckBox
                 {...isHintsDisabled}

@@ -1,8 +1,8 @@
 import {reduxForm} from 'redux-form';
 import PhoneEdit from '../components/PhoneEdit';
-import {getProfile, getPhoneNumber, getIsPhoneVerified} from 'modules/profile/selectors';
-import * as selectors from '../modules/selectors';
-import * as actions from '../modules/actions';
+import {getProfile} from 'modules/profile/selectors';
+import * as selectors from 'routes/Profile/modules/selectors';
+import * as actions from 'routes/Profile/modules/actions';
 import countries, {findByCode, findByPhone} from 'lib/countries';
 import Validator from 'lib/validator';
 
@@ -27,12 +27,13 @@ const getCountry = (phoneNumber, geoip) => {
 
 const mapStateToProps = (state) => {
   const profile = getProfile(state);
-  const phoneNumber = getPhoneNumber(state);
+  const phoneNumber = profile.phoneNumber;
+  const isPhoneVerified = !!phoneNumber;
   const country = getCountry(phoneNumber, profile.geoip);
   return {
     countries,
+    isPhoneVerified,
     isVerifying: selectors.getIsVerifyingPhone(state),
-    isPhoneVerified: getIsPhoneVerified(state),
     currentPhoneNumber: phoneNumber,
     initialValues: {
       countryCode: country.phoneCode,

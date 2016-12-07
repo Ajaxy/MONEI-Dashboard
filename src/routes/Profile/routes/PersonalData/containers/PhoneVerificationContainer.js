@@ -1,14 +1,15 @@
 import {connect} from 'react-redux';
 import PhoneVerification from '../components/PhoneVerification';
-import {getIsPhoneVerified, getPhoneNumber} from 'modules/profile/selectors';
-import * as selectors from '../modules/selectors';
-import * as actions from '../modules/actions';
+import {getProfile} from 'modules/profile/selectors';
+import * as selectors from 'routes/Profile/modules/selectors';
+import * as actions from 'routes/Profile/modules/actions';
 
 const mapStateToProps = (state) => {
-  const isPhoneVerified = getIsPhoneVerified(state);
+  const profile = getProfile(state);
+  const isPhoneVerified = !!profile.phoneNumber;
   return {
     isPhoneVerified,
-    phoneNumber: getPhoneNumber(state),
+    phoneNumber: profile.phoneNumber,
     isVerificationStarted: selectors.getIsPhoneVerificationStarted(state),
     isEditingPhone: selectors.getIsEditingPhone(state) || !isPhoneVerified
   };

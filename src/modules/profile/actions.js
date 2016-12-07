@@ -115,24 +115,20 @@ export const setSandboxMode = (state) => ({
 export const validateUserProfile = () => {
   return (dispatch, getState) => {
     const state = getState();
-    const userMetadata = selectors.getUserMetadata(state);
-    const appMetadata = selectors.getAppMetadata(state);
+    const profile = selectors.getProfile(state);
     const isCompany = selectors.getIsCompany(state);
     const rules = {
       name: 'required',
-      store_url: 'required',
-      store_goods: 'required',
-      document_name: 'required',
-      phone_number: 'required'
+      storeUrl: 'required',
+      storeGoods: 'required',
+      documentName: 'required',
+      phoneNumber: 'required',
+      idNumber: 'required'
     };
     if (isCompany) {
-      rules.vat_number = 'required';
-      rules.company_name = 'required';
+      rules.companyName = 'required';
     }
-    if (!isCompany) {
-      rules.id_number = 'required';
-    }
-    const validator = new Validator({...userMetadata, ...appMetadata}, rules);
+    const validator = new Validator(profile, rules);
     validator.passes();
     dispatch({
       type: types.VALIDATE_PROFILE,

@@ -1,10 +1,10 @@
 import React, {PropTypes} from 'react';
-import UpdateMetaData from '../containers/UpdateMetaDataContainer';
+import PersonalDataForm from '../containers/PersonalDataFormContainer';
 import PhoneVerification from '../containers/PhoneVerificationContainer';
 import ConfirmVerification from '../containers/ConfirmVerificationContainer';
 import Button from 'components/Button';
 
-const SettingsView = ({
+const PersonalData = ({
   requestVerificationStart,
   isVerificationRequested,
   isAllowedVerification
@@ -13,11 +13,8 @@ const SettingsView = ({
     <div className="ui stackable grid">
       <div className="nine wide column">
         <PhoneVerification />
-      </div>
-    </div>
-    <div className="ui stackable grid">
-      <div className="nine wide column">
-        <UpdateMetaData />
+        <br />
+        <PersonalDataForm />
       </div>
     </div>
     <br />
@@ -31,10 +28,10 @@ const SettingsView = ({
   </section>
 );
 
-SettingsView.propTypes = {
+PersonalData.propTypes = {
   requestVerificationStart: PropTypes.func.isRequired,
   isVerificationRequested: PropTypes.bool,
   isAllowedVerification: PropTypes.bool
 };
 
-export default SettingsView;
+export default PersonalData;
