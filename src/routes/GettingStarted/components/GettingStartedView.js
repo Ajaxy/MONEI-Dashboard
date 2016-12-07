@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import PhoneVerification from '../../Profile/routes/PersonalData/containers/PhoneVerificationContainer';
-import UpdateMetaData from '../../Profile/routes/PersonalData/containers/PersonalDataFormContainer';
-import ConfirmVerification from '../../Profile/routes/PersonalData/containers/ConfirmVerificationContainer';
+import PhoneVerification from 'routes/Profile/routes/PersonalData/containers/PhoneVerificationContainer';
+import UpdateMetaData from 'routes/Profile/routes/PersonalData/containers/PersonalDataFormContainer';
+import ConfirmVerification from 'routes/Profile/routes/PersonalData/containers/ConfirmVerificationContainer';
 import SaveBankAccount from 'routes/Profile/routes/BankAccounts/containers/SaveBankAccountContainer';
 import BankAccountItem from 'routes/Profile/routes/BankAccounts/components/BankAccountItem';
 import classNames from './GettingStartedView.scss';
@@ -17,25 +17,24 @@ const GettingStartedView = ({
   isFetching
 }) => {
   return (
-    <section className={cx('ui main container', classNames.container)}>
+    <section className={classNames.container}>
       <h1 className="ui header">
         Getting started
         <div className="sub header">Please complete a few easy steps to start using MONEI in production</div>
       </h1>
-      <PhoneVerification
-        title="1. Verify your phone"
-        className={classNames.form} />
+      <h3>1. Verify your phone</h3>
+      <PhoneVerification />
       <br />
       <div className={classNames.form}>
         <h3>2. Add your primary bank account</h3>
         {
           bankAccount.id
             ? <div>
-              <BankAccountItem
-                {...bankAccount}
-                onEdit={() => saveBankAccountStart(bankAccount.id)} />
-              <br />
-            </div>
+            <BankAccountItem
+              {...bankAccount}
+              onEdit={() => saveBankAccountStart(bankAccount.id)} />
+            <br />
+          </div>
             : isFetching
             ? <Loader active />
             : <Button onClick={saveBankAccountStart} primary>
@@ -44,10 +43,8 @@ const GettingStartedView = ({
         }
       </div>
       <br />
-      <UpdateMetaData
-        title="3. Fill up your personal data"
-        isAppSettingsVisible={false}
-        className={classNames.form} />
+      <h3>3. Fill up your personal data</h3>
+      <UpdateMetaData />
       <br />
       {isAllowedVerification && <Button
         className={cx('orange large', classNames.verifyButton)}

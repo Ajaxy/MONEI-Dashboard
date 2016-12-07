@@ -1,6 +1,6 @@
 import {reduxForm} from 'redux-form';
-import * as actions from '../../PersonalData/modules/actions';
-import * as selectors from '../../PersonalData/modules/selectors';
+import * as actions from 'routes/Profile/modules/actions';
+import * as selectors from 'routes/Profile/modules/selectors';
 import {getUserMetadata} from 'modules/profile/selectors';
 import CreateStore from '../components/CreateStore';
 import Validator from 'validatorjs';
