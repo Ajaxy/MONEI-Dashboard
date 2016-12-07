@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import SettingsView from '../components/PersonalDataView';
 import {getIsReadyForProduction} from 'modules/profile/selectors';
-import * as actions from '../modules/actions';
+import * as actions from 'routes/Profile/modules/actions';
 
 const mapStateToProps = (state) => {
   return {

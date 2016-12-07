@@ -162,7 +162,7 @@ export const fetchAccount = () =>
   apiClient.get('accounts');
 
 export const updateAccount = (data = {}) =>
-  apiClient.patch('accounts', data);
+  apiClient.post('accounts', data);
 
 export const fetchBankAccounts = () =>
   apiClient.get('account/bank-accounts');
