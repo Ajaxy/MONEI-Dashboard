@@ -16,7 +16,7 @@ const CoreLayout = ({isAuthenticated, isPlain, children, isAuthenticating}) => {
     );
   }
   return (
-    <div className={classNames.container}>
+    <div className={cx(classNames.container, classNames.main)}>
       <Header />
       <section className={cx('ui main container', classNames.section)}>
         {children}
