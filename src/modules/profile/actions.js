@@ -33,17 +33,17 @@ export const updateProfileLocally = (data) => {
   };
 };
 
-export const updateProfile = (data) => {
+export const updateProfile = (data, isSilent = false) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
-      const data = await api.updateAccount(data);
+      const profile = await api.updateAccount(data);
       dispatch({
         type: types.UPDATE_PROFILE_SUCCESS,
-        data
+        data: profile
       });
       dispatch(validateUserProfile());
-      dispatch(addMessage({
+      !isSilent && dispatch(addMessage({
         style: 'success',
         text: 'Your profile has been successfully updated'
       }));
@@ -60,18 +60,18 @@ export const updateProfile = (data) => {
   };
 };
 
-export const updateProfileMetaData = (metadata) => {
+export const updateProfileMetaData = (data, isSilent = false) => {
   return async(dispatch, getState) => {
     const userId = selectors.getUserId(getState());
     dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
-      const data = await api.updateUserMetaData(userId, metadata);
+      const profile = await api.updateUserMetaData(userId, data);
       dispatch({
         type: types.UPDATE_PROFILE_SUCCESS,
-        data
+        data: profile
       });
       dispatch(validateUserProfile());
-      dispatch(addMessage({
+      !isSilent && dispatch(addMessage({
         style: 'success',
         text: 'Your profile has been successfully updated'
       }));
