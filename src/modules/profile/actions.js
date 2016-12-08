@@ -33,7 +33,7 @@ export const updateProfileLocally = (data) => {
   };
 };
 
-export const updateProfile = (data, isSilent = false) => {
+export const updateProfile = (data) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
@@ -43,7 +43,7 @@ export const updateProfile = (data, isSilent = false) => {
         data: profile
       });
       dispatch(validateUserProfile());
-      !isSilent && dispatch(addMessage({
+      dispatch(addMessage({
         style: 'success',
         text: 'Your profile has been successfully updated'
       }));
