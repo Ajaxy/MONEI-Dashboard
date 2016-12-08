@@ -1,5 +1,6 @@
 import * as types from './types';
 import {combineReducers} from 'redux';
+import {UPDATE_PROFILE_SUCCESS} from 'modules/profile/types';
 
 export const stateKey = 'profileView';
 
@@ -139,7 +140,7 @@ const isShopifyModalOpen = (state = false, action) => {
     case types.CREATE_SHOPIFY_STORE_START:
       return true;
     case types.CREATE_SHOPIFY_STORE_CANCEL:
-    case types.UPDATE_PROFILE_METADATA_SUCCESS:
+    case UPDATE_PROFILE_SUCCESS:
       return false;
     default:
       return state;

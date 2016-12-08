@@ -159,10 +159,10 @@ export const deleteWebhook = (webhookId) =>
 // Account
 
 export const fetchAccount = () =>
-  apiClient.get('accounts');
+  apiClient.get('account');
 
 export const updateAccount = (data = {}) =>
-  apiClient.post('accounts', data);
+  apiClient.patch('account', data);
 
 export const fetchBankAccounts = () =>
   apiClient.get('account/bank-accounts');
