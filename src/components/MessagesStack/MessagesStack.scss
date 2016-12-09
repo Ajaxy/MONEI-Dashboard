@@ -1,8 +1,9 @@
 .wrapper {
   position: fixed;
   right: 15px;
+  left: 15px;
   top: 80px;
-  width: 400px;
+  max-width: 400px;
   margin: auto;
   z-index: 10000;
 }
