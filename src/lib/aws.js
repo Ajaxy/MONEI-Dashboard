@@ -1,13 +1,19 @@
 import AWS from 'aws-sdk';
+import storage from 'store';
 
 export const buildCreds = (data) => {
+  if (!data) data = storage.get('credentials');
   const credentials = new AWS.Credentials(data.AccessKeyId, data.SecretAccessKey, data.SessionToken);
   AWS.config.credentials = credentials;
   return credentials;
 };
 
 const getS3Bucket = () => {
-  return new AWS.S3({params: {Bucket: APP_CONFIG.userBucket}, region: APP_CONFIG.region});
+  buildCreds();
+  return new AWS.S3({
+    params: {Bucket: APP_CONFIG.userBucket},
+    region: APP_CONFIG.region
+  });
 };
 
 export const fileUpload = (userId, file, onProgress) => {
