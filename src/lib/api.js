@@ -2,7 +2,6 @@ import axios from 'axios';
 import storage from 'store';
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
-import {buildCreds} from 'lib/aws';
 
 const apiClient = axios.create({
   baseURL: APP_CONFIG.apiBaseURL
@@ -72,10 +71,6 @@ export const addInterceptors = (store) => {
       return Promise.reject(errorMessage);
     }
   });
-
-  // update AWS creds
-  const credentials = storage.get('credentials');
-  if (credentials) buildCreds(credentials);
 };
 
 // Sandbox

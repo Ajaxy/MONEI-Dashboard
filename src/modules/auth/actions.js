@@ -1,5 +1,6 @@
 import Auth0Lock from 'auth0-lock';
 import {getTokenExpirationDate} from 'lib/jwt';
+import {buildCreds} from 'lib/aws';
 import * as types from './types';
 import {replace} from 'react-router-redux';
 import storage from 'store';
@@ -33,6 +34,7 @@ export const fetchAWSCredentials = (token) => {
   return new Promise((resolve, reject) => {
     const credentials = storage.get('credentials');
     if (credentials && new Date(credentials.Expiration) - new Date() > 300000) {
+      buildCreds(credentials);
       return resolve(credentials);
     }
     const params = {
@@ -43,6 +45,7 @@ export const fetchAWSCredentials = (token) => {
     lock.$auth0.getDelegationToken(params, (error, data) => {
       if (error) return reject(error);
       storage.set('credentials', data.Credentials);
+      buildCreds(data.Credentials);
       return resolve(data.Credentials);
     });
   });
@@ -148,7 +151,7 @@ export const finalizeAuth = (profile, idToken) => {
   const token = idToken || storage.get('authToken');
   return async(dispatch, getState) => {
     dispatch(autoSignOut(token));
-    fetchAWSCredentials(token);
+    await fetchAWSCredentials(token);
     await dispatch(fetchProfile());
     const state = getState();
     const fetchedProfile = getProfile(state);
