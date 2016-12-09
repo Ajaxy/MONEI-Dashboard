@@ -3,7 +3,7 @@ import * as types from './types';
 import {getPhoneNumber} from './selectors';
 import {trackEvent} from 'lib/intercom';
 import {addMessage} from 'modules/messages/actions';
-import {updateProfileMetaData, updateProfileLocally} from 'modules/profile/actions';
+import {updateProfileMetaData, updateProfileLocally, updateProfile} from 'modules/profile/actions';
 import * as selectors from 'modules/profile/selectors';
 import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 import {push} from 'react-router-redux';
@@ -81,9 +81,8 @@ export const uploadFile = (file) => {
     const profile = selectors.getProfile(state);
     dispatch({type: types.FILE_UPLOAD_REQUEST});
     try {
-      await fileUpload(profile.user_id, file);
-      profile.user_metadata.document_name = file.name;
-      await dispatch(updateProfile(profile));
+      await fileUpload(profile.id, file);
+      await dispatch(updateProfile({documentName: file.name}));
       dispatch({type: types.FILE_UPLOAD_SUCCESS});
     } catch (error) {
       dispatch({type: types.FILE_UPLOAD_FAIL});
@@ -111,9 +110,8 @@ export const deleteFile = () => {
     const profile = selectors.getProfile(state);
     dispatch({type: types.FILE_DELETE_REQUEST});
     try {
-      await fileDelete(profile.user_id, profile.user_metadata.document_name);
-      profile.user_metadata.document_name = null;
-      await dispatch(updateProfile(profile));
+      await fileDelete(profile.id, profile.documentName);
+      await dispatch(updateProfile({documentName: null}));
       dispatch({type: types.FILE_DELETE_SUCCESS});
     } catch (error) {
       dispatch({type: types.FILE_DELETE_FAIL});
@@ -131,9 +129,8 @@ export const fetchFileUrl = (name) => {
   return async(dispatch, getState) => {
     const state = getState();
     const profile = selectors.getProfile(state);
-    const isAdmin = selectors.getIsAdmin(state);
     try {
-      const data = await fileGetUrl(profile.user_id, name, isAdmin);
+      const data = await fileGetUrl(profile.id, name);
       dispatch({type: types.FILE_URL_UPDATE, data});
       return data;
     } catch (error) {

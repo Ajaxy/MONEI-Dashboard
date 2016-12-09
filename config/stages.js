@@ -33,7 +33,7 @@ export default {
   // Overrides when STAGE === 'production'
   // ======================================================
   production: (config) => {
-    const region = 'eu-west-1';
+    const region = 'us-east-1';
     Object.assign(config.globals.APP_CONFIG, {
       apiBaseURL: 'https://api.monei.net/',
       staticCdnURL: 'https://dashboard.monei.net',
