@@ -72,6 +72,7 @@ export const showLock = () => {
   const lockOptions = {
     closable: false,
     container: 'lock-container',
+    socialBigButtons: true,
     authParams: {scope},
     icon: logo
   };
