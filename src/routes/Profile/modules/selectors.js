@@ -3,27 +3,62 @@ import {stateKey} from './reducer';
 
 const profileSelector = state => state[stateKey];
 
-export const getIsChangingPassword = createSelector(
+export const getIsPhoneVerificationStarted = createSelector(
   profileSelector,
-  profile => profile.isChangingPassword
+  profile => profile.isPhoneVerificationStarted
 );
 
-export const getIsRequestingPhoneVerification = createSelector(
+export const getIsVerifyingPhone = createSelector(
   profileSelector,
-  profile => profile.isRequestingPhoneVerification
+  profile => profile.isVerifyingPhone
 );
 
-export const getIsCheckingPhoneVerification = createSelector(
+export const getIsRequestingVerification = createSelector(
   profileSelector,
-  profile => profile.isCheckingPhoneVerification
+  profile => profile.isRequestingVerification
 );
 
-export const getIsCheckingModalVisible = createSelector(
+export const getIsCheckingCode = createSelector(
   profileSelector,
-  profile => profile.isCheckingModalVisible
+  profile => profile.isCheckingCode
 );
 
-export const getPhoneNumberToCheck = createSelector(
+export const getIsEditingPhone = createSelector(
   profileSelector,
-  profile => profile.phoneNumberToCheck
+  profile => profile.isEditingPhone
+);
+
+export const getPhoneNumber = createSelector(
+  profileSelector,
+  profile => profile.phoneNumber
+);
+
+export const getIsFileUploading = createSelector(
+  profileSelector,
+  profile => profile.isFileUploading
+);
+
+export const getIsFileDeleting = createSelector(
+  profileSelector,
+  profile => profile.isFileDeleting
+);
+
+export const getFileUrl = createSelector(
+  profileSelector,
+  profile => profile.fileUrl
+);
+
+export const getIsDeleteModalOpen = createSelector(
+  profileSelector,
+  profile => profile.isDeleteModalOpen
+);
+
+export const getIsVerificationModalOpen = createSelector(
+  profileSelector,
+  profile => profile.isVerificationModalOpen
+);
+
+export const getIsShopifyModalOpen = createSelector(
+  profileSelector,
+  profile => profile.isShopifyModalOpen
 );

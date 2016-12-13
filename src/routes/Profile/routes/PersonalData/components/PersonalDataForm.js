@@ -1,58 +1,34 @@
 import React, {PropTypes} from 'react';
-import CheckBox from 'components/CheckBox';
 import Button from 'components/Button';
-import DotHint from 'components/DotHint';
 import Input from 'components/Input';
 import {PROFILE_TYPES} from 'lib/constants';
 import Select, {SelectItem} from 'components/Select';
 import DocumentUpload from '../containers/DocumentContainer';
 import cx from 'classnames';
 
-const UpdateMetaData = ({
+const PersonalDataForm = ({
   fields: {
     name,
-    profile_type,
+    profileType,
     country,
-    company_name,
-    id_number,
-    vat_number,
-    store_url,
-    store_goods,
-    isHintsDisabled
+    companyName,
+    idNumber,
+    storeUrl,
+    storeGoods
   },
   values,
   countries,
   handleSubmit,
-  updateUserMetaData,
-  isUpdatingMetaData,
+  updateProfile,
+  isUpdating,
   invalid,
   className,
-  disabled,
-  title = 'Personal data',
-  isAppSettingsVisible = true
+  disabled
 }) => {
-  const disableHints = (e) => {
-    updateUserMetaData({isHintsDisabled: e.target.value !== 'true'});
-    isHintsDisabled.onChange(e);
-  };
-  const isCompany = values.profile_type === 'company';
+  const isCompany = values.profileType === 'company';
   return (
     <div className={className}>
-      <form className="ui form" onSubmit={handleSubmit(updateUserMetaData)}>
-        {isAppSettingsVisible && <h3>Application settings</h3>}
-        {isAppSettingsVisible && <div className="field">
-          <CheckBox
-            {...isHintsDisabled}
-            className="green"
-            onChange={disableHints}
-            toggle
-            label="Disable application hints"
-          />
-          <DotHint>
-            This is an example of the hint
-          </DotHint>
-        </div>}
-        <h3>{title}</h3>
+      <form className="ui form" onSubmit={handleSubmit(updateProfile)}>
         <Input {...name} disabled={disabled} label="Name and surname" />
         <Select
           {...country}
@@ -69,7 +45,7 @@ const UpdateMetaData = ({
           ))}
         </Select>
         <Select
-          {...profile_type}
+          {...profileType}
           disabled={disabled}
           label="Profile Type">
           {PROFILE_TYPES.map((type, i) => (
@@ -81,17 +57,13 @@ const UpdateMetaData = ({
           ))}
         </Select>
         {isCompany && <Input
-          {...company_name}
+          {...companyName}
           disabled={disabled}
           label="Company name" />}
-        {isCompany && <Input
-          {...vat_number}
+        <Input
+          {...idNumber}
           disabled={disabled}
-          label="VAT number or registration number of the company" />}
-        {!isCompany && <Input
-          {...id_number}
-          disabled={disabled}
-          label="Identity document number" />}
+          label={isCompany ? 'VAT number or registration number of the company' : 'Identity document number'} />
         <div className="field">
           <label>
             {isCompany ? 'Upload document of company incorporation' : 'Upload your identity document' }
@@ -99,13 +71,13 @@ const UpdateMetaData = ({
           <DocumentUpload disabled={disabled} />
         </div>
         <br />
-        <Input {...store_url} disabled={disabled} label="Your store website url" />
-        <Input {...store_goods} disabled={disabled} label="What goods are you selling?" />
+        <Input {...storeUrl} disabled={disabled} label="Your store website url" />
+        <Input {...storeGoods} disabled={disabled} label="What goods are you selling?" />
         {!disabled && <Button
           primary
           type="submit"
-          loading={isUpdatingMetaData}
-          disabled={invalid || isUpdatingMetaData}>
+          loading={isUpdating}
+          disabled={invalid || isUpdating}>
           Save
         </Button>}
       </form>
@@ -113,13 +85,12 @@ const UpdateMetaData = ({
   );
 };
 
-UpdateMetaData.propTypes = {
+PersonalDataForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  updateUserMetaData: PropTypes.func.isRequired,
+  updateProfile: PropTypes.func.isRequired,
   fields: PropTypes.object.isRequired,
-  isUpdatingMetaData: PropTypes.bool.isRequired,
+  isUpdating: PropTypes.bool.isRequired,
   invalid: PropTypes.bool.isRequired,
-  isAppSettingsVisible: PropTypes.bool,
   countries: PropTypes.array.isRequired,
   className: PropTypes.string,
   title: PropTypes.string,
@@ -127,4 +98,4 @@ UpdateMetaData.propTypes = {
   disabled: PropTypes.bool
 };
 
-export default UpdateMetaData;
+export default PersonalDataForm;

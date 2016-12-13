@@ -28,9 +28,9 @@ const UserView = ({
             <Link to={`${baseUrl}/settings`} className="item" activeClassName="active">
             Admin settings
           </Link>
-            {user.app_metadata.mid && <Link to={`${baseUrl}/sub-accounts`} className="item" activeClassName="active">
+          <Link to={`${baseUrl}/sub-accounts`} className="item" activeClassName="active">
             Sub accounts
-          </Link>}
+          </Link>
           </div>
           {children}
         </section>}
