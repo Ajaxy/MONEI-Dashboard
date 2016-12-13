@@ -56,7 +56,7 @@ const SubAccountsView = ({
     <Button
       primary
       loading={isSyncing}
-      onClick={() => syncUser(user.user_id, user.app_metadata.mid)}
+      onClick={() => syncUser(user.user_id, user.app_metadata)}
       className={cx('right floated green')}>
       Sync user data with PayOn
     </Button>

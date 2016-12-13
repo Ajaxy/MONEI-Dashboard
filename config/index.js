@@ -62,7 +62,6 @@ const config = {
     'redux-form',
     'redux-thunk',
     'reselect',
-    'scroll-behavior',
     'store',
     'validatorjs',
     'auth0-lock',
