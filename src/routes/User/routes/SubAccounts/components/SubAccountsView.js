@@ -49,18 +49,18 @@ const SubAccountsView = ({
             bankAccount={bankAccountById[subAccount.bankAccountId]}
             copy={copyToClipboard}
             isConfirming={isConfirmingBankAccount}
-            confirm={() => confirmBankAccount(user.user_id, subAccount.id)} />
+            confirm={() => confirmBankAccount(user.id, subAccount.id)} />
         ))}
       </tbody>
     </table>
     <Button
       primary
       loading={isSyncing}
-      onClick={() => syncUser(user.user_id, user.app_metadata)}
+      onClick={() => syncUser(user.id, user)}
       className={cx('right floated green')}>
       Sync user data with PayOn
     </Button>
-    <EditSubAccount userId={user.user_id} />
+    <EditSubAccount userId={user.id} />
   </section>
 );
 
