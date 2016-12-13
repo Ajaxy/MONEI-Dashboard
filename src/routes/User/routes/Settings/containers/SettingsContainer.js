@@ -5,7 +5,6 @@ import * as selectors from 'routes/User/modules/selectors';
 
 const mapStateToProps = (state) => {
   const user = selectors.getUser(state);
-  console.log(user);
   return {
     user,
     initialValues: user,
