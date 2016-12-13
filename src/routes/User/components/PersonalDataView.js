@@ -2,30 +2,28 @@ import React, {PropTypes} from 'react';
 import humanize from 'humanize-string';
 import {Table} from 'components/Table';
 
-const addRow = (list, store, key, title, capitalize = false) => {
-  if (store[key]) {
-    list.push(
-      <tr key={list.length}>
-        <td className="three wide">{title}</td>
-        <td>{capitalize ? humanize(store[key]) : store[key]}</td>
-      </tr>
-    );
-  }
-};
-
 const PersonalDataView = ({user, documentUrl}) => {
   const rows = [];
-  addRow(rows, user.user_metadata, 'profile_type', 'Profile Type', true);
-  addRow(rows, user.app_metadata, 'phone_number', 'Phone');
-  addRow(rows, user.user_metadata, 'country', 'Country');
-  addRow(rows, user.user_metadata, 'id_number', 'ID Number');
-  addRow(rows, user.user_metadata, 'vat_number', 'VAT Number');
+  const addRow = (key, title, capitalize = false) => {
+    if (user[key]) {
+      rows.push(
+        <tr key={rows.length}>
+          <td className="three wide">{title}</td>
+          <td>{capitalize ? humanize(user[key]) : user[key]}</td>
+        </tr>
+      );
+    }
+  };
+  addRow('profileType', 'Profile Type', true);
+  addRow('phoneNumber', 'Phone');
+  addRow('country', 'Country');
+  addRow('idNumber', 'ID Number');
   rows.push(
     <tr key={rows.length}>
       <td className="two wide">Document</td>
       <td>
         <a href={documentUrl} target="_blank">
-          {user.user_metadata.document_name}
+          {user.documentName}
         </a>
       </td>
     </tr>
@@ -34,15 +32,15 @@ const PersonalDataView = ({user, documentUrl}) => {
     <tr key={rows.length}>
       <td className="two wide">Store URL</td>
       <td>
-        <a href={user.user_metadata.store_url} target="_blank">
-          {user.user_metadata.store_url}
+        <a href={user.storeUrl} target="_blank">
+          {user.storeUrl}
         </a>
       </td>
     </tr>
   );
-  addRow(rows, user.user_metadata, 'store_goods', 'Store Goods');
-  addRow(rows, user.user_metadata, 'shopifyStoreName', 'Shopify store name');
-  addRow(rows, user.user_metadata, 'shopifyStoreEmail', 'Admin email for Shopify store');
+  addRow('storeGoods', 'Store Goods');
+  addRow('shopifyStoreName', 'Shopify store name');
+  addRow('shopifyStoreEmail', 'Admin email for Shopify store');
   if (rows.length > 0) {
     return (
       <Table className="large definition">
@@ -59,10 +57,7 @@ const PersonalDataView = ({user, documentUrl}) => {
 };
 
 PersonalDataView.propTypes = {
-  user: PropTypes.shape({
-    user_metadata: PropTypes.object.isRequired,
-    app_metadata: PropTypes.object.isRequired
-  }).isRequired,
+  user: PropTypes.object.isRequired,
   documentUrl: PropTypes.string
 };
 

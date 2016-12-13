@@ -93,14 +93,14 @@ export const fetchCustomers = ({page, order, filter, limit}, sandbox) =>
 
 // Users
 
-export const fetchUsers = ({limit = 50, page = 1, filter = null}) =>
-  apiClient.get('users', {params: {limit, page, filter}});
+export const fetchUsers = (params) =>
+  apiClient.get('stored-users', {params});
 
 export const fetchUser = (userId) =>
-  apiClient.get(`users/${userId}`);
+  apiClient.get(`stored-users/${userId}`);
 
-export const updateUser = (userId, {app_metadata, user_metadata}) =>
-  apiClient.patch(`users/${userId}`, {app_metadata, user_metadata});
+export const updateUser = (userId, data) =>
+  apiClient.patch(`stored-users/${userId}`, data);
 
 export const verifyUser = (userId) =>
   apiClient.patch(`users/${userId}/verify`, {});

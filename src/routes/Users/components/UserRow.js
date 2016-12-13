@@ -8,8 +8,6 @@ export const NUM_COLUMNS = 6;
 
 const UserRow = ({
   user,
-  userMetadata,
-  appMetadata,
   viewUser,
   isHeader
 }) => {
@@ -26,25 +24,25 @@ const UserRow = ({
     );
   } else {
     return (
-      <tr className={classNames.row} onClick={() => viewUser(user.user_id)}>
+      <tr className={classNames.row} onClick={() => viewUser(user.id)}>
         <td>
           <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
         </td>
-        <td className="text overflow">{userMetadata.name || user.email}</td>
+        <td className="text overflow">{user.name || user.email}</td>
         <td className="text overflow">
-          {userMetadata.store_url
-            ? <a href={userMetadata.store_url} target="_blank" onClick={e => e.stopPropagation()}>
-              {userMetadata.store_url}
-            </a>
-            : <p>{userMetadata.store_url}</p>
-          }
+          {user.storeUrl && <a
+            href={user.storeUrl}
+            target="_blank"
+            onClick={e => e.stopPropagation()}>
+            {user.storeUrl}
+          </a>}
         </td>
-        <td>{userMetadata.country}</td>
-        <td>{humanize(appMetadata.status || '')}</td>
+        <td>{user.country}</td>
+        <td>{humanize(user.status || '')}</td>
         <td className="right aligned">
-          {appMetadata.verified
+          {user.verified
             ? <i className={cx('big check circle icon', classNames.success)} />
-            : userMetadata.verification_requested
+            : user.verificationRequested
             ? <i className={cx('big warning circle icon', classNames.warning)} /> : ''}
         </td>
       </tr>
@@ -54,8 +52,6 @@ const UserRow = ({
 
 UserRow.propTypes = {
   user: PropTypes.object,
-  userMetadata: PropTypes.object,
-  appMetadata: PropTypes.object,
   viewUser: PropTypes.func,
   isHeader: PropTypes.bool
 };
