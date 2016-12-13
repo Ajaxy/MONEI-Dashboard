@@ -15,11 +15,11 @@ export const copyToClipboard = (text, name) => dispatch => {
   }));
 };
 
-export const syncUser = (userId, mid) => {
+export const syncUser = (userId, {mid, smid}) => {
   return async dispatch => {
     dispatch({type: types.SYNC_USER_REQUEST});
     try {
-      const result = await api.syncUser(userId, mid);
+      const result = await api.syncUser(userId, {mid, smid});
       const normalized = normalize(
         result,
         subSchema.arrayOfSubAccounts
