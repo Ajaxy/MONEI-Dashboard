@@ -3,24 +3,17 @@ import {stateKey} from './reducer';
 import {getActiveUser} from 'routes/Users/modules/selectors';
 
 const userSelector = state => state[stateKey];
-const defaultUserMetadata = {profile_type: 'individual'};
 
-export const getUser = createSelector(
-  getActiveUser,
-  user => {
-    user.user_metadata = Object.assign({}, defaultUserMetadata, user.user_metadata);
-    return user;
-  }
+export const getUser = getActiveUser;
+
+export const getIsVerificationRequested = createSelector(
+  userSelector,
+  user => user.verificationStatus === 'pending'
 );
 
-export const getAppMetadata = createSelector(
-  getUser,
-  user => user.app_metadata || {}
-);
-
-export const getUserMetadata = createSelector(
-  getUser,
-  user => user.user_metadata || {}
+export const getIsVerified = createSelector(
+  userSelector,
+  user => user.verificationStatus === 'verified'
 );
 
 export const getIsFetching = createSelector(

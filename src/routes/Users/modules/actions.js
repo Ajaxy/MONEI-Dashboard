@@ -4,23 +4,18 @@ import * as schema from 'schema/users';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
-const PAGE_LIMIT = 50;
-
-export const fetchUsers = (page = 1, filter = null) => {
+export const fetchUsers = (params = {}) => {
   return async dispatch => {
     dispatch({type: types.FETCH_USERS_REQUEST});
     try {
-      const result = await api.fetchUsers({limit: PAGE_LIMIT, page, filter});
-      const normalized = normalize(result.users, schema.arrayOfUsers);
+      const users = await api.fetchUsers(params);
+      const normalized = normalize(users.items, schema.arrayOfUsers);
       dispatch({
         type: types.FETCH_USERS_SUCCESS,
         byId: normalized.entities.users,
         ids: normalized.result,
-        page: {
-          currentPage: page,
-          lastPage: Math.ceil(result.total / (result.limit * 1.0)),
-          filter
-        }
+        nextPage: users.nextPage,
+        prevPage: users.prevPage
       });
     } catch (error) {
       dispatch({
@@ -29,7 +24,7 @@ export const fetchUsers = (page = 1, filter = null) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchUsers(page, filter));
+          dispatch(fetchUsers(params));
         }
       }));
     }

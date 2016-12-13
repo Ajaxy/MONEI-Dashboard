@@ -6,11 +6,18 @@ import * as selectors from '../modules/selectors';
 import UsersView from '../components/UsersView';
 
 class Users extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ''
+    };
+  }
+
   static propTypes = {
     fetchUsers: PropTypes.func.isRequired,
-    page: PropTypes.shape({
-      currentPage: PropTypes.number,
-      filter: PropTypes.string
+    pages: PropTypes.shape({
+      nextPage: PropTypes.string,
+      prevPage: PropTypes.string
     }),
     router: PropTypes.shape({
       push: PropTypes.func.isRequired
@@ -18,28 +25,29 @@ class Users extends Component {
   };
 
   componentDidMount() {
-    const {page} = this.props;
-    this.props.fetchUsers(1, page.filter);
+    this.props.fetchUsers();
   }
 
-  filterUsers = (filter) => {
-    this.props.fetchUsers(1, filter);
-  };
-
-  goToPage = (pageNumber) => {
-    const {page} = this.props;
-    this.props.fetchUsers(pageNumber, page.filter);
+  getPage = (page) => {
+    this.props.fetchUsers({page, email: this.state.email});
   };
 
   viewUser = (userId) => {
     this.props.router.push(`/users/${encodeURI(userId)}`);
   };
 
+  handleSearchChange = (email) => {
+    this.setState({email});
+    this.props.fetchUsers({email});
+  };
+
   render() {
     return (
       <UsersView
         filterUsers={this.filterUsers}
-        goToPage={this.goToPage}
+        getPage={this.getPage}
+        searchQueryString={this.state.email}
+        handleSearchChange={this.handleSearchChange}
         viewUser={this.viewUser}
         {...this.props}
       />
@@ -48,11 +56,11 @@ class Users extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  page: selectors.getPage(state),
-  users: selectors.getUsers(state),
-  isFetching: selectors.getIsFetching(state),
+  pages: selectors.getPages(state),
+  isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),
-  isFirstPage: selectors.getIsFirstPage(state)
+  users: selectors.getUsers(state),
+  isFetching: selectors.getIsFetching(state)
 });
 
 export default connect(mapStateToProps, actions)(withRouter(Users));

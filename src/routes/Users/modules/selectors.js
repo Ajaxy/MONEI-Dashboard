@@ -6,7 +6,7 @@ const activeUserIdSelector = state => state.route.params.userId;
 
 export const getUsers = createSelector(
   usersSelector,
-  users => users.ids.map(id => users.byId[id]).slice(0, users.page.lastItem)
+  users => users.ids.map(id => users.byId[id])
 );
 
 export const getUserIds = createSelector(
@@ -25,17 +25,17 @@ export const getIsFetching = createSelector(
   users => users.isFetching
 );
 
-export const getPage = createSelector(
+export const getPages = createSelector(
   usersSelector,
-  users => users.page || {}
-);
-
-export const getIsLastPage = createSelector(
-  getPage,
-  page => page.currentPage >= page.lastPage
+  users => users.pages
 );
 
 export const getIsFirstPage = createSelector(
-  getPage,
-  page => page.currentPage === 1
+  getPages,
+  pages => !pages.prevPage
+);
+
+export const getIsLastPage = createSelector(
+  getPages,
+  pages => !pages.nextPage
 );

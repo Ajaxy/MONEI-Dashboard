@@ -14,8 +14,8 @@ class SubAccounts extends Component {
 
   componentDidMount() {
     const {user, fetchSubAccounts, fetchBankAccounts} = this.props;
-    fetchSubAccounts(user.user_id);
-    fetchBankAccounts(user.user_id);
+    fetchSubAccounts(user.id);
+    fetchBankAccounts(user.id);
   }
 
   render() {
