@@ -7,7 +7,7 @@ import countries, {findByCode, findByPhone} from 'lib/countries';
 import Validator from 'lib/validator';
 
 const rules = {
-  phoneNumber: 'phoneNumber'
+  phoneNumber: 'required|phoneNumber'
 };
 
 const validate = values => {

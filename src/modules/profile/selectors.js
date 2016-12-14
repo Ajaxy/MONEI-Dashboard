@@ -21,7 +21,7 @@ export const getProfile = createSelector(
 
 export const getUserId = createSelector(
   getProfile,
-  data => data.id
+  data => data.user_id
 );
 
 export const getAppMetadata = createSelector(
