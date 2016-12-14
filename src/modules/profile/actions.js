@@ -87,8 +87,7 @@ export const initSandbox = () => {
     const state = getState();
     const profile = selectors.getProfile(state);
     const isUser = selectors.getIsUser(state);
-    const appMetadata = selectors.getAppMetadata(state);
-    if (!isUser || appMetadata.smid) {
+    if (!isUser || profile.smid) {
       return dispatch({
         type: types.INIT_PROFILE_SANDBOX
       });
