@@ -33,9 +33,9 @@ export const updateProfileLocally = (data) => {
   };
 };
 
-export const updateProfile = (data) => {
+export const updateProfile = (data, isSilent = false) => {
   return async dispatch => {
-    dispatch({type: types.UPDATE_PROFILE_REQUEST});
+    !isSilent && dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
       const profile = await api.updateAccount(data);
       dispatch({
@@ -43,7 +43,7 @@ export const updateProfile = (data) => {
         data: profile
       });
       dispatch(validateUserProfile());
-      dispatch(addMessage({
+      !isSilent && dispatch(addMessage({
         style: 'success',
         text: 'Your profile has been successfully updated'
       }));

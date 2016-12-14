@@ -82,7 +82,7 @@ export const uploadFile = (file) => {
     dispatch({type: types.FILE_UPLOAD_REQUEST});
     try {
       await fileUpload(profile.id, file);
-      await dispatch(updateProfile({documentName: file.name}));
+      await dispatch(updateProfile({documentName: file.name}, true));
       dispatch({type: types.FILE_UPLOAD_SUCCESS});
     } catch (error) {
       dispatch({type: types.FILE_UPLOAD_FAIL});
@@ -111,7 +111,7 @@ export const deleteFile = () => {
     dispatch({type: types.FILE_DELETE_REQUEST});
     try {
       await fileDelete(profile.id, profile.documentName);
-      await dispatch(updateProfile({documentName: null}));
+      await dispatch(updateProfile({documentName: null}, true));
       dispatch({type: types.FILE_DELETE_SUCCESS});
     } catch (error) {
       dispatch({type: types.FILE_DELETE_FAIL});

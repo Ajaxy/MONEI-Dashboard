@@ -66,7 +66,7 @@ const PersonalDataForm = ({
           label={isCompany ? 'VAT number or registration number of the company' : 'Identity document number'} />
         <div className="field">
           <label>
-            {isCompany ? 'Upload document of company incorporation' : 'Upload your identity document' }
+            {isCompany ? 'Document of company incorporation' : 'Your identity document' }
           </label>
           <DocumentUpload disabled={disabled} />
         </div>
