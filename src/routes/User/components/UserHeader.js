@@ -9,7 +9,7 @@ const UserHeader = ({user, isVerificationRequested, verifyUser, loginAsUser, isU
     <img className="tiny circular ui image" src={user.picture} onError={e => e.target.src = userPic}/>
     <div className="content">
       <a href={`mailto:${user.email}`} target="_top">{user.email}</a>
-      <div className="sub header">{user.emailVerified ? ' (verified)' : ' (not verified)'}</div>
+      <div className="sub header">{user.role}</div>
     </div>
     {(isVerificationRequested && verifyUser) && <Button
       primary
