@@ -5,7 +5,7 @@ import {combineReducers} from 'redux';
 
 export const stateKey = 'profile';
 
-const isFetching = (state = false, action) => {
+const isFetching = (state = true, action) => {
   switch (action.type) {
     case types.FETCH_PROFILE_REQUEST:
       return true;

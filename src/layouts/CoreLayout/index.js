@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import CoreLayoutView from './CoreLayout';
 import * as selectors from 'modules/auth/selectors';
-import {getProfile} from 'modules/profile/selectors';
+import {getProfile, getIsFetching} from 'modules/profile/selectors';
 import * as actions from 'modules/auth/actions';
 import {connect as connectToNotifications} from 'modules/notifications/actions';
 import queryString from 'query-string';
@@ -41,6 +41,7 @@ class CoreLayout extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   profile: getProfile(state),
+  isFetchingProfile: getIsFetching(state),
   isAuthenticated: selectors.getIsAuthenticated(state),
   isAuthenticating: selectors.getIsAuthenticating(state),
   isPlain: ownProps.routes && ownProps.routes.some(r => r.isPlain)

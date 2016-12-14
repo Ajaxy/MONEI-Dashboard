@@ -1,6 +1,5 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
-import base64 from 'base64-url';
 import {USER_ROLES} from 'lib/enums';
 
 const profileSelector = state => state[stateKey];
@@ -51,8 +50,8 @@ export const getIsAdmin = createSelector(
 );
 
 export const getIsMerchant = createSelector(
-  getAppMetadata,
-  appMetadata => !!appMetadata.mid
+  getProfile,
+  data => !!data.mid
 );
 
 export const getIsCompany = createSelector(
@@ -61,13 +60,13 @@ export const getIsCompany = createSelector(
 );
 
 export const getIsVerificationRequested = createSelector(
-  getUserMetadata,
-  userMetadata => userMetadata.verification_requested
+  getProfile,
+  data => data.verificationStatus === 'pending'
 );
 
 export const getIsVerified = createSelector(
   getProfile,
-  data => data.verified
+  data => data.verificationStatus === 'verified'
 );
 
 export const getIsUsingAuth0UserPass = createSelector(
