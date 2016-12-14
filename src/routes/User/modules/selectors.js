@@ -4,7 +4,10 @@ import {getActiveUser} from 'routes/Users/modules/selectors';
 
 const userSelector = state => state[stateKey];
 
-export const getUser = getActiveUser;
+export const getUser = createSelector(
+  getActiveUser,
+  user => ({profileType: 'individual', ...user})
+);
 
 export const getIsVerificationRequested = createSelector(
   getUser,
