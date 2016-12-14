@@ -7,12 +7,12 @@ const userSelector = state => state[stateKey];
 export const getUser = getActiveUser;
 
 export const getIsVerificationRequested = createSelector(
-  userSelector,
+  getUser,
   user => user.verificationStatus === 'pending'
 );
 
 export const getIsVerified = createSelector(
-  userSelector,
+  getUser,
   user => user.verificationStatus === 'verified'
 );
 

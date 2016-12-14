@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import cx from 'classnames';
+import {USER_ROLES} from 'lib/enums';
 import classNames from './UserRow.scss';
 import humanize from 'humanize-string';
 import userPic from 'static/user.png';
@@ -23,8 +24,12 @@ const UserRow = ({
       </tr>
     );
   } else {
+    const isAdmin = user.role === USER_ROLES.Admin;
+    const isAcquirer = user.role === USER_ROLES.Acquirer;
     return (
-      <tr className={classNames.row} onClick={() => viewUser(user.id)}>
+      <tr
+        className={cx(classNames.row, {warning: isAdmin, positive: isAcquirer})}
+        onClick={() => viewUser(user.id)}>
         <td>
           <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
         </td>

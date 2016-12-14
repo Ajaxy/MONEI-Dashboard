@@ -1,7 +1,7 @@
 export const USER_ROLES = Object.freeze({
-  User: 0,
-  Admin: 1,
-  Acquirer: 2
+  User: 'user',
+  Admin: 'admin',
+  Acquirer: 'acquirer'
 });
 
 export const USER_STATUSES = Object.freeze([
