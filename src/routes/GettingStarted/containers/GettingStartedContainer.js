@@ -25,7 +25,7 @@ class GettingStarted extends Component {
 const mapStateToProps = (state) => {
   const bankAccount = getPrimaryBankAccount(state);
   return {
-    isAllowedVerification: selectors.getIsReadyForProduction(state) && bankAccount.id,
+    isAllowedVerification: selectors.getIsReadyForProduction(state) && !!bankAccount.id,
     isFetching: getIsFetching(state),
     bankAccount
   };
