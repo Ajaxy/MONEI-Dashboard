@@ -16,8 +16,7 @@ export const USER_ACQUIRERS = Object.freeze({
   BS: 'Banco Sabadell',
   BBVA: 'BBVA',
   EVO: 'EVO Payments',
-  PP: 'Popular Payments',
-  TA: 'Technoactivity'
+  UP: 'Universalpay'
 });
 
 export const PAYMENT_TYPES = Object.freeze({
