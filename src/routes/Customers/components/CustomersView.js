@@ -15,13 +15,18 @@ const CustomersView = ({
   getPage
 }) => (
   <section className="ui basic segment padded-bottom">
-    <Search
-      placeholder="Customer email..."
-      onSearch={handleSearchChange}
-      defaultValue={searchQueryString}
-      inputClass="fluid"
-      className={classNames.paddedBottom}
-    />
+    <div className="ui grid stackable">
+      <div className="seven wide column">
+        <Search
+          placeholder="Customer email..."
+          onSearch={handleSearchChange}
+          defaultValue={searchQueryString}
+          inputClass="fluid"
+        />
+      </div>
+      <div className="nine wide column right aligned">
+        </div>
+      </div>
     <PaginatedTable
       {...{isFetching, isFirstPage, isLastPage}}
       selectable={!isFetching && customers.length > 0}
