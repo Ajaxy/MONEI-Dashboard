@@ -13,6 +13,9 @@ const authApiClient = axios.create({
 
 export const addInterceptors = (store) => {
   apiClient.interceptors.request.use(config => {
+    // encode url in case of unsupported symbols
+    config.url = encodeURI(config.url);
+
     const token = storage.get('authToken');
     const profile = storage.get('profile');
     if (isTokenExpired(token)) {

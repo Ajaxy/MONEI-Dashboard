@@ -53,7 +53,12 @@ export const fetchAWSCredentials = (token) => {
 };
 
 const bootIntercom = (profile) => {
-  if (profile.impersonated || profile.role !== USER_ROLES.User || __DEV__) {
+  if (
+    profile.impersonated
+    || profile.role !== USER_ROLES.User
+    || __DEV__
+    || __STAGE__ === 'development'
+  ) {
     return;
   }
   window.Intercom('boot', {
@@ -153,12 +158,10 @@ export const getTokenInfo = (idToken) => {
 export const finalizeAuth = (profile, idToken) => {
   const token = idToken || storage.get('authToken');
   return async(dispatch, getState) => {
+    bootIntercom(profile);
     dispatch(autoSignOut(token));
     await fetchAWSCredentials(token);
     await dispatch(fetchProfile());
-    const state = getState();
-    const fetchedProfile = getProfile(state);
-    bootIntercom(fetchedProfile);
   };
 };
 
