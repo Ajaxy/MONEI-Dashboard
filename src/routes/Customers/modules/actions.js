@@ -4,30 +4,20 @@ import * as schema from 'schema/customers';
 import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getPage} from './selectors';
-import {getIsInSandboxMode} from 'modules/profile/selectors';
 
-export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
-  return async(dispatch, getState) => {
-    const previous = getPage(getState());
-
-    // start from first page so clear all customers in the list
-    if (!page || filter !== previous.filter || forceRefresh) {
-      dispatch({type: types.CLEAR_CUSTOMERS});
-    }
-
+export const fetchCustomers = (params = {}) => {
+  return async dispatch => {
     dispatch({type: types.FETCH_CUSTOMERS_REQUEST});
     try {
-      const sandbox = getIsInSandboxMode(getState());
-      const result = await api.fetchCustomers({limit: PAGE_LIMIT, page, filter}, sandbox);
-      const normalized = normalize(result.items, schema.arrayOfCustomers);
+      const customers = await api.fetchCustomers({limit: PAGE_LIMIT, ...params});
+      const normalized = normalize(customers.items, schema.arrayOfCustomers);
       dispatch({
         type: types.FETCH_CUSTOMERS_SUCCESS,
         byId: normalized.entities.customers,
         ids: normalized.result,
-        nextPage: result.nextPage,
-        length: normalized.result.length,
-        filter
+        nextPage: customers.nextPage,
+        prevPage: customers.prevPage,
+        email: params.email
       });
     } catch (error) {
       dispatch({
@@ -36,7 +26,7 @@ export const fetchCustomers = (page, filter = null, forceRefresh = false) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchCustomers(page, true));
+          dispatch(fetchCustomers(params));
         }
       }));
     }

@@ -88,8 +88,8 @@ export const fetchTransactionStats = (sandbox) =>
 
 // Customers
 
-export const fetchCustomers = ({page, order, filter, limit}, sandbox) =>
-  apiClient.get('customers', {params: {page, order, filter, limit}, sandbox});
+export const fetchCustomers = (params) =>
+  apiClient.get('customers', {params});
 
 // Users
 

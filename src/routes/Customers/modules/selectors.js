@@ -18,12 +18,18 @@ export const getIsFetching = createSelector(
   customers => customers.isFetching
 );
 
-export const getPage = createSelector(
+export const getParams = createSelector(
   customersSelector,
-  customers => customers.page
+  customers => customers.params
+);
+
+export const getIsFirstPage = createSelector(
+  getParams,
+  pages => !pages.prevPage
 );
 
 export const getIsLastPage = createSelector(
-  getPage,
-  page => !page.nextPage
+  getParams,
+  pages => !pages.nextPage
 );
+

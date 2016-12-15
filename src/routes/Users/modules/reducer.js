@@ -50,12 +50,13 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const pages = (state = {}, action) => {
+const params = (state = {}, action) => {
   switch (action.type) {
     case types.FETCH_USERS_SUCCESS:
       return {
         prevPage: action.prevPage,
-        nextPage: action.nextPage
+        nextPage: action.nextPage,
+        email: action.email
       };
     default:
       return state;
@@ -65,7 +66,7 @@ const pages = (state = {}, action) => {
 export default combineReducers({
   ids,
   byId,
-  pages,
+  params,
   isFetching
 });
 

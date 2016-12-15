@@ -6,7 +6,7 @@ import classNames from './UsersView.scss';
 
 const UsersView = ({
   users,
-  pages,
+  params,
   isFirstPage,
   isLastPage,
   handleSearchChange,
@@ -27,8 +27,8 @@ const UsersView = ({
       {...{isFetching, isFirstPage, isLastPage}}
       selectable={!isFetching && users.length > 0}
       numColumns={NUM_COLUMNS}
-      onNextPage={() => getPage(pages.nextPage)}
-      onPrevPage={() => getPage(pages.prevPage)}
+      onNextPage={() => getPage(params.nextPage)}
+      onPrevPage={() => getPage(params.prevPage)}
       resourceName="users"
       className="large striped fixed single line"
       header={<UserRow isHeader />}>
@@ -44,7 +44,7 @@ const UsersView = ({
 
 UsersView.propTypes = {
   users: PropTypes.array.isRequired,
-  pages: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
   getPage: PropTypes.func.isRequired,
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
