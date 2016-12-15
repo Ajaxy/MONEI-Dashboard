@@ -159,6 +159,9 @@ export const fetchAccount = () =>
 export const updateAccount = (data = {}) =>
   apiClient.patch('account', data);
 
+export const requestAccountVerification = (data = {}) =>
+  apiClient.post('account/request-verification', data);
+
 export const fetchBankAccounts = () =>
   apiClient.get('account/bank-accounts');
 

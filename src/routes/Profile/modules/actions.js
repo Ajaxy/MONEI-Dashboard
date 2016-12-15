@@ -155,12 +155,12 @@ export const requestVerificationCancel = () => ({
 export const requestVerification = ({redirect}) => {
   return async(dispatch, getState) => {
     const profile = selectors.getProfile(getState());
-    profile.user_metadata.verification_requested = true;
     dispatch({
       type: types.PROFILE_VERIFICATION_REQUEST
     });
     try {
-      await dispatch(updateProfileMetaData(profile.user_metadata));
+      const data = await api.requestAccountVerification(profile);
+      dispatch(updateProfileLocally(data));
       dispatch({
         type: types.PROFILE_VERIFICATION_SUCCESS
       });
