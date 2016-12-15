@@ -15,7 +15,6 @@ const CustomersView = ({
   getPage
 }) => (
   <section className="ui basic segment padded-bottom">
-    <h1 className="ui header">Customers</h1>
     <Search
       placeholder="Customer email..."
       onSearch={handleSearchChange}
