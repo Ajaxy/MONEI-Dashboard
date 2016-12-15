@@ -12,7 +12,7 @@ export default {
       staticCdnURL: 'http://monei-v2-dashboard-development.s3.amazonaws.com',
       adminBucket: 'microapps-monei-verified-documents',
       userBucket: 'microapps-monei-documents',
-      intercomID: 'd84d8u48',
+      intercomID: 'blsf713t',
       iotEndpoint: '',
       region
     });
@@ -39,7 +39,7 @@ export default {
       staticCdnURL: 'https://dashboard.monei.net',
       adminBucket: 'microapps-monei-verified-documents',
       userBucket: 'microapps-monei-documents',
-      intercomID: 'za787poa',
+      intercomID: 'blsf713t',
       iotEndpoint: '',
       region
     });

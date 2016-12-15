@@ -6,6 +6,7 @@ import {replace} from 'react-router-redux';
 import storage from 'store';
 import {fetchProfile, updateProfileLocally, initSandbox} from 'modules/profile/actions';
 import {getProfile} from 'modules/profile/selectors';
+import {USER_ROLES} from 'lib/enums';
 import logo from 'static/logo.svg';
 
 const lock = new Auth0Lock(
@@ -52,7 +53,9 @@ export const fetchAWSCredentials = (token) => {
 };
 
 const bootIntercom = (profile) => {
-  if (profile.impersonated || __DEV__) return;
+  if (profile.impersonated || profile.role !== USER_ROLES.User || __DEV__) {
+    return;
+  }
   window.Intercom('boot', {
     app_id: APP_CONFIG.intercomID,
     ...profile,
