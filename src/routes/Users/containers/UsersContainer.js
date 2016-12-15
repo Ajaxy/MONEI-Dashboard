@@ -6,18 +6,12 @@ import * as selectors from '../modules/selectors';
 import UsersView from '../components/UsersView';
 
 class Users extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: ''
-    };
-  }
-
   static propTypes = {
     fetchUsers: PropTypes.func.isRequired,
-    pages: PropTypes.shape({
+    params: PropTypes.shape({
       nextPage: PropTypes.string,
-      prevPage: PropTypes.string
+      prevPage: PropTypes.string,
+      email: PropTypes.string
     }),
     router: PropTypes.shape({
       push: PropTypes.func.isRequired
@@ -29,7 +23,7 @@ class Users extends Component {
   }
 
   getPage = (page) => {
-    this.props.fetchUsers({page, email: this.state.email});
+    this.props.fetchUsers({page, email: this.props.params.email});
   };
 
   viewUser = (userId) => {
@@ -37,16 +31,14 @@ class Users extends Component {
   };
 
   handleSearchChange = (email) => {
-    this.setState({email});
     this.props.fetchUsers({email});
   };
 
   render() {
     return (
       <UsersView
-        filterUsers={this.filterUsers}
+        searchQueryString={this.props.params.email}
         getPage={this.getPage}
-        searchQueryString={this.state.email}
         handleSearchChange={this.handleSearchChange}
         viewUser={this.viewUser}
         {...this.props}
@@ -56,7 +48,7 @@ class Users extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  pages: selectors.getPages(state),
+  params: selectors.getParams(state),
   isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),
   users: selectors.getUsers(state),

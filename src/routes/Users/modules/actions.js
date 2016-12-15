@@ -15,7 +15,8 @@ export const fetchUsers = (params = {}) => {
         byId: normalized.entities.users,
         ids: normalized.result,
         nextPage: users.nextPage,
-        prevPage: users.prevPage
+        prevPage: users.prevPage,
+        email: params.email
       });
     } catch (error) {
       dispatch({

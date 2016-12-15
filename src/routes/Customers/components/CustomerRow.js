@@ -1,6 +1,8 @@
 import React, {PropTypes} from 'react';
 import classNames from './CustomerRow.scss';
 
+export const NUM_COLUMNS = 2;
+
 const CustomerRow = ({customer, isHeader = false}) => {
   if (isHeader) {
     return (
