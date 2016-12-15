@@ -26,9 +26,12 @@ const PersonalDataForm = ({
   disabled
 }) => {
   const isCompany = values.profileType === 'company';
+  const submit = (formData) => {
+    updateProfile(formData);
+  };
   return (
     <div className={className}>
-      <form className="ui form" onSubmit={handleSubmit(updateProfile)}>
+      <form className="ui form" onSubmit={handleSubmit(submit)}>
         <Input {...name} disabled={disabled} label="Name and surname" />
         <Select
           {...country}

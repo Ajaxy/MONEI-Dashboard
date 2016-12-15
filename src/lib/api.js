@@ -177,4 +177,4 @@ export const phoneVerificationStart = ({phoneNumber}) =>
   apiClient.post('phone-verification/start', {phoneNumber});
 
 export const phoneVerificationCheck = ({phoneNumber, verificationCode}) =>
-  apiClient.post('phone-verification/check', {phoneNumber, verificationCode});
+  apiClient.post('account/phone-verification/check', {phoneNumber, verificationCode});
