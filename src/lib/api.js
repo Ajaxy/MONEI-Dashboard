@@ -1,5 +1,6 @@
 import axios from 'axios';
 import storage from 'store';
+import {getProfile} from 'modules/profile/selectors'
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
 
@@ -17,7 +18,8 @@ export const addInterceptors = (store) => {
     config.url = encodeURI(config.url);
 
     const token = storage.get('authToken');
-    const profile = storage.get('profile');
+    const profile = getProfile(store.getState());
+    const idKey = config.sandbox ? 'smid' : 'mid';
     if (isTokenExpired(token)) {
       config.adapter = (resolve, reject) => reject({
         data: {
@@ -27,13 +29,7 @@ export const addInterceptors = (store) => {
       store.dispatch(signOut());
     }
     config.headers.authToken = token;
-
-    const meta = profile ? profile.app_metadata : {};
-    if (config.sandbox) {
-      config.headers.smid = meta.smid;
-      config.headers.smpwd = meta.smpwd;
-      config.headers.smlogin = meta.smlogin;
-    }
+    config.headers[idKey] = profile[idKey];
     return config;
   }, error => {
     return Promise.reject(error.data);
