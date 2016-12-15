@@ -29,6 +29,7 @@ export const addInterceptors = (store) => {
       store.dispatch(signOut());
     }
     config.headers.authToken = token;
+    config.headers.sandbox = config.sandbox;
     config.headers[idKey] = profile[idKey];
     return config;
   }, error => {
