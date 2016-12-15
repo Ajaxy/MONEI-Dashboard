@@ -4,7 +4,6 @@ import * as schema from 'schema/subAccounts';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 import {getIsUpToDate} from './selectors';
-import {getIsInSandboxMode} from 'modules/profile/selectors';
 
 export const fetchSubAccounts = () => {
   return async(dispatch, getState) => {
@@ -12,8 +11,7 @@ export const fetchSubAccounts = () => {
     if (isUpToDate) return;
     dispatch({type: types.FETCH_SUB_ACCOUNTS_REQUEST});
     try {
-      const sandbox = getIsInSandboxMode(getState());
-      const subAccounts = await api.fetchSubAccounts(sandbox);
+      const subAccounts = await api.fetchSubAccounts();
       const normalized = normalize(
         subAccounts.items,
         schema.arrayOfSubAccounts

@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import {PaginatedTable} from 'components/Table';
 import Search from 'components/Search';
 import CustomerRow, {NUM_COLUMNS} from './CustomerRow';
-import classNames from './CustomersView.scss';
 
 const CustomersView = ({
   customers,

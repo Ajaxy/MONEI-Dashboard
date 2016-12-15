@@ -2,7 +2,6 @@ import * as api from 'lib/api';
 import * as types from './types';
 import * as schema from 'schema/transactions';
 import {PAGE_LIMIT} from 'lib/constants';
-import {getIsInSandboxMode} from 'modules/profile/selectors';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 import {getPage} from './selectors';
@@ -23,8 +22,7 @@ export const fetchTransactions = (from, to, page, forceRefresh = false) => {
 
     dispatch({type: types.FETCH_TRANSACTIONS_REQUEST, from, to, page});
     try {
-      const sandbox = getIsInSandboxMode(getState());
-      const transactions = await api.fetchTransactions({from, to, page, limit: PAGE_LIMIT}, sandbox);
+      const transactions = await api.fetchTransactions({from, to, page, limit: PAGE_LIMIT});
       const normalized = normalize(transactions.items, schema.arrayOfTransactions);
       dispatch({
         type: types.FETCH_TRANSACTIONS_SUCCESS,

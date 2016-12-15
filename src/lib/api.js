@@ -1,6 +1,6 @@
 import axios from 'axios';
 import storage from 'store';
-import {getProfile} from 'modules/profile/selectors'
+import {getProfile, getIsInSandboxMode} from 'modules/profile/selectors'
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
 
@@ -18,8 +18,10 @@ export const addInterceptors = (store) => {
     config.url = encodeURI(config.url);
 
     const token = storage.get('authToken');
-    const profile = getProfile(store.getState());
-    const idKey = config.sandbox ? 'smid' : 'mid';
+    const state = store.getState();
+    const profile = getProfile(state);
+    const isInSandboxMode = getIsInSandboxMode(state);
+    const idKey = isInSandboxMode ? 'smid' : 'mid';
     if (isTokenExpired(token)) {
       config.adapter = (resolve, reject) => reject({
         data: {
@@ -29,7 +31,7 @@ export const addInterceptors = (store) => {
       store.dispatch(signOut());
     }
     config.headers.authToken = token;
-    config.headers.sandbox = config.sandbox;
+    config.headers.sandbox = isInSandboxMode;
     config.headers[idKey] = profile[idKey];
     return config;
   }, error => {
@@ -80,26 +82,26 @@ export const createSandbox = (name) =>
 
 // Transactions
 
-export const fetchTransactions = ({from, to, page, limit}, sandbox) =>
-  apiClient.get('transactions/stored', {params: {from, to, page, limit}, sandbox});
+export const fetchTransactions = (params = {}) =>
+  apiClient.get('transactions/stored', params);
 
-export const fetchTransactionStats = (sandbox) =>
-  apiClient.get('transactions/stats', {sandbox});
+export const fetchTransactionStats = () =>
+  apiClient.get('transactions/stats');
 
 // Customers
 
-export const fetchCustomers = (params) =>
+export const fetchCustomers = (params = {}) =>
   apiClient.get('customers', {params});
 
 // Users
 
-export const fetchUsers = (params) =>
+export const fetchUsers = (params = {}) =>
   apiClient.get('stored-users', {params});
 
 export const fetchUser = (userId) =>
   apiClient.get(`stored-users/${userId}`);
 
-export const updateUser = (userId, data) =>
+export const updateUser = (userId, data = {}) =>
   apiClient.patch(`stored-users/${userId}`, data);
 
 export const verifyUser = (userId) =>
@@ -128,10 +130,10 @@ export const fetchUserBankAccounts = (userId) =>
 
 // Sub Accounts
 
-export const fetchSubAccounts = (sandbox) =>
-  apiClient.get('sub-accounts', {sandbox});
+export const fetchSubAccounts = () =>
+  apiClient.get('sub-accounts');
 
-export const updateSubAccount = (subAccountId, data) =>
+export const updateSubAccount = (subAccountId, data = {}) =>
   apiClient.patch(`sub-accounts/${subAccountId}`, data);
 
 export const createZapierApiToken = (channelId) =>
