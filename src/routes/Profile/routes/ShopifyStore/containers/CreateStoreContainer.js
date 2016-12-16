@@ -1,7 +1,8 @@
 import {reduxForm} from 'redux-form';
-import * as actions from '../../Settings/modules/actions';
-import * as selectors from '../../Settings/modules/selectors';
-import {getUserMetadata} from 'modules/profile/selectors';
+import * as actions from 'routes/Profile/modules/actions';
+import * as selectors from 'routes/Profile/modules/selectors';
+import {getUserMetadata, getIsUpdating} from 'modules/profile/selectors';
+import {updateProfileMetaData} from 'modules/profile/actions';
 import CreateStore from '../components/CreateStore';
 import Validator from 'validatorjs';
 
@@ -20,7 +21,7 @@ const mapStateToProps = (state) => {
   return {
     initialValues: getUserMetadata(state),
     isOpen: selectors.getIsShopifyModalOpen(state),
-    isUpdating: selectors.getIsUpdatingMetaData(state)
+    isUpdating: getIsUpdating(state)
   };
 };
 
@@ -28,4 +29,4 @@ export default reduxForm({
   form: 'createShopifyStore',
   fields: ['shopifyStoreName', 'shopifyStoreEmail'],
   validate
-}, mapStateToProps, actions)(CreateStore);
+}, mapStateToProps, {...actions, updateProfileMetaData})(CreateStore);

@@ -6,28 +6,29 @@ import classNames from './UsersView.scss';
 
 const UsersView = ({
   users,
-  page,
-  filterUsers,
+  queryParams,
+  isFirstPage,
+  isLastPage,
+  handleSearchChange,
+  searchQueryString,
   viewUser,
   isFetching,
-  isLastPage,
-  isFirstPage,
-  goToPage
+  getPage
 }) => (
   <section className="ui basic segment padded-bottom">
     <Search
-      placeholder="Search name..."
-      onSearch={filterUsers}
-      defaultValue={page.filter}
+      placeholder="User email..."
+      onSearch={handleSearchChange}
+      defaultValue={searchQueryString}
       inputClass="fluid"
       className={classNames.paddedBottom}
     />
     <PaginatedTable
-      {...{isFetching, isLastPage, isFirstPage}}
+      {...{isFetching, isFirstPage, isLastPage}}
       selectable={!isFetching && users.length > 0}
       numColumns={NUM_COLUMNS}
-      onNextPage={() => goToPage(page.currentPage + 1)}
-      onPrevPage={() => goToPage(page.currentPage - 1)}
+      onNextPage={() => getPage(queryParams.nextPage)}
+      onPrevPage={() => getPage(queryParams.prevPage)}
       resourceName="users"
       className="large striped fixed single line"
       header={<UserRow isHeader />}>
@@ -35,8 +36,6 @@ const UsersView = ({
         <UserRow
           key={index}
           user={user}
-          userMetadata={user.user_metadata || {}}
-          appMetadata={user.app_metadata || {}}
           viewUser={viewUser} />
       ))}
     </PaginatedTable>
@@ -45,13 +44,12 @@ const UsersView = ({
 
 UsersView.propTypes = {
   users: PropTypes.array.isRequired,
-  page: PropTypes.object.isRequired,
-  goToPage: PropTypes.func.isRequired,
+  queryParams: PropTypes.object.isRequired,
+  getPage: PropTypes.func.isRequired,
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  filterUsers: PropTypes.func.isRequired,
-  isLastPage: PropTypes.bool,
-  isFirstPage: PropTypes.bool
+  handleSearchChange: PropTypes.func.isRequired,
+  searchQueryString: PropTypes.string
 };
 
 export default UsersView;

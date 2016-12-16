@@ -8,9 +8,10 @@ import UsersView from '../components/UsersView';
 class Users extends Component {
   static propTypes = {
     fetchUsers: PropTypes.func.isRequired,
-    page: PropTypes.shape({
-      currentPage: PropTypes.number,
-      filter: PropTypes.string
+    queryParams: PropTypes.shape({
+      nextPage: PropTypes.string,
+      prevPage: PropTypes.string,
+      email: PropTypes.string
     }),
     router: PropTypes.shape({
       push: PropTypes.func.isRequired
@@ -18,28 +19,27 @@ class Users extends Component {
   };
 
   componentDidMount() {
-    const {page} = this.props;
-    this.props.fetchUsers(1, page.filter);
+    this.props.fetchUsers();
   }
 
-  filterUsers = (filter) => {
-    this.props.fetchUsers(1, filter);
-  };
-
-  goToPage = (pageNumber) => {
-    const {page} = this.props;
-    this.props.fetchUsers(pageNumber, page.filter);
+  getPage = (page) => {
+    this.props.fetchUsers({page, email: this.props.queryParams.email});
   };
 
   viewUser = (userId) => {
     this.props.router.push(`/users/${encodeURI(userId)}`);
   };
 
+  handleSearchChange = (email) => {
+    this.props.fetchUsers({email});
+  };
+
   render() {
     return (
       <UsersView
-        filterUsers={this.filterUsers}
-        goToPage={this.goToPage}
+        searchQueryString={this.props.queryParams.email}
+        getPage={this.getPage}
+        handleSearchChange={this.handleSearchChange}
         viewUser={this.viewUser}
         {...this.props}
       />
@@ -48,11 +48,11 @@ class Users extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  page: selectors.getPage(state),
-  users: selectors.getUsers(state),
-  isFetching: selectors.getIsFetching(state),
+  queryParams: selectors.getQueryParams(state),
+  isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),
-  isFirstPage: selectors.getIsFirstPage(state)
+  users: selectors.getUsers(state),
+  isFetching: selectors.getIsFetching(state)
 });
 
 export default connect(mapStateToProps, actions)(withRouter(Users));

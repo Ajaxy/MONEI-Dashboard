@@ -34,7 +34,6 @@ const TransactionsView = ({
   const selectedPeriod = toDateTimestamp - fromDateTimestamp;
   return (
     <section className="ui basic segment padded-bottom">
-      <h1 className="ui header">Transactions</h1>
       <div className={classNames.filters}>
         <a
           className={cx('ui icon button', classNames.arrowButton)}

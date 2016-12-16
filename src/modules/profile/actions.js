@@ -6,9 +6,7 @@ import Validator from 'lib/validator';
 
 export const fetchProfile = () => {
   return async dispatch => {
-    dispatch({
-      type: types.FETCH_PROFILE_REQUEST
-    });
+    dispatch({type: types.FETCH_PROFILE_REQUEST});
     try {
       const data = await api.fetchAccount();
       dispatch({
@@ -18,9 +16,7 @@ export const fetchProfile = () => {
       window.Intercom('update', data);
       return data;
     } catch (error) {
-      dispatch({
-        type: types.FETCH_PROFILE_FAIL
-      });
+      dispatch({type: types.FETCH_PROFILE_FAIL});
       dispatch(addMessage({text: error}));
     }
   };
@@ -36,27 +32,51 @@ export const updateProfileLocally = (data) => {
   };
 };
 
-export const updateProfile = ({user_id, user_metadata}) => {
+export const updateProfile = (data, isSilent = false) => {
   return async dispatch => {
-    dispatch({type: types.UPDATE_PROFILE_REQUEST});
+    !isSilent && dispatch({type: types.UPDATE_PROFILE_REQUEST});
     try {
-      const data = await api.updateUserMetaData(user_id, user_metadata);
+      const profile = await api.updateAccount(data);
       dispatch({
         type: types.UPDATE_PROFILE_SUCCESS,
-        data
+        data: profile
       });
       dispatch(validateUserProfile());
+      !isSilent && dispatch(addMessage({
+        style: 'success',
+        text: 'Your profile has been successfully updated'
+      }));
       return data;
     } catch (error) {
-      dispatch({
-        type: types.UPDATE_PROFILE_FAIL
-      });
+      dispatch({type: types.UPDATE_PROFILE_FAIL});
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(updateProfile({user_id, user_metadata}));
+          dispatch(updateProfile(data));
         }
       }));
+    }
+  };
+};
+
+export const updateProfileMetaData = (data, isSilent = false) => {
+  return async(dispatch, getState) => {
+    const userId = selectors.getUserId(getState());
+    dispatch({type: types.UPDATE_PROFILE_REQUEST});
+    try {
+      const profile = await api.updateUserMetaData(userId, data);
+      dispatch({
+        type: types.UPDATE_PROFILE_SUCCESS,
+        data: profile
+      });
+      dispatch(validateUserProfile());
+      !isSilent && dispatch(addMessage({
+        style: 'success',
+        text: 'Your profile has been successfully updated'
+      }));
+    } catch (error) {
+      dispatch({type: types.UPDATE_PROFILE_FAIL});
+      dispatch(addMessage({text: error}));
     }
   };
 };
@@ -66,8 +86,7 @@ export const initSandbox = () => {
     const state = getState();
     const profile = selectors.getProfile(state);
     const isUser = selectors.getIsUser(state);
-    const appMetadata = selectors.getAppMetadata(state);
-    if (!isUser || appMetadata.smid) {
+    if (!isUser || profile.smid) {
       return dispatch({
         type: types.INIT_PROFILE_SANDBOX
       });
@@ -94,24 +113,20 @@ export const setSandboxMode = (state) => ({
 export const validateUserProfile = () => {
   return (dispatch, getState) => {
     const state = getState();
-    const userMetadata = selectors.getUserMetadata(state);
-    const appMetadata = selectors.getAppMetadata(state);
+    const profile = selectors.getProfile(state);
     const isCompany = selectors.getIsCompany(state);
     const rules = {
       name: 'required',
-      store_url: 'required',
-      store_goods: 'required',
-      document_name: 'required',
-      phone_number: 'required'
+      storeUrl: 'required',
+      storeGoods: 'required',
+      documentName: 'required',
+      phoneNumber: 'required',
+      idNumber: 'required'
     };
     if (isCompany) {
-      rules.vat_number = 'required';
-      rules.company_name = 'required';
+      rules.companyName = 'required';
     }
-    if (!isCompany) {
-      rules.id_number = 'required';
-    }
-    const validator = new Validator({...userMetadata, ...appMetadata}, rules);
+    const validator = new Validator(profile, rules);
     validator.passes();
     dispatch({
       type: types.VALIDATE_PROFILE,

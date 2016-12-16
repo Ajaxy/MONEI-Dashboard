@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import cx from 'classnames';
 
-const DEFAULT_DELAY = 500;
+const DEFAULT_DELAY = 1000;
 
 class Search extends Component {
   debouncedChange(value) {

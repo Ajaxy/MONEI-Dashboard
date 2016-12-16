@@ -13,7 +13,7 @@ class Overview extends Component {
 
   componentDidMount() {
     const {user, fetchFileUrl} = this.props;
-    const documentName = user.user_metadata.document_name;
+    const documentName = user.documentName;
     if (documentName) fetchFileUrl(documentName);
   }
 

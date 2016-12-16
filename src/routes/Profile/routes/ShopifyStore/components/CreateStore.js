@@ -7,13 +7,13 @@ const CreateStore = ({
   isUpdating,
   fields: {shopifyStoreName, shopifyStoreEmail},
   handleSubmit,
-  updateUserMetaData,
+  updateProfileMetaData,
   createShopifyStoreCancel,
   invalid,
   resetForm
 }) => {
   const onSubmit = async(formData) => {
-    await updateUserMetaData(formData);
+    await updateProfileMetaData(formData, true);
     resetForm();
   };
   return (
@@ -36,7 +36,7 @@ const CreateStore = ({
 
 CreateStore.propTypes = {
   fields: PropTypes.object.isRequired,
-  updateUserMetaData: PropTypes.func.isRequired,
+  updateProfileMetaData: PropTypes.func.isRequired,
   createShopifyStoreCancel: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,

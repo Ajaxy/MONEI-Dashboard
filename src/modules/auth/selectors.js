@@ -8,3 +8,9 @@ export const getIsAuthenticated = createSelector(
   auth => auth.isAuthenticated
 );
 
+export const getIsAuthenticating = createSelector(
+  authSelector,
+  auth => auth.isAuthenticating
+);
+
+

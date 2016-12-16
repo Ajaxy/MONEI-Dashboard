@@ -1,12 +1,16 @@
-import {connect} from 'react-redux';
+import {reduxForm} from 'redux-form';
 import SettingsView from '../components/SettingsView';
-import {getIsReadyForProduction} from 'modules/profile/selectors';
-import * as actions from '../modules/actions';
+import * as selectors from 'modules/profile/selectors';
+import * as actions from 'modules/profile/actions';
 
 const mapStateToProps = (state) => {
+  const profile = selectors.getProfile(state);
   return {
-    isAllowedVerification: getIsReadyForProduction(state)
+    initialValues: profile.user_metadata || {}
   };
 };
 
-export default connect(mapStateToProps, actions)(SettingsView);
+export default reduxForm({
+  form: 'appSettings',
+  fields: ['isHintsDisabled']
+}, mapStateToProps, actions)(SettingsView);

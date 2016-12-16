@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {getDocumentName, getIsVerificationRequested} from 'modules/profile/selectors';
-import * as selectors from '../modules/selectors';
-import * as actions from '../modules/actions';
+import {getProfile, getIsVerificationRequested} from 'modules/profile/selectors';
+import * as selectors from 'routes/Profile/modules/selectors';
+import * as actions from 'routes/Profile/modules/actions';
 import DocumentView from '../components/DocumentView';
 
 class Document extends Component {
@@ -31,10 +31,9 @@ class Document extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   disabled: getIsVerificationRequested(state) || ownProps.disabled,
-  documentName: getDocumentName(state),
+  documentName: getProfile(state).documentName,
   documentUrl: selectors.getFileUrl(state),
   isUploading: selectors.getIsFileUploading(state)
 });
 
 export default connect(mapStateToProps, actions)(Document);
-

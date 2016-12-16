@@ -56,9 +56,9 @@ BankAccountItem.propTypes = {
   name: PropTypes.string.isRequired,
   isPrimary: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   onEdit: PropTypes.func.isRequired,
-  isDeletable: PropTypes.bool.isRequired
+  isDeletable: PropTypes.bool
 };
 
 export default BankAccountItem;

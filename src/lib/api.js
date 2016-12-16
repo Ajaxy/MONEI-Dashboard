@@ -1,8 +1,8 @@
 import axios from 'axios';
 import storage from 'store';
+import {getProfile, getIsInSandboxMode} from 'modules/profile/selectors'
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
-import {buildCreds, signRequest} from 'lib/aws';
 
 const apiClient = axios.create({
   baseURL: APP_CONFIG.apiBaseURL
@@ -14,15 +14,14 @@ const authApiClient = axios.create({
 
 export const addInterceptors = (store) => {
   apiClient.interceptors.request.use(config => {
+    // encode url in case of unsupported symbols
+    config.url = encodeURI(config.url);
+
     const token = storage.get('authToken');
-    const profile = storage.get('profile');
-    const credentials = storage.get('credentials');
-
-    // at this point, user is not yet finished authentication
-    if (!token || !profile || !credentials) {
-      return config;
-    }
-
+    const state = store.getState();
+    const profile = getProfile(state);
+    const isInSandboxMode = getIsInSandboxMode(state);
+    const idKey = isInSandboxMode ? 'smid' : 'mid';
     if (isTokenExpired(token)) {
       config.adapter = (resolve, reject) => reject({
         data: {
@@ -32,14 +31,9 @@ export const addInterceptors = (store) => {
       store.dispatch(signOut());
     }
     config.headers.authToken = token;
-
-    const meta = profile ? profile.app_metadata : {};
-    if (config.sandbox) {
-      config.headers.smid = meta.smid;
-      config.headers.smpwd = meta.smpwd;
-      config.headers.smlogin = meta.smlogin;
-    }
-    return signRequest(config, credentials);
+    config.headers.sandbox = isInSandboxMode;
+    config.headers[idKey] = profile[idKey];
+    return config;
   }, error => {
     return Promise.reject(error.data);
   });
@@ -65,7 +59,7 @@ export const addInterceptors = (store) => {
       });
       store.dispatch(signOut());
     }
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   }, error => {
     return Promise.reject(error.data);
@@ -79,10 +73,6 @@ export const addInterceptors = (store) => {
       return Promise.reject(errorMessage);
     }
   });
-
-  // update AWS creds
-  const credentials = storage.get('credentials');
-  if (credentials) buildCreds(credentials);
 };
 
 // Sandbox
@@ -92,27 +82,27 @@ export const createSandbox = (name) =>
 
 // Transactions
 
-export const fetchTransactions = ({from, to, page, limit}, sandbox) =>
-  apiClient.get('transactions/stored', {params: {from, to, page, limit}, sandbox});
+export const fetchTransactions = (params = {}) =>
+  apiClient.get('transactions/stored', params);
 
-export const fetchTransactionStats = (sandbox) =>
-  apiClient.get('transactions/stats', {sandbox});
+export const fetchTransactionStats = () =>
+  apiClient.get('transactions/stats');
 
 // Customers
 
-export const fetchCustomers = ({page, order, filter, limit}, sandbox) =>
-  apiClient.get('customers', {params: {page, order, filter, limit}, sandbox});
+export const fetchCustomers = (params = {}) =>
+  apiClient.get('customers', {params});
 
 // Users
 
-export const fetchUsers = ({limit = 50, page = 1, filter = null}) =>
-  apiClient.get('users', {params: {limit, page, filter}});
+export const fetchUsers = (params = {}) =>
+  apiClient.get('stored-users', {params});
 
 export const fetchUser = (userId) =>
-  apiClient.get(`users/${userId}`);
+  apiClient.get(`stored-users/${userId}`);
 
-export const updateUser = (userId, {app_metadata, user_metadata}) =>
-  apiClient.patch(`users/${userId}`, {app_metadata, user_metadata});
+export const updateUser = (userId, data = {}) =>
+  apiClient.patch(`stored-users/${userId}`, data);
 
 export const verifyUser = (userId) =>
   apiClient.patch(`users/${userId}/verify`, {});
@@ -123,8 +113,8 @@ export const impersonateUser = (userId, {redirect_uri}) =>
 export const updateUserMetaData = (userId, data) =>
   authApiClient.patch(`users/${userId}`, {user_metadata: data});
 
-export const syncUser = (userId, mid) =>
-  apiClient.post(`users/${userId}/sync`, {mid});
+export const syncUser = (userId, {mid, smid}) =>
+  apiClient.post(`users/${userId}/sync`, {mid, smid});
 
 export const fetchUserSubAccounts = (userId) =>
   apiClient.get(`users/${userId}/sub-accounts`);
@@ -140,10 +130,10 @@ export const fetchUserBankAccounts = (userId) =>
 
 // Sub Accounts
 
-export const fetchSubAccounts = (sandbox) =>
-  apiClient.get('sub-accounts', {sandbox});
+export const fetchSubAccounts = () =>
+  apiClient.get('sub-accounts');
 
-export const updateSubAccount = (subAccountId, data) =>
+export const updateSubAccount = (subAccountId, data = {}) =>
   apiClient.patch(`sub-accounts/${subAccountId}`, data);
 
 export const createZapierApiToken = (channelId) =>
@@ -169,7 +159,10 @@ export const fetchAccount = () =>
   apiClient.get('account');
 
 export const updateAccount = (data = {}) =>
-  apiClient.post('account', data);
+  apiClient.patch('account', data);
+
+export const requestAccountVerification = (data = {}) =>
+  apiClient.post('account/request-verification', data);
 
 export const fetchBankAccounts = () =>
   apiClient.get('account/bank-accounts');
@@ -189,4 +182,4 @@ export const phoneVerificationStart = ({phoneNumber}) =>
   apiClient.post('phone-verification/start', {phoneNumber});
 
 export const phoneVerificationCheck = ({phoneNumber, verificationCode}) =>
-  apiClient.post('phone-verification/check', {phoneNumber, verificationCode});
+  apiClient.post('account/phone-verification/check', {phoneNumber, verificationCode});

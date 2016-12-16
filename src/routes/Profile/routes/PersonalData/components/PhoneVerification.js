@@ -10,10 +10,8 @@ const PhoneVerification = ({
   isEditingPhone,
   phoneEditStart,
   className,
-  title = 'Phone settings'
 }) => (
   <div className={className}>
-    <h3>{title}</h3>
     {!isEditingPhone && <div>
       <PhoneView
         phoneNumber={phoneNumber}

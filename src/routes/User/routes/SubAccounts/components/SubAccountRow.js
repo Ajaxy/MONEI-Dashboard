@@ -14,7 +14,7 @@ const SubAccountRow = ({subAccount, onEdit, bankAccount = {}, copy, isConfirming
     onEdit();
   };
   return (
-    <tr>
+    <tr className={cx({warning: subAccount.sandbox})}>
       <td>
         <a href="#" onClick={handleEdit}>{subAccount.name}</a>
       </td>
@@ -36,7 +36,7 @@ const SubAccountRow = ({subAccount, onEdit, bankAccount = {}, copy, isConfirming
         }
       </td>
       <td>{USER_ACQUIRERS[subAccount.acquirer]}</td>
-      <td>{subAccount.state}</td>
+      <td>{subAccount.sandbox ? 'TEST' : subAccount.state}</td>
       <td>
         {isPending && <Button
           loading={isConfirming}

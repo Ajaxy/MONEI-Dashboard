@@ -1,40 +1,46 @@
 import React, {PropTypes} from 'react';
-import UpdateMetaData from '../containers/UpdateMetaDataContainer';
-import PhoneVerification from '../containers/PhoneVerificationContainer';
-import ConfirmVerification from '../containers/ConfirmVerificationContainer';
-import Button from 'components/Button';
+import CheckBox from 'components/CheckBox';
+import DotHint from 'components/DotHint';
 
 const SettingsView = ({
-  requestVerificationStart,
-  isVerificationRequested,
-  isAllowedVerification
-}) => (
-  <section className="ui vertical segment">
-    <div className="ui stackable grid">
-      <div className="nine wide column">
-        <PhoneVerification />
+  fields: {
+    isHintsDisabled
+  },
+  handleSubmit,
+  updateProfileMetaData
+}) => {
+  const disableHints = (e) => {
+    updateProfileMetaData({isHintsDisabled: e.target.value !== 'true'});
+    isHintsDisabled.onChange(e);
+  };
+  return (
+    <section className="ui vertical segment">
+      <div className="ui stackable grid">
+        <div className="nine wide column">
+          <form className="ui form" onSubmit={handleSubmit(updateProfileMetaData)}>
+            <div className="field">
+              <CheckBox
+                {...isHintsDisabled}
+                className="green"
+                onChange={disableHints}
+                toggle
+                label="Disable application hints"
+              />
+              <DotHint>
+                This is an example of the hint
+              </DotHint>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    <div className="ui stackable grid">
-      <div className="nine wide column">
-        <UpdateMetaData />
-      </div>
-    </div>
-    <br />
-    {isAllowedVerification && <Button
-      className="orange"
-      onClick={requestVerificationStart}>
-      <i className="icon checkmark box" />
-      Request verification
-    </Button>}
-    <ConfirmVerification />
-  </section>
-);
+    </section>
+  );
+};
 
 SettingsView.propTypes = {
-  requestVerificationStart: PropTypes.func.isRequired,
-  isVerificationRequested: PropTypes.bool,
-  isAllowedVerification: PropTypes.bool
+  handleSubmit: PropTypes.func.isRequired,
+  updateProfileMetaData: PropTypes.func.isRequired,
+  fields: PropTypes.object.isRequired
 };
 
 export default SettingsView;

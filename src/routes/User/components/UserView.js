@@ -10,9 +10,10 @@ const UserView = ({
   loginAsUser,
   isFetching,
   isUpdating,
+  isVerificationRequested,
   children
 }) => {
-  const baseUrl = `/users/${encodeURI(user.user_id)}`;
+  const baseUrl = `/users/${encodeURI(user.id)}`;
   return (
     <div>
       {isFetching
@@ -20,7 +21,7 @@ const UserView = ({
           <Loader active={isFetching} inline />
         </section>
         : <section className="ui vertical segment padded-bottom">
-          <UserHeader {...{user, verifyUser, loginAsUser, isUpdating}} />
+          <UserHeader {...{user, isVerificationRequested, verifyUser, loginAsUser, isUpdating}} />
           <div className="ui secondary pointing large menu no-padding">
             <IndexLink to={baseUrl} className="item" activeClassName="active">
             Overview
@@ -28,9 +29,9 @@ const UserView = ({
             <Link to={`${baseUrl}/settings`} className="item" activeClassName="active">
             Admin settings
           </Link>
-            {user.app_metadata.mid && <Link to={`${baseUrl}/sub-accounts`} className="item" activeClassName="active">
+          <Link to={`${baseUrl}/sub-accounts`} className="item" activeClassName="active">
             Sub accounts
-          </Link>}
+          </Link>
           </div>
           {children}
         </section>}
