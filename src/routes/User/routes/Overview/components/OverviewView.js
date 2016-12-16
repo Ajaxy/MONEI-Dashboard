@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import humanize from 'humanize-string';
 import {Table} from 'components/Table';
 
 export const OverviewView = ({user, documentUrl}) => {
@@ -7,20 +8,22 @@ export const OverviewView = ({user, documentUrl}) => {
     if (user[key]) {
       rows.push(
         <tr key={rows.length}>
-          <td className="three wide">{name}</td>
+          <td className="three wide">{name || humanize(key)}</td>
           <td>{url ? <a href={url} target="_blank">{user[key]}</a> : user[key]}</td>
         </tr>
       );
     }
   };
-  addRow('profileType', 'Profile Type');
-  addRow('phoneNumber', 'Phone');
-  addRow('country', 'Country');
+  addRow('role');
+  addRow('verificationStatus');
+  addRow('profileType');
+  addRow('phoneNumber');
+  addRow('country');
   addRow('idNumber', 'ID Number');
   addRow('documentName', 'Document', documentUrl);
   addRow('storeUrl', 'Store URL', user.storeUrl);
-  addRow('storeGoods', 'Store Goods');
-  addRow('shopifyStoreName', 'Shopify store name');
+  addRow('storeGoods');
+  addRow('shopifyStoreName');
   addRow('shopifyStoreEmail', 'Admin email for Shopify store');
   if (rows.length > 0) {
     return (

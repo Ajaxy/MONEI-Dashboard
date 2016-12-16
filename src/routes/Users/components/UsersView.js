@@ -6,7 +6,7 @@ import classNames from './UsersView.scss';
 
 const UsersView = ({
   users,
-  params,
+  queryParams,
   isFirstPage,
   isLastPage,
   handleSearchChange,
@@ -14,37 +14,40 @@ const UsersView = ({
   viewUser,
   isFetching,
   getPage
-}) => (
-  <section className="ui basic segment padded-bottom">
-    <Search
-      placeholder="User email..."
-      onSearch={handleSearchChange}
-      defaultValue={searchQueryString}
-      inputClass="fluid"
-      className={classNames.paddedBottom}
-    />
-    <PaginatedTable
-      {...{isFetching, isFirstPage, isLastPage}}
-      selectable={!isFetching && users.length > 0}
-      numColumns={NUM_COLUMNS}
-      onNextPage={() => getPage(params.nextPage)}
-      onPrevPage={() => getPage(params.prevPage)}
-      resourceName="users"
-      className="large striped fixed single line"
-      header={<UserRow isHeader />}>
-      {users.map((user, index) => (
-        <UserRow
-          key={index}
-          user={user}
-          viewUser={viewUser} />
-      ))}
-    </PaginatedTable>
-  </section>
-);
+}) => {
+  console.log(queryParams);
+  return (
+    <section className="ui basic segment padded-bottom">
+      <Search
+        placeholder="User email..."
+        onSearch={handleSearchChange}
+        defaultValue={searchQueryString}
+        inputClass="fluid"
+        className={classNames.paddedBottom}
+      />
+      <PaginatedTable
+        {...{isFetching, isFirstPage, isLastPage}}
+        selectable={!isFetching && users.length > 0}
+        numColumns={NUM_COLUMNS}
+        onNextPage={() => getPage(queryParams.nextPage)}
+        onPrevPage={() => getPage(queryParams.prevPage)}
+        resourceName="users"
+        className="large striped fixed single line"
+        header={<UserRow isHeader />}>
+        {users.map((user, index) => (
+          <UserRow
+            key={index}
+            user={user}
+            viewUser={viewUser} />
+        ))}
+      </PaginatedTable>
+    </section>
+  );
+};
 
 UsersView.propTypes = {
   users: PropTypes.array.isRequired,
-  params: PropTypes.object.isRequired,
+  queryParams: PropTypes.object.isRequired,
   getPage: PropTypes.func.isRequired,
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,

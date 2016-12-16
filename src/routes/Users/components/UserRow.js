@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import cx from 'classnames';
-import {USER_ROLES} from 'lib/enums';
+import {USER_ROLES, VERIFICATION_STATUSES} from 'lib/enums';
 import classNames from './UserRow.scss';
 import humanize from 'humanize-string';
 import userPic from 'static/user.png';
@@ -26,6 +26,10 @@ const UserRow = ({
   } else {
     const isAdmin = user.role === USER_ROLES.Admin;
     const isAcquirer = user.role === USER_ROLES.Acquirer;
+    const verificationStatusIcon = cx('big circle icon', {
+      'check green': user.verificationStatus === VERIFICATION_STATUSES.Verified,
+      'warning yellow': user.verificationStatus === VERIFICATION_STATUSES.Pending
+    });
     return (
       <tr
         className={cx(classNames.row, {warning: isAdmin, positive: isAcquirer})}
@@ -45,10 +49,7 @@ const UserRow = ({
         <td>{user.country}</td>
         <td>{humanize(user.status || '')}</td>
         <td className="right aligned">
-          {user.verified
-            ? <i className={cx('big check circle icon', classNames.success)} />
-            : user.verificationRequested
-            ? <i className={cx('big warning circle icon', classNames.warning)} /> : ''}
+          {user.verificationStatus && <i className={verificationStatusIcon}/>}
         </td>
       </tr>
     );

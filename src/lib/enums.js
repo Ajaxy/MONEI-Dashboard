@@ -12,6 +12,11 @@ export const USER_STATUSES = Object.freeze([
   'other'
 ]);
 
+export const VERIFICATION_STATUSES = Object.freeze({
+  Pending: 'pending',
+  Verified: 'verified'
+});
+
 export const USER_ACQUIRERS = Object.freeze({
   BS: 'Banco Sabadell',
   BBVA: 'BBVA',

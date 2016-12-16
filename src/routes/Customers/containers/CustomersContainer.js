@@ -9,9 +9,10 @@ class Customers extends Component {
   static propTypes = {
     fetchCustomers: PropTypes.func.isRequired,
     isInSandboxMode: PropTypes.bool.isRequired,
-    pages: PropTypes.shape({
+    queryParams: PropTypes.shape({
       nextPage: PropTypes.string,
-      prevPage: PropTypes.string
+      prevPage: PropTypes.string,
+      email: PropTypes.string
     })
   };
 
@@ -26,7 +27,7 @@ class Customers extends Component {
   }
 
   getPage = (page) => {
-    this.props.fetchUsers({page, email: this.props.params.email});
+    this.props.fetchUsers({page, email: this.props.queryParams.email});
   };
 
   handleSearchChange = (email) => {
@@ -36,7 +37,7 @@ class Customers extends Component {
   render() {
     return (
       <CustomersView
-        searchQueryString={this.props.params.email}
+        searchQueryString={this.props.queryParams.email}
         getPage={this.getPage}
         handleSearchChange={this.handleSearchChange}
         {...this.props}
@@ -51,7 +52,7 @@ const mapStateToProps = (state) => ({
   isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),
   isInSandboxMode: profileSelectors.getIsInSandboxMode(state),
-  params: selectors.getParams(state)
+  queryParams: selectors.getQueryParams(state)
 });
 
 export default connect(mapStateToProps, actions)(Customers);

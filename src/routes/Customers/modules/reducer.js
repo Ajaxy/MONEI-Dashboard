@@ -37,7 +37,7 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const params = (state = {}, action) => {
+const queryParams = (state = {}, action) => {
   switch (action.type) {
     case types.FETCH_CUSTOMERS_SUCCESS:
       return {
@@ -53,7 +53,7 @@ const params = (state = {}, action) => {
 export default combineReducers({
   ids,
   byId,
-  params,
+  queryParams,
   isFetching
 });
 

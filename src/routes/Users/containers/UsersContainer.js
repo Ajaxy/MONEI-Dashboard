@@ -8,7 +8,7 @@ import UsersView from '../components/UsersView';
 class Users extends Component {
   static propTypes = {
     fetchUsers: PropTypes.func.isRequired,
-    params: PropTypes.shape({
+    queryParams: PropTypes.shape({
       nextPage: PropTypes.string,
       prevPage: PropTypes.string,
       email: PropTypes.string
@@ -23,7 +23,7 @@ class Users extends Component {
   }
 
   getPage = (page) => {
-    this.props.fetchUsers({page, email: this.props.params.email});
+    this.props.fetchUsers({page, email: this.props.queryParams.email});
   };
 
   viewUser = (userId) => {
@@ -37,7 +37,7 @@ class Users extends Component {
   render() {
     return (
       <UsersView
-        searchQueryString={this.props.params.email}
+        searchQueryString={this.props.queryParams.email}
         getPage={this.getPage}
         handleSearchChange={this.handleSearchChange}
         viewUser={this.viewUser}
@@ -48,7 +48,7 @@ class Users extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  params: selectors.getParams(state),
+  queryParams: selectors.getQueryParams(state),
   isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),
   users: selectors.getUsers(state),

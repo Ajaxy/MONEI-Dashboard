@@ -5,7 +5,7 @@ import CustomerRow, {NUM_COLUMNS} from './CustomerRow';
 
 const CustomersView = ({
   customers,
-  params,
+  queryParams,
   isFirstPage,
   isLastPage,
   handleSearchChange,
@@ -30,8 +30,8 @@ const CustomersView = ({
       {...{isFetching, isFirstPage, isLastPage}}
       selectable={!isFetching && customers.length > 0}
       numColumns={NUM_COLUMNS}
-      onNextPage={() => getPage(params.nextPage)}
-      onPrevPage={() => getPage(params.prevPage)}
+      onNextPage={() => getPage(queryParams.nextPage)}
+      onPrevPage={() => getPage(queryParams.prevPage)}
       resourceName="customers"
       className="large striped fixed single line"
       header={<CustomerRow isHeader />}>
@@ -44,7 +44,7 @@ const CustomersView = ({
 
 CustomersView.propTypes = {
   customers: PropTypes.array.isRequired,
-  params: PropTypes.object.isRequired,
+  queryParams: PropTypes.object.isRequired,
   getPage: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   handleSearchChange: PropTypes.func.isRequired,
