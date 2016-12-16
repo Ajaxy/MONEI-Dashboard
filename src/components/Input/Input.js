@@ -27,8 +27,7 @@ const Input = ({
     'pristine',
     'active',
     'visited',
-    'autofilled',
-    'maskChar'
+    'autofilled'
   ) : rest;
   return (
     <div className={cx('field', fieldClass, {error: touched && invalid})}>
