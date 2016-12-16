@@ -11,8 +11,14 @@ const PersonalDataForm = ({
     name,
     profileType,
     country,
+    address,
+    city,
+    state,
+    zipCode,
     companyName,
     idNumber,
+    ssn,
+    dob,
     storeUrl,
     storeGoods
   },
@@ -26,18 +32,27 @@ const PersonalDataForm = ({
   disabled
 }) => {
   const isCompany = values.profileType === 'company';
+  const isFromUs = values.country === 'United States';
+  const idNumberLabel = isFromUs
+    ? 'Social Security Number'
+    : isCompany ? 'VAT number or registration number of the company' : 'Identity document number';
   const submit = (formData) => {
     updateProfile(formData);
   };
   return (
     <div className={className}>
       <form className="ui form" onSubmit={handleSubmit(submit)}>
-        <Input {...name} disabled={disabled} label="Name and surname" />
+        <Input {...name} disabled={disabled} label="Name and Surname" />
+        <Input
+          {...dob}
+          disabled={disabled}
+          label="Date Of Birth"
+          mask="99/99/9999"
+          hint="mm/dd/yyyy "/>
         <Select
           {...country}
           label="Country"
-          disabled={disabled}
-          search>
+          disabled={disabled}>
           {countries.map(country => (
             <SelectItem
               key={country.code}
@@ -47,6 +62,10 @@ const PersonalDataForm = ({
             </SelectItem>
           ))}
         </Select>
+        <Input label="City" {...city} />
+        <Input label="State / Province / Region" {...state} />
+        <Input label="Address" {...address} />
+        <Input label="Zip / Postal code" {...zipCode} />
         <Select
           {...profileType}
           disabled={disabled}
@@ -66,7 +85,8 @@ const PersonalDataForm = ({
         <Input
           {...idNumber}
           disabled={disabled}
-          label={isCompany ? 'VAT number or registration number of the company' : 'Identity document number'} />
+          label={idNumberLabel}
+          mask={isFromUs ? '999-99-9999' : ''}/>
         <div className="field">
           <label>
             {isCompany ? 'Document of company incorporation' : 'Your identity document' }

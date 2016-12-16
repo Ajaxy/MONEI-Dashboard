@@ -7,7 +7,8 @@ import Validator from 'lib/validator';
 
 const rules = {
   storeUrl: 'url',
-  idNumber: 'min:5'
+  idNumber: 'min:5',
+  zipCode: 'zip'
 };
 
 const validate = values => {
@@ -39,10 +40,15 @@ export default reduxForm({
   form: 'personalData',
   fields: [
     'name',
+    'dob',
     'profileType',
     'country',
     'companyName',
     'idNumber',
+    'address',
+    'city',
+    'state',
+    'zipCode',
     'storeUrl',
     'storeGoods'
   ],
