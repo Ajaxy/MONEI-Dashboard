@@ -116,12 +116,19 @@ export const validateUserProfile = () => {
     const profile = selectors.getProfile(state);
     const isCompany = selectors.getIsCompany(state);
     const rules = {
-      name: 'required',
-      storeUrl: 'required',
-      storeGoods: 'required',
-      documentName: 'required',
       phoneNumber: 'required',
-      idNumber: 'required'
+      name: 'required',
+      dob: 'required',
+      country: 'required',
+      state: 'required',
+      city: 'required',
+      address: 'required',
+      zipCode: 'required',
+      profileType: 'required',
+      idNumber: 'required',
+      documentName: 'required',
+      storeUrl: 'required',
+      storeGoods: 'required'
     };
     if (isCompany) {
       rules.companyName = 'required';
