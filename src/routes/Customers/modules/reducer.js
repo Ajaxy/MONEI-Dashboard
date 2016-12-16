@@ -8,7 +8,7 @@ const ids = (state = [], action) => {
     case types.CLEAR_CUSTOMERS:
       return [];
     case types.FETCH_CUSTOMERS_SUCCESS:
-      return mergeArrays(state, action.ids);
+      return action.ids || [];
     default:
       return state;
   }
@@ -19,7 +19,7 @@ const byId = (state = {}, action) => {
     case types.CLEAR_CUSTOMERS:
       return {};
     case types.FETCH_CUSTOMERS_SUCCESS:
-      return {...state, ...action.byId};
+      return action.byId || {};
     default:
       return state;
   }

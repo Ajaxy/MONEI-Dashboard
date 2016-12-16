@@ -26,13 +26,16 @@ const UserRow = ({
   } else {
     const isAdmin = user.role === USER_ROLES.Admin;
     const isAcquirer = user.role === USER_ROLES.Acquirer;
-    const verificationStatusIcon = cx('big circle icon', {
-      'check green': user.verificationStatus === VERIFICATION_STATUSES.Verified,
-      'warning yellow': user.verificationStatus === VERIFICATION_STATUSES.Pending
+    const isUser = user.role === USER_ROLES.User;
+    const verificationStatusIcon = cx('big icon', {
+      'circle check green': isUser && user.verificationStatus === VERIFICATION_STATUSES.Verified,
+      'circle warning yellow': isUser && user.verificationStatus === VERIFICATION_STATUSES.Pending,
+      'spy blue': isAdmin,
+      'eye grey': isAcquirer
     });
     return (
       <tr
-        className={cx(classNames.row, {warning: isAdmin, positive: isAcquirer})}
+        className={classNames.row}
         onClick={() => viewUser(user.id)}>
         <td>
           <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
@@ -49,7 +52,7 @@ const UserRow = ({
         <td>{user.country}</td>
         <td>{humanize(user.status || '')}</td>
         <td className="right aligned">
-          {user.verificationStatus && <i className={verificationStatusIcon}/>}
+          <i className={verificationStatusIcon}/>
         </td>
       </tr>
     );
