@@ -6,7 +6,11 @@ const userSelector = state => state[stateKey];
 
 export const getUser = createSelector(
   getActiveUser,
-  user => ({profileType: 'individual', ...user})
+  user => ({
+    profileType: 'individual',
+    verificationStatus: 'unverified',
+    ...user
+  })
 );
 
 export const getIsVerificationRequested = createSelector(

@@ -27,11 +27,11 @@ class Customers extends Component {
   }
 
   getPage = (page) => {
-    this.props.fetchUsers({page, email: this.props.queryParams.email});
+    this.props.fetchCustomers({page, email: this.props.queryParams.email});
   };
 
   handleSearchChange = (email) => {
-    this.props.fetchUsers({email});
+    this.props.fetchCustomers({email});
   };
 
   render() {
