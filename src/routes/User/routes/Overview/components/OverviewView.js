@@ -16,17 +16,31 @@ export const OverviewView = ({user, documentUrl}) => {
       );
     }
   };
+  const idNumberLabel = user.country === 'United States'
+    ? 'SSN'
+    : user.profileType === 'company'
+    ? 'Vat number'
+    : 'ID number';
+
   addRow('role', {format: true});
-  addRow('verificationStatus', {format: true});
-  addRow('profileType', {format: true});
+  addRow('name');
+  addRow('email', {url: `mailto:${user.email}`});
+  addRow('dob', {name: 'Date of Birth'});
   addRow('phoneNumber');
   addRow('country');
-  addRow('idNumber', {name: 'ID Number'});
+  addRow('city');
+  addRow('state');
+  addRow('address');
+  addRow('zipCode');
+  addRow('profileType', {format: true});
+  addRow('companyName');
+  addRow('idNumber', {name: idNumberLabel});
   addRow('documentName', {name: 'Document', url: documentUrl});
   addRow('storeUrl', {url: user.storeUrl});
   addRow('storeGoods');
   addRow('shopifyStoreName');
   addRow('shopifyStoreEmail', {name: 'Admin email for Shopify store'});
+  addRow('verificationStatus', {format: true});
   if (rows.length > 0) {
     return (
       <Table className="large definition">
