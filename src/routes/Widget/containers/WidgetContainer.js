@@ -6,7 +6,6 @@ class Widget extends Component {
   static propTypes = {};
 
   componentDidMount() {
-    this.props.fetchBankAccounts();
   }
 
   render() {

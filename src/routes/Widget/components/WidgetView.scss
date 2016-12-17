@@ -4,11 +4,24 @@
   h1 {
     text-align: center;
   }
-}
 
-.verifyButton {
-  display: block;
-  width: 100%;
-  max-width: 500px;
-}
+  .amount {
+    input, span {
+      vertical-align: middle;
+    }
 
+    span {
+      margin-left: 15px;
+      font-weight: bold;
+    }
+  }
+
+  code, pre {
+    font-size: small;
+    font-weight: 100;
+    color: #555555;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+  }
+}
