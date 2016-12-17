@@ -1,4 +1,4 @@
-import Widget from './components/WidgetView';
+import Widget from './containers/WidgetView';
 import RequireAuth from 'containers/RequireAuth';
 
 // Sync route definition
