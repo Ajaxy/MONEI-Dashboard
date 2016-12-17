@@ -7,7 +7,7 @@ const Message = ({text, onClose, onRetry, className, style}) => {
     onRetry();
   };
   return (
-    <div className={cx('ui small message', style, className)}>
+    <div className={cx('ui message', style, className)}>
       {style === 'error' && <b>Oops! </b>}
       {text && text.toString() || 'Something went wrong'} {onRetry && <a href="" onClick={handleRetry}>Retry</a>}
       <i className="close icon" onClick={() => onClose()} />

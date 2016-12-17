@@ -1,12 +1,16 @@
 import React, {PropTypes} from 'react';
 import cx from 'classnames';
+import {USER_ROLES, VERIFICATION_STATUSES} from 'lib/enums';
 import classNames from './UserRow.scss';
 import humanize from 'humanize-string';
 import userPic from 'static/user.png';
 
+export const NUM_COLUMNS = 6;
+
 const UserRow = ({
-  user, userMetadata, appMetadata, viewUser = () => {
-  }, isHeader = false
+  user,
+  viewUser,
+  isHeader
 }) => {
   if (isHeader) {
     return (
@@ -14,35 +18,41 @@ const UserRow = ({
         <th className="one wide" />
         <th>Name</th>
         <th>Store URL</th>
-        <th>Acquirer</th>
-        <th>Country</th>
-        <th>Status</th>
-        <th className="right aligned">Verified</th>
+        <th className="two wide">Country</th>
+        <th className="two wide">Status</th>
+        <th className="two wide right aligned">Verified</th>
       </tr>
     );
   } else {
+    const isAdmin = user.role === USER_ROLES.Admin;
+    const isAcquirer = user.role === USER_ROLES.Acquirer;
+    const isUser = user.role === USER_ROLES.User;
+    const verificationStatusIcon = cx('big icon', {
+      'circle check green': isUser && user.verificationStatus === VERIFICATION_STATUSES.Verified,
+      'circle warning yellow': isUser && user.verificationStatus === VERIFICATION_STATUSES.Pending,
+      'spy blue': isAdmin,
+      'eye grey': isAcquirer
+    });
     return (
-      <tr className={classNames.row} onClick={() => viewUser(user.user_id)}>
+      <tr
+        className={classNames.row}
+        onClick={() => viewUser(user.id)}>
         <td>
           <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
         </td>
-        <td className="text overflow">{userMetadata.name || user.email}</td>
+        <td className="text overflow">{user.name || user.email}</td>
         <td className="text overflow">
-          {userMetadata.store_url
-            ? <a href={userMetadata.store_url} target="_blank" onClick={e => e.stopPropagation()}>
-              {userMetadata.store_url}
-            </a>
-            : <p>{userMetadata.store_url}</p>
-          }
+          {user.storeUrl && <a
+            href={user.storeUrl}
+            target="_blank"
+            onClick={e => e.stopPropagation()}>
+            {user.storeUrl}
+          </a>}
         </td>
-        <td>{userMetadata.acquirer}</td>
-        <td>{userMetadata.country}</td>
-        <td>{humanize(appMetadata.status || '')}</td>
+        <td>{user.country}</td>
+        <td>{humanize(user.status || '')}</td>
         <td className="right aligned">
-          {appMetadata.verified
-            ? <i className={cx('big check circle icon', classNames.success)} />
-            : userMetadata.verification_requested
-            ? <i className={cx('big warning circle icon', classNames.warning)} /> : ''}
+          <i className={verificationStatusIcon}/>
         </td>
       </tr>
     );
@@ -51,12 +61,7 @@ const UserRow = ({
 
 UserRow.propTypes = {
   user: PropTypes.object,
-  userMetadata: PropTypes.object,
-  appMetadata: PropTypes.object,
   viewUser: PropTypes.func,
   isHeader: PropTypes.bool
 };
-
-export const NUM_COLUMNS = 7;
-
 export default UserRow;

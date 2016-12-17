@@ -14,6 +14,8 @@ class DotHint extends Component {
     const {position = 'right center'} = this.props;
     this.element.popup({
       popup: this.popup,
+      preserve: true,
+      inline: true,
       on: 'click',
       position
     });

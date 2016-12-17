@@ -34,10 +34,9 @@ const TransactionsView = ({
   const selectedPeriod = toDateTimestamp - fromDateTimestamp;
   return (
     <section className="ui basic segment padded-bottom">
-      <h1 className="ui header">Transactions</h1>
       <div className={classNames.filters}>
         <a
-          className="ui icon button"
+          className={cx('ui icon button', classNames.arrowButton)}
           onClick={() => filterByDate(fromDateTimestamp - selectedPeriod, toDateTimestamp - selectedPeriod - 1)}>
           <i className="left chevron icon" />
         </a>
@@ -65,7 +64,9 @@ const TransactionsView = ({
           onChange={(date) => filterByDate(fromDate, date)}
         />
         <a
-          className={cx('ui icon button', {disabled: fromDateTimestamp + selectedPeriod + 1 > today})}
+          className={cx('ui icon button', classNames.arrowButton, {
+            disabled: fromDateTimestamp + selectedPeriod + 1 > today
+          })}
           onClick={() => filterByDate(fromDateTimestamp + selectedPeriod + 1, toDateTimestamp + selectedPeriod)}>
           <i className="right chevron icon" />
         </a>
@@ -91,19 +92,16 @@ const TransactionsView = ({
         numColumns={NUM_COLUMNS}
         onNextPage={goToNextPage}
         onPrevPage={goToPrevPage}
-        className="large single line"
+        className="large striped fixed single line selectable"
+        resourceName="transactions"
         header={<TransactionRow isHeader />}
         footer={<TransactionRow totalAmount={totalAmount} isFooter />}>
-        {(transactions.length > 0 || isFetching) ? transactions.map((tx, index) =>
+        {transactions.map((tx, index) =>
           <TransactionRow
             key={index}
             transaction={tx}
-            subAccount={subAccountById[tx.channelId]}
             onClick={viewDetails}
-          />)
-          : <tr>
-            <td colSpan={NUM_COLUMNS} className="center aligned">No transactions</td>
-          </tr>}
+          />)}
       </PaginatedTable>
       <TransactionDetails
         transaction={transactionViewed}

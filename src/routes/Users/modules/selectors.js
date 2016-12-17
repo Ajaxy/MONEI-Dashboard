@@ -2,11 +2,11 @@ import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 
 const usersSelector = state => state[stateKey];
-const activeUserIdSelector = state => state.router.params.userId;
+const activeUserIdSelector = state => state.route.params.userId;
 
 export const getUsers = createSelector(
   usersSelector,
-  users => users.ids.map(id => users.byId[id]).slice(0, users.page.lastItem)
+  users => users.ids.map(id => users.byId[id])
 );
 
 export const getUserIds = createSelector(
@@ -25,12 +25,17 @@ export const getIsFetching = createSelector(
   users => users.isFetching
 );
 
-export const getPage = createSelector(
+export const getQueryParams = createSelector(
   usersSelector,
-  users => users.page || {}
+  users => users.queryParams
+);
+
+export const getIsFirstPage = createSelector(
+  getQueryParams,
+  params => !params.prevPage
 );
 
 export const getIsLastPage = createSelector(
-  getPage,
-  page => page.currentPage >= page.lastPage
+  getQueryParams,
+  params => !params.nextPage
 );

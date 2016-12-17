@@ -1,13 +1,9 @@
 .container {
-  margin-bottom: 6em;
-  margin-top: 2em;
-  text-align: center;
-}
-
-.form {
-  text-align: left;
   max-width: 500px;
-  margin: auto;
+  margin: 2em auto 5em;
+  h1 {
+    text-align: center;
+  }
 }
 
 .verifyButton {

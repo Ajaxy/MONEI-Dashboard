@@ -1,7 +1,7 @@
 export const USER_ROLES = Object.freeze({
-  User: 0,
-  Admin: 1,
-  Acquirer: 2
+  User: 'user',
+  Admin: 'admin',
+  Acquirer: 'acquirer'
 });
 
 export const USER_STATUSES = Object.freeze([
@@ -12,12 +12,16 @@ export const USER_STATUSES = Object.freeze([
   'other'
 ]);
 
+export const VERIFICATION_STATUSES = Object.freeze({
+  Pending: 'pending',
+  Verified: 'verified'
+});
+
 export const USER_ACQUIRERS = Object.freeze({
   BS: 'Banco Sabadell',
   BBVA: 'BBVA',
   EVO: 'EVO Payments',
-  PP: 'Popular Payments',
-  TA: 'Technoactivity'
+  UP: 'Universalpay'
 });
 
 export const PAYMENT_TYPES = Object.freeze({

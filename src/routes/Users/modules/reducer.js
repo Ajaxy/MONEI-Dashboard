@@ -9,7 +9,7 @@ const ids = (state = [], action) => {
     case types.CLEAR_USERS:
       return [];
     case types.FETCH_USERS_SUCCESS:
-      return mergeArrays(state, action.ids);
+      return action.ids || [];
     case userTypes.FETCH_USER_SUCCESS:
       return mergeArrays(state, [action.userId]);
     default:
@@ -22,7 +22,7 @@ const byId = (state = {}, action) => {
     case types.CLEAR_USERS:
       return {};
     case types.FETCH_USERS_SUCCESS:
-      return Object.assign({}, state, action.byId);
+      return action.byId || {};
     case userTypes.FETCH_USER_SUCCESS:
     case userTypes.UPDATE_USER_SUCCESS:
       return {
@@ -50,11 +50,14 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const page = (state = {}, action) => {
+const queryParams = (state = {}, action) => {
   switch (action.type) {
-    case types.CLEAR_USERS:
     case types.FETCH_USERS_SUCCESS:
-      return action.page;
+      return {
+        prevPage: action.prevPage,
+        nextPage: action.nextPage,
+        email: action.email
+      };
     default:
       return state;
   }
@@ -63,7 +66,7 @@ const page = (state = {}, action) => {
 export default combineReducers({
   ids,
   byId,
-  page,
+  queryParams,
   isFetching
 });
 

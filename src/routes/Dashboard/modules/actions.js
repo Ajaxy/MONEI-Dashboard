@@ -1,16 +1,14 @@
 import * as api from 'lib/api';
 import * as types from './types';
 import {addMessage} from 'modules/messages/actions';
-import {getIsInSandboxMode} from 'modules/profile/selectors';
 
 export const fetchTransactionStats = () => {
-  return async(dispatch, getState) => {
+  return async dispatch => {
     dispatch({
       type: types.FETCH_DASHBOARD_REQUEST
     });
     try {
-      const sandbox = getIsInSandboxMode(getState());
-      const result = await api.fetchTransactionStats(sandbox);
+      const result = await api.fetchTransactionStats();
       const {amountPerDay, countPerDay, totalAmount, totalCount, labels, from, to} = result;
       dispatch({
         type: types.FETCH_DASHBOARD_SUCCESS,

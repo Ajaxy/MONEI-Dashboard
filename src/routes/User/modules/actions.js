@@ -82,11 +82,11 @@ export const loginAsUser = (userId) => {
   };
 };
 
-export const updateUser = (userId, {app_metadata, user_metadata}) => {
+export const updateUser = (userId, data) => {
   return async dispatch => {
     dispatch({type: types.UPDATE_USER_REQUEST});
     try {
-      const result = await api.updateUser(userId, {app_metadata, user_metadata});
+      const result = await api.updateUser(userId, data);
       const normalized = normalize(result, schema.user);
       dispatch({
         type: types.UPDATE_USER_SUCCESS,
@@ -104,7 +104,7 @@ export const updateUser = (userId, {app_metadata, user_metadata}) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(updateUser(userId, {app_metadata, user_metadata}));
+          dispatch(updateUser(userId, data));
         }
       }));
     }
@@ -115,7 +115,7 @@ export const fetchFileUrl = (name) => {
   return async(dispatch, getState) => {
     const user = getUser(getState());
     try {
-      const data = await fileGetUrl(user.user_id, name, true);
+      const data = await fileGetUrl(user.id, name, true);
       dispatch({type: types.USER_FILE_URL_UPDATE, data});
       return data;
     } catch (error) {

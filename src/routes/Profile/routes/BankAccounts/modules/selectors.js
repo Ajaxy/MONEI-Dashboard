@@ -8,6 +8,11 @@ export const getBankAccounts = createSelector(
   bankAccounts => bankAccounts.ids.map(id => bankAccounts.byId[id])
 );
 
+export const getBankAccountById = createSelector(
+  bankAccountsSelector,
+  bankAccounts => bankAccounts.byId || {}
+);
+
 export const getIsFetching = createSelector(
   bankAccountsSelector,
   bankAccounts => bankAccounts.isFetching

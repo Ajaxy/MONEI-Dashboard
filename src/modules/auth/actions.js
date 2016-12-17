@@ -1,10 +1,12 @@
 import Auth0Lock from 'auth0-lock';
 import {getTokenExpirationDate} from 'lib/jwt';
+import {buildCreds} from 'lib/aws';
 import * as types from './types';
 import {replace} from 'react-router-redux';
 import storage from 'store';
-import {addMessage} from 'modules/messages/actions';
-import {updateProfileLocally, initSandbox} from 'modules/profile/actions';
+import {fetchProfile, updateProfileLocally, initSandbox} from 'modules/profile/actions';
+import {getProfile} from 'modules/profile/selectors';
+import {USER_ROLES} from 'lib/enums';
 import logo from 'static/logo.svg';
 
 const lock = new Auth0Lock(
@@ -29,10 +31,11 @@ export const signOut = () => dispatch => {
   window.Intercom('shutdown');
 };
 
-export const fetchAWSCredentials = (token) => (
-  new Promise((resolve, reject) => {
+export const fetchAWSCredentials = (token) => {
+  return new Promise((resolve, reject) => {
     const credentials = storage.get('credentials');
     if (credentials && new Date(credentials.Expiration) - new Date() > 300000) {
+      buildCreds(credentials);
       return resolve(credentials);
     }
     const params = {
@@ -43,13 +46,21 @@ export const fetchAWSCredentials = (token) => (
     lock.$auth0.getDelegationToken(params, (error, data) => {
       if (error) return reject(error);
       storage.set('credentials', data.Credentials);
+      buildCreds(data.Credentials);
       return resolve(data.Credentials);
     });
-  })
-);
+  });
+};
 
 const bootIntercom = (profile) => {
-  if (profile.impersonated || __DEV__) return;
+  if (
+    profile.impersonated
+    || profile.role !== USER_ROLES.User
+    || __DEV__
+    || __STAGE__ === 'development'
+  ) {
+    return;
+  }
   window.Intercom('boot', {
     app_id: APP_CONFIG.intercomID,
     ...profile,
@@ -72,23 +83,25 @@ export const showLock = () => {
   const lockOptions = {
     closable: false,
     container: 'lock-container',
+    socialBigButtons: true,
     authParams: {scope},
     icon: logo
   };
   return dispatch => {
     lock.hide(() => lock.show(lockOptions, async(error, profile, token) => {
       if (error) return;
+      dispatch({
+        type: types.AUTH_REQUEST
+      });
       storage.set('profile', profile);
       storage.set('authToken', token);
-      dispatch({
-        type: types.AUTH_SUCCESS
-      });
       dispatch(updateProfileLocally(profile));
       await dispatch(finalizeAuth(profile, token));
       await dispatch(initSandbox());
-      setTimeout(() => {
-        dispatch(replace('/'));
+      dispatch({
+        type: types.AUTH_SUCCESS
       });
+      dispatch(replace('/'));
     }));
   };
 };
@@ -96,6 +109,9 @@ export const showLock = () => {
 export const signInWithToken = (token) => {
   return async dispatch => {
     dispatch(signOut());
+    dispatch({
+      type: types.AUTH_REQUEST
+    });
     const newToken = await dispatch(resetToken(token));
     const profile = await dispatch(getTokenInfo(newToken));
     await dispatch(finalizeAuth(profile, newToken));
@@ -118,6 +134,7 @@ export const resetToken = (token) => {
       };
       lock.$auth0.getDelegationToken(params, (error, data) => {
         if (error) return reject(error);
+        storage.set('authToken', data.id_token);
         return resolve(data.id_token);
       });
     });
@@ -140,15 +157,11 @@ export const getTokenInfo = (idToken) => {
 
 export const finalizeAuth = (profile, idToken) => {
   const token = idToken || storage.get('authToken');
-  return dispatch => {
-    // dispatch(fetchProfile());
-    dispatch(autoSignOut(token));
+  return async(dispatch, getState) => {
     bootIntercom(profile);
-    return fetchAWSCredentials(token).then(
-      // credentials => dispatch(notifications.connect(profile, credentials)),
-      credentials => storage.set('credentials', credentials),
-      error => dispatch(addMessage({text: error}))
-    );
+    dispatch(autoSignOut(token));
+    await fetchAWSCredentials(token);
+    await dispatch(fetchProfile());
   };
 };
 

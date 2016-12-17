@@ -67,7 +67,7 @@ const SaveBankAccount = ({
       onConfirm={handleSubmit(onSubmit)}
       headerText={(isNew ? 'Add new' : 'Edit') + ' bank account'}
       confirmText="Save"
-      confirmClass="positive">
+      confirmClass="green">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Input {...name} />
         <Select

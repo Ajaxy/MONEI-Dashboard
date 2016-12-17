@@ -7,13 +7,13 @@ const CreateStore = ({
   isUpdating,
   fields: {shopifyStoreName, shopifyStoreEmail},
   handleSubmit,
-  updateUserMetaData,
+  updateProfileMetaData,
   createShopifyStoreCancel,
   invalid,
   resetForm
 }) => {
   const onSubmit = async(formData) => {
-    await updateUserMetaData(formData);
+    await updateProfileMetaData(formData, true);
     resetForm();
   };
   return (
@@ -25,7 +25,7 @@ const CreateStore = ({
       onConfirm={handleSubmit(onSubmit)}
       headerText="Request your free Shopify store"
       confirmText="Submit"
-      confirmClass="positive">
+      confirmClass="green">
       <form className="ui form" onSubmit={handleSubmit(onSubmit)}>
         <Input {...shopifyStoreName} label="What name should have your Shopify store?" />
         <Input {...shopifyStoreEmail} label="What email should be the store owner?" />
@@ -36,7 +36,7 @@ const CreateStore = ({
 
 CreateStore.propTypes = {
   fields: PropTypes.object.isRequired,
-  updateUserMetaData: PropTypes.func.isRequired,
+  updateProfileMetaData: PropTypes.func.isRequired,
   createShopifyStoreCancel: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,

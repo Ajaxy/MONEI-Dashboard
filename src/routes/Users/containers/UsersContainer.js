@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import UsersView from '../components/UsersView';
@@ -7,39 +8,38 @@ import UsersView from '../components/UsersView';
 class Users extends Component {
   static propTypes = {
     fetchUsers: PropTypes.func.isRequired,
-    page: PropTypes.shape({
-      currentPage: PropTypes.number,
-      filter: PropTypes.string
-    })
-  };
-
-  static contextTypes = {
-    router: PropTypes.object
+    queryParams: PropTypes.shape({
+      nextPage: PropTypes.string,
+      prevPage: PropTypes.string,
+      email: PropTypes.string
+    }),
+    router: PropTypes.shape({
+      push: PropTypes.func.isRequired
+    }).isRequired
   };
 
   componentDidMount() {
-    const {page} = this.props;
-    this.props.fetchUsers(1, page.filter);
+    this.props.fetchUsers();
   }
 
-  filterUsers = (filter) => {
-    this.props.fetchUsers(1, filter);
-  };
-
-  loadMore = () => {
-    const {page} = this.props;
-    this.props.fetchUsers(page.currentPage + 1, page.filter);
+  getPage = (page) => {
+    this.props.fetchUsers({page, email: this.props.queryParams.email});
   };
 
   viewUser = (userId) => {
-    this.context.router.push(`/users/${encodeURI(userId)}`);
+    this.props.router.push(`/users/${encodeURI(userId)}`);
+  };
+
+  handleSearchChange = (email) => {
+    this.props.fetchUsers({email});
   };
 
   render() {
     return (
       <UsersView
-        filterUsers={this.filterUsers}
-        loadMore={this.loadMore}
+        searchQueryString={this.props.queryParams.email}
+        getPage={this.getPage}
+        handleSearchChange={this.handleSearchChange}
         viewUser={this.viewUser}
         {...this.props}
       />
@@ -48,10 +48,11 @@ class Users extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  page: selectors.getPage(state),
+  queryParams: selectors.getQueryParams(state),
+  isFirstPage: selectors.getIsFirstPage(state),
+  isLastPage: selectors.getIsLastPage(state),
   users: selectors.getUsers(state),
-  isFetching: selectors.getIsFetching(state),
-  isLastPage: selectors.getIsLastPage(state)
+  isFetching: selectors.getIsFetching(state)
 });
 
-export default connect(mapStateToProps, actions)(Users);
+export default connect(mapStateToProps, actions)(withRouter(Users));

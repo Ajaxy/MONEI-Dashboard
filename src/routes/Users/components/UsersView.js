@@ -1,54 +1,55 @@
 import React, {PropTypes} from 'react';
 import UserRow, {NUM_COLUMNS} from './UserRow';
 import Search from 'components/Search';
-import {InfiniteTable} from 'components/Table';
+import {PaginatedTable} from 'components/Table';
 import classNames from './UsersView.scss';
 
-const UsersView = ({users, page, filterUsers, loadMore, viewUser, isFetching, isLastPage}) => (
+const UsersView = ({
+  users,
+  queryParams,
+  isFirstPage,
+  isLastPage,
+  handleSearchChange,
+  searchQueryString,
+  viewUser,
+  isFetching,
+  getPage
+}) => (
   <section className="ui basic segment padded-bottom">
     <Search
-      placeholder="Search name..."
-      onSearch={filterUsers}
-      defaultValue={page.filter}
+      placeholder="User email..."
+      onSearch={handleSearchChange}
+      defaultValue={searchQueryString}
       inputClass="fluid"
       className={classNames.paddedBottom}
     />
-    <InfiniteTable
-      {...{isFetching, isLastPage}}
+    <PaginatedTable
+      {...{isFetching, isFirstPage, isLastPage}}
       selectable={!isFetching && users.length > 0}
       numColumns={NUM_COLUMNS}
-      onLoadMore={loadMore}
-      total={page.total}
-      count={page.lastItem}
-      autoLoad
-      className="large striped single line"
-      header={<UserRow isHeader />}
-    >
-      {
-        (users.length > 0 || isFetching) ? users.map((user, index) =>
-          <UserRow
-            key={index}
-            user={user}
-            userMetadata={user.user_metadata || {}}
-            appMetadata={user.app_metadata || {}}
-            viewUser={viewUser}
-          />)
-          : <tr>
-            <td colSpan={NUM_COLUMNS} className="center aligned">No users yet</td>
-          </tr>
-      }
-    </InfiniteTable>
+      onNextPage={() => getPage(queryParams.nextPage)}
+      onPrevPage={() => getPage(queryParams.prevPage)}
+      resourceName="users"
+      className="large striped fixed single line"
+      header={<UserRow isHeader />}>
+      {users.map((user, index) => (
+        <UserRow
+          key={index}
+          user={user}
+          viewUser={viewUser} />
+      ))}
+    </PaginatedTable>
   </section>
 );
 
 UsersView.propTypes = {
   users: PropTypes.array.isRequired,
-  page: PropTypes.object.isRequired,
-  loadMore: PropTypes.func.isRequired,
+  queryParams: PropTypes.object.isRequired,
+  getPage: PropTypes.func.isRequired,
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  filterUsers: PropTypes.func.isRequired,
-  isLastPage: PropTypes.bool
+  handleSearchChange: PropTypes.func.isRequired,
+  searchQueryString: PropTypes.string
 };
 
 export default UsersView;

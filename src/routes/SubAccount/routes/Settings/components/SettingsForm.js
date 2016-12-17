@@ -8,19 +8,22 @@ const SettingsForm = ({
     customName,
     bankAccountId
   },
+  isDisabled,
   handleSubmit,
   invalid,
   onFormSubmit,
   isFetching,
   bankAccounts,
-  isLoading
+  isLoading,
+  isInSandboxMode
 }) => {
   return (
     <div className="ui stackable grid">
       <form className="ui form nine wide column" onSubmit={handleSubmit(onFormSubmit)}>
         <Input type="text" {...customName} />
-        <Select
+        {!isInSandboxMode && <Select
           label="Bank account"
+          disabled={isDisabled}
           hint="where you want your money to be settled"
           loading={isFetching}
           {...bankAccountId}>
@@ -35,7 +38,10 @@ const SettingsForm = ({
               </span>
             </SelectItem>
           ))}
-        </Select>
+        </Select>}
+        {isDisabled && <div className="ui info message">
+          We will change your bank account within 24 hours.
+        </div>}
         <Button
           primary
           loading={isLoading}
@@ -56,7 +62,9 @@ SettingsForm.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   fields: PropTypes.object.isRequired,
   bankAccounts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool,
+  isInSandboxMode: PropTypes.bool
 };
 
 export default SettingsForm;
