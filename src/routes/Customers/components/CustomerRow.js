@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import classNames from './CustomerRow.scss';
 
 export const NUM_COLUMNS = 2;
 
@@ -13,7 +12,7 @@ const CustomerRow = ({customer, isHeader = false}) => {
     );
   } else {
     return (
-      <tr className={classNames.row}>
+      <tr>
         <td>{`${customer.givenName} ${customer.surname}`}</td>
         <td>{customer.email}</td>
       </tr>

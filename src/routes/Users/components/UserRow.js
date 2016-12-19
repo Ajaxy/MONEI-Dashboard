@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import {USER_ROLES, VERIFICATION_STATUSES} from 'lib/enums';
-import classNames from './UserRow.scss';
 import humanize from 'humanize-string';
 import userPic from 'static/user.png';
 
@@ -35,7 +34,6 @@ const UserRow = ({
     });
     return (
       <tr
-        className={classNames.row}
         onClick={() => viewUser(user.id)}>
         <td>
           <img
