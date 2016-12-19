@@ -1,4 +1,8 @@
-.button {
-  margin-top: 42px !important;
-  margin-bottom: 2px !important;
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1;
 }

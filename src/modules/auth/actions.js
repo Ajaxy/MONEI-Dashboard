@@ -4,8 +4,7 @@ import {buildCreds} from 'lib/aws';
 import * as types from './types';
 import {replace} from 'react-router-redux';
 import storage from 'store';
-import {fetchProfile, updateProfileLocally, initSandbox} from 'modules/profile/actions';
-import {getProfile} from 'modules/profile/selectors';
+import * as actions from 'modules/profile/actions';
 import {USER_ROLES} from 'lib/enums';
 import logo from 'static/logo.svg';
 
@@ -95,9 +94,9 @@ export const showLock = () => {
       });
       storage.set('profile', profile);
       storage.set('authToken', token);
-      dispatch(updateProfileLocally(profile));
+      dispatch(actions.updateProfileLocally(profile));
       await dispatch(finalizeAuth(profile, token));
-      await dispatch(initSandbox());
+      await dispatch(actions.initSandbox());
       dispatch({
         type: types.AUTH_SUCCESS
       });
@@ -115,7 +114,7 @@ export const signInWithToken = (token) => {
     const newToken = await dispatch(resetToken(token));
     const profile = await dispatch(getTokenInfo(newToken));
     await dispatch(finalizeAuth(profile, newToken));
-    await dispatch(initSandbox());
+    await dispatch(actions.initSandbox());
     storage.set('authToken', newToken);
     dispatch({
       type: types.AUTH_SUCCESS
@@ -148,7 +147,7 @@ export const getTokenInfo = (idToken) => {
       lock.getClient().getProfile(token, (error, profile) => {
         if (error) reject(error);
         storage.set('profile', profile);
-        dispatch(updateProfileLocally(profile));
+        dispatch(actions.updateProfileLocally(profile));
         resolve(profile);
       });
     });
@@ -157,11 +156,12 @@ export const getTokenInfo = (idToken) => {
 
 export const finalizeAuth = (profile, idToken) => {
   const token = idToken || storage.get('authToken');
-  return async(dispatch, getState) => {
+  return async dispatch => {
     bootIntercom(profile);
     dispatch(autoSignOut(token));
     await fetchAWSCredentials(token);
-    await dispatch(fetchProfile());
+    const fetchedProfile = await dispatch(actions.fetchProfile());
+    dispatch(actions.setSandboxMode(!fetchedProfile.mid))
   };
 };
 

@@ -26,6 +26,18 @@ const isUpdating = (state = false, action) => {
   }
 };
 
+const isVerifying = (state = false, action) => {
+  switch (action.type) {
+    case types.VERIFY_USER_REQUEST:
+      return true;
+    case types.VERIFY_USER_SUCCESS:
+    case types.VERIFY_USER_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const isUpToDate = (state = false, action) => {
   switch (action.type) {
     case types.FETCH_USER_SUCCESS:
@@ -48,10 +60,25 @@ const fileUrl = (state = null, action) => {
   }
 };
 
+const isVerificationModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.VERIFY_USER_START:
+      return true;
+    case types.VERIFY_USER_SUCCESS:
+    case types.VERIFY_USER_FAIL:
+    case types.VERIFY_USER_CANCEL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   isFetching,
   isUpdating,
+  isVerifying,
   isUpToDate,
+  isVerificationModalOpen,
   fileUrl
 });
 

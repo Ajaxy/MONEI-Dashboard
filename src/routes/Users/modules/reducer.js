@@ -25,6 +25,7 @@ const byId = (state = {}, action) => {
       return action.byId || {};
     case userTypes.FETCH_USER_SUCCESS:
     case userTypes.UPDATE_USER_SUCCESS:
+    case userTypes.VERIFY_USER_SUCCESS:
       return {
         ...state,
         [action.userId]: {

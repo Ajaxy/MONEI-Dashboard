@@ -3,10 +3,11 @@ import Loader from 'components/Loader';
 import UserHeader from './UserHeader';
 import IndexLink from 'react-router/lib/IndexLink';
 import Link from 'react-router/lib/Link';
+import ConfirmVerification from '../containers/ConfirmVerificationContainer';
 
 const UserView = ({
   user,
-  verifyUser,
+  verifyUserStart,
   loginAsUser,
   isFetching,
   isUpdating,
@@ -21,7 +22,7 @@ const UserView = ({
           <Loader active={isFetching} inline />
         </section>
         : <section className="ui vertical segment padded-bottom">
-          <UserHeader {...{user, isVerificationRequested, verifyUser, loginAsUser, isUpdating}} />
+          <UserHeader {...{user, isVerificationRequested, verifyUserStart, loginAsUser, isUpdating}} />
           <div className="ui secondary pointing large menu no-padding">
             <IndexLink to={baseUrl} className="item" activeClassName="active">
             Overview
@@ -35,6 +36,7 @@ const UserView = ({
           </div>
           {children}
         </section>}
+        <ConfirmVerification />
     </div>
   );
 };
@@ -46,6 +48,7 @@ UserView.propTypes = {
   updateUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isUpdating: PropTypes.bool.isRequired,
+  isVerifying: PropTypes.bool.isRequired,
   children: PropTypes.any
 };
 

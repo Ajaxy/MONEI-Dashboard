@@ -25,6 +25,7 @@ class User extends Component {
 const mapStateToProps = (state, props) => ({
   user: selectors.getUser(state),
   isFetching: selectors.getIsFetching(state),
+  isVerifying: selectors.getIsVerifying(state),
   isVerificationRequested: selectors.getIsVerificationRequested(state),
   isUpdating: selectors.getIsUpdating(state),
   isUpToDate: selectors.getIsUpToDate(state),
