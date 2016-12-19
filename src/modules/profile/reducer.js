@@ -58,12 +58,6 @@ const isSandboxInitialized = (state = false, action) => {
 const defaultSandboxMode = storage.get('sandbox') || false;
 const isInSandboxMode = (state = defaultSandboxMode, action) => {
   switch (action.type) {
-    case types.UPDATE_PROFILE_LOCALLY:
-      const appMetadata = (action.data || {}).app_metadata;
-      if (!appMetadata.mid) {
-        return true;
-      }
-      return state;
     case types.SET_PROFILE_SANDBOX:
       const nextState = !!action.data;
       storage.set('sandbox', nextState);

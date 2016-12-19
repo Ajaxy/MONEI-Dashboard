@@ -105,7 +105,7 @@ export const updateUser = (userId, data = {}) =>
   apiClient.patch(`stored-users/${userId}`, data);
 
 export const verifyUser = (userId) =>
-  apiClient.patch(`users/${userId}/verify`, {});
+  apiClient.patch(`stored-users/${userId}/verify`, {});
 
 export const impersonateUser = (userId, {redirect_uri}) =>
   apiClient.post(`users/${userId}/impersonate`, {redirect_uri});

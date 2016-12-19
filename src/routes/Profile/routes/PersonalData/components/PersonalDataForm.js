@@ -48,7 +48,7 @@ const PersonalDataForm = ({
           disabled={disabled}
           label="Date Of Birth"
           mask="99/99/9999"
-          hint="mm/dd/yyyy "/>
+          hint="mm/dd/yyyy " />
         <Select
           {...country}
           label="Country"
@@ -62,10 +62,22 @@ const PersonalDataForm = ({
             </SelectItem>
           ))}
         </Select>
-        <Input label="City" {...city} />
-        <Input label="State / Province / Region" {...state} />
-        <Input label="Address" {...address} />
-        <Input label="Zip / Postal code" {...zipCode} />
+        <Input
+          {...city}
+          label="City"
+          disabled={disabled} />
+        <Input
+          {...state}
+          label="State / Province / Region"
+          disabled={disabled} />
+        <Input
+          {...address}
+          label="Address"
+          disabled={disabled} />
+        <Input
+          {...zipCode}
+          label="Zip / Postal code"
+          disabled={disabled} />
         <Select
           {...profileType}
           disabled={disabled}
@@ -86,7 +98,7 @@ const PersonalDataForm = ({
           {...idNumber}
           disabled={disabled}
           label={idNumberLabel}
-          mask={isFromUs ? '999-99-9999' : ''}/>
+          mask={isFromUs ? '999-99-9999' : ''} />
         <div className="field">
           <label>
             {isCompany ? 'Document of company incorporation' : 'Your identity document' }

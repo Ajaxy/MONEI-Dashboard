@@ -38,7 +38,10 @@ const UserRow = ({
         className={classNames.row}
         onClick={() => viewUser(user.id)}>
         <td>
-          <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
+          <img
+            className="ui avatar image"
+            src={user.picture || userPic}
+            onError={e => e.target.src = userPic} />
         </td>
         <td className="text overflow">{user.name || user.email}</td>
         <td className="text overflow">

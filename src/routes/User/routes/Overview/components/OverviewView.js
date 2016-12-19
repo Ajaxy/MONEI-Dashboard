@@ -23,6 +23,7 @@ export const OverviewView = ({user, documentUrl}) => {
     : 'ID number';
 
   addRow('role', {format: true});
+  addRow('verificationStatus', {format: true});
   addRow('name');
   addRow('email', {url: `mailto:${user.email}`});
   addRow('dob', {name: 'Date of Birth'});
@@ -40,7 +41,6 @@ export const OverviewView = ({user, documentUrl}) => {
   addRow('storeGoods');
   addRow('shopifyStoreName');
   addRow('shopifyStoreEmail', {name: 'Admin email for Shopify store'});
-  addRow('verificationStatus', {format: true});
   if (rows.length > 0) {
     return (
       <Table className="large definition">

@@ -33,6 +33,11 @@ export const getIsUpdating = createSelector(
   user => user.isUpdating
 );
 
+export const getIsVerifying = createSelector(
+  userSelector,
+  user => user.isVerifying
+);
+
 export const getIsUpToDate = createSelector(
   userSelector,
   user => user.isUpToDate
@@ -41,4 +46,14 @@ export const getIsUpToDate = createSelector(
 export const getFileUrl = createSelector(
   userSelector,
   user => user.fileUrl
+);
+
+export const getIsVerificationModalOpen = createSelector(
+  userSelector,
+  user => user.isVerificationModalOpen
+);
+
+export const getIsAllowedToVerify = createSelector(
+  getUser,
+  user => !!user.mid && !!user.mpwd && !!user.mlogin
 );

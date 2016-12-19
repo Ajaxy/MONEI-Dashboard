@@ -3,7 +3,7 @@ import * as types from './types';
 import * as schema from 'schema/users';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getIsUpToDate, getUser} from './selectors';
+import {getIsUpToDate, getUser, getIsVerified} from './selectors';
 import {fileGetUrl} from 'lib/aws';
 import {signOut} from 'modules/auth/actions';
 
@@ -34,14 +34,22 @@ export const fetchUser = (userId, forceRefresh = false) => {
   };
 };
 
+export const verifyUserStart = () => ({
+  type: types.VERIFY_USER_START
+});
+
+export const verifyUserCancel = () => ({
+  type: types.VERIFY_USER_CANCEL
+});
+
 export const verifyUser = (userId) => {
-  return async(dispatch, getState) => {
-    dispatch({type: types.UPDATE_USER_REQUEST});
+  return async dispatch => {
+    dispatch({type: types.VERIFY_USER_REQUEST});
     try {
       const result = await api.verifyUser(userId);
       const normalized = normalize(result, schema.user);
       dispatch({
-        type: types.UPDATE_USER_SUCCESS,
+        type: types.VERIFY_USER_SUCCESS,
         byId: normalized.entities.users,
         userId: normalized.result
       });
@@ -51,7 +59,7 @@ export const verifyUser = (userId) => {
       }));
     } catch (error) {
       dispatch({
-        type: types.UPDATE_USER_FAIL
+        type: types.VERIFY_USER_FAIL
       });
       dispatch(addMessage({
         text: error,
@@ -64,7 +72,7 @@ export const verifyUser = (userId) => {
 };
 
 export const loginAsUser = (userId) => {
-  return async(dispatch, getState) => {
+  return async dispatch => {
     dispatch({type: types.UPDATE_USER_REQUEST});
     try {
       const redirect_uri = window.location.origin;
@@ -113,9 +121,11 @@ export const updateUser = (userId, data) => {
 
 export const fetchFileUrl = (name) => {
   return async(dispatch, getState) => {
-    const user = getUser(getState());
+    const state = getState();
+    const user = getUser(state);
+    const isVerified = getIsVerified(state);
     try {
-      const data = await fileGetUrl(user.id, name, true);
+      const data = await fileGetUrl(user.id, name, isVerified);
       dispatch({type: types.USER_FILE_URL_UPDATE, data});
       return data;
     } catch (error) {

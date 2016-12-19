@@ -13,6 +13,7 @@ export const fetchProfile = () => {
         type: types.FETCH_PROFILE_SUCCESS,
         data
       });
+      dispatch(validateUserProfile());
       window.Intercom('update', data);
       return data;
     } catch (error) {
