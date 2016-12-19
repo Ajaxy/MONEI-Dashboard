@@ -147,3 +147,9 @@ i.icon.loading {
 .ui.toggle.checkbox.green input:checked ~ label:before {
   background-color: #00796b !important;
 }
+
+.ui.table {
+  tr.clickable {
+    cursor: pointer;
+  }
+}

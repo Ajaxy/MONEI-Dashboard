@@ -9,7 +9,7 @@ const PhoneVerification = ({
   isVerificationStarted,
   isEditingPhone,
   phoneEditStart,
-  className,
+  className
 }) => (
   <div className={className}>
     {!isEditingPhone && <div>

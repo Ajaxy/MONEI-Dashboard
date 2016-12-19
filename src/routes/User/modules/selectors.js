@@ -38,6 +38,11 @@ export const getIsVerifying = createSelector(
   user => user.isVerifying
 );
 
+export const getIsImpersonating = createSelector(
+  userSelector,
+  user => user.isImpersonating
+);
+
 export const getIsUpToDate = createSelector(
   userSelector,
   user => user.isUpToDate

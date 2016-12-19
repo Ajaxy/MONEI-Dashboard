@@ -27,7 +27,7 @@ const mapStateToProps = (state, props) => ({
   isFetching: selectors.getIsFetching(state),
   isVerifying: selectors.getIsVerifying(state),
   isVerificationRequested: selectors.getIsVerificationRequested(state),
-  isUpdating: selectors.getIsUpdating(state),
+  isImpersonating: selectors.getIsImpersonating(state),
   isUpToDate: selectors.getIsUpToDate(state),
   userId: props.params.userId
 });

@@ -36,6 +36,7 @@ const SubAccountRow = ({subAccount, onEdit, bankAccount = {}, copy, isConfirming
         }
       </td>
       <td>{USER_ACQUIRERS[subAccount.acquirer]}</td>
+      <td>{subAccount.commercialConditions.currency}</td>
       <td>{subAccount.sandbox ? 'TEST' : subAccount.state}</td>
       <td>
         {isPending && <Button

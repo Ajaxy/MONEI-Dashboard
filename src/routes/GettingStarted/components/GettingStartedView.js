@@ -30,11 +30,11 @@ const GettingStartedView = ({
         {
           bankAccount.id
             ? <div>
-            <BankAccountItem
-              {...bankAccount}
-              onEdit={() => saveBankAccountStart(bankAccount.id)} />
-            <br />
-          </div>
+              <BankAccountItem
+                {...bankAccount}
+                onEdit={() => saveBankAccountStart(bankAccount.id)} />
+              <br />
+            </div>
             : isFetching
             ? <Loader active />
             : <Button onClick={saveBankAccountStart} primary>

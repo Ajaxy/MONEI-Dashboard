@@ -55,7 +55,7 @@ const UserRow = ({
         <td>{user.country}</td>
         <td>{humanize(user.status || '')}</td>
         <td className="right aligned">
-          <i className={verificationStatusIcon}/>
+          <i className={verificationStatusIcon} />
         </td>
       </tr>
     );

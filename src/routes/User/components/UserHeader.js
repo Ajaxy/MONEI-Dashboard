@@ -4,7 +4,7 @@ import cx from 'classnames';
 import userPic from 'static/user.png';
 import classNames from './UserHeader.scss';
 
-const UserHeader = ({user, isVerificationRequested, verifyUserStart, loginAsUser, isUpdating}) => {
+const UserHeader = ({user, isVerificationRequested, verifyUserStart, loginAsUser, isImpersonating}) => {
   const emailLink = <a href={`mailto:${user.email}`} target="_top">{user.email}</a>;
   return (
     <h2 className={cx('ui header', classNames.header)}>
@@ -25,10 +25,10 @@ const UserHeader = ({user, isVerificationRequested, verifyUserStart, loginAsUser
           className="orange">
           Verify User
         </Button>}
-        {" "}
+        {' '}
         {loginAsUser && <Button
           primary
-          loading={isUpdating}
+          loading={isImpersonating}
           onClick={() => loginAsUser(user.id)}>
           Login as User
         </Button>}
@@ -41,7 +41,7 @@ UserHeader.propTypes = {
   user: PropTypes.object.isRequired,
   verifyUserStart: PropTypes.func,
   loginAsUser: PropTypes.func,
-  isUpdating: PropTypes.bool,
+  isImpersonating: PropTypes.bool,
   isVerificationRequested: PropTypes.bool
 };
 

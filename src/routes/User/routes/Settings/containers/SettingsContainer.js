@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     user,
     initialValues: user,
     isUpdating: selectors.getIsUpdating(state)
-  }
+  };
 };
 
 export default reduxForm({
