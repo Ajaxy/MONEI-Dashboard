@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 export const NUM_COLUMNS = 2;
 
-const CustomerRow = ({customer, isHeader = false}) => {
+const CustomerRow = ({customer, viewCustomer, isHeader = false}) => {
   if (isHeader) {
     return (
       <tr>
@@ -12,7 +12,7 @@ const CustomerRow = ({customer, isHeader = false}) => {
     );
   } else {
     return (
-      <tr>
+      <tr onClick={() => viewCustomer(customer.id)}>
         <td>{`${customer.givenName} ${customer.surname}`}</td>
         <td>{customer.email}</td>
       </tr>

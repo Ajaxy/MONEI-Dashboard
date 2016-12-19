@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import * as profileSelectors from 'modules/profile/selectors';
@@ -13,7 +14,10 @@ class Customers extends Component {
       nextPage: PropTypes.string,
       prevPage: PropTypes.string,
       email: PropTypes.string
-    })
+    }),
+    router: PropTypes.shape({
+      push: PropTypes.func.isRequired
+    }).isRequired
   };
 
   componentDidMount() {
@@ -34,11 +38,16 @@ class Customers extends Component {
     this.props.fetchCustomers({email});
   };
 
+  viewCustomer = (customerId) => {
+    this.props.router.push(`/customers/${customerId}`);
+  };
+
   render() {
     return (
       <CustomersView
         searchQueryString={this.props.queryParams.email}
         getPage={this.getPage}
+        viewCustomer={this.viewCustomer}
         handleSearchChange={this.handleSearchChange}
         {...this.props}
       />
@@ -55,4 +64,4 @@ const mapStateToProps = (state) => ({
   queryParams: selectors.getQueryParams(state)
 });
 
-export default connect(mapStateToProps, actions)(Customers);
+export default connect(mapStateToProps, actions)(withRouter(Customers));

@@ -93,6 +93,9 @@ export const fetchTransactionStats = () =>
 export const fetchCustomers = (params = {}) =>
   apiClient.get('customers', {params});
 
+export const fetchCustomer = (customerId) =>
+  apiClient.get(`customers/${customerId}`);
+
 // Users
 
 export const fetchUsers = (params = {}) =>

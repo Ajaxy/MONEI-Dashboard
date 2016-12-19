@@ -2,15 +2,17 @@ import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 
 const customersSelector = state => state[stateKey];
+const activeCustomerIdSelector = state => state.route.params.customerId;
 
 export const getCustomers = createSelector(
   customersSelector,
   customers => customers.ids.map(id => customers.byId[id])
 );
 
-export const getCustomerIds = createSelector(
+export const getActiveCustomer = createSelector(
   customersSelector,
-  customers => customers.ids
+  activeCustomerIdSelector,
+  (customers, customerId) => customers.byId[customerId] || {}
 );
 
 export const getIsFetching = createSelector(

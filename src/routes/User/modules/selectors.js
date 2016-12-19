@@ -43,11 +43,6 @@ export const getIsImpersonating = createSelector(
   user => user.isImpersonating
 );
 
-export const getIsUpToDate = createSelector(
-  userSelector,
-  user => user.isUpToDate
-);
-
 export const getFileUrl = createSelector(
   userSelector,
   user => user.fileUrl

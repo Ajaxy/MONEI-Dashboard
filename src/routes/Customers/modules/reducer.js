@@ -1,5 +1,7 @@
 import * as types from './types';
 import {combineReducers} from 'redux';
+import * as customerTypes from 'routes/Customer/modules/types';
+import {mergeArrays} from 'lib/utils';
 export const stateKey = 'customers';
 
 const ids = (state = [], action) => {
@@ -8,6 +10,8 @@ const ids = (state = [], action) => {
       return [];
     case types.FETCH_CUSTOMERS_SUCCESS:
       return action.ids || [];
+    case customerTypes.FETCH_CUSTOMER_SUCCESS:
+      return mergeArrays(state, [action.customerId]);
     default:
       return state;
   }
@@ -19,6 +23,14 @@ const byId = (state = {}, action) => {
       return {};
     case types.FETCH_CUSTOMERS_SUCCESS:
       return action.byId || {};
+    case customerTypes.FETCH_CUSTOMER_SUCCESS:
+      return {
+        ...state,
+        [action.customerId]: {
+          ...state[action.customerId],
+          ...action.byId[action.customerId]
+        }
+      };
     default:
       return state;
   }

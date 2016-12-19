@@ -11,6 +11,7 @@ const CustomersView = ({
   handleSearchChange,
   searchQueryString,
   isFetching,
+  viewCustomer,
   getPage
 }) => (
   <section className="ui basic segment padded-bottom">
@@ -35,7 +36,10 @@ const CustomersView = ({
       className="large striped fixed single line"
       header={<CustomerRow isHeader />}>
       {customers.map((customer, index) => (
-        <CustomerRow key={index} customer={customer} />
+        <CustomerRow
+          key={index}
+          customer={customer}
+          viewCustomer={viewCustomer} />
       ))}
     </PaginatedTable>
   </section>
@@ -45,6 +49,7 @@ CustomersView.propTypes = {
   customers: PropTypes.array.isRequired,
   queryParams: PropTypes.object.isRequired,
   getPage: PropTypes.func.isRequired,
+  viewCustomer: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isFirstPage: PropTypes.bool,
   isLastPage: PropTypes.bool,
