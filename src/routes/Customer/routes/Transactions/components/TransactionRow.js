@@ -7,7 +7,6 @@ import cx from 'classnames';
 
 const TransactionRow = ({
   transaction,
-  onClick,
   isHeader = false
 }) => {
   if (isHeader) {
@@ -15,15 +14,12 @@ const TransactionRow = ({
       <tr>
         <th width={90}>Amount</th>
         <th width={75}>Status</th>
-        <th width={110}>Type</th>
-        <th>Customer Name</th>
-        <th>Customer Email</th>
+        <th>Type</th>
         <th width={175}>Date</th>
       </tr>
     );
   } else {
-    const {paymentType, currency, amount, result, customer, transactionTimestamp} = transaction;
-    const customerName = `${customer.givenName} ${customer.surname}`;
+    const {paymentType, currency, amount, result, transactionTimestamp} = transaction;
     return (
       <tr
         onClick={e => onClick && onClick(transaction.id)}
@@ -35,12 +31,6 @@ const TransactionRow = ({
             : <i className="checkmark icon green large" />}
         </td>
         <td>{PAYMENT_TYPES[transaction.paymentType]}</td>
-        <td title={customerName}>{customerName}</td>
-        <td>
-          <a href={`mailto:${customer.email}`} onClick={e => e.stopPropagation()}>
-            {customer.email}
-          </a>
-        </td>
         <td>{formatDate(transactionTimestamp, DATE_TIME_FORMAT_SIMPLE)}</td>
       </tr>
     );
@@ -49,10 +39,9 @@ const TransactionRow = ({
 
 TransactionRow.propTypes = {
   transaction: PropTypes.object,
-  onClick: PropTypes.func,
   isHeader: PropTypes.bool
 };
 
-export const NUM_COLUMNS = 6;
+export const NUM_COLUMNS = 4;
 
 export default TransactionRow;

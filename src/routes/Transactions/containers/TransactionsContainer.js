@@ -21,16 +21,20 @@ class Transactions extends Component {
     viewTransactionCancel: PropTypes.func.isRequired
   };
 
-  componentWillMount() {
+  fetchTransactions() {
     const from = moment().startOf('day').valueOf();
     const to = moment().endOf('day').valueOf();
     this.props.fetchTransactions(from, to, null, true);
     this.props.fetchSubAccounts();
   }
 
-  componentWillUpdate(nextProps) {
+  componentDidMount() {
+    this.fetchTransactions();
+  }
+
+  componentDidUpdate(nextProps) {
     if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
-      this.componentWillMount();
+      this.fetchTransactions();
     }
   }
 
@@ -81,7 +85,6 @@ const mapStateToProps = (state) => ({
   fromDate: selectors.getFromDate(state),
   toDate: selectors.getToDate(state),
   transactions: selectors.getTransactions(state),
-  totalAmount: selectors.getTotalAmount(state),
   isFetching: selectors.getIsFetching(state),
   isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),
