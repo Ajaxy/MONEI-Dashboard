@@ -53,10 +53,9 @@ export const fetchAWSCredentials = (token) => {
 
 const bootIntercom = (profile) => {
   if (
-    profile.impersonated
-    || profile.role !== USER_ROLES.User
-    || __DEV__
-    || __STAGE__ === 'development'
+    profile.impersonated ||
+    profile.role !== USER_ROLES.User ||
+    __DEV__ || __STAGE__ === 'development'
   ) {
     return;
   }
@@ -161,7 +160,7 @@ export const finalizeAuth = (profile, idToken) => {
     dispatch(autoSignOut(token));
     await fetchAWSCredentials(token);
     const fetchedProfile = await dispatch(actions.fetchProfile());
-    dispatch(actions.setSandboxMode(!fetchedProfile.mid))
+    dispatch(actions.setSandboxMode(!fetchedProfile.mid));
   };
 };
 

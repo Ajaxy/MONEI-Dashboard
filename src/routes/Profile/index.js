@@ -18,5 +18,5 @@ export default (store) => {
       BankAccountsRoute(store),
       ShopifyStoreRoute
     ]
-  }
+  };
 };

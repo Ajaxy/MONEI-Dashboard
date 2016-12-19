@@ -23,9 +23,8 @@ const CustomersView = ({
           inputClass="fluid"
         />
       </div>
-      <div className="nine wide column right aligned">
-        </div>
-      </div>
+      <div className="nine wide column right aligned" />
+    </div>
     <PaginatedTable
       {...{isFetching, isFirstPage, isLastPage}}
       selectable={!isFetching && customers.length > 0}
@@ -47,6 +46,8 @@ CustomersView.propTypes = {
   queryParams: PropTypes.object.isRequired,
   getPage: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  isFirstPage: PropTypes.bool,
+  isLastPage: PropTypes.bool,
   handleSearchChange: PropTypes.func.isRequired,
   searchQueryString: PropTypes.string
 };

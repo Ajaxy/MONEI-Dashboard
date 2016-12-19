@@ -52,5 +52,5 @@ export default reduxForm({
     'storeUrl',
     'storeGoods'
   ],
-    validate
+  validate
 }, mapStateToProps, actions)(UpdateMetaDataView);

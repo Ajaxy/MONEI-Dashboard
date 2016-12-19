@@ -1,6 +1,6 @@
 import axios from 'axios';
 import storage from 'store';
-import {getProfile, getIsInSandboxMode} from 'modules/profile/selectors'
+import {getProfile, getIsInSandboxMode} from 'modules/profile/selectors';
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
 

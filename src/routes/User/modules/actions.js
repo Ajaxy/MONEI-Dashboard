@@ -73,13 +73,15 @@ export const verifyUser = (userId) => {
 
 export const loginAsUser = (userId) => {
   return async dispatch => {
-    dispatch({type: types.UPDATE_USER_REQUEST});
+    dispatch({type: types.IMPERSONATE_USER_REQUEST});
     try {
-      const redirect_uri = window.location.origin;
-      const result = await api.impersonateUser(userId, {redirect_uri});
+      const result = await api.impersonateUser(userId, {
+        redirect_uri: window.location.origin
+      });
       signOut();
       window.location.href = result;
     } catch (error) {
+      dispatch({type: types.IMPERSONATE_USER_FAIL});
       dispatch(addMessage({
         text: error,
         onRetry() {

@@ -13,4 +13,3 @@ export const getIsAuthenticating = createSelector(
   auth => auth.isAuthenticating
 );
 
-

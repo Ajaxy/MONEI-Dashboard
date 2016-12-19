@@ -38,6 +38,18 @@ const isVerifying = (state = false, action) => {
   }
 };
 
+const isImpersonating = (state = false, action) => {
+  switch (action.type) {
+    case types.IMPERSONATE_USER_REQUEST:
+      return true;
+    case types.IMPERSONATE_USER_SUCCESS:
+    case types.IMPERSONATE_USER_FAIL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const isUpToDate = (state = false, action) => {
   switch (action.type) {
     case types.FETCH_USER_SUCCESS:
@@ -77,6 +89,7 @@ export default combineReducers({
   isFetching,
   isUpdating,
   isVerifying,
+  isImpersonating,
   isUpToDate,
   isVerificationModalOpen,
   fileUrl

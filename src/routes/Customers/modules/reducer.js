@@ -1,5 +1,4 @@
 import * as types from './types';
-import {mergeArrays} from 'lib/utils';
 import {combineReducers} from 'redux';
 export const stateKey = 'customers';
 

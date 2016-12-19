@@ -3,7 +3,7 @@ import * as types from './types';
 import {getPhoneNumber} from './selectors';
 import {trackEvent} from 'lib/intercom';
 import {addMessage} from 'modules/messages/actions';
-import {updateProfileMetaData, updateProfileLocally, updateProfile} from 'modules/profile/actions';
+import {updateProfileLocally, updateProfile} from 'modules/profile/actions';
 import * as selectors from 'modules/profile/selectors';
 import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 import {push} from 'react-router-redux';

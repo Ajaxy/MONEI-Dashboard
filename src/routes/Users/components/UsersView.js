@@ -49,7 +49,9 @@ UsersView.propTypes = {
   viewUser: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   handleSearchChange: PropTypes.func.isRequired,
-  searchQueryString: PropTypes.string
+  searchQueryString: PropTypes.string,
+  isFirstPage: PropTypes.bool,
+  isLastPage: PropTypes.bool
 };
 
 export default UsersView;
