@@ -21,7 +21,7 @@ export const CustomerView = ({customer, children, isFetching}) => {
       {children}
     </section>
   );
-}
+};
 
 CustomerView.propTypes = {
   children: PropTypes.element.isRequired,

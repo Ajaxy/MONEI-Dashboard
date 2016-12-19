@@ -2,10 +2,13 @@ import * as api from 'lib/api';
 import * as types from './types';
 import * as schema from 'schema/customers';
 import {addMessage} from 'modules/messages/actions';
+import {getCustomer} from './selectors';
 import {normalize} from 'normalizr';
 
 export const fetchCustomer = (customerId) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const customer = getCustomer(getState());
+    if (customer.id) return;
     dispatch({type: types.FETCH_CUSTOMER_REQUEST});
     try {
       const result = await api.fetchCustomer(customerId);
