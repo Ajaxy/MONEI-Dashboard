@@ -4,6 +4,8 @@ export const stateKey = 'customerTransactions';
 
 const ids = (state = [], action) => {
   switch (action.type) {
+    case types.CLEAR_C_TRANSACTIONS:
+      return [];
     case types.FETCH_C_TRANSACTIONS_SUCCESS:
       return [...action.ids];
     default:
@@ -13,6 +15,8 @@ const ids = (state = [], action) => {
 
 const byId = (state = {}, action) => {
   switch (action.type) {
+    case types.CLEAR_C_TRANSACTIONS:
+      return {};
     case types.FETCH_C_TRANSACTIONS_SUCCESS:
       return {...action.byId};
     default:

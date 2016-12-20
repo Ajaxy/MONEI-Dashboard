@@ -1,5 +1,6 @@
 import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
+import {getViewedTransactionId} from 'routes/Transactions/modules/selectors';
 
 const transactionsSelector = state => state[stateKey];
 export const getTransactions = createSelector(
@@ -25,4 +26,10 @@ export const getIsFirstPage = createSelector(
 export const getIsLastPage = createSelector(
   getPage,
   page => !page.nextPage
+);
+
+export const getViewedTransaction = createSelector(
+  transactionsSelector,
+  getViewedTransactionId,
+  (transactions, id) => transactions.byId[id] || {}
 );

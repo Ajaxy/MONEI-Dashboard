@@ -9,7 +9,7 @@ import {getAmount, isFailed} from 'routes/Transactions/modules/utils';
 import cx from 'classnames';
 import classNames from './TransactionDetails.scss';
 
-const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint}) => {
+const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint, isCustomerHidden = false}) => {
   const {
     customer = {},
     result = {},
@@ -80,8 +80,8 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
             <td>{transaction.paymentBrand}</td>
           </tr>
         </Table>
-        <h4 className="ui header">Customer</h4>
-        <Table className="large definition">
+        {!isCustomerHidden &&<h4 className="ui header">Customer</h4>}
+        {!isCustomerHidden && <Table className="large definition">
           <tr>
             <td className="three wide">Name</td>
             <td>{`${customer.givenName} ${customer.surname}`}</td>
@@ -118,7 +118,7 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
             <td>Zip Code</td>
             <td>{billing.postcode}</td>
           </tr>
-        </Table>
+        </Table>}
       </div>
       <div className="actions">
         <Button className="icon" onClick={onPrint}>
