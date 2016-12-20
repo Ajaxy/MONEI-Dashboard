@@ -83,7 +83,7 @@ export const createSandbox = (name) =>
 // Transactions
 
 export const fetchTransactions = (params = {}) =>
-  apiClient.get('transactions/stored', params);
+  apiClient.get('transactions/stored', {params});
 
 export const fetchTransactionStats = () =>
   apiClient.get('transactions/stats');
@@ -92,6 +92,12 @@ export const fetchTransactionStats = () =>
 
 export const fetchCustomers = (params = {}) =>
   apiClient.get('customers', {params});
+
+export const fetchCustomer = (customerId) =>
+  apiClient.get(`customers/${customerId}`);
+
+export const fetchCustomerTransactions = (customerId, params = {}) =>
+  apiClient.get(`customers/${customerId}/transactions`, {params});
 
 // Users
 

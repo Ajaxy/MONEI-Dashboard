@@ -1,20 +1,31 @@
 import React, {PropTypes} from 'react';
+import {formatUnixDate} from 'lib/utils';
 
-export const NUM_COLUMNS = 2;
+export const NUM_COLUMNS = 3;
 
-const CustomerRow = ({customer, isHeader = false}) => {
+const CustomerRow = ({customer, viewCustomer, isHeader = false}) => {
   if (isHeader) {
     return (
       <tr>
         <th>Name</th>
         <th>Email</th>
+        <th className="three wide">Created at</th>
       </tr>
     );
   } else {
     return (
-      <tr>
+      <tr onClick={() => viewCustomer(customer.id)}>
         <td>{`${customer.givenName} ${customer.surname}`}</td>
-        <td>{customer.email}</td>
+        <td>
+          <a
+            href={`mailto:${customer.email}`}
+            onClick={e => e.stopPropagation()}>
+            {customer.email}
+          </a>
+        </td>
+        <td>
+          {formatUnixDate(customer.createdAt)}
+        </td>
       </tr>
     );
   }
@@ -24,9 +35,11 @@ CustomerRow.propTypes = {
   customer: PropTypes.shape({
     email: PropTypes.string,
     givenName: PropTypes.string,
-    surname: PropTypes.string
-  }),
-  isHeader: PropTypes.bool
+    surname: PropTypes.string,
+    createdAt: PropTypes.number
+  }).isRequired,
+  isHeader: PropTypes.bool,
+  viewCustomer: PropTypes.func.isRequired
 };
 
 export default CustomerRow;

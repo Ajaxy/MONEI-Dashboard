@@ -14,7 +14,7 @@ class User extends Component {
 
   componentDidMount() {
     const {userId, fetchUser} = this.props;
-    fetchUser(userId, true);
+    fetchUser(userId);
   }
 
   render() {
@@ -28,7 +28,6 @@ const mapStateToProps = (state, props) => ({
   isVerifying: selectors.getIsVerifying(state),
   isVerificationRequested: selectors.getIsVerificationRequested(state),
   isImpersonating: selectors.getIsImpersonating(state),
-  isUpToDate: selectors.getIsUpToDate(state),
   userId: props.params.userId
 });
 

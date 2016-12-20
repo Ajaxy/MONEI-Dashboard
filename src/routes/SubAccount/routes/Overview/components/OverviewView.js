@@ -3,7 +3,7 @@ import {Table} from 'components/Table';
 import humanize from 'humanize-string';
 
 const SubAccountOverview = ({subAccount, copyToClipboard, bankAccount, isFetchingBankAccounts, isInSandboxMode}) => (
-  <Table className="large definition" selectable>
+  <Table className="large definition">
     <tr className="clickable" onClick={() => copyToClipboard(subAccount.sender, 'App ID')}>
       <td className="three wide">App ID</td>
       <td>{subAccount.sender}</td>
@@ -22,7 +22,7 @@ const SubAccountOverview = ({subAccount, copyToClipboard, bankAccount, isFetchin
     </tr>
     <tr>
       <td className="three wide">Currency</td>
-      <td>{subAccount.commercialConditions.currency}</td>
+      <td>{subAccount.commercialConditions && subAccount.commercialConditions.currency}</td>
     </tr>
     <tr>
       <td className="three wide">Status</td>

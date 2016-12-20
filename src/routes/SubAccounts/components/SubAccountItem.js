@@ -57,7 +57,7 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
             {subAccount.customName}
           </Link>
           {' '}
-          {subAccount.commercialConditions.currency}
+          {subAccount.commercialConditions && subAccount.commercialConditions.currency}
         </h3>
         <small className="description">
           {isSandboxMode
