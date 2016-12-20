@@ -17,7 +17,7 @@ const UserView = ({
   const baseUrl = `/users/${encodeURI(user.id)}`;
   return (
     <div>
-      {isFetching
+      {!user.id
         ? <section className="ui vertical segment padded-bottom">
           <Loader active={isFetching} inline />
         </section>
