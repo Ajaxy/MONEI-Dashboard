@@ -1,6 +1,5 @@
 import * as types from './types';
 import {combineReducers} from 'redux';
-import {isFailed, isIncome} from './utils';
 export const stateKey = 'transactions';
 
 const ids = (state = [], action) => {

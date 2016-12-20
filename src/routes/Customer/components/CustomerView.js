@@ -10,9 +10,9 @@ export const CustomerView = ({customer, children, isFetching}) => {
       <section className="ui basic segment padded-bottom">
         <Loader active={isFetching} inline />
       </section>
-    )
+    );
   }
-    return (
+  return (
     <section className="ui basic segment padded-bottom">
       <h1 className={cx('ui header', NO_LOCALIZE)}>
         {`${customer.givenName} ${customer.surname}`}
@@ -24,6 +24,7 @@ export const CustomerView = ({customer, children, isFetching}) => {
 };
 
 CustomerView.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
   children: PropTypes.element.isRequired,
   customer: PropTypes.shape({
     email: PropTypes.string,

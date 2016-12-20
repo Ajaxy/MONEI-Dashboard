@@ -1,19 +1,19 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
 import {getIsInSandboxMode} from 'modules/profile/selectors';
 import CustomerView from '../components/CustomerView';
 
 class Customer extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  };
-
   static propTypes = {
     fetchCustomer: PropTypes.func.isRequired,
     customerId: PropTypes.string.isRequired,
-    isSandboxMode: PropTypes.bool.isRequired
+    isSandboxMode: PropTypes.bool.isRequired,
+    router: PropTypes.shape({
+      push: PropTypes.func.isRequired
+    }).isRequired
   };
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class Customer extends Component {
 
   componentWillReceiveProps(np) {
     if (np.isSandboxMode !== this.props.isSandboxMode) {
-      this.context.router.replace('/customers');
+      this.props.router.replace('/customers');
     }
   }
 
@@ -39,4 +39,4 @@ const mapStateToProps = (state, props) => ({
   customerId: props.params.customerId
 });
 
-export default connect(mapStateToProps, actions)(Customer);
+export default connect(mapStateToProps, actions)(withRouter(Customer));

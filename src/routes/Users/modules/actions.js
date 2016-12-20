@@ -5,7 +5,7 @@ import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
-export const fetchUsers = ({page, email, limit = PAGE_LIMIT}) => {
+export const fetchUsers = ({page, email, limit = PAGE_LIMIT} = {}) => {
   return async dispatch => {
     dispatch({type: types.FETCH_USERS_REQUEST});
     try {

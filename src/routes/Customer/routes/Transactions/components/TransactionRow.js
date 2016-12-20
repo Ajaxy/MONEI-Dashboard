@@ -22,7 +22,6 @@ const TransactionRow = ({
     const {paymentType, currency, amount, result, transactionTimestamp} = transaction;
     return (
       <tr
-        onClick={e => onClick && onClick(transaction.id)}
         className={cx({negative: isFailed(result.code), warning: isRefund(paymentType)})}>
         <td>{getAmount(paymentType, currency, parseFloat(amount))}</td>
         <td>

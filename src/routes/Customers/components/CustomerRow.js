@@ -35,9 +35,11 @@ CustomerRow.propTypes = {
   customer: PropTypes.shape({
     email: PropTypes.string,
     givenName: PropTypes.string,
-    surname: PropTypes.string
-  }),
-  isHeader: PropTypes.bool
+    surname: PropTypes.string,
+    createdAt: PropTypes.number
+  }).isRequired,
+  isHeader: PropTypes.bool,
+  viewCustomer: PropTypes.func.isRequired
 };
 
 export default CustomerRow;

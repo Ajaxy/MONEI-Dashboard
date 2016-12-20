@@ -8,7 +8,7 @@ const TransactionsView = ({
   goToPrevPage,
   isFetching,
   isFirstPage,
-  isLastPage,
+  isLastPage
 }) => {
   return (
     <PaginatedTable

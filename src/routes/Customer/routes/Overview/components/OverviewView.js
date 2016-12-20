@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Table} from 'components/Table';
-import {formatUnixDate} from 'lib/utils'
+import {formatUnixDate} from 'lib/utils';
 
 const SubAccountOverview = ({customer}) => (
   <Table className="large definition">

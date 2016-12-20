@@ -5,7 +5,7 @@ import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
-export const fetchCustomers = ({page, email, limit = PAGE_LIMIT, forceRefresh = false}) => {
+export const fetchCustomers = ({page, email, limit = PAGE_LIMIT, forceRefresh = false} = {}) => {
   return async dispatch => {
     if (forceRefresh) {
       dispatch({type: types.CLEAR_CUSTOMERS});
