@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Table} from 'components/Table';
 import {formatUnixDate} from 'lib/utils'
-import humanize from 'humanize-string';
 
 const SubAccountOverview = ({customer}) => (
   <Table className="large definition">
