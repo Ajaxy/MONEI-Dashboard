@@ -1,14 +1,15 @@
 import * as api from 'lib/api';
 import * as types from './types';
 import * as schema from 'schema/users';
+import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
-export const fetchUsers = (params = {}) => {
+export const fetchUsers = ({page, email, limit = PAGE_LIMIT} = {}) => {
   return async dispatch => {
     dispatch({type: types.FETCH_USERS_REQUEST});
     try {
-      const users = await api.fetchUsers(params);
+      const users = await api.fetchUsers({page, email, limit});
       const normalized = normalize(users.items, schema.arrayOfUsers);
       dispatch({
         type: types.FETCH_USERS_SUCCESS,
@@ -16,7 +17,7 @@ export const fetchUsers = (params = {}) => {
         ids: normalized.result,
         nextPage: users.nextPage,
         prevPage: users.prevPage,
-        email: params.email
+        email
       });
     } catch (error) {
       dispatch({
@@ -25,7 +26,7 @@ export const fetchUsers = (params = {}) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchUsers(params));
+          dispatch(fetchUsers({page, email, limit}));
         }
       }));
     }

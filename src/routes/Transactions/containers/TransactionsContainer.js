@@ -21,33 +21,37 @@ class Transactions extends Component {
     viewTransactionCancel: PropTypes.func.isRequired
   };
 
-  componentWillMount() {
+  fetchTransactions() {
     const from = moment().startOf('day').valueOf();
     const to = moment().endOf('day').valueOf();
-    this.props.fetchTransactions(from, to, null, true);
+    this.props.fetchTransactions({from, to, forceRefresh: true});
     this.props.fetchSubAccounts();
   }
 
-  componentWillUpdate(nextProps) {
+  componentDidMount() {
+    this.fetchTransactions();
+  }
+
+  componentDidUpdate(nextProps) {
     if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
-      this.componentWillMount();
+      this.fetchTransactions({forceRefresh: true});
     }
   }
 
   goToNextPage = () => {
     const {page} = this.props;
-    this.props.fetchTransactions(page.from, page.to, page.nextPage);
+    this.props.fetchTransactions({...page, page: page.nextPage});
   };
 
   goToPrevPage = () => {
     const {page} = this.props;
-    this.props.fetchTransactions(page.from, page.to, page.prevPage);
+    this.props.fetchTransactions({...page, page: page.prevPage});
   };
 
   filterByDate = (fromDate, toDate) => {
     const from = moment(fromDate).startOf('day').valueOf();
     const to = moment(toDate).endOf('day').valueOf();
-    this.props.fetchTransactions(from, to);
+    this.props.fetchTransactions({from, to});
   };
 
   viewDetails = (transactionId) => {
@@ -81,7 +85,6 @@ const mapStateToProps = (state) => ({
   fromDate: selectors.getFromDate(state),
   toDate: selectors.getToDate(state),
   transactions: selectors.getTransactions(state),
-  totalAmount: selectors.getTotalAmount(state),
   isFetching: selectors.getIsFetching(state),
   isFirstPage: selectors.getIsFirstPage(state),
   isLastPage: selectors.getIsLastPage(state),

@@ -6,7 +6,7 @@ import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 import {getPage} from './selectors';
 
-export const fetchTransactions = (from, to, page, forceRefresh = false) => {
+export const fetchTransactions = ({from, to, page, forceRefresh = false} = {}) => {
   return async(dispatch, getState) => {
     const previous = getPage(getState());
 

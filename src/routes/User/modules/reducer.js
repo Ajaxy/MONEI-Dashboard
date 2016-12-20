@@ -50,17 +50,6 @@ const isImpersonating = (state = false, action) => {
   }
 };
 
-const isUpToDate = (state = false, action) => {
-  switch (action.type) {
-    case types.FETCH_USER_SUCCESS:
-      return true;
-    case types.FETCH_USER_REQUEST:
-      return false;
-    default:
-      return state;
-  }
-};
-
 const fileUrl = (state = null, action) => {
   switch (action.type) {
     case types.USER_FILE_URL_UPDATE:
@@ -90,7 +79,6 @@ export default combineReducers({
   isUpdating,
   isVerifying,
   isImpersonating,
-  isUpToDate,
   isVerificationModalOpen,
   fileUrl
 });

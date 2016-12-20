@@ -12,7 +12,6 @@ const TransactionsView = ({
   transactions,
   fromDate,
   toDate,
-  totalAmount,
   goToNextPage,
   goToPrevPage,
   filterByDate,
@@ -94,8 +93,7 @@ const TransactionsView = ({
         onPrevPage={goToPrevPage}
         className="large striped fixed single line selectable"
         resourceName="transactions"
-        header={<TransactionRow isHeader />}
-        footer={<TransactionRow totalAmount={totalAmount} isFooter />}>
+        header={<TransactionRow isHeader />}>
         {transactions.map((tx, index) =>
           <TransactionRow
             key={index}
@@ -115,7 +113,6 @@ const TransactionsView = ({
 
 TransactionsView.propTypes = {
   transactions: PropTypes.array.isRequired,
-  totalAmount: PropTypes.number.isRequired,
   goToNextPage: PropTypes.func.isRequired,
   goToPrevPage: PropTypes.func.isRequired,
   filterByDate: PropTypes.func.isRequired,

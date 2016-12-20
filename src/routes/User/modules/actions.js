@@ -3,14 +3,12 @@ import * as types from './types';
 import * as schema from 'schema/users';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getIsUpToDate, getUser, getIsVerified} from './selectors';
+import {getUser, getIsVerified} from './selectors';
 import {fileGetUrl} from 'lib/aws';
 import {signOut} from 'modules/auth/actions';
 
-export const fetchUser = (userId, forceRefresh = false) => {
-  return async(dispatch, getState) => {
-    const isUpToDate = getIsUpToDate(getState());
-    if (isUpToDate && !forceRefresh) return;
+export const fetchUser = (userId) => {
+  return async dispatch => {
     dispatch({type: types.FETCH_USER_REQUEST});
     try {
       const result = await api.fetchUser(userId);

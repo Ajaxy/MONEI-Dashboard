@@ -30,8 +30,7 @@ const byId = (state = {}, action) => {
         ...state,
         [action.userId]: {
           ...state[action.userId],
-          ...action.byId[action.userId],
-          _isUpToDate: true
+          ...action.byId[action.userId]
         }
       };
     default:
