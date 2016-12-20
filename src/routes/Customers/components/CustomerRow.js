@@ -37,9 +37,9 @@ CustomerRow.propTypes = {
     givenName: PropTypes.string,
     surname: PropTypes.string,
     createdAt: PropTypes.number
-  }).isRequired,
+  }),
   isHeader: PropTypes.bool,
-  viewCustomer: PropTypes.func.isRequired
+  viewCustomer: PropTypes.func
 };
 
 export default CustomerRow;
