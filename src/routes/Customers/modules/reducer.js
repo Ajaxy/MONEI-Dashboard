@@ -9,7 +9,7 @@ const ids = (state = [], action) => {
     case types.CLEAR_CUSTOMERS:
       return [];
     case types.FETCH_CUSTOMERS_SUCCESS:
-      return action.ids || [];
+      return [...action.ids];
     case customerTypes.FETCH_CUSTOMER_SUCCESS:
       return mergeArrays(state, [action.customerId]);
     default:
@@ -22,7 +22,7 @@ const byId = (state = {}, action) => {
     case types.CLEAR_CUSTOMERS:
       return {};
     case types.FETCH_CUSTOMERS_SUCCESS:
-      return action.byId || {};
+      return {...action.byId};
     case customerTypes.FETCH_CUSTOMER_SUCCESS:
       return {
         ...state,

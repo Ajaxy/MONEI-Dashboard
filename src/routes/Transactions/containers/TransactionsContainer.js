@@ -24,7 +24,7 @@ class Transactions extends Component {
   fetchTransactions() {
     const from = moment().startOf('day').valueOf();
     const to = moment().endOf('day').valueOf();
-    this.props.fetchTransactions(from, to, null, true);
+    this.props.fetchTransactions({from, to, forceRefresh: true});
     this.props.fetchSubAccounts();
   }
 
@@ -34,24 +34,24 @@ class Transactions extends Component {
 
   componentDidUpdate(nextProps) {
     if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
-      this.fetchTransactions();
+      this.fetchTransactions({forceRefresh: true});
     }
   }
 
   goToNextPage = () => {
     const {page} = this.props;
-    this.props.fetchTransactions(page.from, page.to, page.nextPage);
+    this.props.fetchTransactions({...page, page: page.nextPage});
   };
 
   goToPrevPage = () => {
     const {page} = this.props;
-    this.props.fetchTransactions(page.from, page.to, page.prevPage);
+    this.props.fetchTransactions({...page, page: page.prevPage});
   };
 
   filterByDate = (fromDate, toDate) => {
     const from = moment(fromDate).startOf('day').valueOf();
     const to = moment(toDate).endOf('day').valueOf();
-    this.props.fetchTransactions(from, to);
+    this.props.fetchTransactions({from, to});
   };
 
   viewDetails = (transactionId) => {

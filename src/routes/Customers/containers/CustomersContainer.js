@@ -21,12 +21,12 @@ class Customers extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchCustomers();
+    this.props.fetchCustomers({forceRefresh: true});
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
-      this.props.fetchCustomers();
+      this.props.fetchCustomers({forceRefresh: true});
     }
   }
 

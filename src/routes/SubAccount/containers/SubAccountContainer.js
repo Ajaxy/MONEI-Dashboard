@@ -5,7 +5,7 @@ import {fetchSubAccounts} from 'routes/SubAccounts/modules/actions';
 import {getActiveSubAccount, getIsFetching, getIsUpToDate} from 'routes/SubAccounts/modules/selectors';
 import SubAccountView from '../components/SubAccountView';
 
-class Channel extends Component {
+class SubAccount extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
@@ -41,4 +41,4 @@ const mapStateToProps = (state, props) => ({
   subAccountId: props.params.subAccountId
 });
 
-export default connect(mapStateToProps, {fetchSubAccounts})(Channel);
+export default connect(mapStateToProps, {fetchSubAccounts})(SubAccount);
