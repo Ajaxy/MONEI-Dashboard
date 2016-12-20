@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actions from 'modules/profile/actions';
 import * as selectors from 'modules/profile/selectors';
-import HomeView from '../components/HomeView';
 
 class Home extends Component {
   static propTypes = {
@@ -14,6 +13,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
+    console.log('home did mount');
     if (this.props.isAdmin) {
       this.props.router.replace('/users');
     } else {
@@ -22,7 +22,7 @@ class Home extends Component {
   }
 
   render() {
-    return <HomeView />;
+    return null;
   }
 }
 
