@@ -99,7 +99,6 @@ export const showLock = () => {
       dispatch({
         type: types.AUTH_SUCCESS
       });
-      dispatch(replace('/'));
     }));
   };
 };
@@ -118,7 +117,6 @@ export const signInWithToken = (token) => {
     dispatch({
       type: types.AUTH_SUCCESS
     });
-    dispatch(replace('/'));
   };
 };
 

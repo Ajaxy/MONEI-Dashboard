@@ -35,7 +35,6 @@ CoreLayout.propTypes = {
   children: PropTypes.element.isRequired,
   isAuthenticated: PropTypes.bool,
   isAuthenticating: PropTypes.bool,
-  isWaiting: PropTypes.bool,
   isPlain: PropTypes.bool,
   isFetchingProfile: PropTypes.bool
 };
