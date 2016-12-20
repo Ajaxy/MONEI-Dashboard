@@ -160,7 +160,7 @@ export const finalizeAuth = (profile, idToken) => {
     dispatch(autoSignOut(token));
     await fetchAWSCredentials(token);
     const fetchedProfile = await dispatch(actions.fetchProfile());
-    dispatch(actions.setSandboxMode(!fetchedProfile.mid));
+    dispatch(actions.setSandboxMode(storage.get('sandbox') || !fetchedProfile.mid));
   };
 };
 
