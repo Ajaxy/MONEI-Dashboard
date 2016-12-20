@@ -12,7 +12,6 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-    console.log('did mount');
     this.refresh();
   }
 

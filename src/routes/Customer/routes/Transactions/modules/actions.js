@@ -5,8 +5,11 @@ import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
-export const fetchTransactions = (customerId, page) => {
+export const fetchTransactions = (customerId, {page, limit, forceRefresh = false}) => {
   return async dispatch => {
+    if (forceRefresh) {
+      dispatch({type: types.CLEAR_C_TRANSACTIONS});
+    }
     dispatch({type: types.FETCH_C_TRANSACTIONS_REQUEST});
     try {
       const transactions = await api.fetchCustomerTransactions(customerId, {page, limit: PAGE_LIMIT});
@@ -25,7 +28,7 @@ export const fetchTransactions = (customerId, page) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchTransactions(page));
+          dispatch(fetchTransactions(customerId, {page, limit, forceRefresh}));
         }
       }));
     }

@@ -41,7 +41,7 @@ export const fetchTransactions = ({from, to, page, forceRefresh = false} = {}) =
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchTransactions(from, to, page, true));
+          dispatch(fetchTransactions({from, to, page, forceRefresh}));
         }
       }));
     }

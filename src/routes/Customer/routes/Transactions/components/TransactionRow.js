@@ -7,6 +7,7 @@ import cx from 'classnames';
 
 const TransactionRow = ({
   transaction,
+  onClick,
   isHeader = false
 }) => {
   if (isHeader) {
@@ -22,6 +23,7 @@ const TransactionRow = ({
     const {paymentType, currency, amount, result, transactionTimestamp} = transaction;
     return (
       <tr
+        onClick={e => onClick(transaction.id)}
         className={cx({negative: isFailed(result.code), warning: isRefund(paymentType)})}>
         <td>{getAmount(paymentType, currency, parseFloat(amount))}</td>
         <td>
@@ -38,7 +40,8 @@ const TransactionRow = ({
 
 TransactionRow.propTypes = {
   transaction: PropTypes.object,
-  isHeader: PropTypes.bool
+  isHeader: PropTypes.bool,
+  onClick: PropTypes.func
 };
 
 export const NUM_COLUMNS = 4;

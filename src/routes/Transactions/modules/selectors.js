@@ -43,7 +43,14 @@ export const getToDate = createSelector(
   page => moment(page.to).format('MMMM DD, YYYY')
 );
 
+export const getViewedTransactionId = createSelector(
+  transactionsSelector,
+  transactions => transactions.transactionViewed
+);
+
+
 export const getViewedTransaction = createSelector(
   transactionsSelector,
-  transactions => transactions.byId[transactions.transactionViewed] || {}
+  getViewedTransactionId,
+  (transactions, id) => transactions.byId[id] || {}
 );

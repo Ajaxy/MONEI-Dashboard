@@ -13,7 +13,6 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    console.log('home did mount');
     if (this.props.isAdmin) {
       this.props.router.replace('/users');
     } else {
