@@ -32,7 +32,7 @@ const TransactionsView = ({
   const toDateTimestamp = moment(toDate).endOf('day');
   const selectedPeriod = toDateTimestamp - fromDateTimestamp;
   return (
-    <section className="ui basic segment padded-bottom">
+    <section className="ui basic segment">
       <div className={classNames.filters}>
         <a
           className={cx('ui icon button', classNames.arrowButton)}
@@ -45,7 +45,7 @@ const TransactionsView = ({
           name="date"
           label={false}
           timeFormat={false}
-          isValidDate={date => date.isBefore(new Date())}
+          isValidDate={date => date.isSameOrBefore(new Date())}
           defaultValue={fromDate}
           value={fromDate}
           onChange={(date) => filterByDate(date, toDate)}
@@ -57,7 +57,7 @@ const TransactionsView = ({
           name="date"
           label={false}
           timeFormat={false}
-          isValidDate={date => date.isAfter(fromDate)}
+          isValidDate={date => date.isBetween(fromDate, new Date(), null, '[]')}
           defaultValue={toDate}
           value={toDate}
           onChange={(date) => filterByDate(fromDate, date)}

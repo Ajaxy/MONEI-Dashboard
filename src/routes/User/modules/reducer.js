@@ -54,7 +54,7 @@ const fileUrl = (state = null, action) => {
   switch (action.type) {
     case types.USER_FILE_URL_UPDATE:
       return action.data;
-    case types.FETCH_USER_SUCCESS:
+    case types.FETCH_USER_REQUEST:
       return null;
     default:
       return state;
