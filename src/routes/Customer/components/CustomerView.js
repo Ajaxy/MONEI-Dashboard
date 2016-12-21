@@ -8,7 +8,15 @@ export const CustomerView = ({customer, children, isFetching}) => {
   if (!customer.id) {
     return (
       <section className="ui basic segment padded-bottom">
-        <Loader active={isFetching} inline />
+        {isFetching
+          ? <Loader active inline />
+          : <h1 className="ui center aligned icon header">
+          <i className="frown red icon" />
+          <div className="content">
+            Oops! Customer not found.
+          </div>
+        </h1>
+        }
       </section>
     );
   }

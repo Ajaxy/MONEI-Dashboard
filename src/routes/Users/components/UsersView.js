@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import UserRow, {NUM_COLUMNS} from './UserRow';
 import Search from 'components/Search';
 import {PaginatedTable} from 'components/Table';
-import classNames from './UsersView.scss';
 
 const UsersView = ({
   users,
@@ -21,7 +20,6 @@ const UsersView = ({
       onSearch={handleSearchChange}
       defaultValue={searchQueryString}
       inputClass="fluid"
-      className={classNames.paddedBottom}
     />
     <PaginatedTable
       {...{isFetching, isFirstPage, isLastPage}}

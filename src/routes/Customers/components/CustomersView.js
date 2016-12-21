@@ -14,7 +14,7 @@ const CustomersView = ({
   viewCustomer,
   getPage
 }) => (
-  <section className="ui basic segment padded-bottom">
+  <section className="ui basic segment">
     <div className="ui grid stackable">
       <div className="seven wide column">
         <Search
