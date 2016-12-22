@@ -69,6 +69,17 @@ const isDetailsModalOpen = (state = false, action) => {
   }
 };
 
+const isExportModalOpen = (state = false, action) => {
+  switch (action.type) {
+    case types.EXPORT_TRANSACTIONS_START:
+      return true;
+    case types.EXPORT_TRANSACTIONS_CANCEL:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const transactionViewed = (state = null, action) => {
   switch (action.type) {
     case types.VIEW_TRANSACTIONS_START:
@@ -86,6 +97,7 @@ export default combineReducers({
   page,
   isFetching,
   isDetailsModalOpen,
-  transactionViewed
+  transactionViewed,
+  isExportModalOpen
 });
 

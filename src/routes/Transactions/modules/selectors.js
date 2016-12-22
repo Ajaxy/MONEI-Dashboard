@@ -18,6 +18,11 @@ export const getIsDetailsModalOpen = createSelector(
   transactions => transactions.isDetailsModalOpen
 );
 
+export const getIsExportModalOpen = createSelector(
+  transactionsSelector,
+  transactions => transactions.isExportModalOpen
+);
+
 export const getPage = createSelector(
   transactionsSelector,
   transactions => transactions.page
