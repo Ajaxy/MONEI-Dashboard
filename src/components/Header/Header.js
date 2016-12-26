@@ -29,7 +29,6 @@ const Header = ({
       {isAdmin ? <Link to="/users" className="item" activeClassName="active">Users</Link> : null }
       {!isAdmin ? <Link to="/transactions" className="item" activeClassName="active">Transactions</Link> : null }
       {!isAdmin ? <Link to="/customers" className="item" activeClassName="active">Customers</Link> : null }
-      {!isAdmin ? <Link to="/widget" className="item" activeClassName="active">Widget</Link> : null }
       {!isAdmin && !isMerchant && isVerificationRequested && <div className="item borderless text yellow">
         Production access pending
       </div>}

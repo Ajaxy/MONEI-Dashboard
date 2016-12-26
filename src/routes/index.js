@@ -13,7 +13,6 @@ import SubAccountsRoute from './SubAccounts';
 import SubAccountRoute from './SubAccount';
 import GettingStartedRoute from './GettingStarted';
 import NotFoundRoute from './NotFound';
-import WidgetRoute from './Widget';
 
 export const createRoutes = (store) => ({
   path: '/',
@@ -31,7 +30,6 @@ export const createRoutes = (store) => ({
     SubAccountsRoute(store),
     SubAccountRoute(store),
     GettingStartedRoute,
-    WidgetRoute,
     NotFoundRoute
   ]
 });
