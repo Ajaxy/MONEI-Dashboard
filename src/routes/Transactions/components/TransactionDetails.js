@@ -8,8 +8,9 @@ import {formatDate} from 'lib/utils';
 import {getAmount, isFailed} from 'routes/Transactions/modules/utils';
 import cx from 'classnames';
 import classNames from './TransactionDetails.scss';
+import Link from 'react-router/lib/Link';
 
-const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint}) => {
+const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint, isCustomerHidden = false}) => {
   const {
     customer = {},
     result = {},
@@ -27,7 +28,7 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
       <div className="header">Transaction details</div>
       <div className={cx('content', classNames.modalContent)}>
         <h4 className="ui header">Payment Details</h4>
-        <Table className="large definition">
+        <Table className="definition">
           <tr>
             <td className="three wide">Amount</td>
             <td>{getAmount(paymentType, currency, amount, false)}</td>
@@ -62,7 +63,7 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
           </tr>
         </Table>
         <h4 className="ui header">Card</h4>
-        <Table className="large definition">
+        <Table className="definition">
           <tr>
             <td className="three wide">Name</td>
             <td>{card.holder}</td>
@@ -80,11 +81,15 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
             <td>{transaction.paymentBrand}</td>
           </tr>
         </Table>
-        <h4 className="ui header">Customer</h4>
-        <Table className="large definition">
+        {!isCustomerHidden && <h4 className="ui header">Customer</h4>}
+        {!isCustomerHidden && <Table className="definition">
           <tr>
             <td className="three wide">Name</td>
-            <td>{`${customer.givenName} ${customer.surname}`}</td>
+            <td>
+              <Link to={`/customers/${transaction.customerId}`} onClick={onClose}>
+                {`${customer.givenName} ${customer.surname}`}
+              </Link>
+            </td>
           </tr>
           <tr>
             <td>Email</td>
@@ -118,7 +123,7 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint})
             <td>Zip Code</td>
             <td>{billing.postcode}</td>
           </tr>
-        </Table>
+        </Table>}
       </div>
       <div className="actions">
         <Button className="icon" onClick={onPrint}>

@@ -11,7 +11,7 @@ class Dashboard extends Component {
     isInSandboxMode: PropTypes.bool.isRequired
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.refresh();
   }
 

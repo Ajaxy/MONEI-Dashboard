@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import cx from 'classnames';
 import {USER_ROLES, VERIFICATION_STATUSES} from 'lib/enums';
-import classNames from './UserRow.scss';
 import humanize from 'humanize-string';
 import userPic from 'static/user.png';
 
@@ -35,10 +34,12 @@ const UserRow = ({
     });
     return (
       <tr
-        className={classNames.row}
         onClick={() => viewUser(user.id)}>
         <td>
-          <img className="ui avatar image" src={user.picture} onError={e => e.target.src = userPic} />
+          <img
+            className="ui avatar image"
+            src={user.picture || userPic}
+            onError={e => e.target.src = userPic} />
         </td>
         <td className="text overflow">{user.name || user.email}</td>
         <td className="text overflow">
@@ -52,7 +53,7 @@ const UserRow = ({
         <td>{user.country}</td>
         <td>{humanize(user.status || '')}</td>
         <td className="right aligned">
-          <i className={verificationStatusIcon}/>
+          <i className={verificationStatusIcon} />
         </td>
       </tr>
     );

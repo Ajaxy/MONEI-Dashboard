@@ -44,7 +44,7 @@ const SettingsView = ({
               </SelectItem>
             ))}
           </Select>
-          <Input {...comment} component="textarea" rows="2"/>
+          <Input {...comment} component="textarea" rows="2" />
           <Button
             type="submit"
             primary

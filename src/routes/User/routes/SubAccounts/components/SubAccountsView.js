@@ -24,6 +24,7 @@ const SubAccountsView = ({
           <th>Name</th>
           <th>Attached bank account</th>
           <th>Acquirer</th>
+          <th>Currency</th>
           <th>Status</th>
           <th />
         </tr>

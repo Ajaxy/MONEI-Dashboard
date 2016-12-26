@@ -56,6 +56,8 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
           <Link to={`/sub-accounts/${subAccount.id}`}>
             {subAccount.customName}
           </Link>
+          {' '}
+          {subAccount.commercialConditions && subAccount.commercialConditions.currency}
         </h3>
         <small className="description">
           {isSandboxMode

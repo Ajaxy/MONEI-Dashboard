@@ -1,6 +1,5 @@
 import * as types from './types';
 import {combineReducers} from 'redux';
-import {isFailed, isIncome} from './utils';
 export const stateKey = 'transactions';
 
 const ids = (state = [], action) => {
@@ -20,25 +19,6 @@ const byId = (state = {}, action) => {
       return {};
     case types.FETCH_TRANSACTIONS_SUCCESS:
       return {...action.byId};
-    default:
-      return state;
-  }
-};
-
-const totalAmount = (state = 0, action) => {
-  switch (action.type) {
-    case types.CLEAR_TRANSACTIONS:
-      return 0;
-    case types.FETCH_TRANSACTIONS_SUCCESS:
-      return action.ids.map(id =>
-        action.byId[id]
-      ).map(transaction => {
-        const {result, paymentType} = transaction;
-        if (isFailed(result.code)) return 0;
-        const amount = parseFloat(transaction.amount);
-        if (isIncome(result.code, paymentType)) return amount;
-        return -amount;
-      }).reduce((a, b) => a + b, 0);
     default:
       return state;
   }
@@ -106,7 +86,6 @@ export default combineReducers({
   page,
   isFetching,
   isDetailsModalOpen,
-  transactionViewed,
-  totalAmount
+  transactionViewed
 });
 

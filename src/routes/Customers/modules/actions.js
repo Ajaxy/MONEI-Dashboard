@@ -5,11 +5,14 @@ import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
 
-export const fetchCustomers = (params = {}) => {
+export const fetchCustomers = ({page, email, limit = PAGE_LIMIT, forceRefresh = false} = {}) => {
   return async dispatch => {
+    if (forceRefresh) {
+      dispatch({type: types.CLEAR_CUSTOMERS});
+    }
     dispatch({type: types.FETCH_CUSTOMERS_REQUEST});
     try {
-      const customers = await api.fetchCustomers({limit: PAGE_LIMIT, ...params});
+      const customers = await api.fetchCustomers({limit, page, email});
       const normalized = normalize(customers.items, schema.arrayOfCustomers);
       dispatch({
         type: types.FETCH_CUSTOMERS_SUCCESS,
@@ -17,7 +20,7 @@ export const fetchCustomers = (params = {}) => {
         ids: normalized.result,
         nextPage: customers.nextPage,
         prevPage: customers.prevPage,
-        email: params.email
+        email
       });
     } catch (error) {
       dispatch({
@@ -26,7 +29,7 @@ export const fetchCustomers = (params = {}) => {
       dispatch(addMessage({
         text: error,
         onRetry() {
-          dispatch(fetchCustomers(params));
+          dispatch(fetchCustomers({limit, page, email, forceRefresh}));
         }
       }));
     }

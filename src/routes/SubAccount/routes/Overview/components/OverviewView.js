@@ -3,22 +3,26 @@ import {Table} from 'components/Table';
 import humanize from 'humanize-string';
 
 const SubAccountOverview = ({subAccount, copyToClipboard, bankAccount, isFetchingBankAccounts, isInSandboxMode}) => (
-  <Table className="large definition" selectable>
-    <tr onClick={() => copyToClipboard(subAccount.sender, 'App ID')}>
+  <Table className="large definition">
+    <tr className="clickable" onClick={() => copyToClipboard(subAccount.sender, 'App ID')}>
       <td className="three wide">App ID</td>
       <td>{subAccount.sender}</td>
     </tr>
-    <tr onClick={() => copyToClipboard(subAccount.id, 'Channel ID')}>
+    <tr className="clickable" onClick={() => copyToClipboard(subAccount.id, 'Channel ID')}>
       <td className="three wide">Channel ID</td>
       <td>{subAccount.id}</td>
     </tr>
-    <tr onClick={() => copyToClipboard(subAccount.login, 'User ID')}>
+    <tr className="clickable" onClick={() => copyToClipboard(subAccount.login, 'User ID')}>
       <td className="three wide">User ID</td>
       <td>{subAccount.login}</td>
     </tr>
-    <tr onClick={() => copyToClipboard(subAccount.pwd, 'Password')}>
+    <tr className="clickable" onClick={() => copyToClipboard(subAccount.pwd, 'Password')}>
       <td className="three wide">Password</td>
       <td>{subAccount.pwd}</td>
+    </tr>
+    <tr>
+      <td className="three wide">Currency</td>
+      <td>{subAccount.commercialConditions && subAccount.commercialConditions.currency}</td>
     </tr>
     <tr>
       <td className="three wide">Status</td>
@@ -30,7 +34,7 @@ const SubAccountOverview = ({subAccount, copyToClipboard, bankAccount, isFetchin
         ? <td>Loading...</td>
         : bankAccount.id
         ? <td>{bankAccount.name} (...{bankAccount.last4Digits})</td>
-        : <td>No attached bank account yet</td>}
+        : <td className="error">No attached bank account yet</td>}
     </tr>}
     {!isInSandboxMode && <tr>
       <td className="three wide">Bank account status</td>

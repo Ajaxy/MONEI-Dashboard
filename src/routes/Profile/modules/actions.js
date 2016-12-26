@@ -3,7 +3,7 @@ import * as types from './types';
 import {getPhoneNumber} from './selectors';
 import {trackEvent} from 'lib/intercom';
 import {addMessage} from 'modules/messages/actions';
-import {updateProfileMetaData, updateProfileLocally, updateProfile} from 'modules/profile/actions';
+import {updateProfileLocally, updateProfile} from 'modules/profile/actions';
 import * as selectors from 'modules/profile/selectors';
 import {fileUpload, fileDelete, fileGetUrl} from 'lib/aws';
 import {push} from 'react-router-redux';
@@ -57,7 +57,7 @@ export const phoneVerificationCheck = ({verificationCode}) => {
         phoneNumber,
         verificationCode
       });
-      profile.app_metadata.phone_number = phoneNumber;
+      profile.phoneNumber = phoneNumber;
       dispatch(updateProfileLocally(profile));
       dispatch({
         type: types.PHONE_VERIFICATION_CHECK_SUCCESS
@@ -154,12 +154,11 @@ export const requestVerificationCancel = () => ({
 
 export const requestVerification = ({redirect}) => {
   return async(dispatch, getState) => {
-    const profile = selectors.getProfile(getState());
     dispatch({
       type: types.PROFILE_VERIFICATION_REQUEST
     });
     try {
-      const data = await api.requestAccountVerification(profile);
+      const data = await api.requestAccountVerification();
       dispatch(updateProfileLocally(data));
       dispatch({
         type: types.PROFILE_VERIFICATION_SUCCESS

@@ -2,35 +2,25 @@ import {createSelector} from 'reselect';
 import {stateKey} from './reducer';
 import moment from 'moment';
 
-const customersSelector = state => state[stateKey];
+const transactionsSelector = state => state[stateKey];
 export const getTransactions = createSelector(
-  customersSelector,
-  customers => customers.ids.map(id => customers.byId[id])
-);
-
-export const getTransactionIds = createSelector(
-  customersSelector,
-  customers => customers.ids
-);
-
-export const getTotalAmount = createSelector(
-  customersSelector,
-  customers => customers.totalAmount
+  transactionsSelector,
+  transactions => transactions.ids.map(id => transactions.byId[id])
 );
 
 export const getIsFetching = createSelector(
-  customersSelector,
-  customers => customers.isFetching
+  transactionsSelector,
+  transactions => transactions.isFetching
 );
 
 export const getIsDetailsModalOpen = createSelector(
-  customersSelector,
-  customers => customers.isDetailsModalOpen
+  transactionsSelector,
+  transactions => transactions.isDetailsModalOpen
 );
 
 export const getPage = createSelector(
-  customersSelector,
-  customers => customers.page
+  transactionsSelector,
+  transactions => transactions.page
 );
 
 export const getIsFirstPage = createSelector(
@@ -53,7 +43,14 @@ export const getToDate = createSelector(
   page => moment(page.to).format('MMMM DD, YYYY')
 );
 
+export const getViewedTransactionId = createSelector(
+  transactionsSelector,
+  transactions => transactions.transactionViewed
+);
+
+
 export const getViewedTransaction = createSelector(
-  customersSelector,
-  customers => customers.byId[customers.transactionViewed] || {}
+  transactionsSelector,
+  getViewedTransactionId,
+  (transactions, id) => transactions.byId[id] || {}
 );

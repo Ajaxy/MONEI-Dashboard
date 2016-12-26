@@ -12,7 +12,6 @@ const TransactionsView = ({
   transactions,
   fromDate,
   toDate,
-  totalAmount,
   goToNextPage,
   goToPrevPage,
   filterByDate,
@@ -33,7 +32,7 @@ const TransactionsView = ({
   const toDateTimestamp = moment(toDate).endOf('day');
   const selectedPeriod = toDateTimestamp - fromDateTimestamp;
   return (
-    <section className="ui basic segment padded-bottom">
+    <section className="ui basic segment">
       <div className={classNames.filters}>
         <a
           className={cx('ui icon button', classNames.arrowButton)}
@@ -46,7 +45,7 @@ const TransactionsView = ({
           name="date"
           label={false}
           timeFormat={false}
-          isValidDate={date => date.isBefore(new Date())}
+          isValidDate={date => date.isSameOrBefore(new Date())}
           defaultValue={fromDate}
           value={fromDate}
           onChange={(date) => filterByDate(date, toDate)}
@@ -58,7 +57,7 @@ const TransactionsView = ({
           name="date"
           label={false}
           timeFormat={false}
-          isValidDate={date => date.isAfter(fromDate)}
+          isValidDate={date => date.isBetween(fromDate, new Date(), null, '[]')}
           defaultValue={toDate}
           value={toDate}
           onChange={(date) => filterByDate(fromDate, date)}
@@ -94,8 +93,7 @@ const TransactionsView = ({
         onPrevPage={goToPrevPage}
         className="large striped fixed single line selectable"
         resourceName="transactions"
-        header={<TransactionRow isHeader />}
-        footer={<TransactionRow totalAmount={totalAmount} isFooter />}>
+        header={<TransactionRow isHeader />}>
         {transactions.map((tx, index) =>
           <TransactionRow
             key={index}
@@ -115,7 +113,6 @@ const TransactionsView = ({
 
 TransactionsView.propTypes = {
   transactions: PropTypes.array.isRequired,
-  totalAmount: PropTypes.number.isRequired,
   goToNextPage: PropTypes.func.isRequired,
   goToPrevPage: PropTypes.func.isRequired,
   filterByDate: PropTypes.func.isRequired,

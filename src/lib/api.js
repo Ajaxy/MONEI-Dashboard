@@ -1,6 +1,6 @@
 import axios from 'axios';
 import storage from 'store';
-import {getProfile, getIsInSandboxMode} from 'modules/profile/selectors'
+import {getProfile, getIsInSandboxMode} from 'modules/profile/selectors';
 import {signOut} from 'modules/auth/actions';
 import {isTokenExpired} from 'lib/jwt';
 
@@ -83,7 +83,7 @@ export const createSandbox = (name) =>
 // Transactions
 
 export const fetchTransactions = (params = {}) =>
-  apiClient.get('transactions/stored', params);
+  apiClient.get('transactions/stored', {params});
 
 export const fetchTransactionStats = () =>
   apiClient.get('transactions/stats');
@@ -92,6 +92,12 @@ export const fetchTransactionStats = () =>
 
 export const fetchCustomers = (params = {}) =>
   apiClient.get('customers', {params});
+
+export const fetchCustomer = (customerId) =>
+  apiClient.get(`customers/${customerId}`);
+
+export const fetchCustomerTransactions = (customerId, params = {}) =>
+  apiClient.get(`customers/${customerId}/transactions`, {params});
 
 // Users
 
@@ -105,7 +111,7 @@ export const updateUser = (userId, data = {}) =>
   apiClient.patch(`stored-users/${userId}`, data);
 
 export const verifyUser = (userId) =>
-  apiClient.patch(`users/${userId}/verify`, {});
+  apiClient.patch(`stored-users/${userId}/verify`, {});
 
 export const impersonateUser = (userId, {redirect_uri}) =>
   apiClient.post(`users/${userId}/impersonate`, {redirect_uri});

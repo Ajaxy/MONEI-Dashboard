@@ -25,12 +25,12 @@ const byId = (state = {}, action) => {
       return action.byId || {};
     case userTypes.FETCH_USER_SUCCESS:
     case userTypes.UPDATE_USER_SUCCESS:
+    case userTypes.VERIFY_USER_SUCCESS:
       return {
         ...state,
         [action.userId]: {
           ...state[action.userId],
-          ...action.byId[action.userId],
-          _isUpToDate: true
+          ...action.byId[action.userId]
         }
       };
     default:
