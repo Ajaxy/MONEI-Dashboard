@@ -1,14 +1,22 @@
 import gulp from 'gulp';
 import gulpif from 'gulp-if';
 import awspublish from 'gulp-awspublish';
+import awspublishRouter from  'gulp-awspublish-router';
 import invalidateCloudfront from 'gulp-invalidate-cloudfront';
 import config from './config';
 import _debug from 'debug';
 
 const debug = _debug('app:gulp:config');
 
-const headers = {
-  'Cache-Control': 'max-age=315360000, no-transform, public'
+const routerConfig = {
+  cache: {
+    cacheTime: 315360000
+  },
+  routes: {
+    'index.html': {
+      cacheTime: 300,
+    }
+  }
 };
 
 const invalidationBatch = {
@@ -24,7 +32,8 @@ gulp.task('default', () => {
   const publisher = awspublish.create(config.S3);
   gulp.src('dist/**/*.*')
     .pipe(awspublish.gzip())
-    .pipe(publisher.publish(headers))
+    .pipe(awspublishRouter(routerConfig))
+    .pipe(publisher.publish())
     .pipe(publisher.sync())
     .pipe(publisher.cache())
     .pipe(awspublish.reporter())

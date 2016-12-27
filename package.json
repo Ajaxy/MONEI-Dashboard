@@ -162,6 +162,7 @@
     "fs-extra": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-awspublish": "^3.3.0",
+    "gulp-awspublish-router": "^0.1.2",
     "gulp-if": "^2.0.2",
     "gulp-invalidate-cloudfront": "^0.1.2",
     "history": "^3.0.0",
