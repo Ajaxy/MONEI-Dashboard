@@ -11,11 +11,12 @@ const debug = _debug('app:gulp:config');
 const routerConfig = {
   routes: {
     'index.html': {
-      cacheTime: 300,
+      cacheTime: 60,
       gzip: true
     },
     '.*': {
-      cacheTime: 315360000
+      cacheTime: 630720000,
+      gzip: true
     }
   }
 };
