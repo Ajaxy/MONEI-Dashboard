@@ -3,7 +3,7 @@ import scriptjs from 'scriptjs';
 import classNames from './WidgetView.scss';
 
 const MIN_AMOUNT = 1;
-const MAX_AMOUNT = 999;
+const MAX_AMOUNT = 9999;
 
 // TODO Create npm package for widget.
 scriptjs('http://monei-jsapi.s3-website.eu-central-1.amazonaws.com/build/widget.js');
@@ -26,17 +26,17 @@ class WidgetView extends Component {
     window.monei.widget.setupAll();
   }
 
-  onChangeAmount(e) {
+  onChangeAmount = (e) => {
     this.setState({amount: e.target.value});
-  }
+  };
 
-  onChangeRedirectUrl(e) {
+  onChangeRedirectUrl = (e) => {
     this.setState({redirectUrl: e.target.value});
-  }
+  };
 
   buildButtonHtml() {
     const {currency, userId, channelId} = this.props;
-    const {amount} = this.state;
+    const {amount, redirectUrl} = this.state;
 
     return `<div
       class="monei-widget"
@@ -52,56 +52,41 @@ class WidgetView extends Component {
     const buttonHtml = this.buildButtonHtml();
 
     return (
-      <section className={classNames.container}>
-        <h1 className="ui header">
-          MONEI Widget
-          <div className="sub header">Easily collect payments from your customers</div>
-        </h1>
-        <h3>1. Choose the amount you want to charge:</h3>
-        <div className={classNames.amount}>
-          <div className="ui right labeled input">
-            <div className="ui label">{currency.toUpperCase()}</div>
-            <input
-              type="number"
-              min={MIN_AMOUNT}
-              max={MAX_AMOUNT}
-              value={amount}
-              onChange={this.onChangeAmount.bind(this)}
-            />
-            <div className="ui basic label">.00</div>
+      <section className="ui vertical segment">
+        <div className="ui stackable grid">
+          <div className="nine wide column">
+            <p>Easily collect payments from your customers</p>
+            <h3>1. Choose the amount you want to charge:</h3>
+            <div className={classNames.amount}>
+              <div className="ui labeled input">
+                <div className="ui label">{currency.toUpperCase()}</div>
+                <input
+                  type="number"
+                  min={MIN_AMOUNT}
+                  max={MAX_AMOUNT}
+                  value={amount}
+                  onChange={this.onChangeAmount}
+                />
+              </div>
+            </div>
+            <h3>2. Insert this code between <code>&lt;head&gt;</code> tags:</h3>
+            <pre>&lt;script type=&quot;text/javascript&quot;src=&quot;https://jsapi.monei.net/widget.js&quot;&gt;&lt;
+              /script&gt;</pre>
+            <h3>3. Setup the callback URL:</h3>
+            <div className="ui labeled fluid input">
+              <div className="ui label">
+                https://
+              </div>
+              <input
+                type="text"
+                value={this.state.redirectUrl}
+                onChange={this.onChangeRedirectUrl}
+              />
+            </div>
+            <h3>3. Insert this code in any place you want to put a widget:</h3>
+            <pre>{buttonHtml}</pre>
           </div>
-          <input
-            type="range"
-            min={MIN_AMOUNT}
-            max={MAX_AMOUNT}
-            name="amount"
-            value={amount}
-            onChange={this.onChangeAmount.bind(this)}
-          />
         </div>
-        <h3>2. Insert this code between <code>&lt;head&gt;</code> tags:</h3>
-        <pre>
-          &lt;script type=&quot;text/javascript&quot;
-          src=&quot;https://jsapi.monei.net/widget.js&quot;&gt;&lt;/script&gt;
-        </pre>
-        {/*
-         <h3>3. Setup the callback URL:</h3>
-         <div className="ui labeled fluid input">
-         <div className="ui label">
-         https://
-         </div>
-         <input
-         type="text"
-         value={this.state.redirectUrl}
-         onKeyUp={this.onChangeRedirectUrl.bind(this)}
-         // onKeyUp={this.onChangeRedirectUrl.bind(this)}
-         />
-         </div>
-         */}
-        <h3>3. Insert this code in any place you want to put widget:</h3>
-        <pre>
-          {buttonHtml}
-        </pre>
         <h2>Demo</h2>
         <div dangerouslySetInnerHTML={{__html: buttonHtml}}></div>
       </section>
