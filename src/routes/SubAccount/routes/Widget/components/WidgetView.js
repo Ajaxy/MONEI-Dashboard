@@ -69,7 +69,7 @@ class WidgetView extends Component {
                 />
               </div>
             </div>
-            <h3>2. Insert this code between <code>&lt;head&gt;</code> tags:</h3>
+            <h3>2. Insert this code between <code>&lt;head&gt;&lt;/head&gt;</code> tags:</h3>
             <pre>&lt;script type=&quot;text/javascript&quot;src=&quot;https://jsapi.monei.net/widget.js&quot;&gt;&lt;
               /script&gt;</pre>
             <h3>3. Setup the callback URL:</h3>
