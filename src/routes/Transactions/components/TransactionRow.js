@@ -23,7 +23,7 @@ const TransactionRow = ({
     );
   } else {
     const {paymentType, currency, amount, result, customer, transactionTimestamp} = transaction;
-    const customerName = `${customer.givenName} ${customer.surname}`;
+    const customerName = `${customer.givenName || ''} ${customer.surname || ''}`;
     return (
       <tr
         onClick={e => onClick && onClick(transaction.id)}
