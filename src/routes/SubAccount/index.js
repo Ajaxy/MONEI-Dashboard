@@ -6,6 +6,7 @@ import GuidesRoute from './routes/Guides';
 import ZapierRoute from './routes/Zapier';
 import SettingsRoute from './routes/Settings';
 import WebhooksRoute from './routes/Webhooks';
+import WidgetRoute from './routes/Widget';
 import reducer, {stateKey} from './modules/reducer';
 
 export default (store) => {
@@ -18,7 +19,8 @@ export default (store) => {
       GuidesRoute,
       ZapierRoute,
       SettingsRoute,
-      WebhooksRoute(store)
+      WebhooksRoute(store),
+      WidgetRoute
     ]
   };
 };

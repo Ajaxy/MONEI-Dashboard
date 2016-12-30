@@ -84,7 +84,9 @@ const config = {
     'card-validator',
     'liquid.js',
     'browser-filesaver',
-    'html2canvas'
+    'html2canvas',
+    'scriptjs',
+    'base64-url'
   ],
 
   aws_services: [

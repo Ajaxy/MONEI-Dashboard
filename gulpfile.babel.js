@@ -1,8 +1,6 @@
 import gulp from 'gulp';
-import gulpif from 'gulp-if';
 import awspublish from 'gulp-awspublish';
-import awspublishRouter from  'gulp-awspublish-router';
-import invalidateCloudfront from 'gulp-invalidate-cloudfront';
+import awspublishRouter from 'gulp-awspublish-router';
 import config from './config';
 import _debug from 'debug';
 
@@ -21,14 +19,6 @@ const routerConfig = {
   }
 };
 
-const invalidationBatch = {
-  CallerReference: new Date().toString(),
-  Paths: {
-    Quantity: 1,
-    Items: ['/index.html']
-  }
-};
-
 gulp.task('default', () => {
   debug(`Deploying to ${config.stage.toUpperCase()} stage`);
   const publisher = awspublish.create(config.S3);
@@ -37,9 +27,5 @@ gulp.task('default', () => {
     .pipe(publisher.publish())
     .pipe(publisher.sync())
     .pipe(publisher.cache())
-    .pipe(awspublish.reporter())
-    .pipe(gulpif(
-      config.stage === 'production',
-      invalidateCloudfront(invalidationBatch, config.cloudfront)
-    ));
+    .pipe(awspublish.reporter());
 });
