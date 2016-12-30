@@ -86,7 +86,7 @@ class WidgetView extends Component {
                 onChange={this.onChangeRedirectUrl}
               />
             </div>
-            <h3>3. Insert this code in any place you want to put a widget:</h3>
+            <h3>4. Insert this code in any place you want to put a widget:</h3>
             <pre>{buttonHtml}</pre>
           </div>
         </div>
