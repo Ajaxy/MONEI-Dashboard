@@ -15,7 +15,7 @@ class WidgetView extends Component {
 
     this.state = {
       amount: 50,
-      redirectUrl: 'yoursite.com/monei-callback'
+      redirectUrl: 'http://yoursite.com/monei-callback'
     };
   }
 
