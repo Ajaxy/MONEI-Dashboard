@@ -87,7 +87,7 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint, 
             <td className="three wide">Name</td>
             <td>
               <Link to={`/customers/${transaction.customerId}`} onClick={onClose}>
-                {`${customer.givenName} ${customer.surname}`}
+                {`${customer.givenName || ''} ${customer.surname || ''}`}
               </Link>
             </td>
           </tr>
