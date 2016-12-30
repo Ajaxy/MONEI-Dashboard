@@ -38,7 +38,6 @@ class WidgetView extends Component {
   buildButtonHtml() {
     const {currency, userId, channelId} = this.props;
     const {amount, redirectUrl} = this.state;
-    console.log(userId, channelId);
     const token = base64url.encode(JSON.stringify({
       u: userId,
       c: channelId
@@ -49,6 +48,9 @@ class WidgetView extends Component {
       data-amount="${amount}"
       data-currency="${currency}"
       data-token="${token}"
+      data-name="Demo widget"
+      data-description="you can embed it anywhere"
+      data-button-text="Pay with Card"
       data-redirect-url="${redirectUrl}"></div>`;
   }
 
