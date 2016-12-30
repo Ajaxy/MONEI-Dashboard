@@ -36,7 +36,7 @@ export default {
     const region = 'us-east-1';
     Object.assign(config.globals.APP_CONFIG, {
       apiBaseURL: 'https://api.monei.net/',
-      widgetScriptURL: 'https://widget.monei.net.s3-website-eu-west-1.amazonaws.com//widget.js',
+      widgetScriptURL: 'https://jsapi.monei.net/widget.js',
       adminBucket: 'microapps-monei-verified-documents',
       userBucket: 'microapps-monei-documents',
       intercomID: 'blsf713t',
