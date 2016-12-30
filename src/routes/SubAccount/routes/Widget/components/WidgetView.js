@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import scriptjs from 'scriptjs';
 import base64url from 'base64-url';
+import DotHint from 'components/DotHint';
 import classNames from './WidgetView.scss';
 
 const MIN_AMOUNT = 1;
@@ -80,7 +81,12 @@ class WidgetView extends Component {
             <h3>2. Insert this code between <code>&lt;head&gt;&lt;/head&gt;</code> tags:</h3>
             <pre>&lt;script type=&quot;text/javascript&quot;src=&quot;https://jsapi.monei.net/widget.js&quot;&gt;&lt;
               /script&gt;</pre>
-            <h3>3. Setup the callback URL:</h3>
+            <h3>
+              3. Setup the redirect URL:
+              <DotHint>
+                The results of all transactions will be passed to this URL
+              </DotHint>
+            </h3>
             <div className="ui fluid input">
               <input
                 type="text"
