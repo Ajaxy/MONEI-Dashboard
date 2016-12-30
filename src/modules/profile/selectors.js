@@ -41,7 +41,7 @@ export const getProfileType = createSelector(
 
 export const getIsUser = createSelector(
   getProfile,
-  data => data.role === USER_ROLES.User
+  data => !data.role || data.role === USER_ROLES.User
 );
 
 export const getIsAdmin = createSelector(

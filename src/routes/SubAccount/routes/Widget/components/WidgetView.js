@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import scriptjs from 'scriptjs';
+import base64url from 'base64-url';
 import classNames from './WidgetView.scss';
 
 const MIN_AMOUNT = 1;
 const MAX_AMOUNT = 9999;
 
 // TODO Create npm package for widget.
-scriptjs('http://monei-jsapi.s3-website.eu-central-1.amazonaws.com/build/widget.js');
+scriptjs(APP_CONFIG.widgetScriptURL);
 
 class WidgetView extends Component {
   constructor(props, context) {
@@ -37,17 +38,22 @@ class WidgetView extends Component {
   buildButtonHtml() {
     const {currency, userId, channelId} = this.props;
     const {amount, redirectUrl} = this.state;
+    console.log(userId, channelId);
+    const token = base64url.encode(JSON.stringify({
+      u: userId,
+      c: channelId
+    }));
 
     return `<div
       class="monei-widget"
       data-amount="${amount}"
       data-currency="${currency}"
-      data-user-id="${userId}"
-      data-channel-id="${channelId}"></div>`;
+      data-token="${token}"
+      data-redirect-url="${redirectUrl}"></div>`;
   }
 
   render() {
-    const {currency, userId, channelId} = this.props;
+    const {currency} = this.props;
     const {amount} = this.state;
     const buttonHtml = this.buildButtonHtml();
 
@@ -73,10 +79,7 @@ class WidgetView extends Component {
             <pre>&lt;script type=&quot;text/javascript&quot;src=&quot;https://jsapi.monei.net/widget.js&quot;&gt;&lt;
               /script&gt;</pre>
             <h3>3. Setup the callback URL:</h3>
-            <div className="ui labeled fluid input">
-              <div className="ui label">
-                https://
-              </div>
+            <div className="ui fluid input">
               <input
                 type="text"
                 value={this.state.redirectUrl}

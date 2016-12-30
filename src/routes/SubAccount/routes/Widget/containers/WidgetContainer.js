@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getActiveSubAccount} from 'routes/SubAccounts/modules/selectors';
+import {getUserId} from 'modules/profile/selectors'
 import WidgetView from '../components/WidgetView';
 
 const DEFAULT_CURRENCY = 'eur';
@@ -18,7 +19,7 @@ const mapStateToProps = (state) => {
   const {commercialConditions} = subAccount;
 
   return {
-    userId: subAccount.login,
+    userId: getUserId(state),
     channelId: subAccount.id,
     currency: commercialConditions && commercialConditions.currency ?
       commercialConditions.currency.toLowerCase() :
