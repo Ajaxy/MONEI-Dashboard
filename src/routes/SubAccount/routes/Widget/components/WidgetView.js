@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import scriptjs from 'scriptjs';
+import {widget} from 'monei-jsapi';
 import base64url from 'base64-url';
 import DotHint from 'components/DotHint';
 import classNames from './WidgetView.scss';
 
 const MIN_AMOUNT = 1;
 const MAX_AMOUNT = 9999;
-
-// TODO Create npm package for widget.
-scriptjs(APP_CONFIG.widgetScriptURL);
 
 class WidgetView extends Component {
   constructor(props, context) {
@@ -21,11 +18,11 @@ class WidgetView extends Component {
   }
 
   componentDidMount() {
-    window.monei.widget.setupAll();
+    widget.setupAll();
   }
 
   componentDidUpdate() {
-    window.monei.widget.setupAll();
+    widget.setupAll();
   }
 
   onChangeAmount = (e) => {
