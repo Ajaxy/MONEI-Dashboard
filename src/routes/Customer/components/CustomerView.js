@@ -11,11 +11,11 @@ export const CustomerView = ({customer, children, isFetching}) => {
         {isFetching
           ? <Loader active inline />
           : <h1 className="ui center aligned icon header">
-          <i className="frown red icon" />
-          <div className="content">
+            <i className="frown red icon" />
+            <div className="content">
             Oops! Customer not found.
           </div>
-        </h1>
+          </h1>
         }
       </section>
     );

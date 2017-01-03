@@ -96,7 +96,7 @@ class WidgetView extends Component {
           </div>
         </div>
         <h2>Demo</h2>
-        <div dangerouslySetInnerHTML={{__html: buttonHtml}}></div>
+        <div dangerouslySetInnerHTML={{__html: buttonHtml}} />
       </section>
     );
   }

@@ -3,13 +3,17 @@ import {reduxForm} from 'redux-form';
 import NewTransactionView from '../components/NewTransactionView';
 import * as selectors from 'routes/SubAccounts/modules/selectors';
 import * as actions from 'routes/SubAccounts/modules/actions';
-import {getUserId} from 'modules/profile/selectors'
+import {getUserId} from 'modules/profile/selectors';
 import Validator from 'lib/validator';
+
+const DEFAULT_CURRENCY = 'eur';
 
 class NewTransaction extends Component {
   static propTypes = {
     fetchSubAccounts: PropTypes.func.isRequired,
-    isUpToDate: PropTypes.bool.isRequired
+    isUpToDate: PropTypes.bool.isRequired,
+    values: PropTypes.object.isRequired,
+    subAccountById: PropTypes.object.isRequired
   };
 
   componentDidMount() {
@@ -18,8 +22,13 @@ class NewTransaction extends Component {
   }
 
   render() {
+    const {values, subAccountById} = this.props;
+    const {commercialConditions} = subAccountById[values.subAccountId] || {};
+    const currency = commercialConditions && commercialConditions.currency
+      ? commercialConditions.currency.toLowerCase()
+      : DEFAULT_CURRENCY;
     return (
-      <NewTransactionView {...this.props} />
+      <NewTransactionView {...this.props} currency={currency} />
     );
   }
 }
@@ -40,14 +49,15 @@ const mapStateToProps = (state) => {
   const defaultSubAccount = subAccounts[0] || {};
   return {
     subAccounts,
+    subAccountById: selectors.getSubAccountById(state),
     isUpToDate: selectors.getIsUpToDate(state),
     userId: getUserId(state),
     isFetchingSubAccounts: selectors.getIsFetching(state),
     initialValues: {
       amount: 100,
       subAccountId: defaultSubAccount.id
-    },
-  }
+    }
+  };
 };
 
 export default reduxForm({

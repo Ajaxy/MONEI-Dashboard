@@ -10,11 +10,16 @@ class NewTransactionView extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     invalid: PropTypes.bool.isRequired,
-    fields: PropTypes.object.isRequired
+    fields: PropTypes.object.isRequired,
+    isFetchingSubAccounts: PropTypes.bool.isRequired,
+    currency: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    values: PropTypes.object.isRequired,
+    subAccounts: PropTypes.array.isRequired
   };
 
   setupWidget() {
-    const {userId, values} = this.props;
+    const {userId, values, currency} = this.props;
     if (values.subAccountId) {
       const token = base64url.encode(JSON.stringify({
         u: userId,
@@ -26,18 +31,18 @@ class NewTransactionView extends Component {
         name: 'New transaction',
         description: 'please enter customer data',
         token,
-        currency: 'eur',
+        currency,
         redirectUrl: location.href.replace('/new', '')
-      })
+      });
     }
   }
 
   componentDidMount() {
-    this.setupWidget()
+    this.setupWidget();
   }
 
   componentDidUpdate() {
-    this.setupWidget()
+    this.setupWidget();
   }
 
   submit = (formProps) => {
@@ -50,14 +55,21 @@ class NewTransactionView extends Component {
       isFetchingSubAccounts,
       subAccounts,
       handleSubmit,
-      invalid,
+      currency,
+      invalid
     } = this.props;
     return (
       <section className="ui basic segment">
         <h2 className="ui header">Create new transaction</h2>
         <div className="ui stackable vertically padded grid">
           <form className="ui form nine wide column" onSubmit={handleSubmit(this.submit)}>
-            <Input type="number" {...amount} />
+            <div className="fields">
+              <Input
+                type="number"
+                fieldClass="five wide"
+                hint={`the amount to charge in ${currency}`}
+                {...amount} />
+            </div>
             <Select
               label="Sub Account"
               loading={isFetchingSubAccounts}

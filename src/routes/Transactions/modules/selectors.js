@@ -48,7 +48,6 @@ export const getViewedTransactionId = createSelector(
   transactions => transactions.transactionViewed
 );
 
-
 export const getViewedTransaction = createSelector(
   transactionsSelector,
   getViewedTransactionId,

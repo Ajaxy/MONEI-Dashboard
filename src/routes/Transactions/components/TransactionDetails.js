@@ -140,7 +140,8 @@ TransactionDetails.propTypes = {
   subAccount: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onPrint: PropTypes.func.isRequired
+  onPrint: PropTypes.func.isRequired,
+  isCustomerHidden: PropTypes.bool
 };
 
 export default TransactionDetails;
