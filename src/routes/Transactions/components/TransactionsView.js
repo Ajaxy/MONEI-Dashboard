@@ -71,16 +71,19 @@ const TransactionsView = ({
         </Button>
         <Button
           className={classNames.filter}
+          disabled={isFetching}
           onClick={() => filterByDate(today, today)}>
           Today
         </Button>
         <Button
           className={classNames.filter}
+          disabled={isFetching}
           onClick={() => filterByDate(lastWeek, today)}>
           Last week
         </Button>
         <Button
           className={classNames.filter}
+          disabled={isFetching}
           onClick={() => filterByDate(lastMonth, today)}>
           Last month
         </Button>
