@@ -14,7 +14,8 @@ const Button = ({
   children,
   onClick,
   type,
-  style
+  style,
+  withRef
 }) => (
   <button
     style={style}
@@ -22,7 +23,8 @@ const Button = ({
       {loading, active, green: primary, positive, negative, basic, icon})}
     type={type}
     disabled={disabled || loading}
-    onClick={onClick}>
+    onClick={onClick}
+    ref={withRef}>
     {children}
   </button>
 );
@@ -40,7 +42,8 @@ Button.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   children: PropTypes.any,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  ref: PropTypes.func
 };
 
 export default Button;
