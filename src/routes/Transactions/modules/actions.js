@@ -4,17 +4,9 @@ import * as schema from 'schema/transactions';
 import {PAGE_LIMIT} from 'lib/constants';
 import {addMessage} from 'modules/messages/actions';
 import {normalize} from 'normalizr';
-import {getPage} from './selectors';
 
 export const fetchTransactions = ({from, to, page, forceRefresh = false} = {}) => {
-  return async(dispatch, getState) => {
-    const previous = getPage(getState());
-
-    // prevent double requests
-    // if (!forceRefresh && page === previous.page && from === previous.from && to === previous.to) {
-    //   return;
-    // }
-
+  return async dispatch => {
     // if we selected a new Date, let's clear the current list
     if (forceRefresh) {
       dispatch({type: types.CLEAR_TRANSACTIONS});

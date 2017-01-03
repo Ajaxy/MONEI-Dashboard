@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../modules/actions';
 import * as selectors from '../modules/selectors';
-import * as transactionActions from 'routes/Transactions/modules/actions'
+import * as transactionActions from 'routes/Transactions/modules/actions';
 import * as transactionSelectors from 'routes/Transactions/modules/selectors';
 import TransactionsView from '../components/TransactionsView';
 
@@ -67,7 +67,7 @@ const mapStateToProps = (state, props) => ({
   isLastPage: selectors.getIsLastPage(state),
   page: selectors.getPage(state),
   isDetailsModalOpen: transactionSelectors.getIsDetailsModalOpen(state),
-  transactionViewed: selectors.getViewedTransaction(state),
+  transactionViewed: selectors.getViewedTransaction(state)
 });
 
 export default connect(mapStateToProps, {...transactionActions, ...actions})(Transactions);

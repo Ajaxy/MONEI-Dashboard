@@ -15,7 +15,7 @@ const CustomerRow = ({customer, viewCustomer, isHeader = false}) => {
   } else {
     return (
       <tr onClick={() => viewCustomer(customer.id)}>
-        <td>{`${customer.givenName} ${customer.surname}`}</td>
+        <td>{`${customer.givenName || ''} ${customer.surname || ''}`}</td>
         <td>
           <a
             href={`mailto:${customer.email}`}

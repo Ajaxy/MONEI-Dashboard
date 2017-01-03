@@ -12,7 +12,7 @@ class SubAccount extends Component {
     fetchSubAccounts: PropTypes.func.isRequired,
     isSandboxMode: PropTypes.bool.isRequired,
     router: PropTypes.shape({
-      push: PropTypes.func.isRequired
+      replace: PropTypes.func.isRequired
     }).isRequired
   };
 

@@ -8,7 +8,7 @@ class Home extends Component {
   static propTypes = {
     isAdmin: PropTypes.bool.isRequired,
     router: PropTypes.shape({
-      push: PropTypes.func.isRequired
+      replace: PropTypes.func.isRequired
     }).isRequired
   };
 

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {PaginatedTable} from 'components/Table';
 import TransactionRow, {NUM_COLUMNS} from './TransactionRow';
-import TransactionDetails from 'routes/Transactions/components/TransactionDetails'
+import TransactionDetails from 'routes/Transactions/components/TransactionDetails';
 
 const TransactionsView = ({
   transactions,
@@ -32,7 +32,7 @@ const TransactionsView = ({
           <TransactionRow
             key={index}
             transaction={tx}
-            onClick={viewDetails}/>
+            onClick={viewDetails} />
         )}
       </PaginatedTable>
       <TransactionDetails
@@ -52,7 +52,12 @@ TransactionsView.propTypes = {
   goToPrevPage: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   isLastPage: PropTypes.bool.isRequired,
-  isFirstPage: PropTypes.bool
+  isFirstPage: PropTypes.bool,
+  viewDetails: PropTypes.func.isRequired,
+  closeDetails: PropTypes.func.isRequired,
+  printPage: PropTypes.func.isRequired,
+  isDetailsModalOpen: PropTypes.bool.isRequired,
+  transactionViewed: PropTypes.string
 };
 
 export default TransactionsView;

@@ -8,7 +8,7 @@ export default function(ComposedComponent) {
     static propTypes = {
       isAuthenticated: PropTypes.bool.isRequired,
       router: PropTypes.shape({
-        push: PropTypes.func.isRequired
+        replace: PropTypes.func.isRequired
       }).isRequired
     };
 
