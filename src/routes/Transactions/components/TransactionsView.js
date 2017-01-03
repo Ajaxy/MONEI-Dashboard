@@ -34,11 +34,12 @@ const TransactionsView = ({
   return (
     <section className="ui basic segment">
       <div className={classNames.filters}>
-        <a
+        <Button
+          disabled={isFetching}
           className={cx('ui icon button', classNames.arrowButton)}
           onClick={() => filterByDate(fromDateTimestamp - selectedPeriod, toDateTimestamp - selectedPeriod - 1)}>
           <i className="left chevron icon" />
-        </a>
+        </Button>
         <DateTimeInput
           fieldClass={classNames.filter}
           placeholder="From date"
@@ -62,25 +63,27 @@ const TransactionsView = ({
           value={toDate}
           onChange={(date) => filterByDate(fromDate, date)}
         />
-        <a
-          className={cx('ui icon button', classNames.arrowButton, {
-            disabled: fromDateTimestamp + selectedPeriod + 1 > today
-          })}
+        <Button
+          disabled={isFetching || fromDateTimestamp + selectedPeriod + 1 > today}
+          className={cx('ui icon button', classNames.arrowButton)}
           onClick={() => filterByDate(fromDateTimestamp + selectedPeriod + 1, toDateTimestamp + selectedPeriod)}>
           <i className="right chevron icon" />
-        </a>
+        </Button>
         <Button
           className={classNames.filter}
+          disabled={isFetching}
           onClick={() => filterByDate(today, today)}>
           Today
         </Button>
         <Button
           className={classNames.filter}
+          disabled={isFetching}
           onClick={() => filterByDate(lastWeek, today)}>
           Last week
         </Button>
         <Button
           className={classNames.filter}
+          disabled={isFetching}
           onClick={() => filterByDate(lastMonth, today)}>
           Last month
         </Button>
