@@ -35,12 +35,12 @@ export const getIsLastPage = createSelector(
 
 export const getFromDate = createSelector(
   getPage,
-  page => moment(page.from).format('MMMM DD, YYYY')
+  page => moment(page.from).format('MMM DD, YYYY')
 );
 
 export const getToDate = createSelector(
   getPage,
-  page => moment(page.to).format('MMMM DD, YYYY')
+  page => moment(page.to).format('MMM DD, YYYY')
 );
 
 export const getViewedTransactionId = createSelector(

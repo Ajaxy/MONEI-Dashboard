@@ -34,7 +34,7 @@ class Transactions extends Component {
 
   componentDidUpdate(nextProps) {
     if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
-      this.fetchTransactions({forceRefresh: true});
+      this.fetchTransactions();
     }
   }
 
