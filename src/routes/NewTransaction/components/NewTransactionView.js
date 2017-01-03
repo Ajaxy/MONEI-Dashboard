@@ -16,8 +16,6 @@ class NewTransactionView extends Component {
   setupWidget() {
     const {userId, values} = this.props;
     if (values.subAccountId) {
-      if (this.widgetIsInitialized) return;
-      this.widgetIsInitialized = true;
       const token = base64url.encode(JSON.stringify({
         u: userId,
         c: values.subAccountId

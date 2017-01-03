@@ -8,11 +8,13 @@ import Validator from 'lib/validator';
 
 class NewTransaction extends Component {
   static propTypes = {
-    fetchSubAccounts: PropTypes.func.isRequired
+    fetchSubAccounts: PropTypes.func.isRequired,
+    isUpToDate: PropTypes.bool.isRequired
   };
 
   componentDidMount() {
-    this.props.fetchSubAccounts();
+    const {isUpToDate, fetchSubAccounts} = this.props;
+    !isUpToDate && fetchSubAccounts();
   }
 
   render() {
@@ -21,7 +23,6 @@ class NewTransaction extends Component {
     );
   }
 }
-
 
 const rules = {
   amount: 'required|integer',
@@ -39,6 +40,7 @@ const mapStateToProps = (state) => {
   const defaultSubAccount = subAccounts[0] || {};
   return {
     subAccounts,
+    isUpToDate: selectors.getIsUpToDate(state),
     userId: getUserId(state),
     isFetchingSubAccounts: selectors.getIsFetching(state),
     initialValues: {
