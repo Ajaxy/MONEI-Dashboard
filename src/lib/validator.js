@@ -4,6 +4,7 @@ import aba from 'abavalidator';
 
 const messages = Validator.getMessages('en');
 messages.required = 'This field is required';
+messages.email = 'Invalid email format';
 Validator.setMessages('en', messages);
 
 const zipRegex = /^\d{5,6}(?:[-\s]\d{4})?$/;

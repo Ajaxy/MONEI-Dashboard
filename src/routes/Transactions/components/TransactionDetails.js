@@ -103,8 +103,11 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint, 
             <td>IP</td>
             <td>{customer.ip}</td>
           </tr>
+        </Table>}
+        {!isCustomerHidden && <h4 className="ui header">Billing address</h4>}
+        {!isCustomerHidden && <Table className="definition">
           <tr>
-            <td>Country</td>
+            <td className="three wide">Country</td>
             <td>{billing.country}</td>
           </tr>
           <tr>

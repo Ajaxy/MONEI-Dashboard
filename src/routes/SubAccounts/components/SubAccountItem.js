@@ -32,6 +32,11 @@ const SubAccountItem = ({subAccount, isSandboxMode}) => {
                 Ecommerce Guides
               </Link>
               <Link
+                to={`/sub-accounts/${subAccount.id}/widget`}
+                className="item">
+                Widget
+              </Link>
+              <Link
                 to={`/sub-accounts/${subAccount.id}/zapier`}
                 className="item">
                 Zapier

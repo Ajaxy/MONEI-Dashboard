@@ -11,8 +11,8 @@ export default (store) => {
         const reducer = require('./modules/reducer').default;
         const key = require('./modules/reducer').stateKey;
         injectReducer(store, {key, reducer});
-        cb(null, RequireAuth(RequireAdmin(Component)))
-      }, 'users')
+        cb(null, RequireAuth(RequireAdmin(Component)));
+      }, 'users');
     }
   };
 };

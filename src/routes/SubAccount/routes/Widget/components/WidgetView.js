@@ -32,7 +32,6 @@ class WidgetView extends Component {
       data-token="${token}"
       data-name="Demo widget"
       data-description="you can embed it anywhere"
-      data-button-text="Pay with Card"
       data-redirect-url="${values.redirectUrl}"></div>`;
   }
 
@@ -65,8 +64,7 @@ class WidgetView extends Component {
               max={MAX_AMOUNT}
               {...amount} />
             <h3>2. Insert this code between <code>&lt;head&gt;&lt;/head&gt;</code> tags:</h3>
-            <pre>&lt;script type=&quot;text/javascript&quot;src=&quot;{APP_CONFIG.widgetScriptURL}&quot;&gt;&lt;
-              /script&gt;</pre>
+            <pre>&lt;script src=&quot;{APP_CONFIG.widgetScriptURL}&quot;&gt;&lt;/script&gt;</pre>
             <h3>
               3. Setup the redirect URL:
               <DotHint>

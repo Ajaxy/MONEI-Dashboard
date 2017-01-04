@@ -5,6 +5,7 @@ import * as selectors from 'routes/SubAccounts/modules/selectors';
 import * as actions from 'routes/SubAccounts/modules/actions';
 import {getUserId} from 'modules/profile/selectors';
 import Validator from 'lib/validator';
+import dot from 'dot-object';
 
 const DEFAULT_CURRENCY = 'eur';
 
@@ -35,13 +36,16 @@ class NewTransaction extends Component {
 
 const rules = {
   amount: 'required|integer|min:1',
-  subAccountId: 'required'
+  subAccountId: 'required',
+  customer: {
+    email: 'email'
+  }
 };
 
 const validate = values => {
   const validator = new Validator(values, rules);
   validator.passes();
-  return validator.errors.all();
+  return dot.object(validator.errors.all());
 };
 
 const mapStateToProps = (state) => {
@@ -62,6 +66,12 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'newTransaction',
-  fields: ['subAccountId', 'amount'],
+  fields: [
+    'subAccountId',
+    'amount',
+    'customer.email',
+    'customer.givenName',
+    'customer.surname'
+  ],
   validate
 }, mapStateToProps, actions)(NewTransaction);

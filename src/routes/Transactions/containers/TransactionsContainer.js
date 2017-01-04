@@ -6,7 +6,6 @@ import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
 import {fetchSubAccounts} from 'routes/SubAccounts/modules/actions';
 import {getSubAccountById} from 'routes/SubAccounts/modules/selectors';
-import {withRouter} from 'react-router';
 import {addMessage} from 'modules/messages/actions';
 import moment from 'moment';
 
@@ -23,7 +22,11 @@ class Transactions extends Component {
       replace: PropTypes.func.isRequired
     }).isRequired,
     viewTransactionStart: PropTypes.func.isRequired,
-    viewTransactionCancel: PropTypes.func.isRequired
+    viewTransactionCancel: PropTypes.func.isRequired,
+    addMessage: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      query: PropTypes.object.isRequired
+    })
   };
 
   fetchTransactions() {
@@ -44,7 +47,7 @@ class Transactions extends Component {
         '(To refresh you can click "Today" button)',
         style: 'success',
         delay: 6000
-      })
+      });
     }
   }
 

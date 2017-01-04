@@ -1,8 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import {reduxForm} from 'redux-form';
 import {getActiveSubAccount} from 'routes/SubAccounts/modules/selectors';
 import {getUserId} from 'modules/profile/selectors';
-import {reduxForm} from 'redux-form';
 import Validator from 'lib/validator';
 import WidgetView from '../components/WidgetView';
 

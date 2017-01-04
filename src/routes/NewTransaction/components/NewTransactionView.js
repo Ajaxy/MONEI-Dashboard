@@ -29,13 +29,14 @@ class NewTransactionView extends Component {
         c: values.subAccountId
       }));
       widget.setup(this.button, {
+        token,
+        currency,
         amount: values.amount,
+        customer: values.customer,
         noEnhance: true,
         showCardHolder: true,
         name: 'New transaction',
         description: 'please enter customer data',
-        token,
-        currency,
         redirectUrl: location.href.replace('/new', '')
       });
     }
@@ -55,7 +56,7 @@ class NewTransactionView extends Component {
 
   render() {
     const {
-      fields: {subAccountId, amount},
+      fields: {subAccountId, amount, customer},
       isFetchingSubAccounts,
       subAccounts,
       handleSubmit,
@@ -66,9 +67,9 @@ class NewTransactionView extends Component {
       <section className="ui basic segment">
         <h2 className="ui header">Create new transaction</h2>
         <div className="ui stackable vertically padded grid">
-          <form className="ui form nine wide column" onSubmit={handleSubmit(this.submit)}>
+          <form className="ui form eight wide column" onSubmit={handleSubmit(this.submit)}>
             <Input
-              fieldClass="six wide"
+              fieldClass="eight wide"
               leftLabel={currency.toUpperCase()}
               leftLabelClass="basic"
               type="number"
@@ -87,12 +88,16 @@ class NewTransactionView extends Component {
                 </SelectItem>
               ))}
             </Select>
+            <h3>Customer info</h3>
+            <Input label="Email" {...customer.email} />
+            <Input label="Given name" {...customer.givenName} />
+            <Input label="Surname" {...customer.surname} />
             <Button
               withRef={c => this.button = c}
               onClick={e => e.preventDefault()}
               primary
               disabled={invalid}>
-              Create
+              Create transaction
             </Button>
           </form>
         </div>
