@@ -6,6 +6,7 @@ import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
 import {fetchSubAccounts} from 'routes/SubAccounts/modules/actions';
 import {getSubAccountById} from 'routes/SubAccounts/modules/selectors';
+import {addMessage} from 'modules/messages/actions';
 import moment from 'moment';
 
 class Transactions extends Component {
@@ -29,7 +30,15 @@ class Transactions extends Component {
   }
 
   componentDidMount() {
+    const {addMessage, location} = this.props;
     this.fetchTransactions();
+    if (location.query.id) addMessage({
+      text: 'A transaction was successfully created. ' +
+      'It will be visible in a few seconds. ' +
+      '(To refresh you can click "Today" button)',
+      style: 'success',
+      delay: 6000
+    })
   }
 
   componentDidUpdate(nextProps) {
@@ -95,4 +104,7 @@ const mapStateToProps = (state) => ({
   page: selectors.getPage(state)
 });
 
-export default connect(mapStateToProps, {...actions, fetchSubAccounts})(Transactions);
+export default connect(
+  mapStateToProps,
+  {...actions, fetchSubAccounts, addMessage}
+)(Transactions);

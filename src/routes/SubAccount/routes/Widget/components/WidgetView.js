@@ -17,7 +17,7 @@ class WidgetView extends Component {
   componentDidUpdate() {
     widget.setupAll();
   }
-  
+
   buildButtonHtml() {
     const {currency, userId, subAccountId, values} = this.props;
     const token = base64url.encode(JSON.stringify({

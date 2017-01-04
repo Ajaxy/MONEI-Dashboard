@@ -135,10 +135,9 @@ export const validateUserProfile = () => {
       rules.companyName = 'required';
     }
     const validator = new Validator(profile, rules);
-    validator.passes();
     dispatch({
       type: types.VALIDATE_PROFILE,
-      isValid: validator.errorCount === 0
+      isValid: validator.passes()
     });
   };
 };
