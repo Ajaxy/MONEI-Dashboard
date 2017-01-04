@@ -1,13 +1,18 @@
 import {injectReducer} from 'store/reducers';
-import Users from './containers/UsersContainer';
 import RequireAuth from 'containers/RequireAuth';
 import RequireAdmin from 'containers/RequireAdmin';
-import reducer, {stateKey} from './modules/reducer';
 
 export default (store) => {
-  injectReducer(store, {key: stateKey, reducer});
   return {
     path: '/users',
-    component: RequireAuth(RequireAdmin(Users))
+    getComponent(nextState, cb) {
+      require.ensure([], require => {
+        const Component = require('./containers/UsersContainer').default;
+        const reducer = require('./modules/reducer').default;
+        const key = require('./modules/reducer').stateKey;
+        injectReducer(store, {key, reducer});
+        cb(null, RequireAuth(RequireAdmin(Component)))
+      }, 'users')
+    }
   };
 };

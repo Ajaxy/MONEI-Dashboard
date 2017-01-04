@@ -31,6 +31,7 @@ class NewTransactionView extends Component {
       widget.setup(this.button, {
         amount: values.amount,
         noEnhance: true,
+        showCardHolder: true,
         name: 'New transaction',
         description: 'please enter customer data',
         token,
