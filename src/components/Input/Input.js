@@ -38,9 +38,9 @@ const Input = ({
       {
         leftLabel
           ? <div className="ui labeled input">
-              <div className={cx('ui label', leftLabelClass)}>{leftLabel}</div>
-              <Component {...componentProps} id={rest.name} />
-            </div>
+            <div className={cx('ui label', leftLabelClass)}>{leftLabel}</div>
+            <Component {...componentProps} id={rest.name} />
+          </div>
           : <Component {...componentProps} id={rest.name} />
       }
       {hint && !(touched && invalid) && <div className="hint">{hint}</div>}
@@ -70,7 +70,9 @@ Input.propTypes = {
   touched: PropTypes.bool,
   invalid: PropTypes.bool,
   mask: PropTypes.string,
-  hint: PropTypes.string
+  hint: PropTypes.string,
+  leftLabel: PropTypes.string,
+  leftLabelClass: PropTypes.string
 };
 
 export default Input;

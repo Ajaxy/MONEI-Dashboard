@@ -2,7 +2,6 @@ import React, {PropTypes, Component} from 'react';
 import {widget} from 'monei-jsapi';
 import base64url from 'base64-url';
 import DotHint from 'components/DotHint';
-import Input from 'components/Input';
 import classNames from './WidgetView.scss';
 
 const MIN_AMOUNT = 1;
