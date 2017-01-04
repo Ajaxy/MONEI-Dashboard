@@ -6,6 +6,7 @@ import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
 import {fetchSubAccounts} from 'routes/SubAccounts/modules/actions';
 import {getSubAccountById} from 'routes/SubAccounts/modules/selectors';
+import {withRouter} from 'react-router';
 import {addMessage} from 'modules/messages/actions';
 import moment from 'moment';
 
@@ -18,6 +19,9 @@ class Transactions extends Component {
       nextPage: PropTypes.string,
       prevPage: PropTypes.string
     }),
+    router: PropTypes.shape({
+      replace: PropTypes.func.isRequired
+    }).isRequired,
     viewTransactionStart: PropTypes.func.isRequired,
     viewTransactionCancel: PropTypes.func.isRequired
   };
@@ -32,13 +36,16 @@ class Transactions extends Component {
   componentDidMount() {
     const {addMessage, location} = this.props;
     this.fetchTransactions();
-    if (location.query.id) addMessage({
-      text: 'A transaction was successfully created. ' +
-      'It will be visible in a few seconds. ' +
-      '(To refresh you can click "Today" button)',
-      style: 'success',
-      delay: 6000
-    })
+    if (location.query.id) {
+      this.props.router.replace('/transactions');
+      addMessage({
+        text: 'A transaction was successfully created. ' +
+        'It will be visible in a few seconds. ' +
+        '(To refresh you can click "Today" button)',
+        style: 'success',
+        delay: 6000
+      })
+    }
   }
 
   componentDidUpdate(nextProps) {
