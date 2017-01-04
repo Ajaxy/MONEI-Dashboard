@@ -6,6 +6,9 @@ import base64url from 'base64-url';
 import {widget} from 'monei-jsapi';
 widget.disableAutoSetup();
 
+const MIN_AMOUNT = 1;
+const MAX_AMOUNT = 9999;
+
 class NewTransactionView extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
@@ -63,13 +66,14 @@ class NewTransactionView extends Component {
         <h2 className="ui header">Create new transaction</h2>
         <div className="ui stackable vertically padded grid">
           <form className="ui form nine wide column" onSubmit={handleSubmit(this.submit)}>
-            <div className="fields">
-              <Input
-                type="number"
-                fieldClass="five wide"
-                hint={`the amount to charge in ${currency}`}
-                {...amount} />
-            </div>
+            <Input
+              fieldClass="six wide"
+              leftLabel={currency.toUpperCase()}
+              leftLabelClass="basic"
+              type="number"
+              min={MIN_AMOUNT}
+              max={MAX_AMOUNT}
+              {...amount} />
             <Select
               label="Sub Account"
               loading={isFetchingSubAccounts}
