@@ -23,7 +23,7 @@ export const CustomerView = ({customer, children, isFetching}) => {
   return (
     <section className="ui basic segment padded-bottom">
       <h1 className={cx('ui header', NO_LOCALIZE)}>
-        {`${customer.givenName} ${customer.surname}`}
+        {customer.givenName ? `${customer.givenName} ${customer.surname || ''}` : customer.email}
       </h1>
       <CustomerHeader customerId={customer.id} />
       {children}
