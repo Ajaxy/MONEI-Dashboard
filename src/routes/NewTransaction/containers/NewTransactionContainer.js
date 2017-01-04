@@ -34,7 +34,7 @@ class NewTransaction extends Component {
 }
 
 const rules = {
-  amount: 'required|integer',
+  amount: 'required|integer|min:1',
   subAccountId: 'required'
 };
 

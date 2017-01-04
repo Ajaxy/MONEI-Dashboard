@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {PropTypes, Component} from 'react';
 import {widget} from 'monei-jsapi';
 import base64url from 'base64-url';
 import DotHint from 'components/DotHint';
+import Input from 'components/Input';
 import classNames from './WidgetView.scss';
 
 const MIN_AMOUNT = 1;
@@ -65,7 +66,7 @@ class WidgetView extends Component {
             <h3>1. Choose the amount you want to charge:</h3>
             <div className={classNames.amount}>
               <div className="ui labeled input">
-                <div className="ui label">{currency.toUpperCase()}</div>
+                <div className="ui basic label">{currency.toUpperCase()}</div>
                 <input
                   type="number"
                   min={MIN_AMOUNT}
@@ -102,7 +103,11 @@ class WidgetView extends Component {
   }
 }
 
-WidgetView.propTypes = {};
+WidgetView.propTypes = {
+  currency: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  channelId: PropTypes.string.isRequired
+};
 WidgetView.defaultProps = {};
 
 export default WidgetView;

@@ -11,6 +11,8 @@ const Input = ({
   fieldClass,
   component,
   label,
+  leftLabel,
+  leftLabelClass,
   hint,
   ...rest
 }) => {
@@ -29,14 +31,21 @@ const Input = ({
     'visited',
     'autofilled'
   ) : rest;
+  componentProps.value = rest.type === 'number' && isNaN(rest.value) ? 0 : rest.value;
   return (
     <div className={cx('field', fieldClass, {error: touched && invalid})}>
       {label !== false && <label htmlFor={rest.name}>{labelText}</label>}
-      <Component {...componentProps} id={rest.name} />
+      {
+        leftLabel
+          ? <div className="ui labeled input">
+              <div className={cx('ui label', leftLabelClass)}>{leftLabel}</div>
+              <Component {...componentProps} id={rest.name} />
+            </div>
+          : <Component {...componentProps} id={rest.name} />
+      }
       {hint && !(touched && invalid) && <div className="hint">{hint}</div>}
       {touched && invalid && <div className="ui basic red pointing prompt label">{errorText}</div>}
     </div>
-
   );
 };
 
