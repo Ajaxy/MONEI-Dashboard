@@ -9,7 +9,7 @@ export default {
     const region = 'us-east-1';
     Object.assign(config.globals.APP_CONFIG, {
       apiBaseURL: 'https://oq60megra3.execute-api.us-east-1.amazonaws.com/development',
-      widgetScriptURL: 'https://staging.widget.monei.net.s3-website-eu-west-1.amazonaws.com/widget.js',
+      widgetScriptURL: 'https://staging.widget.monei.net.s3-website-eu-west-1.amazonaws.com/monei.js',
       adminBucket: 'microapps-monei-verified-documents',
       userBucket: 'microapps-monei-documents',
       intercomID: 'blsf713t',
@@ -36,7 +36,7 @@ export default {
     const region = 'us-east-1';
     Object.assign(config.globals.APP_CONFIG, {
       apiBaseURL: 'https://api.monei.net/',
-      widgetScriptURL: 'https://jsapi.monei.net/widget.js',
+      widgetScriptURL: 'https://jsapi.monei.net/monei.js',
       adminBucket: 'microapps-monei-verified-documents',
       userBucket: 'microapps-monei-documents',
       intercomID: 'blsf713t',
