@@ -188,7 +188,7 @@
     "loadjs": "^3.2.1",
     "mocha": "^3.2.0",
     "moment": "^2.17.1",
-    "monei-jsapi": "^1.1.2",
+    "monei-jsapi": "^1.1.3",
     "mqtt": "^2.2.0",
     "node-sass": "^4.1.1",
     "nodemon": "^1.10.0",
