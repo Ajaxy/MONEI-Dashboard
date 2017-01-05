@@ -101,6 +101,7 @@ const TransactionsView = ({
         numColumns={NUM_COLUMNS}
         onNextPage={goToNextPage}
         onPrevPage={goToPrevPage}
+        onRefresh={() => filterByDate(fromDate, toDate)}
         className="large striped fixed single line selectable"
         resourceName="transactions"
         header={<TransactionRow isHeader />}>

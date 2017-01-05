@@ -12,6 +12,7 @@ const PaginatedTable = ({
   isLastPage,
   onNextPage,
   onPrevPage,
+  onRefresh,
   resourceName = 'resources',
   ...rest
 }) => (
@@ -22,7 +23,7 @@ const PaginatedTable = ({
       children={children.length > 0
         ? children
         : <tr>
-          <td colSpan={numColumns} className={classNames.spacer}>
+          <td colSpan={numColumns} className={classNames.spacer} onClick={() => onRefresh && onRefresh()}>
             {!isFetching && <h3>No {resourceName} were found.</h3>}
           </td>
         </tr>}
@@ -55,6 +56,7 @@ PaginatedTable.propTypes = {
   isLastPage: PropTypes.bool.isRequired,
   onNextPage: PropTypes.func.isRequired,
   onPrevPage: PropTypes.func.isRequired,
+  onRefresh: PropTypes.func,
   children: PropTypes.array,
   resourceName: PropTypes.string
 };
