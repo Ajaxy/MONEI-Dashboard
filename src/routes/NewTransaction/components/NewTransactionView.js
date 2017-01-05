@@ -35,6 +35,7 @@ class NewTransactionView extends Component {
         customer: values.customer,
         noEnhance: true,
         showCardHolder: true,
+        brands: 'VISA MASTER MAESTRO JCB',
         name: 'New transaction',
         description: 'please enter customer data',
         redirectUrl: location.href.replace('/new', '')

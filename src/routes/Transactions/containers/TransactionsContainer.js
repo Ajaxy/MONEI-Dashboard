@@ -32,15 +32,25 @@ class Transactions extends Component {
   fetchTransactions() {
     const from = moment().startOf('day').valueOf();
     const to = moment().endOf('day').valueOf();
-    this.props.fetchTransactions({from, to, forceRefresh: true});
     this.props.fetchSubAccounts();
+    return this.props.fetchTransactions({from, to, forceRefresh: true});
   }
 
   componentDidMount() {
-    const {addMessage, location} = this.props;
     this.fetchTransactions();
-    if (location.query.id) {
-      this.props.router.replace('/transactions');
+  }
+
+  componentDidUpdate(nextProps) {
+    const {addMessage, location, transactions, isFetching} = this.props;
+    if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
+      this.fetchTransactions();
+    }
+    if (location.query.id && !isFetching) {
+      const newTransaction = transactions.find(t => t.ndc === location.query.id);
+      if (newTransaction) {
+        this.viewDetails(newTransaction.id);
+        return this.props.router.replace('/transactions');
+      }
       addMessage({
         text: 'A transaction was successfully created. ' +
         'It will be visible in a few seconds. ' +
@@ -48,12 +58,6 @@ class Transactions extends Component {
         style: 'success',
         delay: 6000
       });
-    }
-  }
-
-  componentDidUpdate(nextProps) {
-    if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
-      this.fetchTransactions();
     }
   }
 
