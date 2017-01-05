@@ -8,7 +8,8 @@ const DEFAULT_CURRENCY = 'eur';
 
 const rules = {
   amount: 'required|integer|min:1',
-  redirectUrl: 'required|url'
+  redirectUrl: 'required|url',
+  brands: 'required'
 };
 
 const validate = values => {
@@ -31,10 +32,20 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'widgetSetup',
-  fields: ['redirectUrl', 'amount'],
+  fields: [
+    'redirectUrl',
+    'amount',
+    'name',
+    'description',
+    'brands',
+    'showCardHolder',
+    'buttonText'
+  ],
   initialValues: {
     amount: 100,
-    redirectUrl: 'http://yoursite.com/monei-callback'
+    redirectUrl: 'http://yoursite.com/monei-callback',
+    showCardHolder: false,
+    brands: ['VISA', 'MASTER']
   },
   validate
 }, mapStateToProps)(WidgetView);
