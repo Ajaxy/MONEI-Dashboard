@@ -34,7 +34,6 @@ class NewTransactionView extends Component {
         amount: values.amount,
         customer: values.customer,
         noEnhance: true,
-        showCardHolder: true,
         brands: 'VISA MASTER MAESTRO JCB',
         name: 'New transaction',
         description: 'please enter customer data',
