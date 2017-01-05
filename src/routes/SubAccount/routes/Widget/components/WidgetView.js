@@ -34,7 +34,11 @@ class WidgetView extends Component {
     super(props);
     this.state = {
       optionsVisible: false
-    }
+    };
+    this.token = base64url.encode(JSON.stringify({
+      u: props.userId,
+      c: props.subAccountId
+    }));
   }
 
   componentDidMount() {
@@ -53,18 +57,13 @@ class WidgetView extends Component {
   };
 
   buildButtonHtml() {
-    const {currency, userId, subAccountId, values, fields: {brands}} = this.props;
-    const token = base64url.encode(JSON.stringify({
-      u: userId,
-      c: subAccountId
-    }));
-
+    const {currency, values, fields: {brands}} = this.props;
     if (!values.amount) return;
     return `<div
       class="monei-widget"
       data-amount="${values.amount}"
       data-currency="${currency}"
-      data-token="${token}"
+      data-token="${this.token}"
       ${brands.pristine ? '' : `data-brands="${values.brands.join(' ')}"`}
       ${values.name ? `data-name="${values.name}"` : ''}
       ${values.description ? `data-description="${values.description}"` : ''}
@@ -115,8 +114,8 @@ class WidgetView extends Component {
               </a>
             </p>
             <div className={cx({[classNames.hidden]: !optionsVisible})}>
-              <Input {...name} />
-              <Input {...description} />
+              <Input {...name} hint="that will be visible in widget header"/>
+              <Input {...description} hint="that will be visible in widget header"/>
               <Input {...buttonText} />
               <Select
                 label="Accepted card brands"
@@ -136,6 +135,17 @@ class WidgetView extends Component {
             <pre>&lt;script src=&quot;{APP_CONFIG.widgetScriptURL}&quot;&gt;&lt;/script&gt;</pre>
             <h3>Insert this code in any place you want to put a widget:</h3>
             <pre>{buttonHtml}</pre>
+            <h3>Get the payment status</h3>
+            <p>to get the status of the payment, you should make a GET request to the
+              <pre>{APP_CONFIG.apiBaseURL}checkouts/<b>{'{id}'}</b>?token=<b>{'{token}'}</b></pre>
+            </p>
+            <p><code>id</code> - payment id that you'll get as a query parameter appended to the <b>redirect URL</b></p>
+            <p><code>token</code> - unique token generated for your widget</p>
+            <pre>{this.token}</pre>
+            <p>
+              Read about response structure and avaliable parameters in {' '}
+              <a href="https://docs.monei.net/reference/parameters#response-params" target="_blank">documentation</a>
+            </p>
           </form>
         </div>
         <h2>Demo</h2>
