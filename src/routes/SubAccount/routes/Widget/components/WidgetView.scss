@@ -1,8 +1,12 @@
-.amount {
-  input {
-    min-width: 100px;
-  }
-  input, span {
-    vertical-align: middle;
-  }
+.widget {
+  display: inline-block;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.hidden {
+  display: none;
 }

@@ -11,7 +11,7 @@ class SignIn extends Component {
     isAuthenticated: PropTypes.bool,
     showLock: PropTypes.func.isRequired,
     router: PropTypes.shape({
-      push: PropTypes.func.isRequired
+      replace: PropTypes.func.isRequired
     }).isRequired
   };
 

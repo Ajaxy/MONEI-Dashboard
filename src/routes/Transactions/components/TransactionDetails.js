@@ -87,7 +87,7 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint, 
             <td className="three wide">Name</td>
             <td>
               <Link to={`/customers/${transaction.customerId}`} onClick={onClose}>
-                {`${customer.givenName || ''} ${customer.surname || ''}`}
+                {customer.givenName ? `${customer.givenName} ${customer.surname || ''}` : customer.email}
               </Link>
             </td>
           </tr>
@@ -103,8 +103,11 @@ const TransactionDetails = ({transaction, subAccount, isOpen, onClose, onPrint, 
             <td>IP</td>
             <td>{customer.ip}</td>
           </tr>
+        </Table>}
+        {!isCustomerHidden && <h4 className="ui header">Billing address</h4>}
+        {!isCustomerHidden && <Table className="definition">
           <tr>
-            <td>Country</td>
+            <td className="three wide">Country</td>
             <td>{billing.country}</td>
           </tr>
           <tr>
@@ -140,7 +143,8 @@ TransactionDetails.propTypes = {
   subAccount: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onPrint: PropTypes.func.isRequired
+  onPrint: PropTypes.func.isRequired,
+  isCustomerHidden: PropTypes.bool
 };
 
 export default TransactionDetails;

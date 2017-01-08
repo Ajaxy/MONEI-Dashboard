@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import Link from 'react-router/lib/Link';
 import {PaginatedTable} from 'components/Table';
 import TransactionRow, {NUM_COLUMNS} from './TransactionRow';
 import TransactionDetails from './TransactionDetails';
@@ -36,7 +37,7 @@ const TransactionsView = ({
       <div className={classNames.filters}>
         <Button
           disabled={isFetching}
-          className={cx('ui icon button', classNames.arrowButton)}
+          className={cx('icon', classNames.arrowButton)}
           onClick={() => filterByDate(fromDateTimestamp - selectedPeriod, toDateTimestamp - selectedPeriod - 1)}>
           <i className="left chevron icon" />
         </Button>
@@ -65,7 +66,7 @@ const TransactionsView = ({
         />
         <Button
           disabled={isFetching || fromDateTimestamp + selectedPeriod + 1 > today}
-          className={cx('ui icon button', classNames.arrowButton)}
+          className={cx('icon', classNames.arrowButton)}
           onClick={() => filterByDate(fromDateTimestamp + selectedPeriod + 1, toDateTimestamp + selectedPeriod)}>
           <i className="right chevron icon" />
         </Button>
@@ -87,6 +88,12 @@ const TransactionsView = ({
           onClick={() => filterByDate(lastMonth, today)}>
           Last month
         </Button>
+        <div className={classNames.spacer} />
+        <Link
+          className="ui button green"
+          to="transactions/new">
+          New transaction
+        </Link>
       </div>
       <PaginatedTable
         {...{isFetching, isFirstPage, isLastPage}}
@@ -94,6 +101,7 @@ const TransactionsView = ({
         numColumns={NUM_COLUMNS}
         onNextPage={goToNextPage}
         onPrevPage={goToPrevPage}
+        onRefresh={() => filterByDate(fromDate, toDate)}
         className="large striped fixed single line selectable"
         resourceName="transactions"
         header={<TransactionRow isHeader />}>

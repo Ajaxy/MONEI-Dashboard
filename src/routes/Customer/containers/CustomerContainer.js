@@ -12,7 +12,7 @@ class Customer extends Component {
     customerId: PropTypes.string.isRequired,
     isSandboxMode: PropTypes.bool.isRequired,
     router: PropTypes.shape({
-      push: PropTypes.func.isRequired
+      replace: PropTypes.func.isRequired
     }).isRequired
   };
 

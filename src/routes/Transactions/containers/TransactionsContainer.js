@@ -6,6 +6,7 @@ import * as profileSelectors from 'modules/profile/selectors';
 import TransactionsView from '../components/TransactionsView';
 import {fetchSubAccounts} from 'routes/SubAccounts/modules/actions';
 import {getSubAccountById} from 'routes/SubAccounts/modules/selectors';
+import {addMessage} from 'modules/messages/actions';
 import moment from 'moment';
 
 class Transactions extends Component {
@@ -17,15 +18,22 @@ class Transactions extends Component {
       nextPage: PropTypes.string,
       prevPage: PropTypes.string
     }),
+    router: PropTypes.shape({
+      replace: PropTypes.func.isRequired
+    }).isRequired,
     viewTransactionStart: PropTypes.func.isRequired,
-    viewTransactionCancel: PropTypes.func.isRequired
+    viewTransactionCancel: PropTypes.func.isRequired,
+    addMessage: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      query: PropTypes.object.isRequired
+    })
   };
 
   fetchTransactions() {
     const from = moment().startOf('day').valueOf();
     const to = moment().endOf('day').valueOf();
-    this.props.fetchTransactions({from, to, forceRefresh: true});
     this.props.fetchSubAccounts();
+    return this.props.fetchTransactions({from, to, forceRefresh: true});
   }
 
   componentDidMount() {
@@ -33,8 +41,23 @@ class Transactions extends Component {
   }
 
   componentDidUpdate(nextProps) {
+    const {addMessage, location, transactions, isFetching} = this.props;
     if (nextProps.isInSandboxMode !== this.props.isInSandboxMode) {
       this.fetchTransactions();
+    }
+    if (location.query.id && !isFetching) {
+      const newTransaction = transactions.find(t => t.ndc === location.query.id);
+      if (newTransaction) {
+        this.viewDetails(newTransaction.id);
+        return this.props.router.replace('/transactions');
+      }
+      addMessage({
+        text: 'A transaction was successfully created. ' +
+        'It will be visible in a few seconds. ' +
+        '(To refresh you can click "Today" button)',
+        style: 'success',
+        delay: 6000
+      });
     }
   }
 
@@ -95,4 +118,7 @@ const mapStateToProps = (state) => ({
   page: selectors.getPage(state)
 });
 
-export default connect(mapStateToProps, {...actions, fetchSubAccounts})(Transactions);
+export default connect(
+  mapStateToProps,
+  {...actions, fetchSubAccounts, addMessage}
+)(Transactions);
