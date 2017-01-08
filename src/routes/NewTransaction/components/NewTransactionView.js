@@ -3,8 +3,8 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 import Select, {SelectItem} from 'components/Select';
 import base64url from 'base64-url';
-import {widget} from 'monei-jsapi';
-widget.disableAutoSetup();
+import moneiWidget from 'monei-widget';
+moneiWidget.disableAutoSetup();
 
 const MIN_AMOUNT = 1;
 const MAX_AMOUNT = 9999;
@@ -28,7 +28,7 @@ class NewTransactionView extends Component {
         u: userId,
         c: values.subAccountId
       }));
-      widget.setup(this.button, {
+      moneiWidget.setup(this.button, {
         token,
         currency,
         amount: values.amount,

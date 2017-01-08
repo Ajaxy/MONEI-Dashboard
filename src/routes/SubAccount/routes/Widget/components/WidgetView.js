@@ -1,5 +1,5 @@
 import React, {PropTypes, Component} from 'react';
-import {widget} from 'monei-jsapi';
+import moneiWidget from 'monei-widget';
 import base64url from 'base64-url';
 import DotHint from 'components/DotHint';
 import Select, {SelectItem} from 'components/Select';
@@ -42,11 +42,11 @@ class WidgetView extends Component {
   }
 
   componentDidMount() {
-    widget.setupAll();
+    moneiWidget.setupAll();
   }
 
   componentDidUpdate() {
-    widget.setupAll();
+    moneiWidget.setupAll();
   }
 
   toggleOptions = (e) => {
